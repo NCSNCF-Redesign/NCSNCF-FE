@@ -44,12 +44,23 @@ permalink: /calendar/
 
 <script>
   // 1. DATA ABSTRACTION: Our list of event objects
-  const eventList = [
-    { title: "Jazz Night", date: "October 25 | Concert Hall", category: "Concerts" },
-    { title: "Blood Memory", date: "October 26 | Museum", category: "Exhibits" },
-    { title: "Beginner Swing Classes", date: "November 7 | Studios", category: "Workshops" },
-    { title: "Jane Monheit Quartet", date: "November 19 | Center Theater", category: "Concerts" }
-  ];
+  let eventList = [];
+
+  async function fetchEvents() {
+  try {
+    // Reach out to the backend API (make sure your Flask port matches here)
+    const response = await fetch('http://127.0.0.1:8587/api/events');
+    
+    // Convert the raw data into our JavaScript array
+    eventList = await response.json();
+    
+    // Now that we have the data, render the 'All' category
+    filterEvents("All");
+    
+  } catch (error) {
+    console.error("Failed to fetch events from backend:", error);
+  }
+}
 
   // 2. PROCEDURAL ABSTRACTION & ALGORITHM: The filtering function
   function filterEvents(selectedCategory) {
@@ -87,5 +98,5 @@ permalink: /calendar/
   }
 
   // Run the function once when the page loads to show all events initially
-  filterEvents("All");
+  fetchEvents();
 </script>
