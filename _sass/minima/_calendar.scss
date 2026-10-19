@@ -1,0 +1,24 @@
+/* _sass/_calendar.scss */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.event-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f9f9f9; 
+}
+
+.calendar-filters {
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  padding: 10px 15px;
+  margin-right: 10px;
+  cursor: pointer;
+}

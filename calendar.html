@@ -1,0 +1,91 @@
+---
+layout: default
+title: Event Calendar
+permalink: /calendar/
+---
+
+<style>
+  .event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+  }
+  .event-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9; 
+  }
+  .calendar-filters {
+    margin-bottom: 20px;
+  }
+  .filter-btn {
+    padding: 10px 15px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+</style>
+
+<section id="event-calendar">
+  <!-- Filter Buttons -->
+  <div class="calendar-filters">
+    <button class="filter-btn active" data-category="All">All Events</button>
+    <button class="filter-btn" data-category="Concerts">Concerts</button>
+    <button class="filter-btn" data-category="Exhibits">Museum Exhibits</button>
+    <button class="filter-btn" data-category="Workshops">Workshops</button>
+  </div>
+
+  <!-- Event Grid -->
+  <div class="event-grid" id="event-grid">
+    <!-- JavaScript will inject the cards here -->
+  </div>
+</section>
+
+<script>
+  // 1. DATA ABSTRACTION: Our list of event objects
+  const eventList = [
+    { title: "Jazz Night", date: "October 25 | Concert Hall", category: "Concerts" },
+    { title: "Blood Memory", date: "October 26 | Museum", category: "Exhibits" },
+    { title: "Beginner Swing Classes", date: "November 7 | Studios", category: "Workshops" },
+    { title: "Jane Monheit Quartet", date: "November 19 | Center Theater", category: "Concerts" }
+  ];
+
+  // 2. PROCEDURAL ABSTRACTION & ALGORITHM: The filtering function
+  function filterEvents(selectedCategory) {
+    const grid = document.getElementById("event-grid");
+    grid.innerHTML = ""; // Clear the grid before adding new cards
+
+    // ITERATION: Loop through the event list
+    for (let i = 0; i < eventList.length; i++) {
+      let currentEvent = eventList[i];
+
+      // SELECTION: Check if the event matches the button clicked
+      if (selectedCategory === "All" || currentEvent.category === selectedCategory) {
+        
+        // SEQUENCING: Create the HTML for the card and push it to the screen
+        let cardHTML = `
+          <div class="event-card">
+            <h3>${currentEvent.title}</h3>
+            <p>${currentEvent.date}</p>
+          </div>
+        `;
+        grid.innerHTML += cardHTML;
+      }
+    }
+  }
+
+  // 3. CAPTURING INPUT: Connect the HTML buttons to the JS function
+  const buttons = document.querySelectorAll('.filter-btn');
+  
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', function() {
+      // Get the category from the button's data attribute
+      let categoryClicked = this.getAttribute('data-category'); 
+      filterEvents(categoryClicked);
+    });
+  }
+
+  // Run the function once when the page loads to show all events initially
+  filterEvents("All");
+</script>
