@@ -5,102 +5,114 @@ hide: true
 show_reading_time: false
 ---
 
-This is the CCAE - California Center For The Performing Arts, Escondido frontend page. It will detail our process, implementations and features that we add.
- 
-### Home Page UI Redesign
-```mermaid
-flowchart LR
-    Draft --> Implement
-    Implement --> Commit
-    Commit --> View
-```
+## California Center For The Arts, Escondido 2026-27
 
-## Learning Buttons
-
-> SASS Mixins examples and code, explore these topics by clicking standard OCS SASS buttons.
-
-<div class="ocs__links">
-    <a class="ocs__btn" href="{{site.baseurl}}/github/pages/about_sass_buttons/">
-        Buttons Lesson
-    </a>
-    <a class="ocs__btn" href="https://github.com/Open-Coding-Society/pages/blob/main/_sass/open-coding/mixins/_buttons.scss">
-        Button Mixins
-    </a>
-    <a class="ocs__btn" href="https://github.com/Open-Coding-Society/pages/blob/main/_sass/open-coding/mixins/_container.scss">
-        Container Mixins
-    </a>
+<div class="ocs__grid ocs__grid--standard cols-2" style="margin-bottom: 1.5rem;">
+    <div class="ocs__grid-cell ocs__grid-cell--header"> Project Summary</div>
+    
+    <div class="ocs__grid-cell ocs__grid-cell--accent">
+        <strong>Main Problems</strong>
+        <p>The website is aesthetically busy and navigation is complicated and hard to follow. It also has different domains for some pages, and is overall difficult to navigate and find what someone might be looking for.</p>
+        <a class="ocs__btn alert-green fill small" href="https://artcenter.org/">
+            See Original
+        </a>
+    </div>
+    <div class="ocs__grid-cell ocs__grid-cell--accent">
+        <strong>Project Direction</strong>
+        <p>This capstone project aims to refurbish the California Center For The Performing Arts Escondido website to be more streamlined, organized, and less busy. It will overhaul the search feature to be more intelligent, fix any visual bugs, introduce a dynamic and artistic design, and will replace generic walls of text with something more interactive. </p>
+    </div>
 </div>
 
-## Development Environment
+<a class="ocs__btn large" href="https://github.com/tristan-chiu0/CCAE-FE" style="margin-bottom: 1.5rem;">
+    Github Repository
+</a>
 
-> Coding starts with tools, explore these tools clicking SASS buttons with SVG.
+---
 
-<div class="ocs__links ocs__links--wide">
-    <a class="ocs__btn ocs__btn--icon alert-green" href="https://opencodingsociety.com">
-        <span class="ocs__btn-icon" aria-hidden="true">
-            <img src="{{ '/favicon.ico' | relative_url }}" alt="">
-        </span>
-        <span>OCS</span>
-    </a>
-    <a class="ocs__btn ocs__btn--icon alert-yellow" href="https://github.com/Open-Coding-Society/portfolio">
-        <span class="ocs__btn-icon" aria-hidden="true">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-            </svg>
-        </span>
-        <span>GitHub</span>
-    </a>
-    <a class="ocs__btn ocs__btn--icon alert-red" href="https://vscode.dev/">
-        <span class="ocs__btn-icon" aria-hidden="true">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.34 0L5.66 5.39l-2.4-1.8L1.19 4.82v6.36l2.07 1.23 2.4-1.8L11.34 16 15 14.23V1.77L11.34 0zm.59 11.57l-3.86-3.54 3.86-3.54v7.08z"/>
-            </svg>
-        </span>
-        <span>VSCode.dev</span>
-    </a>
+<div class="ocs__grid ocs__grid--standard cols-2" style="margin-bottom: 1.5rem;">
+    <div class="ocs__grid-cell ocs__grid-cell--header">Strengths vs Improvement For Website</div>
+
+    <div class="ocs__grid-cell ocs__grid-cell--accent">
+        <strong>Dynamic UI</strong>
+        <p>A changing background creates visual interest and professional polish.</p>
+        <a class="ocs__btn alert-green fill small" href="https://artcenter.org/">
+            View Example
+        </a>
+    </div>
+    <div class="ocs__grid-cell">
+        <strong>Navigation Clarity</strong>
+        <p>Site-in-Site transitions are inconsistent and confusing for users.</p>
+        <a class="ocs__btn alert-yellow fill small" href="https://www.ccaemuseum.org/">
+            Museum Entry Point
+        </a>
+    </div>
+
+    <div class="ocs__grid-cell ocs__grid-cell--accent">
+        <strong>Backend Integration</strong>
+        <p>Data sourcing is evident; events page pulls live ticket inventory and concerts page pulls from real dates. One thing that could be improved is having the Buy Tickets button placed directly on each concert performance grid image for easily accessibility. Some of the events when clicked on also have the buy tickets button twice.</p>
+        <a class="ocs__btn alert-green fill small" href="https://artcenter.org/events/">
+            Events Page
+        </a>
+        <a class="ocs__btn alert-green fill small" href="https://artcenter.org/concerts-performances/">
+            Concerts Page
+        </a>
+        <a class="ocs__btn alert-red fill small" href="https://artcenter.org/event/kintsugi-workshop-2/2026-09-12/">
+            Two Ticket Btn
+        </a>
+    </div>
+    <div class="ocs__grid-cell">
+        <strong>Information Architecture</strong>
+        <p>Multiple nested "About" pages reduce discoverability and clarity.</p>
+        <a class="ocs__btn alert-yellow fill small" href="https://artcenter.org/about/">
+            About Pages
+        </a>
+    </div>
+    <div class="ocs__grid-cell">
+        <strong>Header Network</strong>
+        <p>The smaller black header and main-header have links to the same pages.</p>
+        <a class="ocs__btn alert-red fill small" href="https://artcenter.org/about/">
+            Header Above
+        </a>
+    </div>
+    <div class="ocs__grid-cell">
+        <strong>Basic Bugs and Polish</strong>
+        <p> Sitemap footer redirects nowhere, some links don't work like the contact link at the end of the privacy policy</p>
+        <a class="ocs__btn alert-red fill small" href="https://artcenter.org/about/">
+            Scroll Down
+        </a>
+        <a class="ocs__btn alert-red fill small" href="https://artcenter.org/about/privacy/">
+            Privacy Page
+        </a>
+    </div>
 </div>
 
-<br>
+---
 
-## Code Runner Lessons
-
-> Foundations in Tech are essential, click my iridescent buttons to see some of my lesson creations.
-
-<div class="ocs__links">
-    <a class="ocs__btn iridescent" href="{{site.baseurl}}/code/javascript">
-        JS Basics
-    </a>
-    <a class="ocs__btn alert-green iridescent" href="{{site.baseurl}}/game/essentials/variables">
-        JS Variables
-    </a>
-    <a class="ocs__btn alert-yellow iridescent" href="{{site.baseurl}}/navigation/sass">
-       SASS
-    </a>
-    <a class="ocs__btn alert-yellow iridescent" href="{{site.baseurl}}/gamerunner">
-        Gamerunner
-    </a>
-    <a class="ocs__btn alert-red iridescent" href="{{site.baseurl}}/network/stack">
-        Networking
-    </a>
+<div class="ocs__grid ocs__grid--standard cols-3" style="margin-bottom: 1.5rem;">
+    <div class="ocs__grid-cell ocs__grid-cell--header">Teammates/Collaborators</div>
+    <div class="ocs__grid-cell ocs__grid-cell--accent">
+        <strong>Mateo Amador</strong>
+        <p>Technologist/Developer</p>
+        <a class="ocs__btn alert-green iridescent fill small" href="https://avg11235.opencodingsociety.com/">
+            Portfolio
+        </a>
+    </div>
+    <div class="ocs__grid-cell ocs__grid-cell--accent">
+        <strong>Tristan Chiu</strong>
+        <p>Technologist/Developer</p>
+        <a class="ocs__btn alert-green iridescent fill small" href="https://tristan-chiu0.github.io/portfolio/">
+            Portfolio
+        </a>
+    </div>
+    <div class="ocs__grid-cell ocs__grid-cell--accent">
+        <strong>Yue Barbara Zhao</strong>
+        <p>Technologist/Developer</p>
+        <a class="ocs__btn alert-green iridescent fill small" href="https://3rii0.github.io/portfolio/">
+            Portfolio
+        </a>
+    </div>
 </div>
 
-<br>
+**Powered by OCS grids and buttons**
 
-### Class Progress
-
-> Here is my game progress through coding, click multicolor and size buttons to see these in the browser
-
-<div class="ocs__links">
-    <a href="{{site.baseurl}}/snake" class="ocs__btn pill alert-green fill">
-        Snake
-    </a>
-    <a href="{{site.baseurl}}/gamify/parallax" class="ocs__btn small alert-yellow fill">
-        Fish
-    </a>
-    <a href="{{site.baseurl}}/gamify" class="ocs__btn alert-red fill">
-        Gamify
-    </a>
-</div>
-
-<br>
-<!-- markdownlint-enable MD033 MD046 -->
+[Buttons]({{ '/navigation/sass/buttons/' | relative_url }}) | [Grids]({{ '/navigation/sass/grids/' | relative_url }})
