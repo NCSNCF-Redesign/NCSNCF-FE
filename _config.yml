@@ -112,3 +112,4 @@ minima:
   nav_pages:
     - navigation/search.md
     - navigation/about.md
+    - calendar.html
