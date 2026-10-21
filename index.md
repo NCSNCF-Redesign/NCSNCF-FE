@@ -17,54 +17,27 @@ show_reading_time: false
     <div class="ocs__grid-cell ocs__grid-cell--accent">
         <strong>Event 1</strong>
         <p>A changing background creates visual interest and professional polish.</p>
-        <a class="ocs__btn alert-green fill small" href="https://artcenter.org/">
-            View Example
-        </a>
     </div>
     <div class="ocs__grid-cell">
         <strong>Event 2</strong>
         <p>Site-in-Site transitions are inconsistent and confusing for users.</p>
-        <a class="ocs__btn alert-yellow fill small" href="https://www.ccaemuseum.org/">
-            Museum Entry Point
-        </a>
     </div>
 
     <div class="ocs__grid-cell ocs__grid-cell--accent">
         <strong>Event 3</strong>
         <p>Data sourcing is evident; events page pulls live ticket inventory and concerts page pulls from real dates. One thing that could be improved is having the Buy Tickets button placed directly on each concert performance grid image for easily accessibility. Some of the events when clicked on also have the buy tickets button twice.</p>
-        <a class="ocs__btn alert-green fill small" href="https://artcenter.org/events/">
-            Events Page
-        </a>
-        <a class="ocs__btn alert-green fill small" href="https://artcenter.org/concerts-performances/">
-            Concerts Page
-        </a>
-        <a class="ocs__btn alert-red fill small" href="https://artcenter.org/event/kintsugi-workshop-2/2026-09-12/">
-            Two Ticket Btn
-        </a>
     </div>
     <div class="ocs__grid-cell">
         <strong>Event 4</strong>
         <p>Multiple nested "About" pages reduce discoverability and clarity.</p>
-        <a class="ocs__btn alert-yellow fill small" href="https://artcenter.org/about/">
-            About Pages
-        </a>
     </div>
     <div class="ocs__grid-cell">
         <strong>Header Network</strong>
         <p>The smaller black header and main-header have links to the same pages.</p>
-        <a class="ocs__btn alert-red fill small" href="https://artcenter.org/about/">
-            Header Above
-        </a>
     </div>
     <div class="ocs__grid-cell">
         <strong>Basic Bugs and Polish</strong>
         <p> Sitemap footer redirects nowhere, some links don't work like the contact link at the end of the privacy policy</p>
-        <a class="ocs__btn alert-red fill small" href="https://artcenter.org/about/">
-            Scroll Down
-        </a>
-        <a class="ocs__btn alert-red fill small" href="https://artcenter.org/about/privacy/">
-            Privacy Page
-        </a>
     </div>
 </div>
 
