@@ -1,0 +1,46 @@
+/* Remove default margins and let the container fill the whole browser window */
+.split-screen-container {
+  display: flex;
+  min-height: 100vh; 
+  width: 100%;
+}
+
+/* Left Side: 50% width, covers the background */
+.showcase-side {
+  flex: 1; 
+  background-color: #ffd1dc; /* Soft placeholder tone */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Right Side: 50% width, centers the form */
+.form-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+/* The actual box holding the inputs */
+.form-wrapper {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+}
+
+/* Style the inputs to look modern */
+.form-wrapper input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+.auth-toggle {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+}
