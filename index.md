@@ -11,34 +11,10 @@ show_reading_time: false
 </div>
 ---
 
-<div class="ocs__grid ocs__grid--standard cols-2" style="margin-bottom: 1.5rem;">
+<!-- Dynamic Events Grid -->
+<div class="ocs__grid ocs__grid--standard cols-2" style="margin-bottom: 1.5rem;" id="recent-events-grid">
     <div class="ocs__grid-cell ocs__grid-cell--header">Events</div>
-
-    <div class="ocs__grid-cell ocs__grid-cell--accent">
-        <strong>Event 1</strong>
-        <p>A changing background creates visual interest and professional polish.</p>
-    </div>
-    <div class="ocs__grid-cell">
-        <strong>Event 2</strong>
-        <p>Site-in-Site transitions are inconsistent and confusing for users.</p>
-    </div>
-
-    <div class="ocs__grid-cell ocs__grid-cell--accent">
-        <strong>Event 3</strong>
-        <p>Data sourcing is evident; events page pulls live ticket inventory and concerts page pulls from real dates. One thing that could be improved is having the Buy Tickets button placed directly on each concert performance grid image for easily accessibility. Some of the events when clicked on also have the buy tickets button twice.</p>
-    </div>
-    <div class="ocs__grid-cell">
-        <strong>Event 4</strong>
-        <p>Multiple nested "About" pages reduce discoverability and clarity.</p>
-    </div>
-    <div class="ocs__grid-cell">
-        <strong>Header Network</strong>
-        <p>The smaller black header and main-header have links to the same pages.</p>
-    </div>
-    <div class="ocs__grid-cell">
-        <strong>Basic Bugs and Polish</strong>
-        <p> Sitemap footer redirects nowhere, some links don't work like the contact link at the end of the privacy policy</p>
-    </div>
+    <div class="ocs__grid-cell">Loading recent events...</div>
 </div>
 
 ---
@@ -71,3 +47,66 @@ show_reading_time: false
 **Powered by OCS grids and buttons**
 
 [Buttons]({{ '/navigation/sass/buttons/' | relative_url }}) | [Grids]({{ '/navigation/sass/grids/' | relative_url }})
+
+<script>
+  // Point to local Flask instance
+  const BACKEND_URL = "http://localhost:5000";
+
+  async function loadRecentEvents() {
+    const gridContainer = document.getElementById("recent-events-grid");
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/events`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error status: ${response.status}`);
+      }
+      
+      const events = await response.json();
+
+      // Clear existing grid contents except header cell
+      gridContainer.innerHTML = '<div class="ocs__grid-cell ocs__grid-cell--header">Events</div>';
+
+      if (!Array.isArray(events) || events.length === 0) {
+        gridContainer.innerHTML += '<div class="ocs__grid-cell">No recent events available.</div>';
+        return;
+      }
+
+      // 1. Sort events by date in descending order (most recent first)
+      const sortedEvents = events.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      // 2. Extract top 4 events
+      const topFourEvents = sortedEvents.slice(0, 4);
+
+      // 3. Dynamically append event cells to the OCS grid
+      topFourEvents.forEach((evt, index) => {
+        const cell = document.createElement("div");
+        
+        const isAccent = index % 2 === 0;
+        cell.className = isAccent ? "ocs__grid-cell ocs__grid-cell--accent" : "ocs__grid-cell";
+
+        cell.innerHTML = `
+          <strong>${evt.title || 'Untitled Event'}</strong>
+          <p>Category: ${evt.category || 'General'} | Date: ${evt.date || 'TBD'}</p>
+          <p>Price: $${evt.price ?? 0} | Spots Available: ${evt.capacity ?? 0}</p>
+        `;
+        
+        gridContainer.appendChild(cell);
+      });
+
+    } catch (error) {
+      console.error("Error loading recent events:", error);
+      gridContainer.innerHTML = `
+        <div class="ocs__grid-cell ocs__grid-cell--header">Events</div>
+        <div class="ocs__grid-cell" style="color: red;">Unable to connect to backend server.</div>
+      `;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", loadRecentEvents);
+</script>
