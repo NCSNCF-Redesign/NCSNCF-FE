@@ -192,7 +192,7 @@ window.handleSignup = function () {
   })
   .then(() => {
     msg.style.color = "green";
-    msg.textContent = "Account created successfully! Redirecting to login...";
+    msg.textContent = "Account created successfully. Redirecting to login...";
     setTimeout(() => {
       window.location.href = '{{ "/login" | relative_url }}';
     }, 1500);
