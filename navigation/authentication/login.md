@@ -66,6 +66,7 @@ header.post-header, .post-title, .page-heading {
 .form-wrapper h1 {
   margin-bottom: 20px;
   color: #333;
+  text-shadow: 0px 0px 15px #ffb6c1;
 }
 
 /* Style the inputs to look modern */
@@ -73,10 +74,13 @@ header.post-header, .post-title, .page-heading {
   width: 100%;
   padding: 12px;
   margin-bottom: 20px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #e0e0e0 !important;
+  outline: none !important;
+  box-shadow: none !important;
   border-radius: 8px;
   font-family: inherit;
   box-sizing: border-box;
+  color: #333 !important; 
 }
 
 .submit-button {
@@ -106,6 +110,13 @@ header.post-header, .post-title, .page-heading {
   color: #0066cc;
   text-decoration: none;
 }
+
+.form-wrapper input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 1px solid #e0e0e0 !important;
+}
+
 </style>
 
 <section class="split-screen-container">
