@@ -139,7 +139,7 @@ header.post-header, .post-title, .page-heading {
       </form>
 
       <p class="auth-toggle">
-        Don't have an account? <a href="{{ '/signup' | relative_url }}">Sign up here</a>
+        Don't have an account? <a href="{{ '/signup' | relative_url }}">Sign up here!</a>
       </p>
 
     </div>
