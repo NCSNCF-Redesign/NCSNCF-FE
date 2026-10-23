@@ -67,6 +67,83 @@ active_tab: profile
         </div>
     </div>
 
+    <!-- CCAE Feedback Survey Section -->
+    <div class="bg-neutral-800 rounded-lg shadow-md p-6 mb-6 border-neutral-700 border">
+        <h2 class="text-xl font-semibold mb-2 text-gray-100">CCAE Event & Visitor Survey</h2>
+        <p class="text-sm text-gray-400 mb-6">Help us improve future performances, classes, and community events at the California Center for the Arts, Escondido.</p>
+
+        <div class="space-y-4">
+            <!-- Event / Program Attended -->
+            <div>
+                <label for="ccaeEventType" class="block text-sm font-medium text-gray-300 mb-1">
+                    Primary Event or Activity Attended
+                </label>
+                <select id="ccaeEventType" name="eventType"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Concert / Music Performance">Concert / Live Music</option>
+                    <option value="Theater / Musical">Theater / Musical</option>
+                    <option value="Dance Performance">Dance Performance</option>
+                    <option value="Museum / Art Exhibition">Museum / Art Exhibition</option>
+                    <option value="Education Class / Workshop">Education Class / Workshop</option>
+                    <option value="Community Festival / Event">Community Festival / Event</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!-- Venue Rating -->
+            <div>
+                <label for="ccaeRating" class="block text-sm font-medium text-gray-300 mb-1">
+                    Overall Experience Rating
+                </label>
+                <select id="ccaeRating" name="rating"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" disabled selected>Select a rating</option>
+                    <option value="5">5 - Outstanding</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="3">3 - Satisfactory</option>
+                    <option value="2">2 - Needs Improvement</option>
+                    <option value="1">1 - Poor</option>
+                </select>
+            </div>
+
+            <!-- How did you hear about us? -->
+            <div>
+                <label for="ccaeSource" class="block text-sm font-medium text-gray-300 mb-1">
+                    How did you hear about this CCAE event?
+                </label>
+                <select id="ccaeSource" name="source"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" disabled selected>Select source</option>
+                    <option value="CCAE Website / Email Newsletter">CCAE Website / Email Newsletter</option>
+                    <option value="Social Media">Social Media</option>
+                    <option value="Word of Mouth">Word of Mouth / Friend</option>
+                    <option value="Local Newspaper / Flyer">Local Newspaper / Flyer</option>
+                    <option value="School / Educational Program">School / Educational Program</option>
+                </select>
+            </div>
+
+            <!-- Specific Feedback / Suggestions -->
+            <div>
+                <label for="ccaeFeedback" class="block text-sm font-medium text-gray-300 mb-1">
+                    Comments or Suggestions for Future Events
+                </label>
+                <textarea id="ccaeFeedback" name="feedback" rows="3"
+                    placeholder="Tell us what you enjoyed or what performances/programs you would like to see in Escondido..."
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end pt-2">
+                <button type="button" id="submitCcaeSurveyBtn" onclick="submitCcaeSurvey()"
+                    class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-all font-medium text-sm flex items-center gap-2">
+                    Submit Survey
+                </button>
+            </div>
+            <p id="ccaeSurveyStatus" class="text-sm mt-2 text-center hidden"></p>
+        </div>
+    </div>
+    
     <!-- School Section -->
     <div class="bg-neutral-800 rounded-lg shadow-md p-6 mb-6 border-neutral-700 border">
         <h2 class="text-xl font-semibold mb-6">School Information</h2>
