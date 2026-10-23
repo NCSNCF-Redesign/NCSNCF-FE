@@ -1,10 +1,6 @@
 # Introduction
 
-Open Coding Society `student` is a project designed to support students in their Computer Science and Software Engineering education. It offers a wide range of resources including tech talks, code examples, and educational blogs.
-
-This GitHub Pages repository can be customized by the blogger to support computer science learning as the student works through the pathways of using Javascript, Python/Flask, Java/Spring. It is intended to support course work for Computer Science and Software Engineering (CSSE), AP Computer Science Principles (APCSP or CSP), and AP Computer Science 'A' (APCSA, or CSA).
-
-"Open Coding Society's instructional model is grounded in **Connectivism**, recognizing that learning happens through diverse networks of people, platforms, and AI. OCS is refining `student` using **Merrill's structure**, deepening learning through **Fink**, ensuring access via **UDL**, and supporting our classroom through **Agile and Design Thinking ceremonies**, with a touch of **Gagné** to focus each classroom day. OCS wants to create projects that support learning for today's digital, open, and connected world."
+CCAE is the project that focuses on Improving an already existing website using Open Coding Society website system and style, the people working on this project are
 
 ```mermaid
 flowchart LR

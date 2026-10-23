@@ -6,84 +6,15 @@ show_reading_time: false
 ---
 
 ## California Center For The Arts, Escondido 2026-27
-
-<div class="ocs__grid ocs__grid--standard cols-2" style="margin-bottom: 1.5rem;">
-    <div class="ocs__grid-cell ocs__grid-cell--header"> Project Summary</div>
-    
-    <div class="ocs__grid-cell ocs__grid-cell--accent">
-        <strong>Main Problems</strong>
-        <p>The website is aesthetically busy and navigation is complicated and hard to follow. It also has different domains for some pages, and is overall difficult to navigate and find what someone might be looking for.</p>
-        <a class="ocs__btn alert-green fill small" href="https://artcenter.org/">
-            See Original
-        </a>
-    </div>
-    <div class="ocs__grid-cell ocs__grid-cell--accent">
-        <strong>Project Direction</strong>
-        <p>This capstone project aims to refurbish the California Center For The Performing Arts Escondido website to be more streamlined, organized, and less busy. It will overhaul the search feature to be more intelligent, fix any visual bugs, introduce a dynamic and artistic design, and will replace generic walls of text with something more interactive. </p>
-    </div>
+<div class="ocs__card">
+  <p class="ocs__description">This is the home page for CCAE.</p>
 </div>
-
-<a class="ocs__btn large" href="https://github.com/tristan-chiu0/CCAE-FE" style="margin-bottom: 1.5rem;">
-    Github Repository
-</a>
-
 ---
 
-<div class="ocs__grid ocs__grid--standard cols-2" style="margin-bottom: 1.5rem;">
-    <div class="ocs__grid-cell ocs__grid-cell--header">Strengths vs Improvement For Website</div>
-
-    <div class="ocs__grid-cell ocs__grid-cell--accent">
-        <strong>Dynamic UI</strong>
-        <p>A changing background creates visual interest and professional polish.</p>
-        <a class="ocs__btn alert-green fill small" href="https://artcenter.org/">
-            View Example
-        </a>
-    </div>
-    <div class="ocs__grid-cell">
-        <strong>Navigation Clarity</strong>
-        <p>Site-in-Site transitions are inconsistent and confusing for users.</p>
-        <a class="ocs__btn alert-yellow fill small" href="https://www.ccaemuseum.org/">
-            Museum Entry Point
-        </a>
-    </div>
-
-    <div class="ocs__grid-cell ocs__grid-cell--accent">
-        <strong>Backend Integration</strong>
-        <p>Data sourcing is evident; events page pulls live ticket inventory and concerts page pulls from real dates. One thing that could be improved is having the Buy Tickets button placed directly on each concert performance grid image for easily accessibility. Some of the events when clicked on also have the buy tickets button twice.</p>
-        <a class="ocs__btn alert-green fill small" href="https://artcenter.org/events/">
-            Events Page
-        </a>
-        <a class="ocs__btn alert-green fill small" href="https://artcenter.org/concerts-performances/">
-            Concerts Page
-        </a>
-        <a class="ocs__btn alert-red fill small" href="https://artcenter.org/event/kintsugi-workshop-2/2026-09-12/">
-            Two Ticket Btn
-        </a>
-    </div>
-    <div class="ocs__grid-cell">
-        <strong>Information Architecture</strong>
-        <p>Multiple nested "About" pages reduce discoverability and clarity.</p>
-        <a class="ocs__btn alert-yellow fill small" href="https://artcenter.org/about/">
-            About Pages
-        </a>
-    </div>
-    <div class="ocs__grid-cell">
-        <strong>Header Network</strong>
-        <p>The smaller black header and main-header have links to the same pages.</p>
-        <a class="ocs__btn alert-red fill small" href="https://artcenter.org/about/">
-            Header Above
-        </a>
-    </div>
-    <div class="ocs__grid-cell">
-        <strong>Basic Bugs and Polish</strong>
-        <p> Sitemap footer redirects nowhere, some links don't work like the contact link at the end of the privacy policy</p>
-        <a class="ocs__btn alert-red fill small" href="https://artcenter.org/about/">
-            Scroll Down
-        </a>
-        <a class="ocs__btn alert-red fill small" href="https://artcenter.org/about/privacy/">
-            Privacy Page
-        </a>
-    </div>
+<!-- Dynamic Events Grid -->
+<div class="ocs__grid ocs__grid--standard cols-2" style="margin-bottom: 1.5rem;" id="recent-events-grid">
+    <div class="ocs__grid-cell ocs__grid-cell--header">Events</div>
+    <div class="ocs__grid-cell">Loading recent events...</div>
 </div>
 
 ---
@@ -116,3 +47,66 @@ show_reading_time: false
 **Powered by OCS grids and buttons**
 
 [Buttons]({{ '/navigation/sass/buttons/' | relative_url }}) | [Grids]({{ '/navigation/sass/grids/' | relative_url }})
+
+<script>
+  // Point to local Flask instance
+  const BACKEND_URL = "http://localhost:5000";
+
+  async function loadRecentEvents() {
+    const gridContainer = document.getElementById("recent-events-grid");
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/events`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error status: ${response.status}`);
+      }
+      
+      const events = await response.json();
+
+      // Clear existing grid contents except header cell
+      gridContainer.innerHTML = '<div class="ocs__grid-cell ocs__grid-cell--header">Events</div>';
+
+      if (!Array.isArray(events) || events.length === 0) {
+        gridContainer.innerHTML += '<div class="ocs__grid-cell">No recent events available.</div>';
+        return;
+      }
+
+      // 1. Sort events by date in descending order (most recent first)
+      const sortedEvents = events.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      // 2. Extract top 4 events
+      const topFourEvents = sortedEvents.slice(0, 4);
+
+      // 3. Dynamically append event cells to the OCS grid
+      topFourEvents.forEach((evt, index) => {
+        const cell = document.createElement("div");
+        
+        const isAccent = index % 2 === 0;
+        cell.className = isAccent ? "ocs__grid-cell ocs__grid-cell--accent" : "ocs__grid-cell";
+
+        cell.innerHTML = `
+          <strong>${evt.title || 'Untitled Event'}</strong>
+          <p>Category: ${evt.category || 'General'} | Date: ${evt.date || 'TBD'}</p>
+          <p>Price: $${evt.price ?? 0} | Spots Available: ${evt.capacity ?? 0}</p>
+        `;
+        
+        gridContainer.appendChild(cell);
+      });
+
+    } catch (error) {
+      console.error("Error loading recent events:", error);
+      gridContainer.innerHTML = `
+        <div class="ocs__grid-cell ocs__grid-cell--header">Events</div>
+        <div class="ocs__grid-cell" style="color: red;">Unable to connect to backend server.</div>
+      `;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", loadRecentEvents);
+</script>
