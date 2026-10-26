@@ -1,3 +1,5 @@
+### ReadMe will have regular updates as our project comes along
+
 # Introduction
 
 CCAE is the project that focuses on Improving an already existing website using Open Coding Society website system and style, the people working on this project Tristan Chiu, Mateo Durand Amador, and Yue Barbara (change to actual full name later) 
@@ -39,9 +41,8 @@ There's also a license for CCAE if it gets accepted
 
 ### Contributions
 
-- **Notable Contributions**: Highlights significant contributions to the project, including theme development, search and tagging functionality, GitHub API integration, and the incorporation of GitHub Projects into GitHub pages. Contributors such as Tirth Thakker, Mirza Beg, and Toby Ledder have played crucial roles in these developments.
-
-- **Blog Contributions**:  Often students contribute articles and blogs to this project.  Their names are typically listed in the front matter of their contributing post.
+- **Notable Contributions**: Mateo D.A. brought survey questions, README, ____, etc. Tristan Chiu brought _____, etc. Yue Zhao brought ___, etc.
+- **Blog Contributions**:  When it comes to what we have on our site visibly...  
 
 ---
 
