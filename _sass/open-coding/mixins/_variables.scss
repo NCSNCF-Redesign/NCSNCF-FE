@@ -1,8 +1,22 @@
 /**
  * Design System Variables
- * Centralized spacing, sizing, and breakpoint constants
+ * Centralized spacing, sizing, colors, and breakpoint constants
  * Use these throughout SCSS files for consistency
  */
+
+// ===========================
+// Typography
+// ===========================
+$font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+// ===========================
+// Color Palette (Warm Reddish-Brown)
+// ===========================
+$color-bg: #FAF5F0;          // Warm off-white background
+$color-text: #2C1E16;        // Dark brown text for contrast
+$color-accent: #8B3A3A;      // Reddish-brown accent for primary buttons/links
+$color-accent-hover: #A52A2A; 
+$color-btn-text: #FFFFFF;    // White text for colored buttons
 
 // ===========================
 // Spacing Scale

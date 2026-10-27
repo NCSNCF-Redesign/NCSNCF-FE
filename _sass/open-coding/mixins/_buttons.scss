@@ -9,22 +9,17 @@
  * @private - Use specific mixins instead
  */
 @mixin base-button {
-  background: var(--pref-bg-color);
-  border: 1px solid var(--ui-border);
-  color: var(--pref-text-color);
-  font-family: var(--pref-font-family);
-  font-size: var(--pref-font-size);
+  background: #FFFFFF; // Override var(--pref-bg-color)
+  border: 1px solid #D7C4B7; // Warm border
+  color: #2C1E16; // Override var(--pref-text-color)
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; // New font
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s;
-
+  
   &:hover {
-    background: var(--panel-mid);
-    border-color: var(--pref-accent-color);
-  }
-
-  &:focus {
-    outline: none;
-    border-color: var(--pref-accent-color);
+    background: #F4EBE1; // Warm hover state
+    border-color: #8B3A3A; 
   }
 }
 
@@ -112,6 +107,9 @@
     opacity: 0.85;
     transform: scale(1.05);
   }
+  background: #8B3A3A; // Primary reddish-brown
+  border-color: #8B3A3A;
+  color: #FFFFFF;
 }
 
 /**
