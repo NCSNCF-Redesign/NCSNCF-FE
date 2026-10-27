@@ -1,78 +1,167 @@
 ---
-layout: page 
+layout: page
 title: Sign Up
 permalink: /signup
 search_exclude: true
+show_reading_time: false
 ---
 
-{% include nav/homejava.html %}
-
 <style>
-  .login-container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap; /* allows the cards to wrap onto the next line if the screen is too small */
-  }
+/* Hide the green title */
+header.post-header, .post-title, .page-heading {
+  display: none !important;
+}
 
-  .signup-card {
-      margin: auto;
-      margin-top: 0; /* remove the top margin */
-      width: 45%;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 20px;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-      margin-bottom: 20px;
-      overflow-x: auto; /* Enable horizontal scrolling */
-  }
+/* Hide the footer to remove the black gap at the bottom */
+.site-footer {
+  display: none !important;
+}
 
-  .signup-card h1 {
-      margin-bottom: 20px;
-  }
+/* Remove default padding ONLY from the main content area so the header isn't affected */
+.page-content {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.page-content > .wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Set the split screen to fill the exact height minus the nav bar */
+.split-screen-container {
+  display: flex;
+  min-height: calc(100vh - 56px); 
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Left Side: centers the form */
+.form-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+/* Right Side: The Image Showcase */
+.showcase-side {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  background-color: #ffd1dc;
+}
+
+/* The actual box holding the inputs */
+.form-wrapper {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  color: #333;
+}
+
+.form-wrapper h1 {
+  display: block !important;
+  margin-bottom: 20px;
+  color: #333 !important;
+  text-shadow: 0px 0px 15px #ffb6c1;
+}
+
+/* Style the inputs to look modern */
+.form-wrapper input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-radius: 8px;
+  font-family: inherit;
+  box-sizing: border-box;
+  color: #333 !important;
+}
+
+/* Override browser autofill background/text colors */
+.form-wrapper input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: #333 !important;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #555;
+}
+
+.auth-toggle {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.auth-toggle a {
+  color: #0066cc;
+  text-decoration: none;
+}
 </style>
 
-<div id="login-container">
-  <div class="signup-card">
-    <h1 id="signupTitle">Sign Up</h1>
-    <form id="signupForm" onsubmit="signup(); return false;">
-      <p>
-        <label>
-          Name:
-          <input type="text" name="name" id="name" required>
-        </label>
-      </p>
-      <p>
-        <label>
-          Github Id:
-          <input type="text" name="signupUid" id="signupUid" required>
-        </label>
-      </p>
-      <p>
-        <label>
-          SID:
-          <input type="text" name="sid" id="sid" required>
-        </label>
-      </p>
-      <p>
-        <label>
-          Email:
-          <input type="email" name="email" id="email" required>
-        </label>
-      </p>
-      <p>
-        <label>
-          Password:
-          <input type="password" name="signupPassword" id="signupPassword" required>
-        </label>
-      </p>
-      <p>
-        <button type="submit" class="medium filledHighlight primary">Sign Up</button>
-      </p>
-      <p id="signupMessage" style="color: green;"></p>
-    </form>
-  </div>
-</div>
+<section class="split-screen-container">
+  
+  <!-- Left Side: The Sign Up Form -->
+  <div class="form-side">
+    <div class="form-wrapper">
+      <h1>Sign Up</h1>
+      
+      <!-- Make sure this onsubmit calls your actual JS sign up function -->
+      <form id="signupForm" onsubmit="return false;">
+        <div class="form-group">
+          <input type="text" id="name" placeholder="Name" required>
+        </div>
+        <div class="form-group">
+          <input type="text" id="uid" placeholder="GitHub ID" required>
+        </div>
+        <div class="form-group">
+          <input type="text" id="sid" placeholder="SID" required>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+          <input type="password" id="password" placeholder="Password" required>
+        </div>
+        
+        <button type="submit" class="submit-button">Sign Up</button>
+        <p id="message" style="color: red; margin-top: 10px;"></p>
+      </form>
 
+      <p class="auth-toggle">
+        Already have an account? <a href="{{ '/login' | relative_url }}">Log in here</a>
+      </p>
+
+    </div>
+  </div>
+
+  <!-- Right Side: The Image Showcase -->
+  <div class="showcase-side" style="background-image: url('https://raw.githubusercontent.com/ccae-redesign-team/CCAE-FE/main/images/CCAE.jpg');">
+  </div>
+
+</section>
+
+<!-- KEEP YOUR EXISTING JAVASCRIPT HERE -->
 <script type="module">
   import { javaURI, pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
 

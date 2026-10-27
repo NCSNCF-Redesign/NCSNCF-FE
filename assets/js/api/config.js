@@ -1,4 +1,6 @@
 ---
+# Rebuilt on every build: incremental builds don't notice _config.yml changes, such as spring.
+regenerate: true
 ---
 
 // ^^ Do not remove the above front matter, it is required for Jekyll processing
@@ -21,6 +23,25 @@ if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     javaURI = "https://spring.opencodingsociety.com";
 }
 
+// Shared across the signup, login, and password-reset OAuth flows (login.md,
+// support.md) so the client_id only needs updating in one place.
+export const GOOGLE_CLIENT_ID = "{{ site.google_client_id }}";
+
+// Whether this site runs Spring next to Flask (`spring` in _config.yml). Login, logout,
+// the navbar's DM bell and /profile skip Spring when it is false; a site without the
+// setting keeps Spring on.
+export const springEnabled = "{{ site.spring }}" !== "false";
+
+export var javaWebSocketURI;
+// Port 8589 only exists on localhost; in production nginx forwards /ws-chat
+// through javaURI's normal port (443), same as announcement_chat.html and
+// week_chat.html's buildChatSocketEndpoint() already do.
+if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+    javaWebSocketURI = "http://localhost:8589";
+} else {
+    javaWebSocketURI = "https://spring.opencodingsociety.com";
+}
+
 export const fetchOptions = {
     method: 'GET',  // Default method is GET
     mode: 'cors', // Enable CORS (Cross-Origin Resource Sharing)
@@ -30,6 +51,7 @@ export const fetchOptions = {
         'Content-Type': 'application/json',
         'X-Origin': 'client' // Custom header to identify source
     },
+    credentials: "include"
 };
 
 // User Login Function (allows both GET and POST)
