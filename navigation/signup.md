@@ -52,7 +52,7 @@ header.post-header, .post-title, .page-heading {
   flex: 1;
   background-size: cover;
   background-position: center;
-  background-color: #ffd1dc;
+  background-color: #6e5555;
 }
 
 /* The actual box holding the inputs */
@@ -67,7 +67,7 @@ header.post-header, .post-title, .page-heading {
   display: block !important;
   margin-bottom: 20px;
   color: #333 !important;
-  text-shadow: 0px 0px 15px #ffb6c1;
+  text-shadow: 0px 0px 15px #6e5555;
 }
 
 /* Style the inputs to look modern */
@@ -156,7 +156,7 @@ header.post-header, .post-title, .page-heading {
   </div>
 
   <!-- Right Side: The Image Showcase -->
-  <div class="showcase-side" style="background-image: url('https://raw.githubusercontent.com/ccae-redesign-team/CCAE-FE/main/images/CCAE.jpg');">
+  <div class="showcase-side" style="background-image: url('https://raw.githubusercontent.com/NCSNCF-Redesign/NCSNCF-FE/main/images/NCSNCF.jpg');">
   </div>
 
 </section>

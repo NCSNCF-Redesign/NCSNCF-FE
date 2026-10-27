@@ -14,11 +14,11 @@
 #   in _config.yml. It will appear in your document head meta (for Google search
 #   results) and in your feed.xml site description.
 
-title: CCAE Frontend
+title: NCSNCF Frontend
 description: "Class of 2026"
 owner_name: Tristan Chiu, Barbara Zhao, Mateo Amador
 github_username: tristan-chiu0 
-github_repo: "CCAE-FE" 
+github_repo: "NCSNCF-FE" 
 baseurl: "/portfolio" 
 future: true
 
@@ -106,9 +106,8 @@ plugins:
 minima:
   skin: classic
   social_links:
-    - { platform: github, user_url: "https://github.com/open-coding-society" }
-    - { platform: x, user_url: "https://x.com/Open_Coding" }
-    - { platform: youtube, user_url: "https://www.youtube.com/@OpenCodingSociety" } 
+    - { platform: instagram, user_url: "https://www.instagram.com/ncspecialneedsfoundation/" }
+    - { platform: facebook, user_url: "https://www.facebook.com/North-County-Special-Needs-Community-Foundation-113636564660105/" }
   nav_pages:
     - navigation/search.md
     - navigation/about.md
