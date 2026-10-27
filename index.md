@@ -1,22 +1,17 @@
 ---
 layout: post 
-title: CCAE-FE
+title: NCSNCF-FE
 hide: true
 show_reading_time: false
 ---
 
-## California Center For The Arts, Escondido 2026-27
+## North County Special Needs Community Foundation 2026-27
 <div class="ocs__card">
-  <p class="ocs__description">This is the home page for CCAE.</p>
+  <p class="ocs__description">This is the home page for NCSNCF.</p>
 </div>
 ---
 
 ### Development Environment
-
-
-<!-- markdownlint-disable MD033 MD046 -->
-
-Hi! My name is [Your Full Name]
 
 ## Learning Buttons
 
