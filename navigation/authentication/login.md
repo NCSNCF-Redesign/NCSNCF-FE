@@ -64,8 +64,9 @@ header.post-header, .post-title, .page-heading {
 }
 
 .form-wrapper h1 {
+  display: block !important;
   margin-bottom: 20px;
-  color: #333;
+  color: #333 !important;
   text-shadow: 0px 0px 15px #ffb6c1;
 }
 
@@ -122,7 +123,7 @@ header.post-header, .post-title, .page-heading {
   <!-- Left Side: The Login Form -->
   <div class="form-side">
     <div class="form-wrapper">
-      <h1 id="pythonTitle">Welcome Back</h1>
+      <h1>Welcome Back</h1>
       <form id="pythonForm" onsubmit="loginBoth(); return false;">
         <div class="form-group">
           <input type="text" id="uid" placeholder="GitHub ID" required>

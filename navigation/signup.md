@@ -64,9 +64,10 @@ header.post-header, .post-title, .page-heading {
 }
 
 .form-wrapper h1 {
+  display: block !important;
   margin-bottom: 20px;
-  color: #333;
-  text-shadow: 0px 0px 15px #ffb6c1; /* Optional pink glow to match */
+  color: #333 !important;
+  text-shadow: 0px 0px 15px #ffb6c1;
 }
 
 /* Style the inputs to look modern */
