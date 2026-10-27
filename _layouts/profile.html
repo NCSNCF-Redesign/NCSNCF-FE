@@ -67,80 +67,78 @@ active_tab: profile
         </div>
     </div>
 
-    <!-- CCAE Feedback Survey Section -->
+    <!-- CCAE Profile & Engagement Preferences -->
     <div class="bg-neutral-800 rounded-lg shadow-md p-6 mb-6 border-neutral-700 border">
-        <h2 class="text-xl font-semibold mb-2 text-gray-100">CCAE Event & Visitor Survey</h2>
-        <p class="text-sm text-gray-400 mb-6">Help us improve future performances, classes, and community events at the California Center for the Arts, Escondido.</p>
+        <h2 class="text-xl font-semibold mb-2 text-gray-100">CCAE Community Engagement</h2>
+        <p class="text-sm text-gray-400 mb-6">Tell us about your involvement with the California Center for the Arts, Escondido so we can personalize your experience.</p>
 
         <div class="space-y-4">
-            <!-- Event / Program Attended -->
+            <!-- Relationship to CCAE -->
             <div>
-                <label for="ccaeEventType" class="block text-sm font-medium text-gray-300 mb-1">
-                    Primary Event or Activity Attended
+                <label for="ccaeAffiliation" class="block text-sm font-medium text-gray-300 mb-1">
+                    Your Primary Connection to CCAE
                 </label>
-                <select id="ccaeEventType" name="eventType"
+                <select id="ccaeAffiliation" name="affiliation"
                     class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="Concert / Music Performance">Concert / Live Music</option>
-                    <option value="Theater / Musical">Theater / Musical</option>
-                    <option value="Dance Performance">Dance Performance</option>
-                    <option value="Museum / Art Exhibition">Museum / Art Exhibition</option>
-                    <option value="Education Class / Workshop">Education Class / Workshop</option>
-                    <option value="Community Festival / Event">Community Festival / Event</option>
-                    <option value="Other">Other</option>
+                    <option value="" disabled selected>Select your connection</option>
+                    <option value="Audience / Patron">Audience Member / Event Patron</option>
+                    <option value="Student / Class Participant">Student / Class Participant</option>
+                    <option value="Educator / School Representative">Educator / School Representative</option>
+                    <option value="Artist / Performer">Artist / Performer / Exhibitor</option>
+                    <option value="Volunteer / Community Partner">Volunteer / Community Partner</option>
+                    <option value="Escondido Resident">Escondido Resident / Local Supporter</option>
                 </select>
             </div>
 
-            <!-- Venue Rating -->
+            <!-- Primary Arts Interests -->
             <div>
-                <label for="ccaeRating" class="block text-sm font-medium text-gray-300 mb-1">
-                    Overall Experience Rating
+                <label for="ccaeInterests" class="block text-sm font-medium text-gray-300 mb-1">
+                    Primary Arts Interest
                 </label>
-                <select id="ccaeRating" name="rating"
+                <select id="ccaeInterests" name="primaryInterest"
                     class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="" disabled selected>Select a rating</option>
-                    <option value="5">5 - Outstanding</option>
-                    <option value="4">4 - Very Good</option>
-                    <option value="3">3 - Satisfactory</option>
-                    <option value="2">2 - Needs Improvement</option>
-                    <option value="1">1 - Poor</option>
+                    <option value="" disabled selected>Select primary interest</option>
+                    <option value="Performing Arts">Performing Arts (Concerts, Theater, Dance)</option>
+                    <option value="Visual Arts">Visual Arts & Museum Exhibitions</option>
+                    <option value="Arts Education">Arts Education & Workshops</option>
+                    <option value="Community Festivals">Community Festivals & Free Events</option>
+                    <option value="Youth Programs">Youth & School Programs</option>
                 </select>
             </div>
 
-            <!-- How did you hear about us? -->
+            <!-- Visit Frequency -->
             <div>
-                <label for="ccaeSource" class="block text-sm font-medium text-gray-300 mb-1">
-                    How did you hear about this CCAE event?
+                <label for="ccaeFrequency" class="block text-sm font-medium text-gray-300 mb-1">
+                    How often do you visit or participate?
                 </label>
-                <select id="ccaeSource" name="source"
+                <select id="ccaeFrequency" name="visitFrequency"
                     class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="" disabled selected>Select source</option>
-                    <option value="CCAE Website / Email Newsletter">CCAE Website / Email Newsletter</option>
-                    <option value="Social Media">Social Media</option>
-                    <option value="Word of Mouth">Word of Mouth / Friend</option>
-                    <option value="Local Newspaper / Flyer">Local Newspaper / Flyer</option>
-                    <option value="School / Educational Program">School / Educational Program</option>
+                    <option value="" disabled selected>Select frequency</option>
+                    <option value="First time / New member">First time / Just getting involved</option>
+                    <option value="A few times a year">A few times a year</option>
+                    <option value="Monthly">Monthly</option>
+                    <option value="Weekly or more">Weekly or more</option>
                 </select>
             </div>
 
-            <!-- Specific Feedback / Suggestions -->
+            <!-- Suggestions / General Feedback -->
             <div>
-                <label for="ccaeFeedback" class="block text-sm font-medium text-gray-300 mb-1">
-                    Comments or Suggestions for Future Events
+                <label for="ccaeProfileNotes" class="block text-sm font-medium text-gray-300 mb-1">
+                    What programs or events would you like to see at CCAE?
                 </label>
-                <textarea id="ccaeFeedback" name="feedback" rows="3"
-                    placeholder="Tell us what you enjoyed or what performances/programs you would like to see in Escondido..."
+                <textarea id="ccaeProfileNotes" name="profileNotes" rows="3"
+                    placeholder="Share any ideas, interests, or feedback regarding CCAE programs..."
                     class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"></textarea>
             </div>
 
             <!-- Submit Button -->
             <div class="flex justify-end pt-2">
-                <button type="button" id="submitCcaeSurveyBtn" onclick="submitCcaeSurvey()"
+                <button type="button" id="saveCcaePreferencesBtn" onclick="saveCcaePreferences()"
                     class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-all font-medium text-sm flex items-center gap-2">
-                    Submit Survey
+                    Save Preferences
                 </button>
             </div>
-            <p id="ccaeSurveyStatus" class="text-sm mt-2 text-center hidden"></p>
+            <p id="ccaeStatus" class="text-sm mt-2 text-center hidden"></p>
         </div>
     </div>
     
