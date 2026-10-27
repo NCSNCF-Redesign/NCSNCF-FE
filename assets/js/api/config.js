@@ -51,6 +51,7 @@ export const fetchOptions = {
         'Content-Type': 'application/json',
         'X-Origin': 'client' // Custom header to identify source
     },
+    credentials: "include"
 };
 
 // User Login Function (allows both GET and POST)
