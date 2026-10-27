@@ -11,10 +11,34 @@ show_reading_time: false
 </div>
 ---
 
+<<<<<<< HEAD
 <!-- Dynamic Events Grid -->
 <div class="ocs__grid ocs__grid--standard cols-2" style="margin-bottom: 1.5rem;" id="recent-events-grid">
     <div class="ocs__grid-cell ocs__grid-cell--header">Events</div>
     <div class="ocs__grid-cell">Loading recent events...</div>
+=======
+### Development Environment
+
+
+<!-- markdownlint-disable MD033 MD046 -->
+
+Hi! My name is [Your Full Name]
+
+## Learning Buttons
+
+> SASS Mixins examples and code, explore these topics by clicking standard OCS SASS buttons.
+
+<div class="ocs__links">
+    <a class="ocs__btn" href="{{site.baseurl}}/github/pages/about_sass_buttons/">
+        Buttons Lesson
+    </a>
+    <a class="ocs__btn" href="https://github.com/Open-Coding-Society/pages/blob/main/_sass/open-coding/mixins/_buttons.scss">
+        Button Mixins
+    </a>
+    <a class="ocs__btn" href="https://github.com/Open-Coding-Society/pages/blob/main/_sass/open-coding/mixins/_container.scss">
+        Container Mixins
+    </a>
+>>>>>>> 2277c0aa8314f615a62f287af6aae8eb1ea6dd08
 </div>
 
 ---
