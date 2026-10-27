@@ -32,7 +32,7 @@ header.post-header, .post-title, .page-heading {
 /* Set the split screen to fill the exact height minus the nav bar */
 .split-screen-container {
   display: flex;
-  min-height: calc(100vh - 56px); 
+  min-height: calc(100vh - 56px);
   width: 100%;
   margin: 0;
   padding: 0;
@@ -80,7 +80,7 @@ header.post-header, .post-title, .page-heading {
   border-radius: 8px;
   font-family: inherit;
   box-sizing: border-box;
-  color: #333 !important; 
+  color: #333 !important;
 }
 
 .submit-button {
@@ -116,16 +116,13 @@ header.post-header, .post-title, .page-heading {
   box-shadow: none !important;
   border: 1px solid #e0e0e0 !important;
 }
-
 </style>
 
 <section class="split-screen-container">
-  
   <!-- Left Side: The Login Form -->
   <div class="form-side">
     <div class="form-wrapper">
       <h1 id="pythonTitle">Welcome Back</h1>
-      
       <form id="pythonForm" onsubmit="loginBoth(); return false;">
         <div class="form-group">
           <input type="text" id="uid" placeholder="GitHub ID" required>
@@ -133,29 +130,29 @@ header.post-header, .post-title, .page-heading {
         <div class="form-group">
           <input type="password" id="password" placeholder="Password" required>
         </div>
-        
         <button type="submit" class="submit-button">Sign In</button>
         <p id="message" style="color: red; margin-top: 10px;"></p>
       </form>
-
       <p class="auth-toggle">
         Don't have an account? <a href="{{ '/signup' | relative_url }}">Sign up here!</a>
       </p>
-
     </div>
   </div>
 
   <!-- Right Side: The Image Showcase (Image path applied directly in HTML) -->
   <div class="showcase-side" style="background-image: url('https://raw.githubusercontent.com/ccae-redesign-team/CCAE-FE/main/images/CCAE.jpg');">
   </div>
-
 </section>
 
 <script type="module">
 import { login, pythonURI, javaURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
 
+// Read the URL for a redirect parameter and set fallback destination
+const urlParams = new URLSearchParams(window.location.search);
+const redirectTarget = urlParams.get('redirect') || '{{site.baseurl}}/profile';
+
 window.loginBoth = function () {
-  javaLogin(); 
+  javaLogin();
   pythonLogin();
 };
 
@@ -178,6 +175,7 @@ window.javaLogin = function () {
   const loginURL = `${javaURI}/authenticate`;
   const databaseURL = `${javaURI}/api/person/get`;
   const signupURL = `${javaURI}/api/person/create`;
+  
   const userCredentials = JSON.stringify({
     uid: document.getElementById("uid").value,
     password: document.getElementById("password").value,
@@ -197,7 +195,8 @@ window.javaLogin = function () {
       return response.json();
     })
     .then(data => {
-      window.location.href = '{{site.baseurl}}/profile';
+      // Redirect using the smart target
+      window.location.href = redirectTarget;
       return fetch(databaseURL, fetchOptions)
         .then(response => {
           if (!response.ok) {
@@ -264,7 +263,8 @@ function pythonDatabase() {
       return response.json();
     })
     .then(data => {
-      window.location.href = '{{site.baseurl}}/profile';
+      // Redirect using the smart target
+      window.location.href = redirectTarget;
     })
     .catch(error => {
       document.getElementById("message").textContent = `Error: ${error.message}`;
