@@ -217,7 +217,7 @@
 
             <!-- Submit Button -->
             <div class="flex justify-end pt-2">
-                <button type="button" id="saveCcaePreferencesBtn" onclick="saveCcaePreferences()"
+                <button type="button" id="saveCcaePreferencesBtn"
                     class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-all font-medium text-sm flex items-center gap-2">
                     Submit Survey
                 </button>
@@ -234,19 +234,19 @@
     async function saveCcaePreferences() {
         const getCheckedValues = (name) => Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value);
 
-        const discovery = document.getElementById('ccaeDiscovery').value;
-        const frequency = document.getElementById('ccaeFrequency').value;
+        const discovery = document.getElementById('ccaeDiscovery')?.value;
+        const frequency = document.getElementById('ccaeFrequency')?.value;
         const eventTypes = getCheckedValues('eventTypes');
-        const companions = document.getElementById('ccaeCompanions').value;
-        const mainReason = document.getElementById('ccaeMainReason').value;
-        const travelDistance = document.getElementById('ccaeTravelDistance').value;
+        const companions = document.getElementById('ccaeCompanions')?.value;
+        const mainReason = document.getElementById('ccaeMainReason')?.value;
+        const travelDistance = document.getElementById('ccaeTravelDistance')?.value;
         const findChannels = getCheckedValues('findChannels');
         const decisionFactors = getCheckedValues('decisionFactors');
-        const ticketBudget = document.getElementById('ccaeTicketBudget').value;
-        const attendanceBarriers = document.getElementById('ccaeAttendanceBarriers').value;
-        const improvements = document.getElementById('ccaeImprovements').value;
-        const browsingPreference = document.getElementById('ccaeBrowsingPreference').value;
-        const accessibilityImportance = document.getElementById('ccaeAccessibilityImportance').value;
+        const ticketBudget = document.getElementById('ccaeTicketBudget')?.value;
+        const attendanceBarriers = document.getElementById('ccaeAttendanceBarriers')?.value;
+        const improvements = document.getElementById('ccaeImprovements')?.value;
+        const browsingPreference = document.getElementById('ccaeBrowsingPreference')?.value;
+        const accessibilityImportance = document.getElementById('ccaeAccessibilityImportance')?.value;
         
         const statusEl = document.getElementById('ccaeStatus');
 
@@ -276,16 +276,20 @@
             const response = await fetch(`${pythonURI}/api/profile/ccae`, {
                 ...fetchOptions,
                 method: 'POST',
+                credentials: 'include',
                 headers: {
-                    ...fetchOptions.headers,
+                    ...(fetchOptions?.headers || {}),
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(payload)
             });
 
             if (!response.ok) {
-                throw new Error(`Server status ${response.status}`);
+                const errData = await response.json().catch(() => ({}));
+                throw new Error(errData.message || `Server returned HTTP status ${response.status}`);
             }
+
+            document.getElementById('ccaeSurveyForm')?.reset();
 
             showToast({
                 message: "Thank you! Your survey responses have been saved.",
@@ -295,11 +299,20 @@
 
         } catch (error) {
             console.error('Error saving CCAE preferences:', error);
-            statusEl.textContent = "Failed to save survey. Please try again.";
-            statusEl.className = "text-sm mt-2 text-center text-red-400";
-            statusEl.classList.remove('hidden');
+            if (statusEl) {
+                statusEl.textContent = `Failed to save survey: ${error.message}`;
+                statusEl.className = "text-sm mt-2 text-center text-red-400";
+                statusEl.classList.remove('hidden');
+            }
         }
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('saveCcaePreferencesBtn');
+        if (btn) {
+            btn.addEventListener('click', saveCcaePreferences);
+        }
+    });
 
     window.saveCcaePreferences = saveCcaePreferences;
 </script>
