@@ -1,0 +1,305 @@
+<div class="max-w-4xl mx-auto py-6">
+    <!-- CCAE Community Survey -->
+    <div class="bg-neutral-800 rounded-lg shadow-md p-6 mb-6 border-neutral-700 border">
+        <h2 class="text-xl font-semibold mb-2 text-gray-100">CCAE Community Survey</h2>
+        <p class="text-sm text-gray-400 mb-6">Tell us about your involvement and preferences with the California Center for the Arts, Escondido so we can personalize your experience.</p>
+
+        <form id="ccaeSurveyForm" class="space-y-6">
+            <!-- 1. Discovery Source -->
+            <div>
+                <label for="ccaeDiscovery" class="block text-sm font-medium text-gray-300 mb-1">
+                    1. How did you first hear about CCAE?
+                </label>
+                <select id="ccaeDiscovery" name="discovery"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Social media">Social media</option>
+                    <option value="Friends or family">Friends or family</option>
+                    <option value="School or teacher">School or teacher</option>
+                    <option value="Search engine">Search engine (Google, etc.)</option>
+                    <option value="Community event">Community event</option>
+                    <option value="Advertisement">Advertisement</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!-- 2. Visit Frequency -->
+            <div>
+                <label for="ccaeFrequency" class="block text-sm font-medium text-gray-300 mb-1">
+                    2. How often do you visit CCAE or attend its events?
+                </label>
+                <select id="ccaeFrequency" name="visitFrequency"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" disabled selected>Select frequency</option>
+                    <option value="First time / haven't visited yet">First time / haven't visited yet</option>
+                    <option value="Several times a year">Several times a year</option>
+                    <option value="Once a month">Once a month</option>
+                    <option value="Several times a month">Several times a month</option>
+                    <option value="Once a week or more">Once a week or more</option>
+                </select>
+            </div>
+
+            <!-- 3. Event Types (Checkboxes) -->
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">
+                    3. Which types of events have you attended or would you like to attend? (Select all that apply)
+                </label>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-200">
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="eventTypes" value="Concerts and live music" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Concerts and live music</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="eventTypes" value="Theater and performing arts" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Theater and performing arts</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="eventTypes" value="Art exhibitions" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Art exhibitions</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="eventTypes" value="Dance performances" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Dance performances</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="eventTypes" value="Educational workshops" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Educational workshops</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="eventTypes" value="Community events and festivals" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Community events and festivals</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="eventTypes" value="Family activities" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Family activities</span></label>
+                </div>
+            </div>
+
+            <!-- 4. Attendance Companions -->
+            <div>
+                <label for="ccaeCompanions" class="block text-sm font-medium text-gray-300 mb-1">
+                    4. Who do you usually attend events with?
+                </label>
+                <select id="ccaeCompanions" name="companions"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="By myself">By myself</option>
+                    <option value="Friends">Friends</option>
+                    <option value="Family or children">Family or children</option>
+                    <option value="Partner">Partner</option>
+                    <option value="School or organized group">School or organized group</option>
+                </select>
+            </div>
+
+            <!-- 5. Main Reason -->
+            <div>
+                <label for="ccaeMainReason" class="block text-sm font-medium text-gray-300 mb-1">
+                    5. What is your main reason for visiting CCAE?
+                </label>
+                <select id="ccaeMainReason" name="mainReason"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" disabled selected>Select primary reason</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Interest in art and culture">Interest in art and culture</option>
+                    <option value="Learning something new">Learning something new</option>
+                    <option value="Spending time with others">Spending time with others</option>
+                    <option value="Supporting local artists">Supporting local artists</option>
+                    <option value="School or educational activities">School or educational activities</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!-- 6. Travel Distance -->
+            <div>
+                <label for="ccaeTravelDistance" class="block text-sm font-medium text-gray-300 mb-1">
+                    6. How far do you typically travel to visit CCAE?
+                </label>
+                <select id="ccaeTravelDistance" name="travelDistance"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" disabled selected>Select distance</option>
+                    <option value="Less than 5 miles">Less than 5 miles</option>
+                    <option value="5–10 miles">5–10 miles</option>
+                    <option value="11–25 miles">11–25 miles</option>
+                    <option value="More than 25 miles">More than 25 miles</option>
+                    <option value="I haven't visited yet">I haven't visited yet</option>
+                </select>
+            </div>
+
+            <!-- 7. Information Finding (Checkboxes) -->
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">
+                    7. How do you usually find events to attend? (Select all that apply)
+                </label>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-200">
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="CCAE website" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>CCAE website</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Social media" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Social media</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Email newsletters" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Email newsletters</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Friends and family" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Friends and family</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Event listing websites" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Event listing websites</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Posters or flyers" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Posters or flyers</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Other" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Other</span></label>
+                </div>
+            </div>
+
+            <!-- 8. Decision Factors (Checkboxes) -->
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">
+                    8. What event information matters most when deciding to attend? (Select all that apply)
+                </label>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-200">
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Date and time" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Date and time</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Ticket price" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Ticket price</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Event description" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Event description</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Photos or videos" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Photos or videos</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Artist or performer information" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Artist or performer information</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Location and parking" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Location and parking</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Age suitability or accessibility" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Age suitability or accessibility</span></label>
+                </div>
+            </div>
+
+            <!-- 9. Ticket Budget -->
+            <div>
+                <label for="ccaeTicketBudget" class="block text-sm font-medium text-gray-300 mb-1">
+                    9. What is your typical ticket budget per person?
+                </label>
+                <select id="ccaeTicketBudget" name="ticketBudget"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" disabled selected>Select budget range</option>
+                    <option value="Free events only">Free events only</option>
+                    <option value="Under $20">Under $20</option>
+                    <option value="$20–$50">$20–$50</option>
+                    <option value="$51–$100">$51–$100</option>
+                    <option value="Over $100">Over $100</option>
+                    <option value="It depends on the event">It depends on the event</option>
+                </select>
+            </div>
+
+            <!-- 10. Barriers to Attendance -->
+            <div>
+                <label for="ccaeAttendanceBarriers" class="block text-sm font-medium text-gray-300 mb-1">
+                    10. What most often prevents you from attending an event?
+                </label>
+                <select id="ccaeAttendanceBarriers" name="attendanceBarriers"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" disabled selected>Select a primary barrier</option>
+                    <option value="Ticket cost">Ticket cost</option>
+                    <option value="Busy schedule">Busy schedule</option>
+                    <option value="Not knowing about events">Not knowing about events</option>
+                    <option value="Transportation or parking">Transportation or parking</option>
+                    <option value="Not finding events that interest me">Not finding events that interest me</option>
+                    <option value="Accessibility needs">Accessibility needs</option>
+                    <option value="Nothing usually prevents me">Nothing usually prevents me</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!-- 11. Improvements -->
+            <div>
+                <label for="ccaeImprovements" class="block text-sm font-medium text-gray-300 mb-1">
+                    11. What is one thing CCAE could improve about its events or website?
+                </label>
+                <textarea id="ccaeImprovements" name="improvements" rows="3"
+                    placeholder="Share any suggestions or ideas for improvement..."
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"></textarea>
+            </div>
+
+            <!-- 12. Browsing Preferences -->
+            <div>
+                <label for="ccaeBrowsingPreference" class="block text-sm font-medium text-gray-300 mb-1">
+                    12. Which way would you like to browse events?
+                </label>
+                <select id="ccaeBrowsingPreference" name="browsingPreference"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" disabled selected>Select browsing style</option>
+                    <option value="Simple list with clear details">Simple list with clear details</option>
+                    <option value="Large image cards">Large image cards</option>
+                    <option value="Calendar view">Calendar view</option>
+                    <option value="Gallery of artwork and performances">Gallery of artwork and performances</option>
+                    <option value="A combination of these">A combination of these</option>
+                </select>
+            </div>
+
+            <!-- 13. Accessibility and Formatting Importance -->
+            <div>
+                <label for="ccaeAccessibilityImportance" class="block text-sm font-medium text-gray-300 mb-1">
+                    13. How important are readable text, clear spacing, and reduced animation to you?
+                </label>
+                <select id="ccaeAccessibilityImportance" name="accessibilityImportance"
+                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="" disabled selected>Select importance level</option>
+                    <option value="Extremely important">Extremely important</option>
+                    <option value="Very important">Very important</option>
+                    <option value="Moderately important">Moderately important</option>
+                    <option value="Slightly important">Slightly important</option>
+                    <option value="Not important">Not important</option>
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end pt-2">
+                <button type="button" id="saveCcaePreferencesBtn" onclick="saveCcaePreferences()"
+                    class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-all font-medium text-sm flex items-center gap-2">
+                    Submit Survey
+                </button>
+            </div>
+            <p id="ccaeStatus" class="text-sm mt-2 text-center hidden"></p>
+        </form>
+    </div>
+</div>
+
+<script type="module">
+    import { pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
+    import { showToast } from "{{site.baseurl}}/assets/js/aesthetihawk/shared/toastHandler.js";
+
+    async function saveCcaePreferences() {
+        const getCheckedValues = (name) => Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value);
+
+        const discovery = document.getElementById('ccaeDiscovery').value;
+        const frequency = document.getElementById('ccaeFrequency').value;
+        const eventTypes = getCheckedValues('eventTypes');
+        const companions = document.getElementById('ccaeCompanions').value;
+        const mainReason = document.getElementById('ccaeMainReason').value;
+        const travelDistance = document.getElementById('ccaeTravelDistance').value;
+        const findChannels = getCheckedValues('findChannels');
+        const decisionFactors = getCheckedValues('decisionFactors');
+        const ticketBudget = document.getElementById('ccaeTicketBudget').value;
+        const attendanceBarriers = document.getElementById('ccaeAttendanceBarriers').value;
+        const improvements = document.getElementById('ccaeImprovements').value;
+        const browsingPreference = document.getElementById('ccaeBrowsingPreference').value;
+        const accessibilityImportance = document.getElementById('ccaeAccessibilityImportance').value;
+        
+        const statusEl = document.getElementById('ccaeStatus');
+
+        if (!discovery || !frequency || !mainReason) {
+            alert("Please answer the required questions (Discovery, Frequency, and Main Reason) before submitting.");
+            return;
+        }
+
+        const payload = {
+            organization: "California Center for the Arts, Escondido",
+            discovery_source: discovery,
+            visit_frequency: frequency,
+            event_types_interested: eventTypes,
+            attends_with: companions || "Unspecified",
+            main_reason: mainReason,
+            travel_distance: travelDistance || "Unspecified",
+            discovery_channels: findChannels,
+            decision_factors: decisionFactors,
+            ticket_budget: ticketBudget || "Unspecified",
+            attendance_barriers: attendanceBarriers || "Unspecified",
+            improvements_feedback: improvements || "",
+            browsing_preference: browsingPreference || "Unspecified",
+            accessibility_importance: accessibilityImportance || "Unspecified"
+        };
+
+        try {
+            const response = await fetch(`${pythonURI}/api/profile/ccae`, {
+                ...fetchOptions,
+                method: 'POST',
+                headers: {
+                    ...fetchOptions.headers,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Server status ${response.status}`);
+            }
+
+            showToast({
+                message: "Thank you! Your survey responses have been saved.",
+                icon: `<svg class="size-5 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>`,
+                duration: 3000
+            });
+
+        } catch (error) {
+            console.error('Error saving CCAE preferences:', error);
+            statusEl.textContent = "Failed to save survey. Please try again.";
+            statusEl.className = "text-sm mt-2 text-center text-red-400";
+            statusEl.classList.remove('hidden');
+        }
+    }
+
+    window.saveCcaePreferences = saveCcaePreferences;
+</script>
