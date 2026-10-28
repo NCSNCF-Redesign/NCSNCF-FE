@@ -2,7 +2,7 @@
 
 # Introduction
 
-CCAE is the project that focuses on Improving an already existing website using Open Coding Society website system and style, the people working on this project Tristan Chiu, Mateo Durand Amador, and Yue Barbara (change to actual full name later) 
+North County Special Needs Community Foundation is the website that focuses on building a community for people with down syndrome this project is a website revamp for NCSNCF, Improving an already existing website using Open Coding Society website system and style, the people working on this project Tristan Chiu, Mateo Durand Amador, and Yue Barbara Zhao
 
 ```mermaid
 flowchart LR
