@@ -54,7 +54,7 @@ $bp-md: 768px;
 .lesson-sidebar {
   flex: 0 0 250px; 
   max-width: 100%;
-  background: #FAF5F0; // Changed to warm background
+  background: #604140; // Changed to warm background
   padding: 1rem;
   border-radius: 8px;
   @include sticky(1rem);
@@ -78,7 +78,7 @@ $bp-md: 768px;
 // :stopwatch: Time Tracker
 // =====
 .time-display {
-  background: #F0E6DD; // Soft warm background
+  background: #604140; // Soft warm background
   padding: 0.5rem;
   margin: 0.25rem 0;
   border-radius: 4px;
@@ -116,7 +116,7 @@ $bp-md: 768px;
 // :bar_chart: Progress Bar
 // =====
 .progress-bar {
-  background: #E6DCD3; // Changed surface color
+  background: #604140; // Changed surface color
   border-radius: 6px;
   height: 12px;
   width: 100%;
@@ -163,11 +163,11 @@ $bp-md: 768px;
 .resources,
 .sandbox,
 .lesson-quiz {
-  background: #FAF5F0; // Changed to warm background
+  background: #604140; // Changed to warm background
   padding: 1rem;
   border-radius: 8px;
   margin: 1rem 0;
-  color: #2C1E16; // Changed to dark brown text
+  color: #FFFFFF; // Changed to white text
 }
 
 // =====
@@ -178,8 +178,8 @@ $bp-md: 768px;
   flex-wrap: wrap;
   gap: 0.5rem;
   .badge {
-    background: #8B3A3A; // Reddish-brown
-    color: #fff;
+    background: #FFFFFF; // White
+    color: #8B3A3A; // Reddish-brown text
     padding: 6px 10px;
     border-radius: 20px;
     font-size: 0.9rem;
@@ -292,11 +292,11 @@ $bp-md: 768px;
 // :safety_pin: Flashcards
 // =====
 .flashcards-section {
-  background: #FAF5F0 !important; // Warm background
+  background: #604140 !important; // Warm background
   padding: 1rem !important;
   border-radius: 8px !important;
   margin: 1rem 0 2rem 0 !important; 
-  color: #2C1E16 !important; // Dark brown text
+  color: #FFFFFF !important; // White text
   max-width: 100% !important; 
   box-sizing: border-box !important; 
 }
@@ -334,7 +334,7 @@ $bp-md: 768px;
   align-items: center !important;
   padding: 12px !important; 
   border-radius: 8px !important; 
-  background: #8B3A3A !important; // Reddish-brown card background
+  background: #604140 !important; // Reddish-brown card background
   color: #FFFFFF !important;
   border: 1px solid rgba(255,255,255,0.15) !important;
 }

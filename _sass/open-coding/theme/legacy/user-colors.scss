@@ -6,6 +6,7 @@
 // PRIMARY COLORS
 // =============================================================================
 
+
 $background: #121212;
 $black1: rgba(0, 0, 0, 1);
 $blue1: #007aff;
@@ -48,3 +49,45 @@ $game-overlay: rgba(13, 13, 26, 0.72);
 $game-panel-selected-bg: #2a2a4a;
 $game-selected-border: #7effff;
 $game-score-accent: #f59e0b;
+
+:root {
+  --pref-bg-color: #6e5555;       
+  --pref-text-color: #FFFFFF;     
+  --pref-accent-color: #FFFFFF;   
+  --panel: #6e5555;               
+  --panel-mid: #7A5351;           
+  --ui-border: #6e5555;
+  --pref-font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+body, html {
+  background-color: var(--pref-bg-color) !important;
+  color: var(--pref-text-color) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--pref-accent-color) !important;
+}
+
+/* Force grid cells and cards to adopt the #604140 theme */
+.ocs__grid-cell, .ocs__card {
+  background-color: #604140 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #604140 !important;
+}
+
+/* Ensure paragraph text inside the boxes remains white */
+.ocs__grid-cell p, .ocs__card p, .ocs__grid-cell strong {
+  color: #FFFFFF !important;
+}
+
+/* Force the top navigation header to #604140 */
+.masthead, .masthead__inner-wrap, .site-header {
+  background-color: #604140 !important;
+  border-bottom: none !important;
+}
+
+/* Ensure the navigation links remain white and readable */
+.masthead a, .site-title, .masthead__menu-item a {
+  color: #FFFFFF !important;
+}

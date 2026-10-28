@@ -4,18 +4,31 @@ title: North County Special Needs Community Foundation
 hide: true
 show_reading_time: false
 ---
+<style>
+  /* Aggressively hide the layout's auto-generated header block, preserving the masthead navigation */
+  .page-header, .page__header, .entry-header, .page-title { 
+    display: none !important; 
+  }
+</style>
 
-<!-- Hero Section -->
-<div style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ site.baseurl }}/images/NCSNCF header.jpg') no-repeat center center; background-size: cover; padding: 8rem 2rem; text-align: center;">
-  <div style="max-width: 800px; margin: 0 auto;">
-    <h1 style="color: white; margin-bottom: 1rem;">Bringing People Together</h1>
-    <p class="ocs__description" style="color: white; margin-bottom: 2rem;">
+<!-- Unified Hero Section -->
+<div style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-top: -2rem; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ site.baseurl }}/images/NCSNCF%20header.jpg') no-repeat center 15%; background-size: cover; padding: 10rem 2rem; text-align: center; margin-bottom: 3rem;">
+  <div style="width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 1rem; box-sizing: border-box;">
+    
+    <!-- Foundation Name: Forced to one line using nowrap and viewport-relative scaling -->
+    <h1 style="color: #FFFFFF; margin-bottom: 1rem; font-size: clamp(1.2rem, 3.2vw, 3.5rem); white-space: nowrap; width: 100%;">North County Special Needs Community Foundation</h1>
+    
+    <!-- Empowering Subtext -->
+    <p class="ocs__description" style="color: #FFFFFF; margin-bottom: 2.5rem; font-size: 1.2rem; line-height: 1.5; max-width: 800px; margin-left: auto; margin-right: auto; white-space: normal;">
       Empowering adults with developmental disabilities in the Poway community through social, educational, and independent housing opportunities.
     </p>
-    <div class="ocs__links">
-      <a class="ocs__btn alert-green iridescent fill" href="#">Get Involved</a>
-      <a class="ocs__btn" style="color: white; border-color: white;" href="#">Donate Today</a>
+    
+    <!-- Buttons -->
+    <div class="ocs__links" style="display: flex; justify-content: center; gap: 1rem;">
+      <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none;" href="#">Get Involved</a>
+      <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none;" href="#">Donate Today</a>
     </div>
+    
   </div>
 </div>
 
@@ -37,7 +50,7 @@ show_reading_time: false
 </div>
 
 <!-- Featured Milestone -->
-<h2>Upcoming Milestones</h2>
+<h2>Milestones</h2>
 <div class="ocs__card" style="margin-bottom: 2rem;">
   <h3>Monte Vista Housing Project (Fall 2025)</h3>
   <p class="ocs__description">Approved by the Poway City Council, this 60-unit affordable housing site across from Pomerado Hospital will provide 30 units dedicated specifically to Individuals with Developmental Disabilities. This represents our ongoing commitment to expanding independent living solutions.</p>
@@ -45,32 +58,10 @@ show_reading_time: false
 
 <!-- Dynamic Events Section -->
 <h2>Upcoming Events</h2>
-<div id="recent-events-grid" class="ocs__grid ocs__grid--standard cols-3" style="margin-bottom: 2rem;">
   <!-- Events will be populated here via JavaScript -->
   <div class="ocs__grid-cell ocs__grid-cell--header">Loading Events...</div>
-</div>
 
 <hr style="margin: 2rem 0;">
-
-<!-- Development Team -->
-<h3>Development Team</h3>
-<div class="ocs__grid ocs__grid--standard cols-3" style="margin-bottom: 1.5rem;">
-  <div class="ocs__grid-cell ocs__grid-cell--accent">
-    <strong>Mateo Amador</strong>
-    <p>Technologist/Developer</p>
-    <a class="ocs__btn alert-green iridescent fill small" href="https://avg11235.opencodingsociety.com/">Portfolio</a>
-  </div>
-  <div class="ocs__grid-cell ocs__grid-cell--accent">
-    <strong>Tristan Chiu</strong>
-    <p>Technologist/Developer</p>
-    <a class="ocs__btn alert-green iridescent fill small" href="https://tristan-chiu0.github.io/portfolio/">Portfolio</a>
-  </div>
-  <div class="ocs__grid-cell ocs__grid-cell--accent">
-    <strong>Yue Barbara Zhao</strong>
-    <p>Technologist/Developer</p>
-    <a class="ocs__btn alert-green iridescent fill small" href="https://3rii0.github.io/portfolio/">Portfolio</a>
-  </div>
-</div>
 
 <script>
 // Point to local Flask instance
