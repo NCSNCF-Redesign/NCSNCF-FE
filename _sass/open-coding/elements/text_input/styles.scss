@@ -7,11 +7,11 @@ input.ocs__input:not(:where([type="checkbox"], [type="radio"], [type="range"], [
 textarea.ocs__input,
 select.ocs__input {
     box-sizing: border-box;
-    border: 1px solid color-mix(in srgb, var(--pref-text-color) 24%, transparent);
+    border: 1px solid #D7C4B7; // Warm border
     border-radius: 0.5rem;
-    background-color: color-mix(in srgb, var(--pref-bg-color) 88%, var(--pref-text-color) 12%);
-    color: var(--pref-text-color);
-    font-family: var(--pref-font-family);
+    background-color: #FFFFFF; // Force white background
+    color: #2C1E16; // Dark text
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: var(--pref-font-size);
     filter: none;
     padding: 0.5rem 1rem;

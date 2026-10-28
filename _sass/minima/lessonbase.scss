@@ -1,19 +1,21 @@
 // Centralized theme variables
 @import "root-color-map";
-
 // Breakpoints
 $bp-md: 768px;
-// =======================
+
+// =====
 // :jigsaw: Mixins
-// =======================
+// =====
 @mixin sticky($top: 1rem) {
   position: sticky;
   top: $top;
 }
+
 @mixin scroll-y {
   max-height: calc(100vh - 2rem);
   overflow-y: auto;
 }
+
 @mixin btn-base {
   display: inline-block;
   color: white;
@@ -23,55 +25,60 @@ $bp-md: 768px;
   margin: 0.5rem 0.25rem;
   border: none;
   cursor: pointer;
-  font-family: arial;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; // Updated font
   font-weight: bolder;
 }
+
 @mixin info-box($color) {
   padding: 20px;
   margin: 20px 0;
   border-radius: 0 8px 8px 0;
   border-left: 4px solid $color;
 }
-// =======================
+
+// =====
 // :package: Layout
-// =======================
+// =====
 .lesson-container {
   display: flex;
   gap: 2rem;
-  flex-wrap: wrap; // allows sidebar + content to wrap on narrow screens
+  flex-wrap: wrap; 
   align-items: flex-start;
   padding: 1rem;
   @media (max-width: $bp-md) {
-    flex-direction: column; // stack sidebar above content
+    flex-direction: column; 
   }
 }
+
 /* Sidebar */
 .lesson-sidebar {
-  flex: 0 0 250px; // fixed width
+  flex: 0 0 250px; 
   max-width: 100%;
-  background: $bg-1;
+  background: #604140; // Changed to warm background
   padding: 1rem;
   border-radius: 8px;
   @include sticky(1rem);
   @include scroll-y;
   @media (max-width: $bp-md) {
-    position: relative; // no longer sticky
+    position: relative; 
     top: auto;
     max-height: none;
     overflow: visible;
     width: 100%;
   }
 }
+
 /* Main content */
 .lesson-content {
   flex: 1 1 0;
-  min-width: 300px; // prevents collapsing
+  min-width: 300px; 
 }
-// =======================
+
+// =====
 // :stopwatch: Time Tracker
-// =======================
+// =====
 .time-display {
-  background: $bg-3;
+  background: #604140; // Soft warm background
   padding: 0.5rem;
   margin: 0.25rem 0;
   border-radius: 4px;
@@ -79,14 +86,15 @@ $bp-md: 768px;
   span {
     font-size: 1.2rem;
     font-weight: bold;
-    color: $accent;
+    color: #8B3A3A; // Reddish-brown accent
     display: block;
   }
   small {
     font-size: 0.75rem;
-    color: $text-muted;
+    color: #5C4B40; // Muted brown text
   }
 }
+
 .timer-status {
   text-align: center;
   padding: 0.25rem;
@@ -95,99 +103,106 @@ $bp-md: 768px;
   font-weight: bold;
   margin-top: 0.5rem;
   &.active {
-    background: $green-bg;
-    color: $green;
+    background: #E8F5E9; 
+    color: #2E7D32; 
   }
   &.paused {
-    background: $warn-bg;
-    color: $warn;
+    background: #FFF3E0;
+    color: #E65100;
   }
 }
-// =======================
+
+// =====
 // :bar_chart: Progress Bar
-// =======================
+// =====
 .progress-bar {
-  background: $surface;
+  background: #604140; // Changed surface color
   border-radius: 6px;
   height: 12px;
   width: 100%;
   margin: 0.5rem 0;
   .progress-fill {
-    background: $accent;
+    background: #8B3A3A; // Reddish-brown accent
     height: 100%;
     width: 0%;
     border-radius: 6px;
   }
 }
-// =======================
+
+// =====
 // :radio_button: Buttons
-// =======================
+// =====
 .btn {
   @include btn-base;
-  background: $accent-700;
+  background: #8B3A3A; // Base reddish-brown
   &:hover {
-    background: $accent-700-hover;
+    background: #A52A2A; // Hover reddish-brown
     border-radius: 25px;
-    transition: border-radius 2s;
+    transition: border-radius 0.2s; // Fixed transition time format
   }
 }
+
 .small-btn {
   font-size: 0.75rem;
   padding: 3px 6px;
   margin-top: 0.5rem;
 }
-// =======================
+
+// =====
 // :test_tube: Sandbox & Blocks
-// =======================
+// =====
 .sandbox {
   textarea {
     width: 100%;
     height: 120px;
-    font-family: monospace;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; // Updated font
     margin-bottom: 0.5rem;
   }
 }
+
 .resources,
 .sandbox,
 .lesson-quiz {
-  background: $panel;
+  background: #604140; // Changed to warm background
   padding: 1rem;
   border-radius: 8px;
   margin: 1rem 0;
-  color: $text;
+  color: #FFFFFF; // Changed to white text
 }
-// =======================
+
+// =====
 // :sports_medal: Badges
-// =======================
+// =====
 #badges {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  .badge {
+    background: #FFFFFF; // White
+    color: #8B3A3A; // Reddish-brown text
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); // Softened shadow
+  }
 }
-.badge {
-  background: $surface;
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-// =======================
+
+// =====
 // :tada: Congrats Popup
-// =======================
+// =====
 .congrats-popup {
   position: fixed;
   top: 20px;
   right: -300px;
-  background: $popup-bg;
+  background: #8B3A3A; // Reddish-brown background
   color: #fff;
   padding: 12px 18px;
   border-radius: 8px;
   font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); // Softened shadow
   transition: right 0.3s ease, opacity 0.3s ease;
   opacity: 0.95;
   z-index: 9999;
@@ -195,60 +210,63 @@ $bp-md: 768px;
     right: 20px;
   }
 }
-// =======================
+
+// =====
 // :memo: Quick Check / Reflection
-// =======================
+// =====
 .lesson-quiz {
   textarea {
     width: 100%;
-    min-height: 120px; // makes it comfortably tall
+    min-height: 120px; 
     padding: 10px;
     border-radius: 6px;
-    border: 1px solid #444;
+    border: 1px solid #D7C4B7; // Warm border
     font-size: 1rem;
-    resize: vertical; // allows user to drag to resize
+    resize: vertical; 
     box-sizing: border-box;
-    background: $bg-2;
-    color: $text;
+    background: #FFFFFF; // White text area for readability
+    color: #2C1E16; // Dark brown text
   }
   button:hover {
-    background: lighten($accent-700, 15%); // #379BD8 equivalent vibe
+    background: #A52A2A; 
   }
   #reflection-status {
     margin-top: 0.5rem;
     font-size: 0.85rem;
     font-style: italic;
-    color: #9ACDFF; // subtle highlight color
+    color: #8B3A3A; // Accent color instead of subtle blue
   }
 }
-// =======================
+
+// =====
 // :wood: Blackboard
-// =======================
+// =====
 .blackboard {
   width: 100%;
   min-height: 240px;
+  #blackboard-canvas {
+    border: 1px solid #D7C4B7;
+    background: #FAF5F0; // Changed to warm background
+    cursor: crosshair;
+  }
+  .blackboard-description {
+    margin-top: 10px;
+    color: #5C4B40; // Muted brown text
+  }
 }
-#blackboard-canvas {
-  // min-height: 480px;
-  border: 1px solid #ccc;
-  background: $bg-0;
-  cursor: crosshair;
-}
-.blackboard-description {
-  margin-top: 10px;
-  color: #ccc;
-}
-// =======================
+
+// =====
 // :test_tube: Demo
-// =======================
+// =====
 .demo-label {
   display: block;
   text-align: center;
   margin: 6px 0;
+  color: #2C1E16;
 }
 #demo-canvas-wrapper {
   background: white;
-  border: 2px solid #333;
+  border: 2px solid #8B3A3A; // Accent color border
   display: block;
   margin: 0 auto;
 }
@@ -257,35 +275,38 @@ $bp-md: 768px;
   margin: 8px auto;
   overflow: auto;
 }
-// =======================
+
+// =====
 // :information_source: Info Boxes
-// =======================
-.info-box { @include info-box($blue); } // default style if used solo
-.challenge-box { @include info-box($teal); }
-.think-box { @include info-box($orange); }
+// =====
+// Updated to warmer colors fitting the scheme
+.info-box { @include info-box(#8B3A3A); } 
+.challenge-box { @include info-box(#B85A44); }
+.think-box { @include info-box(#D98C5A); }
 .checkpoint-box,
-.key-points { @include info-box($blue); }
-.warning-box { @include info-box($red); }
-.success { @include info-box($success-green); }
-// =======================
+.key-points { @include info-box(#8B3A3A); }
+.warning-box { @include info-box(#C62828); }
+.success { @include info-box(#2E7D32); }
+
+// =====
 // :safety_pin: Flashcards
-// =======================
+// =====
 .flashcards-section {
-  background: $panel !important;
+  background: #604140 !important; // Warm background
   padding: 1rem !important;
   border-radius: 8px !important;
-  margin: 1rem 0 2rem 0 !important;  // Added bottom margin
-  color: $text !important;
-  max-width: 100% !important;        // Prevent overflow
-  box-sizing: border-box !important; // Include padding in width
+  margin: 1rem 0 2rem 0 !important; 
+  color: #FFFFFF !important; // White text
+  max-width: 100% !important; 
+  box-sizing: border-box !important; 
 }
 .flashcard-container {
   position: relative !important;
   width: 100% !important;
-  max-width: 280px !important;  // Even smaller
-  height: 140px !important;     // Even shorter
+  max-width: 280px !important; 
+  height: 140px !important; 
   perspective: 1500px !important;
-  margin: 1rem auto 1.5rem auto !important; // Added bottom margin
+  margin: 1rem auto 1.5rem auto !important; 
   display: block !important;
   &.hidden {
     display: none !important;
@@ -297,7 +318,7 @@ $bp-md: 768px;
   height: 100% !important;
   transition: transform 0.6s ease !important;
   transform-style: preserve-3d !important;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important; // Softened shadow
   border-radius: 12px !important;
   &.flipped { transform: rotateY(180deg) !important; }
 }
@@ -311,10 +332,10 @@ $bp-md: 768px;
   flex-direction: column !important;
   justify-content: center !important;
   align-items: center !important;
-  padding: 12px !important;      // Reduced from 20px
-  border-radius: 8px !important; // Reduced from 12px
-  background: #1E293B !important;
-  color: #F8FAFC !important;
+  padding: 12px !important; 
+  border-radius: 8px !important; 
+  background: #604140 !important; // Reddish-brown card background
+  color: #FFFFFF !important;
   border: 1px solid rgba(255,255,255,0.15) !important;
 }
 .flashcard-back { transform: rotateY(180deg) !important; }
@@ -322,7 +343,7 @@ $bp-md: 768px;
   position: absolute !important;
   top: 12px !important;
   right: 12px !important;
-  background: rgba(255,255,255,0.15) !important;
+  background: rgba(255,255,255,0.2) !important;
   border-radius: 15px !important;
   padding: 4px 10px !important;
   font-size: 0.8rem !important;
@@ -330,101 +351,82 @@ $bp-md: 768px;
 .flashcard-front h3,
 .flashcard-back h4 {
   text-align: center !important;
-  margin-bottom: 1rem !important;
+  margin-bottom: 0.5rem !important; 
   color: white !important;
+  font-size: 1rem !important;
 }
 .flashcard-back p {
   text-align: center !important;
-  margin-bottom: 1rem !important;
+  margin-bottom: 0.5rem !important; 
   color: white !important;
+  font-size: 0.9rem !important;
 }
 .flashcard-controls {
   display: flex !important;
   flex-wrap: wrap !important;
   justify-content: center !important;
   align-items: center !important;
-  margin: 1rem 0 1.5rem 0 !important; // Added bottom margin
+  margin: 1rem 0 1.5rem 0 !important; 
   gap: 0.4rem !important;
   max-width: 100% !important;
-  
   button {
-    flex: 0 1 auto !important;     // Don't grow, allow shrink
+    flex: 0 1 auto !important;
     min-width: 60px !important;
-    max-width: 100px !important;   // Smaller max width
+    max-width: 100px !important; 
     padding: 6px 10px !important;
     font-size: 0.75rem !important;
     border-radius: 4px !important;
     border: none !important;
     cursor: pointer !important;
-    white-space: nowrap !important; // Prevent text wrapping
+    white-space: nowrap !important; 
   }
 }
 .flashcard-actions {
   display: flex !important;
   gap: 0.5rem !important;
   flex: 1 !important;
-  
   .know-btn, .review-btn {
     flex: 1 !important;
     min-width: 60px !important;
     font-size: 0.75rem !important;
     padding: 6px 10px !important;
   }
-  
   .know-btn {
-    background: #10B981 !important;
+    background: #4CAF50 !important; // Softer green
     color: white !important;
   }
-  
   .review-btn {
-    background: #F59E0B !important;
+    background: #FF9800 !important; // Softer orange
     color: white !important;
   }
 }
 .card-status {
   margin-top: 12px !important;
   font-size: 0.85rem !important;
-  color: #CBD5E1 !important;
+  color: #5C4B40 !important; // Muted text
   text-align: center !important;
 }
 #flashcard-review-sidebar {
   button {
     width: 100%;
-    background: #334155;
+    background: #D7C4B7; // Warm secondary button
     border: none;
-    color: white;
+    color: #2C1E16; // Dark text
     padding: 8px;
     border-radius: 6px;
     cursor: pointer;
     margin-bottom: 5px;
     font-size: 0.85rem;
-    &:hover { background: #475569; }
+    &:hover { background: #C8B2A1; }
   }
 }
-
-.flashcard-front h3,
-.flashcard-back h4 {
-  text-align: center !important;
-  margin-bottom: 0.5rem !important; // Reduced from 1rem
-  color: white !important;
-  font-size: 1rem !important;       // Smaller text
-}
-
-.flashcard-back p {
-  text-align: center !important;
-  margin-bottom: 0.5rem !important; // Reduced from 1rem
-  color: white !important;
-  font-size: 0.9rem !important;     // Smaller text
-}
-
 .flashcard-front .btn,
 .flashcard-back .btn {
-  padding: 6px 12px !important;     // Smaller flip button
+  padding: 6px 12px !important; 
   font-size: 0.8rem !important;
 }
-
 .flashcard-deck {
   width: 100% !important;
   max-width: 100% !important;
-  overflow: hidden !important; // Prevent any overflow
+  overflow: hidden !important; 
 }

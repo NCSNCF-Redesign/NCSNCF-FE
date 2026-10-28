@@ -5,16 +5,16 @@
 
 /** Code formatting - override hardcoded dark background */
 pre, code {
-  font-family: "Menlo", "Inconsolata", "Consolas", "Roboto Mono", "Ubuntu Mono", "Liberation Mono", "Courier New", monospace;
-  background-color: var(--panel) !important;
-  color: var(--pref-text-color) !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; // Changed to target font
+  background-color: #FDFBF9 !important; // Changed to a very light, warm off-white
+  color: #2C1E16 !important; // Changed to dark brown for contrast
   padding: 2px 6px;
   border-radius: 3px;
 }
 
 pre {
   padding: 1rem;
-  border: 1px solid var(--ui-border);
+  border: 1px solid #E6DCD3; // Warm, subtle border
   overflow-x: auto;
 
   code {
@@ -27,6 +27,6 @@ pre {
 p code,
 li code,
 td code {
-  background-color: var(--panel) !important;
-  color: var(--pref-text-color) !important;
+  background-color: #FDFBF9 !important;
+  color: #2C1E16 !important;
 }
