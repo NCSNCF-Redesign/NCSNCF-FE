@@ -1,0 +1,166 @@
+---
+---
+
+/* 1. Aggressively hide any H1 that isn't our specific gallery title */
+main h1:not(.ocs-gallery-title), 
+.page-content h1:not(.ocs-gallery-title),
+div.wrapper h1:not(.ocs-gallery-title) {
+  display: none !important;
+}
+
+/* Clear any background colors left by the theme's content wrappers */
+.page-content, .wrapper {
+  background: transparent !important;
+  padding-top: 0 !important;
+}
+
+/* 2. Breakout container */
+.ocs-gallery-breakout {
+  background-color: #6a5656; /* Updated to new color */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  
+  /* Tightened values to reduce the gap between the header and the title */
+  margin-top: -4rem; 
+  padding-top: 2rem; 
+  
+  padding-bottom: 2rem; 
+  margin-bottom: -2rem; 
+  min-height: 100vh;
+  z-index: 1;
+}
+
+/* 3. Container */
+.ocs-gallery-container {
+  max-width: 1400px; 
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2; 
+}
+
+/* 4. Center the Manual Title */
+.ocs-gallery-title {
+  display: block;
+  width: 100%;
+  text-align: center !important;
+  color: #ffffff !important;
+  font-size: 3rem; 
+  margin-bottom: 4rem; 
+  margin-top: 0;
+  font-weight: 600;
+}
+
+/* 5. Section and Text Styling */
+.ocs-gallery-section {
+  margin-bottom: 4rem;
+
+  h2 {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    font-size: 2rem;
+  }
+}
+
+/* 6. Grid Layout */
+.ocs-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.ocs-gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  /* Updated the loading background color to a slightly darker shade of the new background */
+  background-color: #554444; 
+  
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: zoom-in;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 1rem 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+    color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    font-weight: 500;
+    margin: 0;
+    pointer-events: none; 
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.05);
+    }
+    figcaption {
+      opacity: 1;
+    }
+  }
+}
+
+/* 7. CSS-Only Lightbox Functionality */
+.ocs-lightbox {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  &:target {
+    display: flex; 
+  }
+
+  .ocs-lightbox-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    img {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    p {
+      color: #ffffff;
+      margin-top: 1.5rem;
+      font-size: 1.25rem;
+      text-align: center;
+    }
+  }
+}

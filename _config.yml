@@ -111,3 +111,4 @@ minima:
   nav_pages:
     - navigation/about.md
     - calendar.html
+    - gallery.html
