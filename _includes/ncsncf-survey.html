@@ -1,0 +1,415 @@
+<style>
+  /* Aggressively hide the layout's auto-generated header block, preserving the masthead navigation */
+  .page-header, .page__header, .entry-header, .page-title { 
+    display: none !important; 
+  }
+</style>
+
+<!-- Community Survey Component -->
+<div class="ocs__container">
+  <div class="ocs__card">
+    
+    <!-- Header Section -->
+    <h2 class="ocs__title">Website & Community Survey</h2>
+    <p class="ocs__description">
+      This survey will help identify ways to improve the North County Special Needs Community Foundation website so visitors can more easily find information, discover opportunities, access resources, and get involved.
+    </p>
+
+    <form id="ncsncfSurveyForm" class="ocs__form">
+        
+        <!-- 1. Discovery Source -->
+        <div class="ocs__form-group">
+            <label for="ncsncfDiscovery" class="ocs__label">
+                1. How did you first hear about the North County Special Needs Community Foundation?
+            </label>
+            <select id="ncsncfDiscovery" name="discovery" class="ocs__select">
+                <option value="" disabled selected>Select an option</option>
+                <option value="Social media">Social media</option>
+                <option value="Friends or family">Friends or family</option>
+                <option value="School or teacher">School or teacher</option>
+                <option value="Search engine">Search engine (Google, etc.)</option>
+                <option value="Community event">Community event</option>
+                <option value="Healthcare provider or support organization">Healthcare provider or support organization</option>
+                <option value="Advertisement">Advertisement</option>
+                <option value="Other">Other</option>
+                <option value="I haven't heard of the foundation before">I haven't heard of the foundation before</option>
+            </select>
+        </div>
+
+        <!-- 2. Visit Frequency -->
+        <div class="ocs__form-group">
+            <label for="ncsncfFrequency" class="ocs__label">
+                2. How often do you visit the foundation's website?
+            </label>
+            <select id="ncsncfFrequency" name="visitFrequency" class="ocs__select">
+                <option value="" disabled selected>Select frequency</option>
+                <option value="This is my first visit">This is my first visit</option>
+                <option value="Less than once a month">Less than once a month</option>
+                <option value="Once a month">Once a month</option>
+                <option value="Several times a month">Several times a month</option>
+                <option value="Once a week or more">Once a week or more</option>
+            </select>
+        </div>
+
+        <!-- 3. Information & Opportunities (Checkboxes) -->
+        <div class="ocs__form-group">
+            <label class="ocs__label">
+                3. What information or opportunities are you most interested in finding on the website? (Select all that apply)
+            </label>
+            <div class="ocs__grid ocs__grid--standard cols-2">
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Down syndrome information and resources" class="ocs__checkbox"> <span>Down syndrome information and resources</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Programs and activities for individuals with developmental disabilities" class="ocs__checkbox"> <span>Programs and activities</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Family support and community connections" class="ocs__checkbox"> <span>Family support</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Educational opportunities" class="ocs__checkbox"> <span>Educational opportunities</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Independent living and housing resources" class="ocs__checkbox"> <span>Housing resources</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Volunteer opportunities" class="ocs__checkbox"> <span>Volunteer opportunities</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Fundraising and donation opportunities" class="ocs__checkbox"> <span>Donations</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Community events" class="ocs__checkbox"> <span>Community events</span></label></div>
+                <div class="ocs__grid-cell ocs__grid-cell--wide"><label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Other" class="ocs__checkbox"> <span>Other</span></label></div>
+            </div>
+        </div>
+
+        <!-- 4. Community Connection -->
+        <div class="ocs__form-group">
+            <label for="ncsncfConnection" class="ocs__label">
+                4. What is your connection to the special needs community?
+            </label>
+            <select id="ncsncfConnection" name="communityConnection" class="ocs__select">
+                <option value="" disabled selected>Select an option</option>
+                <option value="Individual with Down syndrome or another developmental disability">Individual with Down syndrome or another developmental disability</option>
+                <option value="Parent or caregiver">Parent or caregiver</option>
+                <option value="Family member or friend">Family member or friend</option>
+                <option value="Teacher or education professional">Teacher or education professional</option>
+                <option value="Healthcare or support professional">Healthcare or support professional</option>
+                <option value="Volunteer or community supporter">Volunteer or community supporter</option>
+                <option value="Student researching the topic">Student researching the topic</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+        </div>
+
+        <!-- 5. Main Reason -->
+        <div class="ocs__form-group">
+            <label for="ncsncfMainReason" class="ocs__label">
+                5. What is your main reason for visiting the foundation's website?
+            </label>
+            <select id="ncsncfMainReason" name="mainReason" class="ocs__select">
+                <option value="" disabled selected>Select primary reason</option>
+                <option value="Finding resources or support">Finding resources or support</option>
+                <option value="Learning about Down syndrome or developmental disabilities">Learning about Down syndrome or developmental disabilities</option>
+                <option value="Finding programs and activities">Finding programs and activities</option>
+                <option value="Connecting with other families">Connecting with other families</option>
+                <option value="Exploring volunteer opportunities">Exploring volunteer opportunities</option>
+                <option value="Donating or fundraising">Donating or fundraising</option>
+                <option value="Learning about the foundation's mission">Learning about the foundation's mission</option>
+                <option value="School or educational research">School or educational research</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <!-- 6. Location -->
+        <div class="ocs__form-group">
+            <label for="ncsncfLocation" class="ocs__label">
+                6. Where are you located in relation to the foundation's community?
+            </label>
+            <select id="ncsncfLocation" name="location" class="ocs__select">
+                <option value="" disabled selected>Select location</option>
+                <option value="Poway">Poway</option>
+                <option value="Elsewhere in San Diego County">Elsewhere in San Diego County</option>
+                <option value="Elsewhere in California">Elsewhere in California</option>
+                <option value="Outside California">Outside California</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+        </div>
+
+        <!-- 7. Finding Programs & Resources (Checkboxes) -->
+        <div class="ocs__form-group">
+            <label class="ocs__label">
+                7. How do you usually find programs, resources, or support opportunities? (Select all that apply)
+            </label>
+            <div class="ocs__grid ocs__grid--standard cols-2">
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="findMethods" value="Foundation website" class="ocs__checkbox"> <span>Foundation website</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="findMethods" value="Social media" class="ocs__checkbox"> <span>Social media</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="findMethods" value="Friends or family" class="ocs__checkbox"> <span>Friends or family</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="findMethods" value="Schools or teachers" class="ocs__checkbox"> <span>Schools or teachers</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="findMethods" value="Healthcare providers or support organizations" class="ocs__checkbox"> <span>Healthcare providers</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="findMethods" value="Email newsletters" class="ocs__checkbox"> <span>Email newsletters</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="findMethods" value="Community events" class="ocs__checkbox"> <span>Community events</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="findMethods" value="Search engines" class="ocs__checkbox"> <span>Search engines</span></label></div>
+                <div class="ocs__grid-cell ocs__grid-cell--wide"><label class="ocs__checkbox-label"><input type="checkbox" name="findMethods" value="Other" class="ocs__checkbox"> <span>Other</span></label></div>
+            </div>
+        </div>
+
+        <!-- 8. Important Information for Participation (Checkboxes) -->
+        <div class="ocs__form-group">
+            <label class="ocs__label">
+                8. What information is most important when deciding whether to participate in a program or event? (Select all that apply)
+            </label>
+            <div class="ocs__grid ocs__grid--standard cols-2">
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="importantInfo" value="Date and time" class="ocs__checkbox"> <span>Date and time</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="importantInfo" value="Location and transportation information" class="ocs__checkbox"> <span>Location & transportation</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="importantInfo" value="Cost or whether it is free" class="ocs__checkbox"> <span>Cost / Free entry</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="importantInfo" value="Program description" class="ocs__checkbox"> <span>Program description</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="importantInfo" value="Who can participate" class="ocs__checkbox"> <span>Eligibility info</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="importantInfo" value="Registration instructions" class="ocs__checkbox"> <span>Registration steps</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="importantInfo" value="Accessibility and accommodations" class="ocs__checkbox"> <span>Accessibility info</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="importantInfo" value="Contact information" class="ocs__checkbox"> <span>Contact information</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="importantInfo" value="Photos or videos" class="ocs__checkbox"> <span>Photos or videos</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="importantInfo" value="Other" class="ocs__checkbox"> <span>Other</span></label></div>
+            </div>
+        </div>
+
+        <!-- 9. Cost Information (Checkboxes) -->
+        <div class="ocs__form-group">
+            <label class="ocs__label">
+                9. What cost information would be most helpful when viewing programs or activities? (Select all that apply)
+            </label>
+            <div class="ocs__grid ocs__grid--standard cols-2">
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="costInfo" value="Whether the program is free" class="ocs__checkbox"> <span>Whether program is free</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="costInfo" value="Participation or registration fees" class="ocs__checkbox"> <span>Participation fees</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="costInfo" value="Available financial assistance" class="ocs__checkbox"> <span>Financial assistance</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="costInfo" value="Donation options" class="ocs__checkbox"> <span>Donation options</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="costInfo" value="What the cost includes" class="ocs__checkbox"> <span>Included costs</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="costInfo" value="Clear information about all costs" class="ocs__checkbox"> <span>Clear cost details</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="costInfo" value="Not applicable to me" class="ocs__checkbox"> <span>Not applicable</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="costInfo" value="Other" class="ocs__checkbox"> <span>Other</span></label></div>
+            </div>
+        </div>
+
+        <!-- 10. Difficulties in Participating (Checkboxes) -->
+        <div class="ocs__form-group">
+            <label class="ocs__label">
+                10. What makes it difficult to find or participate in programs and resources? (Select all that apply)
+            </label>
+            <div class="ocs__grid ocs__grid--standard cols-2">
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="difficulties" value="I don't know what opportunities are available" class="ocs__checkbox"> <span>Unaware of opportunities</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="difficulties" value="Information is difficult to find" class="ocs__checkbox"> <span>Hard to find info</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="difficulties" value="Registration instructions are unclear" class="ocs__checkbox"> <span>Unclear registration</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="difficulties" value="Transportation or location" class="ocs__checkbox"> <span>Transportation / location</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="difficulties" value="Cost" class="ocs__checkbox"> <span>Cost</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="difficulties" value="Scheduling conflicts" class="ocs__checkbox"> <span>Scheduling conflicts</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="difficulties" value="Accessibility or accommodation information is unclear" class="ocs__checkbox"> <span>Unclear accessibility</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="difficulties" value="I need more information before deciding" class="ocs__checkbox"> <span>Need more information</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="difficulties" value="I have not experienced any difficulties" class="ocs__checkbox"> <span>No difficulties</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="difficulties" value="Other" class="ocs__checkbox"> <span>Other</span></label></div>
+            </div>
+        </div>
+
+        <!-- 11. Improvements Feedback -->
+        <div class="ocs__form-group">
+            <label for="ncsncfImprovements" class="ocs__label">
+                11. What is one thing you would improve about the foundation's website?
+            </label>
+            <textarea id="ncsncfImprovements" name="improvements" rows="3" placeholder="Share your suggestions..." class="ocs__textarea"></textarea>
+        </div>
+
+        <!-- 12. Useful Features (Checkboxes) -->
+        <div class="ocs__form-group">
+            <label class="ocs__label">
+                12. Which website features would be most useful to you? (Select all that apply)
+            </label>
+            <div class="ocs__grid ocs__grid--standard cols-2">
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="usefulFeatures" value="A clear list of programs and activities" class="ocs__checkbox"> <span>Program list</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="usefulFeatures" value="A calendar of upcoming events" class="ocs__checkbox"> <span>Event calendar</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="usefulFeatures" value="A searchable resource directory" class="ocs__checkbox"> <span>Resource directory</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="usefulFeatures" value="A page explaining how to volunteer" class="ocs__checkbox"> <span>Volunteer guide</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="usefulFeatures" value="A simple donation page" class="ocs__checkbox"> <span>Simple donation page</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="usefulFeatures" value="Frequently asked questions" class="ocs__checkbox"> <span>FAQ page</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="usefulFeatures" value="Personal stories and community highlights" class="ocs__checkbox"> <span>Personal stories</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="usefulFeatures" value="A contact form" class="ocs__checkbox"> <span>Contact form</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="usefulFeatures" value="A page with information for families and caregivers" class="ocs__checkbox"> <span>Family info page</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="usefulFeatures" value="Other" class="ocs__checkbox"> <span>Other</span></label></div>
+            </div>
+        </div>
+
+        <!-- 13. Preferred Browsing Style -->
+        <div class="ocs__form-group">
+            <label for="ncsncfBrowsing" class="ocs__label">
+                13. How would you prefer to browse programs and resources?
+            </label>
+            <select id="ncsncfBrowsing" name="browsingPreference" class="ocs__select">
+                <option value="" disabled selected>Select preference</option>
+                <option value="Simple list with clear details">Simple list with clear details</option>
+                <option value="Large image cards">Large image cards</option>
+                <option value="Calendar view">Calendar view</option>
+                <option value="Categories with filters">Categories with filters</option>
+                <option value="A combination of these">A combination of these</option>
+            </select>
+        </div>
+
+        <!-- 14. Design Accessibility Importance -->
+        <div class="ocs__form-group">
+            <label for="ncsncfDesignImportance" class="ocs__label">
+                14. How important are readable text, clear spacing, simple navigation, and reduced animation to you?
+            </label>
+            <select id="ncsncfDesignImportance" name="designImportance" class="ocs__select">
+                <option value="" disabled selected>Select level of importance</option>
+                <option value="Extremely important">Extremely important</option>
+                <option value="Very important">Very important</option>
+                <option value="Moderately important">Moderately important</option>
+                <option value="Slightly important">Slightly important</option>
+                <option value="Not important">Not important</option>
+            </select>
+        </div>
+
+        <!-- 15. Current Site Ease of Use -->
+        <div class="ocs__form-group">
+            <label for="ncsncfEaseOfUse" class="ocs__label">
+                15. How easy is it for you to find the information you need on the current website?
+            </label>
+            <select id="ncsncfEaseOfUse" name="easeOfUse" class="ocs__select">
+                <option value="" disabled selected>Select an option</option>
+                <option value="Very easy">Very easy</option>
+                <option value="Somewhat easy">Somewhat easy</option>
+                <option value="Neither easy nor difficult">Neither easy nor difficult</option>
+                <option value="Somewhat difficult">Somewhat difficult</option>
+                <option value="Very difficult">Very difficult</option>
+                <option value="I haven't used the website enough to answer">I haven't used the website enough to answer</option>
+            </select>
+        </div>
+
+        <!-- 16. Accessibility Enhancements (Checkboxes) -->
+        <div class="ocs__form-group">
+            <label class="ocs__label">
+                16. What would help make the website easier to use for people with different abilities? (Select all that apply)
+            </label>
+            <div class="ocs__grid ocs__grid--standard cols-2">
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="accessibilityFeatures" value="Larger or adjustable text" class="ocs__checkbox"> <span>Adjustable text</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="accessibilityFeatures" value="Better color contrast" class="ocs__checkbox"> <span>Better contrast</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="accessibilityFeatures" value="Plain-language explanations" class="ocs__checkbox"> <span>Plain language</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="accessibilityFeatures" value="Clearer headings and menus" class="ocs__checkbox"> <span>Clearer headings</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="accessibilityFeatures" value="Fewer moving images or animations" class="ocs__checkbox"> <span>Fewer animations</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="accessibilityFeatures" value="Text descriptions for images" class="ocs__checkbox"> <span>Image alt text</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="accessibilityFeatures" value="Keyboard-friendly navigation" class="ocs__checkbox"> <span>Keyboard navigation</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="accessibilityFeatures" value="Videos with captions" class="ocs__checkbox"> <span>Captioned videos</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="accessibilityFeatures" value="More visual instructions" class="ocs__checkbox"> <span>Visual instructions</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="accessibilityFeatures" value="Other" class="ocs__checkbox"> <span>Other</span></label></div>
+            </div>
+        </div>
+
+        <!-- 17. Learning Preferences (Checkboxes) -->
+        <div class="ocs__form-group">
+            <label class="ocs__label">
+                17. How would you prefer to learn about Down syndrome and the foundation's work? (Select all that apply)
+            </label>
+            <div class="ocs__grid ocs__grid--standard cols-2">
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="learningPref" value="Short articles" class="ocs__checkbox"> <span>Short articles</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="learningPref" value="Frequently asked questions" class="ocs__checkbox"> <span>FAQs</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="learningPref" value="Videos" class="ocs__checkbox"> <span>Videos</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="learningPref" value="Infographics" class="ocs__checkbox"> <span>Infographics</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="learningPref" value="Personal stories and experiences" class="ocs__checkbox"> <span>Personal stories</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="learningPref" value="Links to trusted organizations" class="ocs__checkbox"> <span>Trusted links</span></label></div>
+                <div class="ocs__grid-cell ocs__grid-cell--wide"><label class="ocs__checkbox-label"><input type="checkbox" name="learningPref" value="A combination of these" class="ocs__checkbox"> <span>Combination of these</span></label></div>
+            </div>
+        </div>
+
+        <!-- 18. Involvement Drivers (Checkboxes) -->
+        <div class="ocs__form-group">
+            <label class="ocs__label">
+                18. What would encourage you to get more involved with the foundation? (Select all that apply)
+            </label>
+            <div class="ocs__grid ocs__grid--standard cols-2">
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="involvementDrivers" value="More information about volunteer opportunities" class="ocs__checkbox"> <span>Volunteer info</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="involvementDrivers" value="A clear guide to donating" class="ocs__checkbox"> <span>Donation guide</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="involvementDrivers" value="More community events" class="ocs__checkbox"> <span>More events</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="involvementDrivers" value="Information about programs and activities" class="ocs__checkbox"> <span>Program info</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="involvementDrivers" value="Opportunities to support individuals and families" class="ocs__checkbox"> <span>Family support</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="involvementDrivers" value="Updates about the foundation's impact" class="ocs__checkbox"> <span>Impact updates</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="involvementDrivers" value="Easier ways to contact the foundation" class="ocs__checkbox"> <span>Easier contact</span></label></div>
+                <div class="ocs__grid-cell"><label class="ocs__checkbox-label"><input type="checkbox" name="involvementDrivers" value="Nothing at the moment" class="ocs__checkbox"> <span>Nothing right now</span></label></div>
+                <div class="ocs__grid-cell ocs__grid-cell--wide"><label class="ocs__checkbox-label"><input type="checkbox" name="involvementDrivers" value="Other" class="ocs__checkbox"> <span>Other</span></label></div>
+            </div>
+        </div>
+
+        <!-- Submit Action -->
+        <div class="ocs__grid ocs__grid--standard cols-2">
+            <div class="ocs__grid-cell ocs__grid-cell--wide">
+                <button type="button" id="saveNcsncfPreferencesBtn" class="ocs__btn ocs__btn--primary">
+                    Submit Survey
+                </button>
+            </div>
+        </div>
+
+        <p id="ncsncfStatus" class="ocs__status-message ocs__hidden"></p>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+  import { pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
+  import { showToast } from "{{site.baseurl}}/assets/js/aesthetihawk/shared/toastHandler.js";
+
+  async function saveNcsncfPreferences() {
+      const getCheckedValues = (name) => Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value);
+
+      const discovery = document.getElementById('ncsncfDiscovery')?.value;
+      const frequency = document.getElementById('ncsncfFrequency')?.value;
+      const mainReason = document.getElementById('ncsncfMainReason')?.value;
+
+      const statusEl = document.getElementById('ncsncfStatus');
+
+      if (!discovery || !frequency || !mainReason) {
+          alert("Please answer the required questions (Discovery, Frequency, and Main Reason) before submitting.");
+          return;
+      }
+
+      const payload = {
+          organization: "North County Special Needs Community Foundation",
+          discovery_source: discovery,
+          visit_frequency: frequency,
+          interested_info: getCheckedValues('interestedInfo'),
+          community_connection: document.getElementById('ncsncfConnection')?.value || "Unspecified",
+          main_reason: mainReason,
+          location: document.getElementById('ncsncfLocation')?.value || "Unspecified",
+          find_methods: getCheckedValues('findMethods'),
+          important_info: getCheckedValues('importantInfo'),
+          cost_info: getCheckedValues('costInfo'),
+          difficulties: getCheckedValues('difficulties'),
+          improvements_feedback: document.getElementById('ncsncfImprovements')?.value || "",
+          useful_features: getCheckedValues('usefulFeatures'),
+          browsing_preference: document.getElementById('ncsncfBrowsing')?.value || "Unspecified",
+          design_importance: document.getElementById('ncsncfDesignImportance')?.value || "Unspecified",
+          ease_of_use: document.getElementById('ncsncfEaseOfUse')?.value || "Unspecified",
+          accessibility_features: getCheckedValues('accessibilityFeatures'),
+          learning_pref: getCheckedValues('learningPref'),
+          involvement_drivers: getCheckedValues('involvementDrivers')
+      };
+
+      try {
+          const response = await fetch(`${pythonURI}/api/profile/ncsncf`, {
+              ...fetchOptions,
+              method: 'POST',
+              credentials: 'include',
+              headers: {
+                  ...(fetchOptions?.headers || {}),
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+              const errData = await response.json().catch(() => ({}));
+              throw new Error(errData.message || `Server returned HTTP status ${response.status}`);
+          }
+
+          document.getElementById('ncsncfSurveyForm')?.reset();
+
+          showToast({
+              message: "Thank you! Your survey responses have been saved.",
+              duration: 3000
+          });
+
+      } catch (error) {
+          console.error('Error saving NCSNCF preferences:', error);
+          if (statusEl) {
+              statusEl.textContent = `Failed to save survey: ${error.message}`;
+              statusEl.classList.remove('ocs__hidden');
+          }
+      }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('saveNcsncfPreferencesBtn');
+      if (btn) btn.addEventListener('click', saveNcsncfPreferences);
+  });
+</script>
