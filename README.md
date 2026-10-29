@@ -2,7 +2,7 @@
 
 # Introduction
 
-North County Special Needs Community Foundation is the website that focuses on building a community for people with down syndrome this project is a website revamp for NCSNCF, Improving an already existing website using Open Coding Society website system and style, the people working on this project Tristan Chiu, Mateo Durand Amador, and Yue Barbara Zhao
+North County Special Needs Community Foundation is the website that focuses on building a community for people with down syndrome. this project is a website revamp for NCSNCF, Improving an already existing website using Open Coding Society website system and style, the people working on this project Tristan Chiu, Mateo Durand Amador, and Yue Barbara Zhao
 
 ```mermaid
 flowchart LR
@@ -23,9 +23,9 @@ The requirements for this project go as follows
 
 ---
 
-##  History of CCAE
+##  History of NCSNCF
 
-The California Center for the Arts, Escondido (CCAE) was created to bring more cultural, artistic, and educational opportunities to Escondido and the surrounding North San Diego County region. Its history began long before the building opened, with local residents and civic leaders working to make the arts a bigger part of community life.
+ North County Special Needs Community Foundation (NCSNCF) was established in 2011 to expand educational opportunities and support for adults with developmental disabilities in the Poway community. Its efforts grew from earlier community programs, including a Special Olympics softball team formed in 1998, and developed into a broader mission of bringing families together, building friendships, and creating more housing and educational opportunities for individuals with developmental disabilities.
 
 ### License
 
@@ -36,7 +36,7 @@ There's also a license for CCAE if it gets accepted
 ### Key Features
 
 - **Code Examples**: the FE will try to interact with the BE to get most chunks of data, making the FE pretty light on it's own and most code in it will be like import ____ from ____ somewhat 
-- **Catalogue and announcements of events in Escondido California**: The main purpose of CCAE is to display and announce real events going down in the area for people who are interested.
+- **Catalogue and announcements of events in Special Needs Community**: The main purpose of NCSNCF is to display and announce real events going down in the area for people who are interested.
 - **Profile System, Settings Options, Engagement Activities, and more NEW Features**: Features for a custom profile with username, password, settings, achievements, surveys, reccomendation adjustments, etc.  
 
 ### Contributions
