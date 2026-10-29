@@ -1,432 +1,200 @@
-<div class="max-w-4xl mx-auto py-6">
-    <!-- NCSNCF Community Survey -->
-    <div class="bg-neutral-800 rounded-lg shadow-md p-6 mb-6 border-neutral-700 border">
-        <h2 class="text-xl font-semibold mb-2 text-gray-100">North County Special Needs Community Foundation Website Survey</h2>
-        <p class="text-sm text-gray-400 mb-6">This survey will help identify ways to improve the North County Special Needs Community Foundation website so visitors can more easily find information, discover opportunities, access resources, and get involved in supporting individuals with Down syndrome and other developmental disabilities.</p>
+---
+title: NCSNCF Survey
+layout: aesthetihawk
+permalink: /survey
+active_tab: ncsncf-survey
+---
 
-        <form id="ncsncfSurveyForm" class="space-y-6">
-            <!-- 1. Discovery Source -->
-            <div>
-                <label for="ncsncfDiscovery" class="block text-sm font-medium text-gray-300 mb-1">
-                    1. How did you first hear about the North County Special Needs Community Foundation?
-                </label>
-                <select id="ncsncfDiscovery" name="discovery"
-                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="Social media">Social media</option>
-                    <option value="Friends or family">Friends or family</option>
-                    <option value="School or teacher">School or teacher</option>
-                    <option value="Search engine">Search engine (Google, etc.)</option>
-                    <option value="Community event">Community event</option>
-                    <option value="Healthcare provider or support organization">Healthcare provider or support organization</option>
-                    <option value="Advertisement">Advertisement</option>
-                    <option value="Other">Other</option>
-                    <option value="I haven't heard of the foundation before">I haven't heard of the foundation before</option>
-                </select>
-            </div>
+<style>
+  /* Aggressively hide the layout's auto-generated header block, preserving the masthead navigation */
+  .page-header, .page__header, .entry-header, .page-title { 
+    display: none !important; 
+  }
+</style>
 
-            <!-- 2. Visit Frequency -->
-            <div>
-                <label for="ncsncfFrequency" class="block text-sm font-medium text-gray-300 mb-1">
-                    2. How often do you visit the foundation's website?
-                </label>
-                <select id="ncsncfFrequency" name="visitFrequency"
-                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="" disabled selected>Select frequency</option>
-                    <option value="This is my first visit">This is my first visit</option>
-                    <option value="Less than once a month">Less than once a month</option>
-                    <option value="Once a month">Once a month</option>
-                    <option value="Several times a month">Several times a month</option>
-                    <option value="Once a week or more">Once a week or more</option>
-                </select>
-            </div>
+<!-- Community Survey Component -->
+<div class="ocs__card ocs__mb-8" style="margin-top: 2rem;">
+  <h2 class="ocs__title ocs__title--lg ocs__mb-2">Website & Community Survey</h2>
+  <p class="ocs__description ocs__mb-6">This survey will help identify ways to improve the North County Special Needs Community Foundation website so visitors can more easily find information, discover opportunities, access resources, and get involved.</p>
 
-            <!-- 3. Information & Opportunities (Checkboxes) -->
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">
-                    3. What information or opportunities are you most interested in finding on the website? (Select all that apply)
-                </label>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-200">
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="interestedInfo" value="Down syndrome information and resources" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Down syndrome information and resources</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="interestedInfo" value="Programs and activities for individuals with developmental disabilities" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Programs and activities for individuals with developmental disabilities</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="interestedInfo" value="Family support and community connections" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Family support and community connections</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="interestedInfo" value="Educational opportunities" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Educational opportunities</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="interestedInfo" value="Independent living and housing resources" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Independent living and housing resources</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="interestedInfo" value="Volunteer opportunities" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Volunteer opportunities</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="interestedInfo" value="Fundraising and donation opportunities" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Fundraising and donation opportunities</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="interestedInfo" value="Community events" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Community events</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="interestedInfo" value="Other" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Other</span></label>
-                </div>
-            </div>
+  <form id="ncsncfSurveyForm" class="ocs__form">
+      
+      <!-- 1. Discovery Source -->
+      <div class="ocs__form-group">
+          <label for="ncsncfDiscovery" class="ocs__label">
+              1. How did you first hear about the North County Special Needs Community Foundation?
+          </label>
+          <select id="ncsncfDiscovery" name="discovery" class="ocs__select">
+              <option value="" disabled selected>Select an option</option>
+              <option value="Social media">Social media</option>
+              <option value="Friends or family">Friends or family</option>
+              <option value="School or teacher">School or teacher</option>
+              <option value="Search engine">Search engine (Google, etc.)</option>
+              <option value="Community event">Community event</option>
+              <option value="Healthcare provider or support organization">Healthcare provider or support organization</option>
+              <option value="Advertisement">Advertisement</option>
+              <option value="Other">Other</option>
+              <option value="I haven't heard of the foundation before">I haven't heard of the foundation before</option>
+          </select>
+      </div>
 
-            <!-- 4. Community Connection -->
-            <div>
-                <label for="ncsncfConnection" class="block text-sm font-medium text-gray-300 mb-1">
-                    4. What is your connection to the special needs community?
-                </label>
-                <select id="ncsncfConnection" name="communityConnection"
-                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="Individual with Down syndrome or another developmental disability">Individual with Down syndrome or another developmental disability</option>
-                    <option value="Parent or caregiver">Parent or caregiver</option>
-                    <option value="Family member or friend">Family member or friend</option>
-                    <option value="Teacher or education professional">Teacher or education professional</option>
-                    <option value="Healthcare or support professional">Healthcare or support professional</option>
-                    <option value="Volunteer or community supporter">Volunteer or community supporter</option>
-                    <option value="Student researching the topic">Student researching the topic</option>
-                    <option value="Other">Other</option>
-                    <option value="Prefer not to say">Prefer not to say</option>
-                </select>
-            </div>
+      <!-- 2. Visit Frequency -->
+      <div class="ocs__form-group">
+          <label for="ncsncfFrequency" class="ocs__label">
+              2. How often do you visit the foundation's website?
+          </label>
+          <select id="ncsncfFrequency" name="visitFrequency" class="ocs__select">
+              <option value="" disabled selected>Select frequency</option>
+              <option value="This is my first visit">This is my first visit</option>
+              <option value="Less than once a month">Less than once a month</option>
+              <option value="Once a month">Once a month</option>
+              <option value="Several times a month">Several times a month</option>
+              <option value="Once a week or more">Once a week or more</option>
+          </select>
+      </div>
 
-            <!-- 5. Main Reason -->
-            <div>
-                <label for="ncsncfMainReason" class="block text-sm font-medium text-gray-300 mb-1">
-                    5. What is your main reason for visiting the foundation's website?
-                </label>
-                <select id="ncsncfMainReason" name="mainReason"
-                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="" disabled selected>Select primary reason</option>
-                    <option value="Finding resources or support">Finding resources or support</option>
-                    <option value="Learning about Down syndrome or developmental disabilities">Learning about Down syndrome or developmental disabilities</option>
-                    <option value="Finding programs and activities">Finding programs and activities</option>
-                    <option value="Connecting with other families">Connecting with other families</option>
-                    <option value="Exploring volunteer opportunities">Exploring volunteer opportunities</option>
-                    <option value="Donating or fundraising">Donating or fundraising</option>
-                    <option value="Learning about the foundation's mission">Learning about the foundation's mission</option>
-                    <option value="School or educational research">School or educational research</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
+      <!-- 3. Information & Opportunities (Checkboxes) -->
+      <div class="ocs__form-group">
+          <label class="ocs__label ocs__mb-2">
+              3. What information or opportunities are you most interested in finding on the website? (Select all that apply)
+          </label>
+          <div class="ocs__checkbox-grid">
+              <label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Down syndrome information and resources" class="ocs__checkbox"> <span>Down syndrome information and resources</span></label>
+              <label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Programs and activities for individuals with developmental disabilities" class="ocs__checkbox"> <span>Programs and activities</span></label>
+              <label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Family support and community connections" class="ocs__checkbox"> <span>Family support</span></label>
+              <label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Educational opportunities" class="ocs__checkbox"> <span>Educational opportunities</span></label>
+              <label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Independent living and housing resources" class="ocs__checkbox"> <span>Housing resources</span></label>
+              <label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Volunteer opportunities" class="ocs__checkbox"> <span>Volunteer opportunities</span></label>
+              <label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Fundraising and donation opportunities" class="ocs__checkbox"> <span>Donations</span></label>
+              <label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Community events" class="ocs__checkbox"> <span>Community events</span></label>
+              <label class="ocs__checkbox-label"><input type="checkbox" name="interestedInfo" value="Other" class="ocs__checkbox"> <span>Other</span></label>
+          </div>
+      </div>
 
-            <!-- 6. Location -->
-            <div>
-                <label for="ncsncfLocation" class="block text-sm font-medium text-gray-300 mb-1">
-                    6. Where are you located in relation to the foundation's community?
-                </label>
-                <select id="ncsncfLocation" name="location"
-                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="" disabled selected>Select location</option>
-                    <option value="Poway">Poway</option>
-                    <option value="Elsewhere in San Diego County">Elsewhere in San Diego County</option>
-                    <option value="Elsewhere in California">Elsewhere in California</option>
-                    <option value="Outside California">Outside California</option>
-                    <option value="Prefer not to say">Prefer not to say</option>
-                </select>
-            </div>
+      <!-- 4. Community Connection -->
+      <div class="ocs__form-group">
+          <label for="ncsncfConnection" class="ocs__label">
+              4. What is your connection to the special needs community?
+          </label>
+          <select id="ncsncfConnection" name="communityConnection" class="ocs__select">
+              <option value="" disabled selected>Select an option</option>
+              <option value="Individual with Down syndrome or another developmental disability">Individual with Down syndrome or another developmental disability</option>
+              <option value="Parent or caregiver">Parent or caregiver</option>
+              <option value="Family member or friend">Family member or friend</option>
+              <option value="Teacher or education professional">Teacher or education professional</option>
+              <option value="Healthcare or support professional">Healthcare or support professional</option>
+              <option value="Volunteer or community supporter">Volunteer or community supporter</option>
+              <option value="Student researching the topic">Student researching the topic</option>
+              <option value="Other">Other</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+      </div>
 
-            <!-- 7. Information Finding Channels (Checkboxes) -->
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">
-                    7. How do you usually find programs, resources, or support opportunities? (Select all that apply)
-                </label>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-200">
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Foundation website" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Foundation website</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Social media" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Social media</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Friends or family" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Friends or family</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Schools or teachers" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Schools or teachers</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Healthcare providers or support organizations" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Healthcare providers or support organizations</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Email newsletters" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Email newsletters</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Community events" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Community events</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Search engines" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Search engines</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="findChannels" value="Other" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Other</span></label>
-                </div>
-            </div>
+      <!-- 5. Main Reason -->
+      <div class="ocs__form-group">
+          <label for="ncsncfMainReason" class="ocs__label">
+              5. What is your main reason for visiting the foundation's website?
+          </label>
+          <select id="ncsncfMainReason" name="mainReason" class="ocs__select">
+              <option value="" disabled selected>Select primary reason</option>
+              <option value="Finding resources or support">Finding resources or support</option>
+              <option value="Learning about Down syndrome or developmental disabilities">Learning about Down syndrome or developmental disabilities</option>
+              <option value="Finding programs and activities">Finding programs and activities</option>
+              <option value="Connecting with other families">Connecting with other families</option>
+              <option value="Exploring volunteer opportunities">Exploring volunteer opportunities</option>
+              <option value="Donating or fundraising">Donating or fundraising</option>
+              <option value="Learning about the foundation's mission">Learning about the foundation's mission</option>
+              <option value="School or educational research">School or educational research</option>
+              <option value="Other">Other</option>
+          </select>
+      </div>
 
-            <!-- 8. Decision Factors (Checkboxes) -->
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">
-                    8. What information is most important when deciding whether to participate in a program or event? (Select all that apply)
-                </label>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-200">
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Date and time" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Date and time</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Location and transportation information" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Location and transportation information</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Cost or whether it is free" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Cost or whether it is free</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Program description" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Program description</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Who can participate" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Who can participate</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Registration instructions" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Registration instructions</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Accessibility and accommodations" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Accessibility and accommodations</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Contact information" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Contact information</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Photos or videos" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Photos or videos</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="decisionFactors" value="Other" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Other</span></label>
-                </div>
-            </div>
+      <!-- 6. Improvements Feedback -->
+      <div class="ocs__form-group">
+          <label for="ncsncfImprovements" class="ocs__label">
+              6. What is one thing you would improve about the foundation's website?
+          </label>
+          <textarea id="ncsncfImprovements" name="improvements" rows="3" placeholder="Share your suggestions..." class="ocs__textarea"></textarea>
+      </div>
 
-            <!-- 9. Cost Information (Checkboxes) -->
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">
-                    9. What cost information would be most helpful when viewing programs or activities? (Select all that apply)
-                </label>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-200">
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="costInfo" value="Whether the program is free" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Whether the program is free</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="costInfo" value="Participation or registration fees" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Participation or registration fees</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="costInfo" value="Available financial assistance" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Available financial assistance</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="costInfo" value="Donation options" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Donation options</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="costInfo" value="What the cost includes" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>What the cost includes</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="costInfo" value="Clear information about all costs" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Clear information about all costs</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="costInfo" value="Not applicable to me" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Not applicable to me</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="costInfo" value="Other" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Other</span></label>
-                </div>
-            </div>
-
-            <!-- 10. Participation Barriers (Checkboxes) -->
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">
-                    10. What makes it difficult to find or participate in programs and resources? (Select all that apply)
-                </label>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-200">
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="participationBarriers" value="I don't know what opportunities are available" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>I don't know what opportunities are available</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="participationBarriers" value="Information is difficult to find" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Information is difficult to find</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="participationBarriers" value="Registration instructions are unclear" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Registration instructions are unclear</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="participationBarriers" value="Transportation or location" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Transportation or location</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="participationBarriers" value="Cost" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Cost</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="participationBarriers" value="Scheduling conflicts" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Scheduling conflicts</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="participationBarriers" value="Accessibility or accommodation information is unclear" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Accessibility or accommodation information is unclear</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="participationBarriers" value="I need more information before deciding" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>I need more information before deciding</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="participationBarriers" value="I have not experienced any difficulties" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>I have not experienced any difficulties</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="participationBarriers" value="Other" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Other</span></label>
-                </div>
-            </div>
-
-            <!-- 11. Improvements -->
-            <div>
-                <label for="ncsncfImprovements" class="block text-sm font-medium text-gray-300 mb-1">
-                    11. What is one thing you would improve about the foundation's website?
-                </label>
-                <textarea id="ncsncfImprovements" name="improvements" rows="3"
-                    placeholder="Share any suggestions or ideas for improvement..."
-                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"></textarea>
-            </div>
-
-            <!-- 12. Useful Features (Checkboxes) -->
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">
-                    12. Which website features would be most useful to you? (Select all that apply)
-                </label>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-200">
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="usefulFeatures" value="A clear list of programs and activities" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>A clear list of programs and activities</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="usefulFeatures" value="A calendar of upcoming events" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>A calendar of upcoming events</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="usefulFeatures" value="A searchable resource directory" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>A searchable resource directory</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="usefulFeatures" value="A page explaining how to volunteer" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>A page explaining how to volunteer</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="usefulFeatures" value="A simple donation page" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>A simple donation page</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="usefulFeatures" value="Frequently asked questions" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Frequently asked questions</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="usefulFeatures" value="Personal stories and community highlights" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Personal stories and community highlights</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="usefulFeatures" value="A contact form" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>A contact form</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="usefulFeatures" value="A page with information for families and caregivers" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>A page with information for families and caregivers</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="usefulFeatures" value="Other" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Other</span></label>
-                </div>
-            </div>
-
-            <!-- 13. Browsing Preferences -->
-            <div>
-                <label for="ncsncfBrowsingPreference" class="block text-sm font-medium text-gray-300 mb-1">
-                    13. How would you prefer to browse programs and resources?
-                </label>
-                <select id="ncsncfBrowsingPreference" name="browsingPreference"
-                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="" disabled selected>Select browsing style</option>
-                    <option value="Simple list with clear details">Simple list with clear details</option>
-                    <option value="Large image cards">Large image cards</option>
-                    <option value="Calendar view">Calendar view</option>
-                    <option value="Categories with filters">Categories with filters</option>
-                    <option value="A combination of these">A combination of these</option>
-                </select>
-            </div>
-
-            <!-- 14. Usability & Formatting Importance -->
-            <div>
-                <label for="ncsncfUsabilityImportance" class="block text-sm font-medium text-gray-300 mb-1">
-                    14. How important are readable text, clear spacing, simple navigation, and reduced animation to you?
-                </label>
-                <select id="ncsncfUsabilityImportance" name="usabilityImportance"
-                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="" disabled selected>Select importance level</option>
-                    <option value="Extremely important">Extremely important</option>
-                    <option value="Very important">Very important</option>
-                    <option value="Moderately important">Moderately important</option>
-                    <option value="Slightly important">Slightly important</option>
-                    <option value="Not important">Not important</option>
-                </select>
-            </div>
-
-            <!-- 15. Ease of Finding Information -->
-            <div>
-                <label for="ncsncfEaseOfUse" class="block text-sm font-medium text-gray-300 mb-1">
-                    15. How easy is it for you to find the information you need on the current website?
-                </label>
-                <select id="ncsncfEaseOfUse" name="easeOfUse"
-                    class="w-full px-4 py-2 rounded-lg border border-gray-600 bg-neutral-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <option value="" disabled selected>Select ease rating</option>
-                    <option value="Very easy">Very easy</option>
-                    <option value="Somewhat easy">Somewhat easy</option>
-                    <option value="Neither easy nor difficult">Neither easy nor difficult</option>
-                    <option value="Somewhat difficult">Somewhat difficult</option>
-                    <option value="Very difficult">Very difficult</option>
-                    <option value="I haven't used the website enough to answer">I haven't used the website enough to answer</option>
-                </select>
-            </div>
-
-            <!-- 16. Accessibility Enhancements (Checkboxes) -->
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">
-                    16. What would help make the website easier to use for people with different abilities? (Select all that apply)
-                </label>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-200">
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="accessibilityEnhancements" value="Larger or adjustable text" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Larger or adjustable text</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="accessibilityEnhancements" value="Better color contrast" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Better color contrast</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="accessibilityEnhancements" value="Plain-language explanations" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Plain-language explanations</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="accessibilityEnhancements" value="Clearer headings and menus" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Clearer headings and menus</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="accessibilityEnhancements" value="Fewer moving images or animations" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Fewer moving images or animations</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="accessibilityEnhancements" value="Text descriptions for images" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Text descriptions for images</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="accessibilityEnhancements" value="Keyboard-friendly navigation" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Keyboard-friendly navigation</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="accessibilityEnhancements" value="Videos with captions" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Videos with captions</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="accessibilityEnhancements" value="More visual instructions" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>More visual instructions</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="accessibilityEnhancements" value="Other" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Other</span></label>
-                </div>
-            </div>
-
-            <!-- 17. Learning Preferences (Checkboxes) -->
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">
-                    17. How would you prefer to learn about Down syndrome and the foundation's work? (Select all that apply)
-                </label>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-200">
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="learningPreferences" value="Short articles" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Short articles</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="learningPreferences" value="Frequently asked questions" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Frequently asked questions</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="learningPreferences" value="Videos" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Videos</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="learningPreferences" value="Infographics" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Infographics</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="learningPreferences" value="Personal stories and experiences" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Personal stories and experiences</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="learningPreferences" value="Links to trusted organizations" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Links to trusted organizations</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="learningPreferences" value="A combination of these" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>A combination of these</span></label>
-                </div>
-            </div>
-
-            <!-- 18. Engagement Drivers (Checkboxes) -->
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">
-                    18. What would encourage you to get more involved with the foundation? (Select all that apply)
-                </label>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-200">
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="engagementDrivers" value="More information about volunteer opportunities" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>More information about volunteer opportunities</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="engagementDrivers" value="A clear guide to donating" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>A clear guide to donating</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="engagementDrivers" value="More community events" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>More community events</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="engagementDrivers" value="Information about programs and activities" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Information about programs and activities</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="engagementDrivers" value="Opportunities to support individuals and families" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Opportunities to support individuals and families</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="engagementDrivers" value="Updates about the foundation's impact" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Updates about the foundation's impact</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="engagementDrivers" value="Easier ways to contact the foundation" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Easier ways to contact the foundation</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="engagementDrivers" value="Nothing at the moment" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Nothing at the moment</span></label>
-                    <label class="flex items-center space-x-2"><input type="checkbox" name="engagementDrivers" value="Other" class="rounded bg-neutral-700 border-gray-600 text-indigo-600 focus:ring-indigo-500"> <span>Other</span></label>
-                </div>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="flex justify-end pt-2">
-                <button type="button" id="saveNcsncfPreferencesBtn"
-                    class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-all font-medium text-sm flex items-center gap-2">
-                    Submit Survey
-                </button>
-            </div>
-            <p id="ncsncfStatus" class="text-sm mt-2 text-center hidden"></p>
-        </form>
-    </div>
+      <!-- Submit Action -->
+      <div class="ocs__flex-end">
+          <button type="button" id="saveNcsncfPreferencesBtn" class="ocs__btn ocs__btn--primary">
+              Submit Survey
+          </button>
+      </div>
+      <p id="ncsncfStatus" class="ocs__status-message ocs__hidden"></p>
+  </form>
 </div>
 
 <script type="module">
-    import { pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
-    import { showToast } from "{{site.baseurl}}/assets/js/aesthetihawk/shared/toastHandler.js";
+  import { pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
+  import { showToast } from "{{site.baseurl}}/assets/js/aesthetihawk/shared/toastHandler.js";
 
-    async function saveNcsncfPreferences() {
-        const getCheckedValues = (name) => Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value);
+  // Submit Survey Responses
+  async function saveNcsncfPreferences() {
+      const getCheckedValues = (name) => Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value);
 
-        const discovery = document.getElementById('ncsncfDiscovery')?.value;
-        const frequency = document.getElementById('ncsncfFrequency')?.value;
-        const interestedInfo = getCheckedValues('interestedInfo');
-        const communityConnection = document.getElementById('ncsncfConnection')?.value;
-        const mainReason = document.getElementById('ncsncfMainReason')?.value;
-        const location = document.getElementById('ncsncfLocation')?.value;
-        const findChannels = getCheckedValues('findChannels');
-        const decisionFactors = getCheckedValues('decisionFactors');
-        const costInfo = getCheckedValues('costInfo');
-        const participationBarriers = getCheckedValues('participationBarriers');
-        const improvements = document.getElementById('ncsncfImprovements')?.value;
-        const usefulFeatures = getCheckedValues('usefulFeatures');
-        const browsingPreference = document.getElementById('ncsncfBrowsingPreference')?.value;
-        const usabilityImportance = document.getElementById('ncsncfUsabilityImportance')?.value;
-        const easeOfUse = document.getElementById('ncsncfEaseOfUse')?.value;
-        const accessibilityEnhancements = getCheckedValues('accessibilityEnhancements');
-        const learningPreferences = getCheckedValues('learningPreferences');
-        const engagementDrivers = getCheckedValues('engagementDrivers');
+      const discovery = document.getElementById('ncsncfDiscovery')?.value;
+      const frequency = document.getElementById('ncsncfFrequency')?.value;
+      const interestedInfo = getCheckedValues('interestedInfo');
+      const communityConnection = document.getElementById('ncsncfConnection')?.value;
+      const mainReason = document.getElementById('ncsncfMainReason')?.value;
+      const improvements = document.getElementById('ncsncfImprovements')?.value;
 
-        const statusEl = document.getElementById('ncsncfStatus');
+      const statusEl = document.getElementById('ncsncfStatus');
 
-        if (!discovery || !frequency || !mainReason) {
-            alert("Please answer the required questions (Discovery, Frequency, and Main Reason) before submitting.");
-            return;
-        }
+      if (!discovery || !frequency || !mainReason) {
+          alert("Please answer the required questions (Discovery, Frequency, and Main Reason) before submitting.");
+          return;
+      }
 
-        const payload = {
-            organization: "North County Special Needs Community Foundation",
-            discovery_source: discovery,
-            visit_frequency: frequency,
-            interested_info: interestedInfo,
-            community_connection: communityConnection || "Unspecified",
-            main_reason: mainReason,
-            location: location || "Unspecified",
-            discovery_channels: findChannels,
-            decision_factors: decisionFactors,
-            cost_info: costInfo,
-            participation_barriers: participationBarriers,
-            improvements_feedback: improvements || "",
-            useful_features: usefulFeatures,
-            browsing_preference: browsingPreference || "Unspecified",
-            usability_importance: usabilityImportance || "Unspecified",
-            ease_of_use: easeOfUse || "Unspecified",
-            accessibility_enhancements: accessibilityEnhancements,
-            learning_preferences: learningPreferences,
-            engagement_drivers: engagementDrivers
-        };
+      const payload = {
+          organization: "North County Special Needs Community Foundation",
+          discovery_source: discovery,
+          visit_frequency: frequency,
+          interested_info: interestedInfo,
+          community_connection: communityConnection || "Unspecified",
+          main_reason: mainReason,
+          improvements_feedback: improvements || ""
+      };
 
-        try {
-            const response = await fetch(`${pythonURI}/api/profile/ncsncf`, {
-                ...fetchOptions,
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    ...(fetchOptions?.headers || {}),
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
+      try {
+          const response = await fetch(`${pythonURI}/api/profile/ncsncf`, {
+              ...fetchOptions,
+              method: 'POST',
+              credentials: 'include',
+              headers: {
+                  ...(fetchOptions?.headers || {}),
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(payload)
+          });
 
-            if (!response.ok) {
-                const errData = await response.json().catch(() => ({}));
-                throw new Error(errData.message || `Server returned HTTP status ${response.status}`);
-            }
+          if (!response.ok) {
+              const errData = await response.json().catch(() => ({}));
+              throw new Error(errData.message || `Server returned HTTP status ${response.status}`);
+          }
 
-            document.getElementById('ncsncfSurveyForm')?.reset();
+          document.getElementById('ncsncfSurveyForm')?.reset();
 
-            showToast({
-                message: "Thank you! Your survey responses have been saved.",
-                icon: `<svg class="size-5 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>`,
-                duration: 3000
-            });
+          showToast({
+              message: "Thank you! Your survey responses have been saved.",
+              duration: 3000
+          });
 
-        } catch (error) {
-            console.error('Error saving NCSNCF preferences:', error);
-            if (statusEl) {
-                statusEl.textContent = `Failed to save survey: ${error.message}`;
-                statusEl.className = "text-sm mt-2 text-center text-red-400";
-                statusEl.classList.remove('hidden');
-            }
-        }
-    }
+      } catch (error) {
+          console.error('Error saving NCSNCF preferences:', error);
+          if (statusEl) {
+              statusEl.textContent = `Failed to save survey: ${error.message}`;
+              statusEl.className = "ocs__status-message ocs__text-danger";
+              statusEl.classList.remove('ocs__hidden');
+          }
+      }
+  }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const btn = document.getElementById('saveNcsncfPreferencesBtn');
-        if (btn) {
-            btn.addEventListener('click', saveNcsncfPreferences);
-        }
-    });
-
-    window.saveNcsncfPreferences = saveNcsncfPreferences;
+  document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('saveNcsncfPreferencesBtn');
+      if (btn) btn.addEventListener('click', saveNcsncfPreferences);
+  });
 </script>
