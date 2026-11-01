@@ -1,3 +1,5 @@
+---
+---
 import { pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
 
 function getCheckedValues(name) {
@@ -11,37 +13,54 @@ function getAuthToken() {
            localStorage.getItem('token');
 }
 
-export async function saveCcaePreferences() {
-    const discovery = document.getElementById('ccaeDiscovery')?.value || "Unspecified";
-    const frequency = document.getElementById('ccaeFrequency')?.value || "Unspecified";
-    const companions = document.getElementById('ccaeCompanions')?.value || "Unspecified";
-    const mainReason = document.getElementById('ccaeMainReason')?.value || "Unspecified";
-    const travelDistance = document.getElementById('ccaeTravelDistance')?.value || "Unspecified";
-    const ticketBudget = document.getElementById('ccaeTicketBudget')?.value || "Unspecified";
-    const attendanceBarriers = document.getElementById('ccaeAttendanceBarriers')?.value || "Unspecified";
-    const improvements = document.getElementById('ccaeImprovements')?.value || "";
-    const browsingPreference = document.getElementById('ccaeBrowsingPreference')?.value || "Unspecified";
-    const accessibilityImportance = document.getElementById('ccaeAccessibilityImportance')?.value || "Unspecified";
+export async function saveNcsncfPreferences() {
+    const statusEl = document.getElementById('ncsncfStatus');
 
-    const eventTypes = getCheckedValues('eventTypes');
-    const findChannels = getCheckedValues('findChannels');
-    const decisionFactors = getCheckedValues('decisionFactors');
+    // Helper for status updates
+    const showStatus = (msg, isError = false) => {
+        if (!statusEl) return;
+        statusEl.textContent = msg;
+        statusEl.style.color = isError ? '#ff4d4d' : '#28a745';
+        statusEl.classList.remove('ocs__hidden');
+    };
+
+    // Single Select Inputs
+    const discovery = document.getElementById('ncsncfDiscovery')?.value || "";
+    const frequency = document.getElementById('ncsncfFrequency')?.value || "";
+    const connection = document.getElementById('ncsncfConnection')?.value || "Unspecified";
+    const mainReason = document.getElementById('ncsncfMainReason')?.value || "";
+    const location = document.getElementById('ncsncfLocation')?.value || "Unspecified";
+    const improvements = document.getElementById('ncsncfImprovements')?.value || "";
+    const browsingPreference = document.getElementById('ncsncfBrowsing')?.value || "Unspecified";
+    const designImportance = document.getElementById('ncsncfDesignImportance')?.value || "Unspecified";
+    const easeOfUse = document.getElementById('ncsncfEaseOfUse')?.value || "Unspecified";
+
+    // Required fields check
+    if (!discovery || !frequency || !mainReason) {
+        showStatus("Please answer mandatory questions 1, 2, and 5.", true);
+        return;
+    }
 
     const payload = {
-        organization: "California Center for the Arts, Escondido",
+        organization: "North County Special Needs Community Foundation",
         discovery_source: discovery,
         visit_frequency: frequency,
-        event_types_interested: eventTypes,
-        attends_with: companions,
+        interested_info: getCheckedValues('interestedInfo'),
+        community_connection: connection,
         main_reason: mainReason,
-        travel_distance: travelDistance,
-        discovery_channels: findChannels,
-        decision_factors: decisionFactors,
-        ticket_budget: ticketBudget,
-        attendance_barriers: attendanceBarriers,
+        location: location,
+        find_methods: getCheckedValues('findMethods'),
+        important_info: getCheckedValues('importantInfo'),
+        cost_info: getCheckedValues('costInfo'),
+        difficulties: getCheckedValues('difficulties'),
         improvements_feedback: improvements,
+        useful_features: getCheckedValues('usefulFeatures'),
         browsing_preference: browsingPreference,
-        accessibility_importance: accessibilityImportance
+        design_importance: designImportance,
+        ease_of_use: easeOfUse,
+        accessibility_features: getCheckedValues('accessibilityFeatures'),
+        learning_pref: getCheckedValues('learningPref'),
+        involvement_drivers: getCheckedValues('involvementDrivers')
     };
 
     const token = getAuthToken();
@@ -58,19 +77,20 @@ export async function saveCcaePreferences() {
     };
 
     try {
-        const response = await fetch(`${pythonURI}/api/profile/ccae`, requestOptions);
+        showStatus("Submitting survey...");
+        const response = await fetch(`${pythonURI}/api/profile/ncsncf`, requestOptions);
         const data = await response.json().catch(() => ({}));
 
         if (response.ok) {
+            showStatus("Survey submitted successfully!");
             alert("Survey submitted successfully!");
-            document.getElementById('ccaeSurveyForm')?.reset();
         } else {
-            alert(`Failed to save survey: ${data.message || response.statusText}`);
+            showStatus(`Failed to save survey: ${data.message || response.statusText}`, true);
         }
     } catch (error) {
         console.error("Error submitting survey:", error);
-        alert("An error occurred while submitting the survey.");
+        showStatus("Network error occurred while submitting survey.", true);
     }
 }
 
-window.saveCcaePreferences = saveCcaePreferences;
+window.saveNcsncfPreferences = saveNcsncfPreferences;
