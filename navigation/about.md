@@ -1,138 +1,89 @@
 ---
 layout: post
-title: About
+title: About NCSNCF
 permalink: /about/
-comments: true
+comments: false
 ---
 
-## As a conversation Starter
-
-Here are some places I have lived.
-
-<comment>
-Flags are made using Wikipedia images
-</comment>
-
 <style>
-    /* Style looks pretty compact, 
-       - grid-container and grid-item are referenced the code 
-    */
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Dynamic columns */
-        gap: 10px;
-    }
-    .grid-item {
-        text-align: center;
-    }
-    .grid-item img {
-        width: 100%;
-        height: 100px; /* Fixed height for uniformity */
-        object-fit: contain; /* Ensure the image fits within the fixed height */
-    }
-    .grid-item p {
-        margin: 5px 0; /* Add some margin for spacing */
-    }
-
-    .image-gallery {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 10px;
-        }
-
-    .image-gallery img {
-        max-height: 150px;
-        object-fit: cover;
-        border-radius: 5px;
-    }
+  .ncs-about { --ncs-primary: #173b64; --ncs-accent: #247e83; --ncs-muted: #f2f7fa; color: inherit; }
+  .ncs-about * { box-sizing: border-box; }
+  .ncs-about .ncs-hero { padding: clamp(1.6rem,4vw,3.2rem); border-radius: 18px; background: linear-gradient(125deg,#173b64,#236979); color: #fff; margin: 0 0 2.4rem; }
+  .ncs-about .ncs-eyebrow { text-transform: uppercase; letter-spacing: .13em; font-size: .8rem; font-weight: 700; opacity: .92; margin: 0 0 .8rem; }
+  .ncs-about .ncs-hero h1 { color: #fff; font-size: clamp(2rem,4vw,3.3rem); line-height: 1.15; margin: 0 0 1rem; }
+  .ncs-about .ncs-hero p { font-size: 1.1rem; line-height: 1.65; max-width: 50rem; margin-bottom: 1.5rem; }
+  .ncs-about .ncs-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .ncs-about .ncs-button { display: inline-block; padding: .75rem 1.2rem; border-radius: .6rem; background: #fff; color: #173b64; font-weight: 700; text-decoration: none; }
+  .ncs-about .ncs-button:focus-visible, .ncs-about a:focus-visible { outline: 3px solid #f3c969; outline-offset: 3px; }
+  .ncs-about .ncs-button-secondary { background: transparent; border: 2px solid #fff; color: #fff; }
+  .ncs-about section { margin: 2.5rem 0; }
+  .ncs-about h2 { font-size: clamp(1.55rem,3vw,2rem); margin-bottom: .8rem; }
+  .ncs-about .ncs-lead { line-height: 1.75; max-width: 52rem; font-size: 1.06rem; }
+  .ncs-about .ncs-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,235px),1fr)); gap: 1rem; margin-top: 1.4rem; }
+  .ncs-about .ncs-card { padding: 1.4rem; border-radius: 14px; border: 1px solid #dce7ed; background: var(--ncs-muted); }
+  .ncs-about .ncs-card h3 { margin: 0 0 .6rem; font-size: 1.2rem; }
+  .ncs-about .ncs-card p { margin: 0; line-height: 1.65; }
+  .ncs-about .ncs-timeline { list-style: none; margin: 1.3rem 0; padding: 0; border-left: 3px solid #247e83; }
+  .ncs-about .ncs-timeline li { margin: 0 0 1.3rem; padding: 0 0 0 1.25rem; position: relative; }
+  .ncs-about .ncs-timeline li:before { content: ''; position: absolute; top: .45rem; left: -.48rem; width: .8rem; height: .8rem; background: #247e83; border-radius: 50%; }
+  .ncs-about .ncs-timeline strong { display: block; color: var(--ncs-accent); margin-bottom: .25rem; }
+  .ncs-about .ncs-callout { border-radius: 14px; background: #eef5f7; border-left: 5px solid #247e83; padding: 1.5rem; }
+  .ncs-about .ncs-callout h2 { margin-top: 0; }
+  @media (prefers-color-scheme: dark) { .ncs-about .ncs-card { background: #1c303a; border-color: #41535d; } .ncs-about .ncs-callout { background: #1c303a; } .ncs-about .ncs-timeline strong { color: #8bd5d7; } }
 </style>
 
-<!-- This grid_container class is used by CSS styling and the id is used by JavaScript connection -->
-<div class="grid-container" id="grid_container">
-    <!-- content will be added here by JavaScript -->
-</div>
+<div class="ncs-about">
+  <header class="ncs-hero">
+    <p class="ncs-eyebrow">North County Special Needs Community Foundation</p>
+    <h1>Bringing people together. Creating opportunities.</h1>
+    <p>We help individuals with developmental disabilities and their families build connections, participate in community activities, and advocate for more inclusive educational and housing opportunities in North County San Diego.</p>
+    <div class="ncs-actions">
+      <a class="ncs-button" href="https://www.ncspecialneedsfoundation.com/" target="_blank" rel="noopener noreferrer">Visit the foundation</a>
+      <a class="ncs-button ncs-button-secondary" href="mailto:info@ncspecialneedsfoundation.com">Get in touch</a>
+    </div>
+  </header>
 
-<script>
-    // 1. Make a connection to the HTML container defined in the HTML div
-    var container = document.getElementById("grid_container"); // This container connects to the HTML div
+  <section aria-labelledby="our-mission">
+    <h2 id="our-mission">Our mission</h2>
+    <p class="ncs-lead">The North County Special Needs Community Foundation (NCSNCF) works to bring families and community members together while supporting opportunities for people with developmental disabilities to build friendships, develop independence, and take part in meaningful social, educational, and recreational experiences.</p>
+  </section>
 
-    // 2. Define a JavaScript object for our http source and our data rows for the Living in the World grid
-    var http_source = "https://upload.wikimedia.org/wikipedia/commons/";
-    var living_in_the_world = [
-        {"flag": "0/01/Flag_of_California.svg", "greeting": "Hey", "description": "California - forever"},
-        {"flag": "b/b9/Flag_of_Oregon.svg", "greeting": "Hi", "description": "Oregon - 9 years"},
-        {"flag": "b/be/Flag_of_England.svg", "greeting": "Alright mate", "description": "England - 2 years"},
-        {"flag": "e/ef/Flag_of_Hawaii.svg", "greeting": "Aloha", "description": "Hawaii - 2 years"},
-    ];
+  <section aria-labelledby="what-we-do">
+    <h2 id="what-we-do">What we do</h2>
+    <div class="ncs-grid">
+      <article class="ncs-card"><h3>Friendship and belonging</h3><p>Create connections through sports, gatherings, and shared experiences that strengthen the community.</p></article>
+      <article class="ncs-card"><h3>Family connections</h3><p>Bring families together to build support networks and share information about local opportunities.</p></article>
+      <article class="ncs-card"><h3>Education and housing</h3><p>Work with civic and community partners to advocate for educational programs and more independent living options.</p></article>
+      <article class="ncs-card"><h3>Community inclusion</h3><p>Encourage participation, awareness, and partnerships that celebrate the abilities and contributions of every individual.</p></article>
+    </div>
+  </section>
 
-    // 3a. Consider how to update style count for size of container
-    // The grid-template-columns has been defined as dynamic with auto-fill and minmax
+  <section aria-labelledby="our-story">
+    <h2 id="our-story">Our story</h2>
+    <p class="ncs-lead">Our roots reach back to a Special Olympics softball program in Poway. As friendships and family connections grew, so did a shared commitment to educational opportunities, housing, and community inclusion.</p>
+    <ol class="ncs-timeline">
+      <li><strong>1998 — A team brings people together</strong>The Poway Padres Special Olympics softball program began, creating opportunities for athletes and families to connect.</li>
+      <li><strong>2011 — Foundation established</strong>NCSNCF formed to address the need for additional educational programs for adults with developmental disabilities in the Poway area.</li>
+      <li><strong>2014 — Housing collaboration expands</strong>Collaboration among families, civic leaders, and development partners helped advance plans for housing for adults with developmental disabilities.</li>
+      <li><strong>2021 — A milestone for independent living</strong>Villa de Vida began welcoming residents, creating more housing options for adults with developmental disabilities.</li>
+      <li><strong>Today — Continuing the work</strong>The Foundation continues to bring people together and support community, education, and housing opportunities.</li>
+    </ol>
+  </section>
 
-    // 3b. Build grid items inside of our container for each row of data
-    for (const location of living_in_the_world) {
-        // Create a "div" with "class grid-item" for each row
-        var gridItem = document.createElement("div");
-        gridItem.className = "grid-item";  // This class name connects the gridItem to the CSS style elements
-        // Add "img" HTML tag for the flag
-        var img = document.createElement("img");
-        img.src = http_source + location.flag; // concatenate the source and flag
-        img.alt = location.flag + " Flag"; // add alt text for accessibility
+  <section aria-labelledby="community-programs">
+    <h2 id="community-programs">Community activities and initiatives</h2>
+    <div class="ncs-grid">
+      <article class="ncs-card"><h3>Poway Padres</h3><p>Softball and team activities foster friendships, confidence, and connection among athletes and families.</p></article>
+      <article class="ncs-card"><h3>Community events</h3><p>Sports events, celebrations, and community gatherings help participants build lasting relationships.</p></article>
+      <article class="ncs-card"><h3>Housing advocacy</h3><p>Partnerships with local officials and community organizations support expanded independent living opportunities.</p></article>
+    </div>
+    <p>For the latest events and announcements, visit the <a href="https://www.ncspecialneedsfoundation.com/news" target="_blank" rel="noopener noreferrer">Foundation's news page</a>.</p>
+  </section>
 
-        // Add "p" HTML tag for the description
-        var description = document.createElement("p");
-        description.textContent = location.description; // extract the description
-
-        // Add "p" HTML tag for the greeting
-        var greeting = document.createElement("p");
-        greeting.textContent = location.greeting;  // extract the greeting
-
-        // Append img and p HTML tags to the grid item DIV
-        gridItem.appendChild(img);
-        gridItem.appendChild(description);
-        gridItem.appendChild(greeting);
-
-        // Append the grid item DIV to the container DIV
-        container.appendChild(gridItem);
-    }
-</script>
-
-### Journey through Life
-
-Here is what I did at those places
-
-- 🏫 Lots of Elementary Schools in Tucson, LA, Honolulu, and Glendale (CA)
-- 🏫 Middle and High School in Glendale (CA), Hoover High graduated '77
-- 🎓 Glendale CA Community College, UCLA Extension, LA Wilshire Computer Tech School '77 to '79
-- ⛪ England, London Missionary for Church of Jesus Christ of Latter-day Saints '79 to '81
-- 💼 Culver City, Glendale CA founder at Ashton-Tate, original PC's dBase 2 and 3 '82 to '87
-- 🎓 Eugene Oregon Undergraduate CompSci Degree at University of Oregon (Go Ducks!) '89 to '91
-- 💼 Eugene Oregon, founder and owner @ Microniche `88, Point Control CAD CAM developer '91 to '96
-- 🏢 San Diego CA Qualcomm, Satellite Comm and 1st Mobile OS (BREW) '96 to '19
-- 👨‍🏫 San Diego CA Teacher of Computer Science @ Del Norte High School San Diego '19 to present
-
-### Culture, Family, and Fun
-
-Everything for me, as for many others, revolves around family and faith.
-
-- My mother told me that I was Danish, English. and Irish, here is my researched [family tree]({{site.baseurl}}/images/about/familytree.png)
-- My family is pretty big as I have been married twice, my 1st wife passed away.  We have had 5 kids, 4 adopted by me, 1 biological.  Plus, there are three grandkids.  My name to my grandkids is Abuilito.
-- The gallery of pics has some of my family, fun, culture and faith memories.
-
-<comment>
-Gallery of Pics, scroll to the right for more ...
-</comment>
-<div class="image-gallery">
-  <img src="{{site.baseurl}}/images/about/missionary.jpg" alt="Image 1">
-  <img src="{{site.baseurl}}/images/about/john_tamara.jpg" alt="Image 2">
-  <img src="{{site.baseurl}}/images/about/tamara_fam.jpg" alt="Image 3">
-  <img src="{{site.baseurl}}/images/about/surf.jpg" alt="Image 4">
-  <img src="{{site.baseurl}}/images/about/john_lora.jpg" alt="Image 5">
-  <img src="{{site.baseurl}}/images/about/lora_fam.jpg" alt="Image 6">
-  <img src="{{site.baseurl}}/images/about/lora_fam2.jpg" alt="Image 7">
-  <img src="{{site.baseurl}}/images/about/pj_party.jpg" alt="Image 8">
-  <img src="{{site.baseurl}}/images/about/trent_family.png" alt="Image 9">
-  <img src="{{site.baseurl}}/images/about/claire.jpg" alt="Image 10">
-  <img src="{{site.baseurl}}/images/about/grandkids.jpg" alt="Image 11">
-  <img src="{{site.baseurl}}/images/about/farm.jpg" alt="Image 12">
+  <section class="ncs-callout" aria-labelledby="get-involved">
+    <h2 id="get-involved">Get involved</h2>
+    <p>Stronger communities start with connection. Whether you are a family member, volunteer, local partner, or supporter, we welcome your interest in building inclusive opportunities throughout North County San Diego.</p>
+    <p><strong>Email:</strong> <a href="mailto:info@ncspecialneedsfoundation.com">info@ncspecialneedsfoundation.com</a></p>
+    <p><a href="https://www.ncspecialneedsfoundation.com/" target="_blank" rel="noopener noreferrer">Learn more on the official NCSNCF website</a></p>
+  </section>
 </div>
