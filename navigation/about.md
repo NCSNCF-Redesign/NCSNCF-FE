@@ -1,5 +1,5 @@
 ---
-layout: ncsncf
+layout: sdlabrats
 title: About NCSNCF
 permalink: /about/
 comments: false

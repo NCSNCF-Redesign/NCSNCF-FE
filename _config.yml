@@ -117,3 +117,13 @@ minima:
     - navigation/donate.md
     - navigation/contact.md
     - gallery.html
+
+sdlabrats:
+  nav:
+    - { title: "About", url: "/about/", section: "about" }
+    - { title: "What We Do", url: "/what-we-do/", section: "what-we-do" }
+    - { title: "Leadership", url: "/leadership/", section: "leadership" }
+    - { title: "Events", url: "/calendar/", section: "events" }
+    - { title: "Resources", url: "/resources/" }
+    - { title: "Contact", url: "/contact/" }
+    - { title: "Donate", url: "/donate/", enroll: true }

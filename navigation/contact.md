@@ -1,5 +1,5 @@
 ---
-layout: ncsncf
+layout: sdlabrats
 title: Contact Us
 permalink: /contact/
 ---

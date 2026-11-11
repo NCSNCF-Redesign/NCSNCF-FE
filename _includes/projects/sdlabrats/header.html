@@ -1,0 +1,25 @@
+{%- comment -%}
+  Site header matching exact LabRats UI architecture.
+{%- endcomment -%}
+<header class="labrats__header">
+  <div class="labrats__wrap labrats__header-row">
+    <a class="labrats__brand" href="{{ '/' | relative_url }}">
+      <img src="{{ '/images/NCSNCF logo.jpg' | relative_url }}" width="48" height="48" alt="NCSNCF Logo" style="border-radius: 8px; object-fit: contain;">
+      <span>North County <strong>Special Needs Foundation</strong></span>
+    </a>
+
+    <button class="labrats__menu-toggle" type="button" aria-expanded="false" aria-controls="labrats-nav" data-labrats-menu-toggle>
+      <span class="labrats__menu-icon" aria-hidden="true"></span>
+      Menu
+    </button>
+
+    <nav class="labrats__nav" id="labrats-nav" aria-label="Main">
+      <ul>
+        {%- for item in site.sdlabrats.nav %}
+        <li><a href="{{ item.url | relative_url }}" data-labrats-nav="{{ item.url }}"{% if item.section %} data-labrats-nav-section="{{ item.section }}"{% endif %}{% if item.enroll %} class="ocs__btn signal fill labrats__nav-enroll"{% endif %}>{{ item.title }}</a></li>
+        {%- endfor %}
+      </ul>
+      <a class="labrats__nav-signin" href="{{ '/contact/' | relative_url }}">Contact</a>
+    </nav>
+  </div>
+</header>

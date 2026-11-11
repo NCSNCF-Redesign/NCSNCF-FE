@@ -1,0 +1,65 @@
+{%- comment -%}
+  Scholarship application. Questions and the eligibility rule come from the live
+  sdlabrats.org form; the backend (model/labrats_inquiry.py) enforces the same rule. The program
+  checkboxes are filled from the backend's `scholarship_programs` setting.
+{%- endcomment -%}
+<form class="labrats__form" data-labrats-form="scholarship" novalidate>
+  <fieldset class="labrats__fieldset">
+    <legend>Student</legend>
+    <div class="labrats__form-grid">
+      {% include projects/sdlabrats/form-parts.html part="name" form="scholarship" prefix="student_" label="Student first name" last_label="Student last name" autocomplete="off" %}
+      <div class="labrats__field">
+        <label for="scholarship-student_grade">Grade <span class="labrats__required">required</span></label>
+        <select class="ocs__input" id="scholarship-student_grade" name="student_grade" required aria-describedby="scholarship-student_grade-error">
+          <option value="">Choose a grade</option>
+          <option value="K">Kindergarten</option>
+          {%- for grade in (1..8) %}
+          <option value="{{ grade }}">Grade {{ grade }}</option>
+          {%- endfor %}
+        </select>
+        <p class="labrats__field-error" id="scholarship-student_grade-error" hidden></p>
+      </div>
+      {% include projects/sdlabrats/field.html form="scholarship" name="student_school" label="School" required=true autocomplete="off" %}
+    </div>
+  </fieldset>
+
+  <fieldset class="labrats__fieldset" data-labrats-group="programs" aria-describedby="scholarship-programs-error">
+    <legend>Which programs are you interested in? <span class="labrats__required">choose at least one</span></legend>
+    <div class="labrats__choices" data-labrats-choices="programs"></div>
+    <p class="labrats__field-error" id="scholarship-programs-error" hidden></p>
+  </fieldset>
+
+  <fieldset class="labrats__fieldset" data-labrats-group="eligibility" aria-describedby="scholarship-eligibility-hint scholarship-eligibility-error">
+    <legend>Eligibility</legend>
+    <p class="labrats__hint" id="scholarship-eligibility-hint">To qualify, answer yes to at least one of these questions.</p>
+    <div class="labrats__question">
+      <p id="scholarship-income-label">Is your household income less than $89,000 a year? <span class="labrats__required">required</span></p>
+      <div class="labrats__choices labrats__choices--inline" role="radiogroup" aria-labelledby="scholarship-income-label">
+        <label><input type="radio" name="income_under_limit" value="yes" required> Yes</label>
+        <label><input type="radio" name="income_under_limit" value="no"> No</label>
+      </div>
+      <p class="labrats__hint">The limit is based on San Diego median income data.</p>
+    </div>
+    <div class="labrats__question">
+      <p id="scholarship-military-label">Are you a military family?</p>
+      <div class="labrats__choices labrats__choices--inline" role="radiogroup" aria-labelledby="scholarship-military-label">
+        <label><input type="radio" name="military_family" value="yes"> Yes</label>
+        <label><input type="radio" name="military_family" value="no"> No</label>
+      </div>
+    </div>
+    <p class="labrats__field-error" id="scholarship-eligibility-error" hidden></p>
+  </fieldset>
+
+  <fieldset class="labrats__fieldset">
+    <legend>Parent or guardian</legend>
+    <div class="labrats__form-grid">
+      {% include projects/sdlabrats/form-parts.html part="name" form="scholarship" prefix="parent_" label="First name" %}
+      {% include projects/sdlabrats/field.html form="scholarship" name="email" label="Email" type="email" required=true autocomplete="email" %}
+      {% include projects/sdlabrats/field.html form="scholarship" name="phone" label="Phone" type="tel" required=true autocomplete="tel" %}
+    </div>
+  </fieldset>
+
+  <p class="labrats__hint">Applying adds you to our email list for new classes and camps.</p>
+  {% include projects/sdlabrats/form-parts.html part="trap" form="scholarship" %}
+  {% include projects/sdlabrats/form-parts.html part="submit" label="Apply for a scholarship" %}
+</form>

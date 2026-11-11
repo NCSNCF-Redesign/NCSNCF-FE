@@ -54,9 +54,6 @@ _posts/**/*_csse.md
 _notebooks/projects/
 _posts/projects/
 _sass/projects/
-assets/js/projects/
-assets/css/projects/
-images/projects/
 
 # Post generations
 _posts/**/*_cwgu.md

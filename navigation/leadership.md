@@ -1,5 +1,5 @@
 ---
-layout: ncsncf
+layout: sdlabrats
 title: Foundation Leadership & Board
 permalink: /leadership/
 ---

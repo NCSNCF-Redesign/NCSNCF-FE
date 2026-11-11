@@ -1,5 +1,5 @@
 ---
-layout: ncsncf
+layout: sdlabrats
 title: What We Do & Our Impact
 permalink: /what-we-do/
 ---

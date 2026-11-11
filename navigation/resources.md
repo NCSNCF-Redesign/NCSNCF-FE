@@ -1,5 +1,5 @@
 ---
-layout: ncsncf
+layout: sdlabrats
 title: Community Resources & Regional Partners
 permalink: /resources/
 ---

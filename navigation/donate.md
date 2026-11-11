@@ -1,5 +1,5 @@
 ---
-layout: ncsncf
+layout: sdlabrats
 title: Support & Donate
 permalink: /donate/
 ---

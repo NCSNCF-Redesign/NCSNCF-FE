@@ -1,0 +1,34 @@
+{%- comment -%}
+  Shared pieces every LabRats form needs, chosen with `part`:
+  - "name": first and last name fields
+  - "trap": hidden field that bots fill in and people never see
+  - "submit": submit button, live status line, and the no-JavaScript fallback
+  The phone number for error messages (data-labrats-phone) is filled in from the backend.
+{%- endcomment -%}
+{%- case include.part -%}
+{%- when "name" -%}
+{%- comment -%} Jekyll include params cannot take filters, so names are built first. {%- endcomment -%}
+{%- assign prefix = include.prefix | default: "" -%}
+{%- assign first_name = prefix | append: "first_name" -%}
+{%- assign last_name = prefix | append: "last_name" -%}
+{%- assign first_label = include.label | default: "First name" -%}
+{%- assign last_label = include.last_label | default: "Last name" -%}
+{%- if include.autocomplete == "off" -%}
+  {%- assign first_auto = "off" -%}{%- assign last_auto = "off" -%}
+{%- else -%}
+  {%- assign first_auto = "given-name" -%}{%- assign last_auto = "family-name" -%}
+{%- endif -%}
+{% include projects/sdlabrats/field.html form=include.form name=first_name label=first_label required=true autocomplete=first_auto %}
+{% include projects/sdlabrats/field.html form=include.form name=last_name label=last_label required=true autocomplete=last_auto %}
+{%- when "trap" -%}
+<div class="labrats__trap" aria-hidden="true">
+  <label for="{{ include.form }}-website">Leave this field empty</label>
+  <input id="{{ include.form }}-website" name="website" type="text" tabindex="-1" autocomplete="off">
+</div>
+{%- when "submit" -%}
+<div class="labrats__form-actions" data-labrats-phone>
+  <button class="ocs__btn signal fill" type="submit">{{ include.label | default: "Send" }}</button>
+  <p class="labrats__form-status" role="status" aria-live="polite"></p>
+</div>
+<noscript><p class="labrats__hint">This form needs JavaScript.</p></noscript>
+{%- endcase -%}

@@ -1,0 +1,8 @@
+<form class="labrats__form labrats__form--compact" data-labrats-form="newsletter" data-success-url="{{ '/thank-you-newsletter-response/' | relative_url }}" novalidate>
+  <div class="labrats__form-grid">
+    {% include projects/sdlabrats/form-parts.html part="name" form="newsletter" %}
+    {% include projects/sdlabrats/field.html form="newsletter" name="email" label="Email" type="email" required=true autocomplete="email" wide=true %}
+  </div>
+  {% include projects/sdlabrats/form-parts.html part="trap" form="newsletter" %}
+  {% include projects/sdlabrats/form-parts.html part="submit" label="Sign up" %}
+</form>

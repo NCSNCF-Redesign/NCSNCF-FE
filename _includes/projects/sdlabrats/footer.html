@@ -1,0 +1,67 @@
+<footer class="labrats__footer">
+  <div class="labrats__wrap labrats__footer-grid">
+    <section class="labrats__footer-about" aria-labelledby="footer-about-title">
+      <h2 id="footer-about-title">North County Special Needs Community Foundation</h2>
+      <p style="color: var(--labrats-on-band-muted); font-size: 0.95rem; line-height: 1.6;">
+        A California 501(c)(3) nonprofit organization dedicated to empowering individuals with developmental disabilities and their families through community connection, social programs, educational pathways, and independent housing solutions.
+      </p>
+      <p style="color: var(--labrats-on-band-muted); font-size: 0.95rem;"><strong>EIN:</strong> 45-3974276</p>
+    </section>
+
+    <section aria-labelledby="footer-visit-title">
+      <h2 id="footer-visit-title">Contact & Headquarters</h2>
+      <address style="font-style: normal; color: var(--labrats-on-band-muted); font-size: 0.95rem; line-height: 1.6;">
+        16459 Sombra Del Monte<br>
+        Ramona, CA 92065<br>
+        <strong>President:</strong> Tony Rubio<br>
+        <strong>Phone:</strong> (619) 665-1335<br>
+        <strong>Email:</strong> <a href="mailto:info@ncspecialneedsfoundation.com" style="color: var(--labrats-signal);">info@ncspecialneedsfoundation.com</a>
+      </address>
+    </section>
+
+    <section class="labrats__footer-signup">
+      <h2>Stay Connected</h2>
+      <p style="color: var(--labrats-on-band-muted); font-size: 0.95rem; line-height: 1.6;">Join our community newsletter to receive updates on independent housing milestones, team sports, and family events.</p>
+      <form onsubmit="event.preventDefault(); alert('Thank you for subscribing to NCSNCF!');" style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+        <input type="email" class="ocs__input" placeholder="Your email address" required style="flex: 1; min-width: 0;">
+        <button type="submit" class="ocs__btn signal fill">Subscribe</button>
+      </form>
+    </section>
+
+    <nav class="labrats__footer-sitemap" aria-label="Site map">
+      <div>
+        <h3 style="color: var(--labrats-on-band); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.5rem;">Foundation</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li><a href="{{ '/' | relative_url }}">Home</a></li>
+          <li><a href="{{ '/about/' | relative_url }}">About Us</a></li>
+          <li><a href="{{ '/what-we-do/' | relative_url }}">What We Do</a></li>
+          <li><a href="{{ '/leadership/' | relative_url }}">Leadership</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color: var(--labrats-on-band); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.5rem;">Community</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li><a href="{{ '/calendar/' | relative_url }}">Events Calendar</a></li>
+          <li><a href="{{ '/resources/' | relative_url }}">Regional Resources</a></li>
+          <li><a href="https://www.ncspecialneedsfoundation.com/news" target="_blank" rel="noopener noreferrer">News</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color: var(--labrats-on-band); font-size: 0.95rem; text-transform: uppercase; margin-bottom: 0.5rem;">Get Involved</h3>
+        <ul style="list-style: none; padding-left: 0;">
+          <li><a href="{{ '/donate/' | relative_url }}">Donate</a></li>
+          <li><a href="{{ '/contact/' | relative_url }}">Contact Us</a></li>
+          <li><a href="{{ '/what-we-do/' | relative_url }}">2-Night Family Retreats</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="labrats__wrap labrats__footer-base">
+    <ul class="labrats__social" aria-label="Social media" style="list-style: none; display: flex; gap: 1rem; padding: 0;">
+      <li><a href="https://www.instagram.com/ncspecialneedsfoundation/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+      <li><a href="https://www.facebook.com/North-County-Special-Needs-Community-Foundation-113636564660105/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+    </ul>
+    <p>&copy; {{ site.time | date: '%Y' }} North County Special Needs Community Foundation</p>
+  </div>
+</footer>
