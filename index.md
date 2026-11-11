@@ -1,177 +1,194 @@
 ---
-layout: sdlabrats
+layout: post
 title: North County Special Needs Community Foundation
-permalink: /
+hide: true
+show_reading_time: false
 ---
+<style>
+  /* Hide the layout's auto-generated header block, preserving the masthead navigation */
+  .page-header, .page__header, .entry-header, .page-title { 
+    display: none !important; 
+  }
+</style>
 
-<!-- Hero Section with LabRats UI Split Structure -->
-<section class="labrats__hero">
-  <div class="labrats__split labrats__split--center">
-    <div>
-      <span class="labrats__grade">Poway &bull; Est. 2011</span>
-      <h1>Bringing People Together. Creating Lifelong Opportunities.</h1>
-      <p class="ocs__lead">
-        Dedicated to empowering adults with developmental disabilities in Poway and surrounding North County communities through social inclusion, workplace education, and independent housing initiatives.
+<!-- Hero Section with Header Image and Slogan -->
+<div style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-top: -2rem; background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('{{ site.baseurl }}/images/NCSNCF%20header.jpg') no-repeat center 15%; background-size: cover; padding: 7rem 2rem; text-align: center; margin-bottom: 3rem;">
+  <div style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1rem; box-sizing: border-box;">
+    
+    <h1 style="color: #FFFFFF; margin-bottom: 0.75rem; font-size: clamp(1.8rem, 4vw, 3.2rem); font-weight: 800; letter-spacing: -0.02em;">
+      Bringing People Together
+    </h1>
+    
+    <h2 style="color: #f7eedf; margin-bottom: 1.25rem; font-size: clamp(1.2rem, 2.5vw, 1.75rem); font-weight: 500;">
+      North County Special Needs Community Foundation
+    </h2>
+
+    <p class="ocs__description" style="color: #FFFFFF; margin-bottom: 2rem; font-size: 1.15rem; line-height: 1.6; max-width: 750px; margin-left: auto; margin-right: auto;">
+      Empowering adults with developmental disabilities in Poway and surrounding communities through heartfelt human connection, social inclusion, lifelong education, and independent housing opportunities.
+    </p>
+    
+    <div class="ocs__links" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;" href="{{ site.baseurl }}/about/">Our Story &amp; Mission</a>
+      <a class="ocs__btn" style="color: #FFFFFF; background-color: transparent; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;" href="{{ site.baseurl }}/gallery/">View Photo Gallery</a>
+      <a class="ocs__btn" style="color: #604140; background-color: #fdf3e7; border: 2px solid #fdf3e7; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;" href="https://www.ncspecialneedsfoundation.com/donate" target="_blank" rel="noopener noreferrer">Donate</a>
+    </div>
+    
+  </div>
+</div>
+
+<!-- Special Tribute: Honoring Friendship & Connection -->
+<div class="ocs__card" style="margin-bottom: 3rem; background-color: #604140; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+  <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+    <div style="flex: 1 1 280px; max-width: 380px; margin: 0 auto; text-align: center;">
+      <img src="{{ site.baseurl }}/images/tony-rubio-friend.png" alt="Mr. Tony Rubio with his beloved friend" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.25); object-fit: cover;">
+      <p style="font-size: 0.85rem; color: #f7eedf; margin-top: 0.6rem; font-style: italic;">A bond of enduring friendship, joy, and mutual support.</p>
+    </div>
+    <div style="flex: 2 1 340px;">
+      <h2 style="color: #FFFFFF; margin-top: 0; font-size: 1.85rem; margin-bottom: 0.75rem;">Honoring True Friendship &amp; Inclusion</h2>
+      <p style="color: #FFFFFF; font-size: 1.1rem; line-height: 1.7; margin-bottom: 1rem;">
+        At the core of the North County Special Needs Community Foundation is something profound yet simple: <strong>human connection</strong>. Foundation President Tony Rubio often speaks of the deep, irreplaceable bond with his dear friend pictured here. He never let his disabilities stand in the way of living life to the fullest, sharing laughter, and inspiring everyone around him.
       </p>
-      <div class="ocs__links" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
-        <a href="{{ '/about/' | relative_url }}" class="ocs__btn medium signal fill">Our Story & Mission</a>
-        <a href="{{ '/donate/' | relative_url }}" class="ocs__btn medium">Donate & Support</a>
-      </div>
-    </div>
-    <div>
-      <figure class="labrats__figure">
-        <img src="{{ '/images/NCSNCF header.jpg' | relative_url }}" alt="Poway Padres and NCSNCF Community Gathering">
-        <figcaption>Poway Padres Special Olympics & Foundation community celebration in Poway, CA.</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- 3 Core Pillars -->
-<section class="labrats__section" style="margin-top: 3.5rem;">
-  <h2>Our Core Pillars</h2>
-  <div class="ocs__grid ocs__grid--card cols-3">
-    <div class="ocs__grid-cell">
-      <span class="labrats__grade">Connection</span>
-      <h3 style="margin-top: 0.75rem;">Make Friends & Socialize</h3>
-      <p>Creating opportunities to bring families together and build lasting friendships through sports, Poway community parades, picnics, and annual celebrations.</p>
-    </div>
-
-    <div class="ocs__grid-cell">
-      <span class="labrats__grade">Independence</span>
-      <h3 style="margin-top: 0.75rem;">Housing Opportunities</h3>
-      <p>Advocating and partnering for independent living models, including our milestone 53-unit development and the new Monte Vista 60-unit project opening in 2025.</p>
-    </div>
-
-    <div class="ocs__grid-cell">
-      <span class="labrats__grade">Growth</span>
-      <h3 style="margin-top: 0.75rem;">Education & Workplace Skills</h3>
-      <p>Collaborating with civic leaders, schools, and local businesses to create post-secondary practical learning and meaningful employment pathways.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Housing Highlight Band -->
-<div class="labrats__band">
-  <div class="labrats__wrap">
-    <div class="labrats__split labrats__split--center">
-      <div>
-        <span class="labrats__grade">Housing Milestone</span>
-        <h2 style="margin-top: 0.5rem; margin-bottom: 1rem;">Monte Vista Housing Project (Opening Fall 2025)</h2>
-        <p style="font-size: 1.15rem; line-height: 1.65; color: var(--text-muted); margin-bottom: 1.25rem;">
-          Approved in partnership with the Poway City Council, this 60-unit affordable housing community across from Pomerado Hospital dedicates 30 specialized units for Individuals with Developmental Disabilities and 30 units for Veterans.
-        </p>
-        <p style="font-size: 1.05rem; line-height: 1.65; color: var(--text-muted);">
-          Following our successful 53-unit development opened in June 2021, Monte Vista fulfills our enduring mission to provide dignity, safety, and community for adults as they mature into independent adulthood.
-        </p>
-        <div style="margin-top: 1.5rem;">
-          <a href="{{ '/what-we-do/' | relative_url }}" class="ocs__btn medium signal fill">Learn More About Our Housing &rarr;</a>
-        </div>
-      </div>
-      <div>
-        <figure class="labrats__figure">
-          <img src="{{ '/images/NCSNCF.jpg' | relative_url }}" alt="Monte Vista and Housing Initiatives">
-          <figcaption>Dedicated to creating safe, affordable, and supportive living spaces.</figcaption>
-        </figure>
+      <p style="color: #FFFFFF; font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.25rem;">
+        Though he has passed on, his vibrant spirit, perseverance, and genuine warmth continue to shape every program we champion. Our mission is not just about programs or buildings—it is about honoring each person's individuality, celebrating their contributions, and ensuring every member of our special needs family feels valued, respected, and truly loved.
+      </p>
+      <div class="ocs__links">
+        <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.5rem 1.25rem; border-radius: 6px;" href="{{ site.baseurl }}/about/">Read Full Story &rarr;</a>
       </div>
     </div>
   </div>
 </div>
 
+<!-- 3 Pillars Section -->
+<h2 style="color: #FFFFFF; font-size: 1.75rem; margin-bottom: 1rem;">What We Do</h2>
+<div class="ocs__grid ocs__grid--standard cols-3" style="margin-bottom: 3rem;">
+  <div class="ocs__grid-cell ocs__grid-cell--accent" style="padding: 1.5rem; border-radius: 10px;">
+    <h3 style="margin-top: 0; color: #FFFFFF;">Community &amp; Social</h3>
+    <p>Creating opportunities to bring families together and build lasting friendships through sports with the Poway Padres, community parades, picnics, and annual celebrations.</p>
+  </div>
+  <div class="ocs__grid-cell" style="padding: 1.5rem; border-radius: 10px;">
+    <h3 style="margin-top: 0; color: #FFFFFF;">Housing Initiatives</h3>
+    <p>Spearheading independent living models, including our milestone 53-unit community and the upcoming 60-unit Monte Vista affordable housing development in Poway.</p>
+  </div>
+  <div class="ocs__grid-cell ocs__grid-cell--accent" style="padding: 1.5rem; border-radius: 10px;">
+    <h3 style="margin-top: 0; color: #FFFFFF;">Education &amp; Training</h3>
+    <p>Collaborating with educators and civic leaders to create post-secondary practical learning, vocational training, and supportive pathways toward independence.</p>
+  </div>
+</div>
+
+<!-- Featured Milestone -->
+<h2 style="color: #FFFFFF; font-size: 1.75rem; margin-bottom: 1rem;">Community Milestones</h2>
+<div class="ocs__card" style="margin-bottom: 3rem; padding: 1.75rem; border-radius: 10px;">
+  <h3 style="color: #FFFFFF; margin-top: 0;">Monte Vista Housing Project (Opening Fall 2025)</h3>
+  <p class="ocs__description" style="color: #FFFFFF; line-height: 1.6; font-size: 1.05rem;">
+    Approved by the Poway City Council, this 60-unit affordable housing community located directly across from Pomerado Hospital will dedicate 30 units specifically for Individuals with Developmental Disabilities. This project marks a transformative step forward in expanding safe, permanent, and accessible independent housing in North County.
+  </p>
+</div>
+
 <!-- Dynamic Events Section -->
-<section class="labrats__section">
-  <div class="ocs__card-header">
-    <h2>Upcoming Community Events</h2>
-    <a href="{{ '/calendar/' | relative_url }}" class="ocs__btn small">View Full Calendar &rarr;</a>
-  </div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-bottom: 1rem;">
+  <h2 style="color: #FFFFFF; font-size: 1.75rem; margin: 0;">Upcoming Events &amp; Gatherings</h2>
+  <a href="{{ site.baseurl }}/calendar/" style="color: #FFFFFF; text-decoration: underline; font-weight: bold;">View Full Calendar &rarr;</a>
+</div>
 
-  <div id="recent-events-grid" class="ocs__grid ocs__grid--card cols-2">
-    <div class="ocs__grid-cell">Connecting to Event Server...</div>
-  </div>
-</section>
+<div class="ocs__grid ocs__grid--standard cols-2" id="recent-events-grid" style="margin-bottom: 3rem;">
+  <div class="ocs__grid-cell ocs__grid-cell--header">Loading Events...</div>
+</div>
 
-<!-- Call to Action Band -->
-<section class="labrats__cta" style="margin-top: 4rem;">
-  <div class="labrats__split labrats__split--center">
-    <div>
-      <h2>Join Us in Building a Stronger Community</h2>
-      <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">
-        Whether you are a family seeking services, a prospective volunteer coach, or a community supporter, your partnership makes independence possible.
-      </p>
-      <div class="ocs__links" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="{{ '/donate/' | relative_url }}" class="ocs__btn medium signal fill">Make a Tax-Deductible Donation</a>
-        <a href="{{ '/contact/' | relative_url }}" class="ocs__btn medium" style="border-color: #fff; color: #fff;">Get In Touch</a>
-      </div>
-    </div>
-    <div>
-      <div class="ocs__card" style="background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); color: #fff; margin-bottom: 0;">
-        <h3 style="color: #fff; font-size: 1.25rem;">Impact Facts</h3>
-        <ul style="list-style: none; padding-left: 0; line-height: 1.8; margin-bottom: 0;">
-          <li>&bull; <strong>25+ Years:</strong> Poway Padres Special Olympics partnership</li>
-          <li>&bull; <strong>53 Units:</strong> Independent living opened June 2021</li>
-          <li>&bull; <strong>60 Units:</strong> Monte Vista affordable housing (Fall 2025)</li>
-          <li>&bull; <strong>501(c)(3):</strong> Non-profit public charity (EIN 45-3974276)</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- Explore Photo Gallery Callout -->
+<div class="ocs__card" style="text-align: center; padding: 2.5rem 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
+  <h2 style="color: #FFFFFF; margin-top: 0;">Moments of Joy &amp; Community</h2>
+  <p style="color: #FFFFFF; max-width: 650px; margin: 0 auto 1.5rem; font-size: 1.05rem; line-height: 1.6;">
+    From softball tournament victories and bowling parties to community fundraisers, see our athletes, families, and volunteers in action.
+  </p>
+  <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.6rem 1.5rem; border-radius: 8px;" href="{{ site.baseurl }}/gallery/">Explore Our Gallery &rarr;</a>
+</div>
+
+<hr style="margin: 2rem 0; border: none; border-top: 1px solid rgba(255,255,255,0.2);">
 
 <script>
-const BACKEND_URL = "http://localhost:5000";
+// Point to backend API with fallback
+const BACKEND_URL = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+  ? "http://localhost:8587"
+  : "https://ccae-be.onrender.com";
+
+const FALLBACK_EVENTS = [
+  {
+    title: "Poway Padres Softball Weekly Practice",
+    category: "Athletics",
+    date: "Every Saturday, 10:00 AM",
+    location: "Poway Community Park",
+    capacity: 35
+  },
+  {
+    title: "Monte Vista Housing Project Community Briefing",
+    category: "Housing",
+    date: "October 18, 2026",
+    location: "Poway City Hall / Virtual",
+    capacity: 100
+  },
+  {
+    title: "Annual 2-Night Family Caregiver Retreat",
+    category: "Community",
+    date: "November 14-16, 2026",
+    location: "Julian, CA",
+    capacity: 20
+  },
+  {
+    title: "NCSNCF Holiday Community Social",
+    category: "Social",
+    date: "December 19, 2026",
+    location: "Old Poway Park",
+    capacity: 150
+  }
+];
 
 async function loadRecentEvents() {
   const gridContainer = document.getElementById("recent-events-grid");
   if (!gridContainer) return;
-
+  
   try {
     const response = await fetch(`${BACKEND_URL}/api/events`, {
       method: 'GET',
       headers: { 'Accept': 'application/json' }
     });
     
-    if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-    
+    if (!response.ok) throw new Error(`HTTP Error status: ${response.status}`);
     const events = await response.json();
-    gridContainer.innerHTML = '';
     
-    if (!Array.isArray(events) || events.length === 0) {
-      gridContainer.innerHTML = '<div class="ocs__grid-cell">No scheduled events found. Check back soon!</div>';
-      return;
+    if (Array.isArray(events) && events.length > 0) {
+      renderEvents(events.slice(0, 4));
+    } else {
+      renderEvents(FALLBACK_EVENTS);
     }
-    
-    const sortedEvents = events.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 4);
-    
-    sortedEvents.forEach((evt) => {
-      const cell = document.createElement("div");
-      cell.className = "ocs__grid-cell";
-      cell.innerHTML = `
-        <span class="labrats__grade">${evt.category || 'Foundation Event'}</span>
-        <h3 style="margin: 0.5rem 0 0.35rem;">${evt.title || 'Community Gathering'}</h3>
-        <p style="margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
-          <strong>Date:</strong> ${evt.date || 'TBD'} &bull; <strong>Location:</strong> ${evt.location || 'Poway, CA'}
-        </p>
-        <p style="margin: 0; font-size: 0.9rem;">${evt.description || 'Join us for fun, recreation, and community connection.'}</p>
-      `;
-      gridContainer.appendChild(cell);
-    });
-    
   } catch (error) {
-    gridContainer.innerHTML = `
-      <div class="ocs__grid-cell">
-        <span class="labrats__grade">Athletics</span>
-        <h3 style="margin: 0.5rem 0 0.35rem;">Poway Padres Softball Practice</h3>
-        <p style="margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">Weekly at Poway Community Park</p>
-        <p style="margin: 0; font-size: 0.9rem;">Join the team for weekly fielding, batting practice, and team bonding.</p>
-      </div>
-      <div class="ocs__grid-cell">
-        <span class="labrats__grade">Social</span>
-        <h3 style="margin: 0.5rem 0 0.35rem;">Annual Family & Friends BBQ</h3>
-        <p style="margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">Lake Poway Picnic Grounds</p>
-        <p style="margin: 0; font-size: 0.9rem;">Celebrating our athletes, families, and supporters with lunch, games, and awards.</p>
-      </div>
-    `;
+    console.warn("Using fallback events:", error);
+    renderEvents(FALLBACK_EVENTS);
   }
+}
+
+function renderEvents(list) {
+  const gridContainer = document.getElementById("recent-events-grid");
+  if (!gridContainer) return;
+  gridContainer.innerHTML = '';
+  
+  list.forEach((evt, index) => {
+    const cell = document.createElement("div");
+    const isAccent = index % 2 === 0;
+    cell.className = isAccent ? "ocs__grid-cell ocs__grid-cell--accent" : "ocs__grid-cell";
+    cell.style.padding = "1.25rem";
+    cell.style.borderRadius = "8px";
+    
+    cell.innerHTML = `
+      <strong style="font-size: 1.15rem; color: #FFFFFF; display: block; margin-bottom: 0.35rem;">${evt.title || 'Community Gathering'}</strong>
+      <p style="margin: 0 0 0.4rem; color: #f7eedf; font-size: 0.95rem;">
+        <strong>Category:</strong> ${evt.category || 'Foundation'} | <strong>Date:</strong> ${evt.date || 'TBD'}
+      </p>
+      <p style="margin: 0; color: #FFFFFF; font-size: 0.9rem;">
+        ${evt.location ? 'Location: ' + evt.location : (evt.price ? 'Price: $' + evt.price : 'Open community event')}
+      </p>
+    `;
+    gridContainer.appendChild(cell);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", loadRecentEvents);

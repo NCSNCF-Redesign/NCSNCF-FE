@@ -14,7 +14,7 @@
 #   in _config.yml. It will appear in your document head meta (for Google search
 #   results) and in your feed.xml site description.
 
-title: North County Special Needs Community Foundation
+title: NCSNCF Frontend
 description: "Class of 2026"
 owner_name: Tristan Chiu, Barbara Zhao, Mateo Amador
 github_username: tristan-chiu0 
@@ -110,20 +110,5 @@ minima:
     - { platform: facebook, user_url: "https://www.facebook.com/North-County-Special-Needs-Community-Foundation-113636564660105/" }
   nav_pages:
     - navigation/about.md
-    - navigation/what-we-do.md
-    - navigation/leadership.md
     - calendar.html
-    - navigation/resources.md
-    - navigation/donate.md
-    - navigation/contact.md
     - gallery.html
-
-sdlabrats:
-  nav:
-    - { title: "About", url: "/about/", section: "about" }
-    - { title: "What We Do", url: "/what-we-do/", section: "what-we-do" }
-    - { title: "Leadership", url: "/leadership/", section: "leadership" }
-    - { title: "Events", url: "/calendar/", section: "events" }
-    - { title: "Resources", url: "/resources/" }
-    - { title: "Contact", url: "/contact/" }
-    - { title: "Donate", url: "/donate/", enroll: true }
