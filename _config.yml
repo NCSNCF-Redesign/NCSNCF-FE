@@ -110,5 +110,10 @@ minima:
     - { platform: facebook, user_url: "https://www.facebook.com/North-County-Special-Needs-Community-Foundation-113636564660105/" }
   nav_pages:
     - navigation/about.md
+    - navigation/what-we-do.md
+    - navigation/leadership.md
     - calendar.html
+    - navigation/resources.md
+    - navigation/donate.md
+    - navigation/contact.md
     - gallery.html

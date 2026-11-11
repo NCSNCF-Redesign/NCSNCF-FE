@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title | default: "North County Special Needs Community Foundation" }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&display=swap">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body class="ncsncf">
+  <a class="ncsncf__skip" href="#main">Skip to main content</a>
+  
+  <div class="ncsncf__announcement">
+    <div class="ncsncf__wrap ncsncf__announcement-row">
+      <p>Building Opportunities in Poway & North County San Diego &bull; <a href="{{ '/donate/' | relative_url }}">Support the Monte Vista Housing Initiative</a></p>
+    </div>
+  </div>
+
+  {% include ncsncf/header.html %}
+
+  <main id="main">
+    <div class="ncsncf__wrap ncsncf__body">
+      {{ content }}
+    </div>
+  </main>
+
+  {% include ncsncf/footer.html %}
+</body>
+</html>

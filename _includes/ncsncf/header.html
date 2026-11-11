@@ -1,0 +1,38 @@
+<header class="ncsncf__header">
+  <div class="ncsncf__wrap ncsncf__header-row">
+    <a class="ncsncf__brand" href="{{ '/' | relative_url }}">
+      <img src="{{ '/images/NCSNCF logo.jpg' | relative_url }}" alt="NCSNCF Logo">
+      <span>North County <strong>Special Needs Foundation</strong></span>
+    </a>
+
+    <button class="ncsncf__menu-toggle" type="button" aria-expanded="false" aria-controls="ncsncf-nav" id="ncsncfMenuBtn">
+      Menu
+    </button>
+
+    <nav class="ncsncf__nav" id="ncsncf-nav" aria-label="Main Navigation">
+      <ul>
+        <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a></li>
+        <li><a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}aria-current="page"{% endif %}>About</a></li>
+        <li><a href="{{ '/what-we-do/' | relative_url }}" {% if page.url == '/what-we-do/' %}aria-current="page"{% endif %}>What We Do</a></li>
+        <li><a href="{{ '/leadership/' | relative_url }}" {% if page.url == '/leadership/' %}aria-current="page"{% endif %}>Leadership</a></li>
+        <li><a href="{{ '/calendar/' | relative_url }}" {% if page.url == '/calendar/' %}aria-current="page"{% endif %}>Events</a></li>
+        <li><a href="{{ '/resources/' | relative_url }}" {% if page.url == '/resources/' %}aria-current="page"{% endif %}>Resources</a></li>
+        <li><a href="{{ '/contact/' | relative_url }}" {% if page.url == '/contact/' %}aria-current="page"{% endif %}>Contact</a></li>
+        <li><a href="{{ '/donate/' | relative_url }}" class="ncsncf__nav-donate">Donate</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('ncsncfMenuBtn');
+    const nav = document.getElementById('ncsncf-nav');
+    if (btn && nav) {
+      btn.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+    }
+  });
+</script>
