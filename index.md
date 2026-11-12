@@ -29,8 +29,8 @@ show_reading_time: false
     
     <div class="ocs__links" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
       <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;" href="{{ site.baseurl }}/about/">Our Story &amp; Mission</a>
-      <a class="ocs__btn" style="color: #FFFFFF; background-color: transparent; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;" href="{{ site.baseurl }}/gallery/">View Photo Gallery</a>
-      <a class="ocs__btn" style="color: #604140; background-color: #fdf3e7; border: 2px solid #fdf3e7; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;" href="https://www.ncspecialneedsfoundation.com/donate" target="_blank" rel="noopener noreferrer">Donate</a>
+      <a class="ocs__btn" style="color: #FFFFFF; background-color: transparent; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;" href="{{ site.baseurl }}/calendar/">View Event Calendar</a>
+      <a class="ocs__btn" style="color: #604140; background-color: #fdf3e7; border: 2px solid #fdf3e7; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;" href="{{ site.baseurl }}/survey">Community Survey</a>
     </div>
     
   </div>
@@ -52,26 +52,39 @@ show_reading_time: false
         Though he has passed on, his vibrant spirit, perseverance, and genuine warmth continue to shape every program we champion. Our mission is not just about programs or buildings—it is about honoring each person's individuality, celebrating their contributions, and ensuring every member of our special needs family feels valued, respected, and truly loved.
       </p>
       <div class="ocs__links">
-        <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.5rem 1.25rem; border-radius: 6px;" href="{{ site.baseurl }}/about/">Read Full Story &rarr;</a>
+        <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.5rem 1.25rem; border-radius: 6px;" href="{{ site.baseurl }}/about/#our-story">Read Our Story &rarr;</a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 3 Pillars Section -->
-<h2 style="color: #FFFFFF; font-size: 1.75rem; margin-bottom: 1rem;">What We Do</h2>
+<!-- What We Do: Central Hub Cards Linking to Detailed Pages -->
+<h2 style="color: #FFFFFF; font-size: 1.75rem; margin-bottom: 0.5rem;">What We Do</h2>
+<p style="color: #f7eedf; margin-bottom: 1.5rem; font-size: 1.05rem;">Explore our core focus areas and how you can participate across our community programs.</p>
+
 <div class="ocs__grid ocs__grid--standard cols-3" style="margin-bottom: 3rem;">
-  <div class="ocs__grid-cell ocs__grid-cell--accent" style="padding: 1.5rem; border-radius: 10px;">
+  <div class="ocs__grid-cell ocs__grid-cell--accent" style="padding: 1.5rem; border-radius: 10px; display: flex; flex-direction: column;">
     <h3 style="margin-top: 0; color: #FFFFFF;">Community &amp; Social</h3>
-    <p>Creating opportunities to bring families together and build lasting friendships through sports with the Poway Padres, community parades, picnics, and annual celebrations.</p>
+    <p style="flex-grow: 1;">Creating opportunities to bring families together and build lasting friendships through sports with the Poway Padres, community parades, picnics, and annual celebrations.</p>
+    <div style="margin-top: 1rem;">
+      <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.9rem;" href="{{ site.baseurl }}/about/#community-programs">Explore Activities &rarr;</a>
+    </div>
   </div>
-  <div class="ocs__grid-cell" style="padding: 1.5rem; border-radius: 10px;">
+
+  <div class="ocs__grid-cell" style="padding: 1.5rem; border-radius: 10px; display: flex; flex-direction: column;">
     <h3 style="margin-top: 0; color: #FFFFFF;">Housing Initiatives</h3>
-    <p>Spearheading independent living models, including our milestone 53-unit community and the upcoming 60-unit Monte Vista affordable housing development in Poway.</p>
+    <p style="flex-grow: 1;">Spearheading independent living models, including our milestone 53-unit community and the upcoming 60-unit Monte Vista affordable housing development in Poway.</p>
+    <div style="margin-top: 1rem;">
+      <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.9rem;" href="{{ site.baseurl }}/about/#our-mission">Housing Advocacy &rarr;</a>
+    </div>
   </div>
-  <div class="ocs__grid-cell ocs__grid-cell--accent" style="padding: 1.5rem; border-radius: 10px;">
-    <h3 style="margin-top: 0; color: #FFFFFF;">Education &amp; Training</h3>
-    <p>Collaborating with educators and civic leaders to create post-secondary practical learning, vocational training, and supportive pathways toward independence.</p>
+
+  <div class="ocs__grid-cell ocs__grid-cell--accent" style="padding: 1.5rem; border-radius: 10px; display: flex; flex-direction: column;">
+    <h3 style="margin-top: 0; color: #FFFFFF;">Community Feedback &amp; Survey</h3>
+    <p style="flex-grow: 1;">We value the voice of our athletes, parents, caregivers, and supporters. Help shape our upcoming events, recreational programs, and community services.</p>
+    <div style="margin-top: 1rem;">
+      <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.9rem;" href="{{ site.baseurl }}/survey">Take the Survey &rarr;</a>
+    </div>
   </div>
 </div>
 
@@ -94,7 +107,7 @@ show_reading_time: false
   <div class="ocs__grid-cell ocs__grid-cell--header">Loading Events...</div>
 </div>
 
-<!-- Explore Photo Gallery Callout -->
+<!-- Photo Gallery Callout -->
 <div class="ocs__card" style="text-align: center; padding: 2.5rem 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
   <h2 style="color: #FFFFFF; margin-top: 0;">Moments of Joy &amp; Community</h2>
   <p style="color: #FFFFFF; max-width: 650px; margin: 0 auto 1.5rem; font-size: 1.05rem; line-height: 1.6;">
@@ -128,7 +141,7 @@ const FALLBACK_EVENTS = [
   },
   {
     title: "Annual 2-Night Family Caregiver Retreat",
-    category: "Community",
+    category: "Social",
     date: "November 14-16, 2026",
     location: "Julian, CA",
     capacity: 20

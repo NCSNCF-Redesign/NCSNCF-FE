@@ -2,6 +2,7 @@
 layout: post
 title: Event Calendar
 permalink: /calendar/
+show_reading_time: false
 ---
 
 <style>
@@ -21,6 +22,7 @@ permalink: /calendar/
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
+    font-family: var(--pref-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif);
   }
   .filter-btn:hover, .filter-btn.active {
     background-color: #FFFFFF;
@@ -28,45 +30,63 @@ permalink: /calendar/
   }
   .event-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
     padding: 10px 0 30px;
   }
   .event-card {
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 20px;
-    border-radius: 10px;
+    border-radius: 12px;
     background-color: #604140;
     color: #FFFFFF;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .event-card-img-wrap {
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    background-color: #4f3534;
+  }
+  .event-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  .event-card:hover .event-card-img {
+    transform: scale(1.04);
+  }
+  .event-card-body {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
   }
   .event-card h3 {
     margin-top: 0;
     margin-bottom: 8px;
     color: #FFFFFF;
     font-size: 1.25rem;
+    font-weight: 700;
   }
   .event-card .event-meta {
     color: #f7eedf;
     font-size: 0.95rem;
     margin-bottom: 10px;
+    line-height: 1.4;
   }
   .event-card .event-desc {
     color: #FFFFFF;
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: 1.55;
     margin: 0;
   }
 </style>
 
-<div style="margin-bottom: 2rem;">
-  <h1 style="color: #FFFFFF; margin-bottom: 0.5rem;">Foundation &amp; Community Events</h1>
-  <p style="color: #f7eedf; font-size: 1.1rem; line-height: 1.6; max-width: 800px;">
-    Join us for Poway Padres softball practices, caregiver retreats, social celebrations, and informational housing workshops throughout North County.
-  </p>
-</div>
-
-<section id="event-calendar">
+<section id="event-calendar" style="margin-top: 1rem;">
   <!-- Filter Buttons -->
   <div class="calendar-filters">
     <button class="filter-btn active" data-category="All">All Events</button>
@@ -83,13 +103,15 @@ permalink: /calendar/
 </section>
 
 <script>
-  // 1. DATA ABSTRACTION: Foundation Events List with graceful fallback
+  // 1. DATA ABSTRACTION: Foundation Events List integrated with authentic Gallery photos
   const FALLBACK_EVENTS = [
     {
       title: "Poway Padres Softball Weekly Practice",
       category: "Athletics",
       date: "Every Saturday, 10:00 AM",
       location: "Poway Community Park",
+      image: "{{ site.baseurl }}/images/gallery/poway-padres-gold-medal.jpg",
+      imageAlt: "Poway Padres Softball Team Celebration",
       description: "Weekly softball practice, batting drills, and team camaraderie for Special Olympics athletes, coaches, and families.",
       capacity: 35
     },
@@ -98,6 +120,8 @@ permalink: /calendar/
       category: "Housing",
       date: "October 18, 2026",
       location: "Poway City Hall / Virtual",
+      image: "{{ site.baseurl }}/images/gallery/celebrating-20-years.jpg",
+      imageAlt: "Foundation Milestones and Housing Celebration",
       description: "Status update on the 60-unit affordable independent living community opening in Fall 2025 in Poway.",
       capacity: 100
     },
@@ -106,6 +130,8 @@ permalink: /calendar/
       category: "Social",
       date: "November 14-16, 2026",
       location: "Julian, CA",
+      image: "{{ site.baseurl }}/images/gallery/group-photo.jpg",
+      imageAlt: "Caregiver and Foundation Community Group Gathering",
       description: "Foundation-sponsored weekend getaway providing rest, peer connection, and renewal for dedicated family caregivers.",
       capacity: 20
     },
@@ -114,15 +140,19 @@ permalink: /calendar/
       category: "Education",
       date: "December 5, 2026",
       location: "North County Regional Learning Center",
+      image: "{{ site.baseurl }}/images/gallery/community-fundrasing-event.jpg",
+      imageAlt: "Vocational education and community learning workshop",
       description: "Interactive session exploring workplace readiness, job coaching opportunities, and interview confidence for young adults.",
       capacity: 25
     },
     {
-      title: "NCSNCF Community Holiday Social",
+      title: "NCSNCF Community Holiday Social & Bowling",
       category: "Social",
       date: "December 19, 2026",
-      location: "Old Poway Park",
-      description: "Annual holiday celebration with food, music, team awards, and community fellowship for all athletes and families.",
+      location: "Old Poway Park & Bowling Center",
+      image: "{{ site.baseurl }}/images/gallery/bowling-party-1.jpg",
+      imageAlt: "Team Bowling Party and Holiday Social",
+      description: "Annual holiday celebration with bowling, food, awards, and community fellowship for all athletes and families.",
       capacity: 150
     },
     {
@@ -130,6 +160,8 @@ permalink: /calendar/
       category: "Education",
       date: "January 16, 2027",
       location: "Poway Library Community Hall",
+      image: "{{ site.baseurl }}/images/gallery/pizza-party.jpg",
+      imageAlt: "Community Gathering and Informational Meeting",
       description: "Informational workshop covering San Diego Regional Center service plans, SLS agencies, and transition planning.",
       capacity: 40
     }
@@ -152,7 +184,20 @@ permalink: /calendar/
       const data = await response.json();
       
       if (Array.isArray(data) && data.length > 0) {
-        eventList = data;
+        // Map backend events and assign gallery images based on category/index
+        const defaultImgs = [
+          "{{ site.baseurl }}/images/gallery/poway-padres-gold-medal.jpg",
+          "{{ site.baseurl }}/images/gallery/group-photo.jpg",
+          "{{ site.baseurl }}/images/gallery/bowling-party-1.jpg",
+          "{{ site.baseurl }}/images/gallery/pizza-party.jpg",
+          "{{ site.baseurl }}/images/gallery/celebrating-20-years.jpg",
+          "{{ site.baseurl }}/images/gallery/community-fundrasing-event.jpg"
+        ];
+        eventList = data.map((d, idx) => ({
+          ...d,
+          image: d.image || defaultImgs[idx % defaultImgs.length],
+          imageAlt: d.title || "Foundation event photo"
+        }));
       } else {
         eventList = FALLBACK_EVENTS;
       }
@@ -176,20 +221,28 @@ permalink: /calendar/
     });
 
     if (filtered.length === 0) {
-      grid.innerHTML = `<div class="event-card" style="grid-column: 1 / -1; text-align: center;">No scheduled events in "${selectedCategory}". Check back soon!</div>`;
+      grid.innerHTML = `<div class="event-card" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No scheduled events in "${selectedCategory}". Check back soon!</div>`;
       return;
     }
 
     filtered.forEach(evt => {
       const card = document.createElement("div");
       card.className = "event-card";
+      
+      const imgHtml = evt.image 
+        ? `<div class="event-card-img-wrap"><img src="${evt.image}" alt="${evt.imageAlt || evt.title}" class="event-card-img" loading="lazy"></div>`
+        : '';
+        
       card.innerHTML = `
-        <h3>${evt.title}</h3>
-        <p class="event-meta">
-          <strong>Category:</strong> ${evt.category || 'General'} | <strong>Date:</strong> ${evt.date || 'TBD'}
-          ${evt.location ? '<br><strong>Location:</strong> ' + evt.location : ''}
-        </p>
-        <p class="event-desc">${evt.description || 'Join our community for friendship, learning, and celebration.'}</p>
+        ${imgHtml}
+        <div class="event-card-body">
+          <h3>${evt.title}</h3>
+          <p class="event-meta">
+            <strong>Category:</strong> ${evt.category || 'General'} | <strong>Date:</strong> ${evt.date || 'TBD'}
+            ${evt.location ? '<br><strong>Location:</strong> ' + evt.location : ''}
+          </p>
+          <p class="event-desc">${evt.description || 'Join our community for friendship, learning, and celebration.'}</p>
+        </div>
       `;
       grid.appendChild(card);
     });

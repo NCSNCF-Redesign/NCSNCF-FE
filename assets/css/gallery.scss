@@ -16,13 +16,14 @@ div.wrapper h1:not(.ocs-gallery-title) {
 
 /* 2. Breakout container */
 .ocs-gallery-breakout {
-  background-color: #6a5656; /* Updated to new color */
+  background-color: #6e5555; /* Matched to site background */
   width: 100vw;
   position: relative;
   left: 50%;
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+  font-family: var(--pref-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif);
   
   /* Tightened values to reduce the gap between the header and the title */
   margin-top: -4rem; 
@@ -41,6 +42,7 @@ div.wrapper h1:not(.ocs-gallery-title) {
   padding: 0 2rem;
   position: relative;
   z-index: 2; 
+  font-family: var(--pref-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif);
 }
 
 /* 4. Center the Manual Title */
@@ -49,10 +51,12 @@ div.wrapper h1:not(.ocs-gallery-title) {
   width: 100%;
   text-align: center !important;
   color: #ffffff !important;
-  font-size: 3rem; 
-  margin-bottom: 4rem; 
+  font-size: 2.75rem; 
+  margin-bottom: 3.5rem; 
   margin-top: 0;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: var(--pref-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif);
+  letter-spacing: -0.01em;
 }
 
 /* 5. Section and Text Styling */
@@ -64,25 +68,27 @@ div.wrapper h1:not(.ocs-gallery-title) {
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-    font-size: 2rem;
+    font-size: 1.75rem;
+    font-family: var(--pref-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif);
+    font-weight: 700;
   }
 }
 
 /* 6. Grid Layout */
 .ocs-gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
 }
 
 .ocs-gallery-item {
   position: relative;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 10px;
   margin: 0;
   aspect-ratio: 4 / 3;
-  /* Updated the loading background color to a slightly darker shade of the new background */
-  background-color: #554444; 
+  background-color: #604140; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   
   a {
     display: block;
@@ -104,12 +110,13 @@ div.wrapper h1:not(.ocs-gallery-title) {
     left: 0;
     width: 100%;
     padding: 2rem 1rem 1rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
     color: #ffffff;
     opacity: 0;
     transition: opacity 0.3s ease;
     text-align: center;
-    font-weight: 500;
+    font-weight: 600;
+    font-family: var(--pref-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif);
     margin: 0;
     pointer-events: none; 
   }
@@ -133,10 +140,11 @@ div.wrapper h1:not(.ocs-gallery-title) {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.88);
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  font-family: var(--pref-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif);
 
   &:target {
     display: flex; 
@@ -153,7 +161,7 @@ div.wrapper h1:not(.ocs-gallery-title) {
       max-width: 100%;
       max-height: 80vh;
       border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
 
     p {
@@ -161,6 +169,8 @@ div.wrapper h1:not(.ocs-gallery-title) {
       margin-top: 1.5rem;
       font-size: 1.25rem;
       text-align: center;
+      font-weight: 600;
+      font-family: var(--pref-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif);
     }
   }
 }
