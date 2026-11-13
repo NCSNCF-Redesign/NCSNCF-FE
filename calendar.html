@@ -5,212 +5,295 @@ permalink: /calendar/
 show_reading_time: false
 ---
 
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css">
+
 <style>
-  .calendar-container { max-width: 1100px; margin: 30px auto; padding: 20px; }
-  .calendar-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
-  .filter-btn { padding: 10px 18px; border-radius: 8px; border: 2px solid #604140; background: white; color: #604140; font-weight: 600; cursor: pointer; transition: all .2s ease; }
-  .filter-btn:hover, .filter-btn.active { background: #604140; color: white; }
-  #calendar { background: white; padding: 15px; border: 1px solid #ddd; border-radius: 10px; }
-  .fc-event { cursor: pointer; }
-  .event-details { margin-top: 25px; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background: #f8fafc; }
-  .event-details[hidden] { display: none; }
-  .event-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; padding: 10px 0 30px; }
-  .event-card { border: 1px solid rgba(255,255,255,.2); border-radius: 12px; background: #604140; color: white; box-shadow: 0 4px 12px rgba(0,0,0,.18); overflow: hidden; display: flex; flex-direction: column; }
-  .event-card-img-wrap { height: 190px; overflow: hidden; background: #4f3534; }
-  .event-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
-  .event-card:hover .event-card-img { transform: scale(1.04); }
-  .event-card-body { padding: 18px 20px 20px; flex: 1; }
-  .event-card h3 { margin: 0 0 8px; color: white; font-size: 1.25rem; }
-  .event-meta { color: #f7eedf; font-size: .95rem; line-height: 1.5; }
-  .event-desc { color: white; font-size: .95rem; line-height: 1.55; }
-  @media (max-width: 600px) { .calendar-container { padding: 8px; } .fc .fc-toolbar { flex-wrap: wrap; gap: 10px; } }
+/* NCSNCF calendar: OCS grids/buttons for layout, scoped FullCalendar styling. */
+.ncs-calendar {
+  --cal-paper: #fffdf9;
+  --cal-ink: #302d32;
+  --cal-muted: #625d66;
+  --cal-border: #dcd6d2;
+  --cal-soft: #f5f0ec;
+  --cal-accent: #74545b;
+  --cal-accent-soft: #f0e2e4;
+  --cal-focus: #316f9c;
+  max-width: 1120px;
+  margin: 1.5rem auto 4rem;
+  color: var(--cal-ink);
+}
+.ncs-calendar, .ncs-calendar * { box-sizing: border-box; }
+.ncs-calendar .ncs-intro { color: var(--cal-muted); margin-bottom: 1.4rem; }
+.ncs-calendar .ncs-filters { display: flex; flex-wrap: wrap; gap: .55rem; margin: 1rem 0 1.3rem; }
+.ncs-calendar .ncs-filters .ocs__btn { cursor: pointer; font: inherit; border-radius: 8px; }
+.ncs-calendar .ncs-filters .ocs__btn[aria-pressed="true"] { outline: 2px solid var(--cal-accent); outline-offset: 2px; }
+.ncs-calendar button:focus-visible, .ncs-calendar a:focus-visible, .ncs-calendar [tabindex]:focus-visible {
+  outline: 3px solid var(--cal-focus); outline-offset: 2px;
+}
+.ncs-calendar .ncs-panel { background: var(--cal-paper); color: var(--cal-ink); border: 1px solid var(--cal-border); border-radius: 12px; padding: clamp(.65rem, 2vw, 1.4rem); }
+.ncs-calendar #calendar .fc { color: var(--cal-ink); }
+.ncs-calendar #calendar .fc-toolbar { flex-wrap: wrap; gap: .75rem; }
+.ncs-calendar #calendar .fc-toolbar-title { color: var(--cal-ink); font-size: clamp(1.15rem, 2.4vw, 1.6rem); font-weight: 700; }
+.ncs-calendar #calendar .fc-button-primary { background: var(--cal-paper) !important; color: var(--cal-ink) !important; border: 1px solid var(--cal-border) !important; box-shadow: none !important; border-radius: 7px !important; text-transform: none; }
+.ncs-calendar #calendar .fc-button-primary:hover { background: var(--cal-soft) !important; }
+.ncs-calendar #calendar .fc-button-primary.fc-button-active { background: var(--cal-accent) !important; color: white !important; border-color: var(--cal-accent) !important; }
+.ncs-calendar #calendar .fc-button-primary:disabled { opacity: .55; }
+.ncs-calendar #calendar .fc-theme-standard td,
+.ncs-calendar #calendar .fc-theme-standard th,
+.ncs-calendar #calendar .fc-theme-standard .fc-scrollgrid { border-color: var(--cal-border); }
+.ncs-calendar #calendar .fc-col-header-cell { background: var(--cal-soft); }
+.ncs-calendar #calendar .fc-col-header-cell-cushion { color: var(--cal-ink); text-decoration: none; padding: .7rem .15rem; font-weight: 700; }
+.ncs-calendar #calendar .fc-daygrid-day { background: var(--cal-paper); }
+.ncs-calendar #calendar .fc-daygrid-day-frame { min-height: 105px; }
+.ncs-calendar #calendar .fc-daygrid-day-number { color: var(--cal-ink); text-decoration: none; padding: .45rem .55rem; font-weight: 600; }
+.ncs-calendar #calendar .fc-day-other { background: var(--cal-soft); }
+.ncs-calendar #calendar .fc-day-other .fc-daygrid-day-number { color: var(--cal-muted); }
+.ncs-calendar #calendar .fc-day-today { background: #fff3dd !important; }
+.ncs-calendar #calendar .fc-daygrid-event { border-radius: 5px; padding: 2px 4px; margin: 2px 3px; white-space: normal; align-items: flex-start; }
+.ncs-calendar #calendar .fc-daygrid-event .fc-event-title { white-space: normal; overflow-wrap: anywhere; line-height: 1.3; font-weight: 600; }
+.ncs-calendar #calendar .fc-daygrid-event .fc-event-time { white-space: normal; }
+.ncs-calendar #calendar .fc-daygrid-more-link { color: var(--cal-accent); font-weight: 700; }
+.ncs-calendar #calendar .fc-list { border-color: var(--cal-border); }
+.ncs-calendar #calendar .fc-list-day-cushion { background: var(--cal-soft); }
+.ncs-calendar #calendar .fc-list-event:hover td { background: var(--cal-soft); }
+.ncs-calendar .ncs-note { margin: .8rem 0 1.5rem; color: var(--cal-muted); font-size: .92rem; }
+.ncs-calendar .ncs-heading { margin: 2rem 0 .85rem; }
+.ncs-calendar .ncs-events { margin-top: 1rem; }
+.ncs-calendar .ncs-event-card { padding: 1rem; color: var(--cal-ink); background: var(--cal-paper); border: 1px solid var(--cal-border); border-radius: 9px; height: 100%; }
+.ncs-calendar .ncs-event-card h3 { margin: .3rem 0 .55rem; color: var(--cal-ink); font-size: 1.08rem; }
+.ncs-calendar .ncs-event-card p { margin: .35rem 0; }
+.ncs-calendar .ncs-event-card .ncs-meta { color: var(--cal-muted); font-size: .91rem; }
+.ncs-calendar .ncs-event-card .ncs-desc { line-height: 1.5; }
+.ncs-calendar .ncs-category { display: inline-block; font-size: .78rem; font-weight: 700; border-radius: 999px; padding: .25rem .6rem; background: var(--cal-accent-soft); color: #5e3540; }
+.ncs-calendar .ncs-event-card .ocs__btn { display: inline-block; margin-top: .7rem; }
+.ncs-calendar .ncs-details { margin: 1rem 0; padding: 1.2rem; background: var(--cal-paper); color: var(--cal-ink); border: 1px solid var(--cal-border); border-left: 5px solid var(--cal-accent); border-radius: 9px; }
+.ncs-calendar .ncs-details[hidden] { display: none; }
+.ncs-calendar .ncs-details h2 { color: var(--cal-ink); margin: 0 0 .7rem; }
+.ncs-calendar .ncs-details p { margin: .4rem 0; }
+.ncs-calendar .ncs-details .ncs-close { margin-top: .7rem; }
+.ncs-calendar .ncs-empty { padding: 1.2rem; border: 1px dashed var(--cal-border); border-radius: 9px; color: var(--cal-muted); }
+@media (max-width: 700px) {
+  .ncs-calendar .ncs-panel { padding: .5rem; }
+  .ncs-calendar #calendar .fc-toolbar { justify-content: center; }
+  .ncs-calendar #calendar .fc-toolbar-chunk { display: flex; justify-content: center; }
+  .ncs-calendar #calendar .fc-daygrid-day-frame { min-height: 65px; }
+  .ncs-calendar #calendar .fc-daygrid-day-number { padding: .3rem; }
+  .ncs-calendar #calendar .fc-daygrid-event { font-size: .72rem; }
+}
 </style>
 
-<section class="calendar-container" id="event-calendar">
-  <h1>NCSNCF Event Calendar</h1>
-  <p>Explore community events and activities by month.</p>
-  <div class="calendar-filters" aria-label="Filter events by category">
-    <button type="button" class="filter-btn active" data-category="All" aria-pressed="true">All Events</button>
-    <button type="button" class="filter-btn" data-category="Athletics" aria-pressed="false">Athletics</button>
-    <button type="button" class="filter-btn" data-category="Housing" aria-pressed="false">Housing</button>
-    <button type="button" class="filter-btn" data-category="Social" aria-pressed="false">Social</button>
-    <button type="button" class="filter-btn" data-category="Education" aria-pressed="false">Education</button>
+<section class="ncs-calendar" aria-labelledby="ncs-calendar-title">
+  <h1 id="ncs-calendar-title">NCSNCF Community Event Calendar</h1>
+  <p class="ncs-intro">Explore community activities, programs, and events. Choose a category, browse the calendar, or read the event list below.</p>
+
+  <div class="ocs__grid ocs__grid--standard cols-2" style="margin-bottom: 1.2rem;">
+    <div class="ocs__grid-cell ocs__grid-cell--header">Find Community Events</div>
+    <div class="ocs__grid-cell">
+      <strong>Browse by category</strong>
+      <div class="ncs-filters" role="group" aria-label="Filter events by category">
+        <button type="button" class="ocs__btn fill small ncs-filter" data-category="All" aria-pressed="true">All Events</button>
+        <button type="button" class="ocs__btn small ncs-filter" data-category="Athletics" aria-pressed="false">Athletics</button>
+        <button type="button" class="ocs__btn small ncs-filter" data-category="Housing" aria-pressed="false">Housing</button>
+        <button type="button" class="ocs__btn small ncs-filter" data-category="Social" aria-pressed="false">Social</button>
+        <button type="button" class="ocs__btn small ncs-filter" data-category="Education" aria-pressed="false">Education</button>
+      </div>
+    </div>
+    <div class="ocs__grid-cell ocs__grid-cell--accent">
+      <strong>How to use this calendar</strong>
+      <p>Switch between Month, Week, and List views. Select an event to read its details. Event listings are shown below the calendar too.</p>
+    </div>
   </div>
-  <div id="calendar"></div>
-  <div id="event-details" class="event-details" hidden>
-    <h2 id="detail-title"></h2>
+
+  <div class="ncs-panel">
+    <div id="calendar" aria-label="Community events calendar"></div>
+  </div>
+  <p id="calendar-status" class="ncs-note" role="status" aria-live="polite">Loading community events...</p>
+
+  <section id="event-details" class="ncs-details" aria-labelledby="detail-title" hidden>
+    <h2 id="detail-title" tabindex="-1"></h2>
     <p><strong>Date:</strong> <span id="detail-date"></span></p>
     <p><strong>Category:</strong> <span id="detail-category"></span></p>
     <p><strong>Location:</strong> <span id="detail-location"></span></p>
     <p id="detail-description"></p>
-  </div>
-  <p id="calendar-status" role="status"></p>
-  <h2>Community Events</h2>
-  <div id="event-grid" class="event-grid"></div>
+    <button type="button" id="close-details" class="ocs__btn small ncs-close">Close Details</button>
+  </section>
+
+  <h2 class="ncs-heading">Community Events</h2>
+  <p class="ncs-note">Browse event information in date order. Undated or recurring events are listed separately.</p>
+  <div id="event-grid" class="ocs__grid ocs__grid--standard cols-2 ncs-events" aria-live="polite"></div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // Existing event catalog retained from the team's version. Verify details before publishing.
+  'use strict';
+
+  // Demonstration entries from the existing team calendar. Not verified public event announcements.
   const FALLBACK_EVENTS = [
-    { title: 'Poway Padres Softball Weekly Practice', category: 'Athletics', date: 'Every Saturday, 10:00 AM', location: 'Poway Community Park', image: '{{ site.baseurl }}/images/gallery/poway-padres-gold-medal.jpg', imageAlt: 'Poway Padres Softball Team Celebration', description: 'Weekly softball practice, batting drills, and team camaraderie for Special Olympics athletes, coaches, and families.', capacity: 35 },
-    { title: 'Monte Vista Housing Project Community Briefing', category: 'Housing', date: 'October 18, 2026', location: 'Poway City Hall / Virtual', image: '{{ site.baseurl }}/images/gallery/celebrating-20-years.jpg', imageAlt: 'Foundation Milestones and Housing Celebration', description: 'Status update on the 60-unit affordable independent living community opening in Fall 2025 in Poway.', capacity: 100 },
-    { title: 'Annual 2-Night Family Caregiver Retreat', category: 'Social', date: 'November 14-16, 2026', location: 'Julian, CA', image: '{{ site.baseurl }}/images/gallery/group-photo.jpg', imageAlt: 'Caregiver and Foundation Community Group Gathering', description: 'Foundation-sponsored weekend getaway providing rest, peer connection, and renewal for dedicated family caregivers.', capacity: 20 },
-    { title: 'Post-Secondary Vocational Skills Workshop', category: 'Education', date: 'December 5, 2026', location: 'North County Regional Learning Center', image: '{{ site.baseurl }}/images/gallery/community-fundrasing-event.jpg', imageAlt: 'Vocational education and community learning workshop', description: 'Interactive session exploring workplace readiness, job coaching opportunities, and interview confidence for young adults.', capacity: 25 },
-    { title: 'NCSNCF Community Holiday Social & Bowling', category: 'Social', date: 'December 19, 2026', location: 'Old Poway Park & Bowling Center', image: '{{ site.baseurl }}/images/gallery/bowling-party-1.jpg', imageAlt: 'Team Bowling Party and Holiday Social', description: 'Annual holiday celebration with bowling, food, awards, and community fellowship for all athletes and families.', capacity: 150 },
-    { title: 'Navigating SDRC & Supported Living Options', category: 'Education', date: 'January 16, 2027', location: 'Poway Library Community Hall', image: '{{ site.baseurl }}/images/gallery/pizza-party.jpg', imageAlt: 'Community Gathering and Informational Meeting', description: 'Informational workshop covering San Diego Regional Center service plans, SLS agencies, and transition planning.', capacity: 40 }
+    { title: 'Poway Padres Softball Weekly Practice', category: 'Athletics', date: 'Every Saturday, 10:00 AM', location: 'Poway Community Park', description: 'Weekly softball practice, batting drills, and team camaraderie for athletes, coaches, and families.' },
+    { title: 'Monte Vista Housing Project Community Briefing', category: 'Housing', date: 'October 18, 2026', location: 'Poway City Hall / Virtual', description: 'Community briefing about housing opportunities and project updates.' },
+    { title: 'Annual 2-Night Family Caregiver Retreat', category: 'Social', date: 'November 14-16, 2026', location: 'Julian, CA', description: 'A weekend focused on rest, connection, and support for family caregivers.' },
+    { title: 'Post-Secondary Vocational Skills Workshop', category: 'Education', date: 'December 5, 2026', location: 'North County Regional Learning Center', description: 'A workshop about workplace readiness, job coaching, and interview skills.' },
+    { title: 'NCSNCF Community Holiday Social & Bowling', category: 'Social', date: 'December 19, 2026', location: 'Old Poway Park & Bowling Center', description: 'Community holiday celebration with bowling and social activities.' },
+    { title: 'Navigating SDRC & Supported Living Options', category: 'Education', date: 'January 16, 2027', location: 'Poway Library Community Hall', description: 'Information about San Diego Regional Center services and supported living options.' }
   ];
 
-  let eventList = [];
-  let selectedCategory = 'All';
+  const categoryColors = {
+    Athletics: { bg: '#dceee5', text: '#205f45' },
+    Housing: { bg: '#f4e6ce', text: '#785019' },
+    Social: { bg: '#e8e0f5', text: '#594085' },
+    Education: { bg: '#dcebf8', text: '#245b83' },
+    Other: { bg: '#eae6e3', text: '#4d4845' }
+  };
   const grid = document.getElementById('event-grid');
-  const details = document.getElementById('event-details');
   const status = document.getElementById('calendar-status');
-  const calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
-    initialView: 'dayGridMonth',
-    height: 'auto',
-    headerToolbar: { left: 'prev,next today', center: 'title', right: 'dayGridMonth,dayGridWeek' },
-    buttonText: { today: 'Today', month: 'Month', week: 'Week' },
-    eventClick: function(info) {
-      const item = info.event.extendedProps.original;
-      if (item) showDetails(item);
-    }
-  });
-  calendar.render();
+  const details = document.getElementById('event-details');
+  let allEvents = [];
+  let selectedCategory = 'All';
+  let showingExamples = false;
 
-  function showDetails(item) {
-    document.getElementById('detail-title').textContent = item.title || '';
-    document.getElementById('detail-date').textContent = item.date || item.start || 'Date TBD';
-    document.getElementById('detail-category').textContent = item.category || 'Other';
-    document.getElementById('detail-location').textContent = item.location || 'Not provided';
-    document.getElementById('detail-description').textContent = item.description || 'No description available.';
-    details.hidden = false;
-    details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  function isoLocal(date) {
+    return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
   }
 
-  // Only parse unambiguous dates. Recurring text remains visible in cards, not assigned an invented date.
-  function calendarDates(item) {
-    if (item.start && /^\d{4}-\d{2}-\d{2}/.test(item.start)) {
+  function eventDates(item) {
+    if (typeof item.start === 'string' && /^\d{4}-\d{2}-\d{2}/.test(item.start)) {
       return { start: item.start, end: item.end || undefined, allDay: item.allDay !== false };
     }
-    const raw = (item.date || '').trim();
+    const raw = String(item.date || '').trim();
     if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return { start: raw, allDay: true };
     const range = raw.match(/^([A-Za-z]+)\s+(\d{1,2})\s*[-–]\s*(\d{1,2}),\s*(\d{4})$/);
     if (range) {
       const month = new Date(`${range[1]} 1, ${range[4]}`).getMonth();
       const year = Number(range[4]);
-      const startDay = Number(range[2]);
-      const endDay = Number(range[3]);
-      if (endDay >= startDay && endDay <= 31) {
-        const iso = day => `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const exclusiveEnd = new Date(year, month, endDay + 1);
-        const end = `${exclusiveEnd.getFullYear()}-${String(exclusiveEnd.getMonth()+1).padStart(2,'0')}-${String(exclusiveEnd.getDate()).padStart(2,'0')}`;
-        return { start: iso(startDay), end, allDay: true };
+      const first = Number(range[2]);
+      const last = Number(range[3]);
+      if (!Number.isNaN(month) && first >= 1 && last >= first && last <= new Date(year, month + 1, 0).getDate()) {
+        return { start: isoLocal(new Date(year, month, first)), end: isoLocal(new Date(year, month, last + 1)), allDay: true };
       }
     }
-    if (/^[A-Za-z]+\s+\d{1,2},\s*\d{4}$/.test(raw)) {
+    const single = raw.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+    if (single) {
       const d = new Date(`${raw} 12:00:00`);
-      if (!Number.isNaN(d.getTime())) {
-        return { start: `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`, allDay: true };
-      }
+      if (!Number.isNaN(d.getTime())) return { start: isoLocal(d), allDay: true };
     }
-    return null;
+    return null; // Never invent a date for recurring/undated entries.
   }
 
-  function renderCard(item) {
+  function startSortValue(item) {
+    const dates = eventDates(item);
+    return dates ? new Date(dates.start).getTime() : Infinity;
+  }
+
+  function showDetails(item) {
+    document.getElementById('detail-title').textContent = item.title || 'Community event';
+    document.getElementById('detail-date').textContent = item.date || item.start || 'Date to be announced';
+    document.getElementById('detail-category').textContent = item.category || 'Other';
+    document.getElementById('detail-location').textContent = item.location || 'Location to be announced';
+    document.getElementById('detail-description').textContent = item.description || 'More details coming soon.';
+    details.hidden = false;
+    details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    document.getElementById('detail-title').focus({ preventScroll: true });
+  }
+  document.getElementById('close-details').addEventListener('click', () => { details.hidden = true; });
+
+  function makeCard(item) {
     const card = document.createElement('article');
-    card.className = 'event-card';
-    if (item.image) {
-      const wrap = document.createElement('div');
-      wrap.className = 'event-card-img-wrap';
-      const img = document.createElement('img');
-      img.className = 'event-card-img';
-      img.src = item.image;
-      img.alt = item.imageAlt || item.title || 'Community event';
-      img.loading = 'lazy';
-      wrap.appendChild(img);
-      card.appendChild(wrap);
-    }
-    const body = document.createElement('div');
-    body.className = 'event-card-body';
+    card.className = 'ocs__grid-cell ncs-event-card';
+    const category = document.createElement('span');
+    category.className = 'ncs-category';
+    category.textContent = item.category || 'Other';
     const title = document.createElement('h3');
-    title.textContent = item.title || 'Untitled event';
+    title.textContent = item.title || 'Community event';
     const meta = document.createElement('p');
-    meta.className = 'event-meta';
-    meta.textContent = `${item.category || 'Other'} | ${item.date || item.start || 'Date TBD'}${item.location ? ' | ' + item.location : ''}`;
-    const desc = document.createElement('p');
-    desc.className = 'event-desc';
-    desc.textContent = item.description || 'More information coming soon.';
-    body.append(title, meta, desc);
-    card.appendChild(body);
-    card.tabIndex = 0;
-    card.setAttribute('role', 'button');
-    card.setAttribute('aria-label', `View details for ${item.title || 'event'}`);
-    card.addEventListener('click', () => showDetails(item));
-    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showDetails(item); } });
+    meta.className = 'ncs-meta';
+    meta.textContent = `${item.date || item.start || 'Date TBD'} · ${item.location || 'Location TBD'}`;
+    const description = document.createElement('p');
+    description.className = 'ncs-desc';
+    description.textContent = item.description || 'More information coming soon.';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'ocs__btn fill small';
+    button.textContent = 'View Details';
+    button.setAttribute('aria-label', `View details for ${item.title || 'event'}`);
+    button.addEventListener('click', () => showDetails(item));
+    card.append(category, title, meta, description, button);
     return card;
   }
 
-  function filterEvents(category) {
+  const calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+    initialView: window.matchMedia('(max-width: 700px)').matches ? 'listMonth' : 'dayGridMonth',
+    height: 'auto',
+    dayMaxEventRows: 3,
+    displayEventTime: true,
+    eventDisplay: 'block',
+    headerToolbar: { left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,listMonth' },
+    buttonText: { today: 'Today', month: 'Month', week: 'Week', list: 'List' },
+    eventClick: function (info) {
+      info.jsEvent.preventDefault();
+      if (info.event.extendedProps.original) showDetails(info.event.extendedProps.original);
+    },
+    eventDidMount: function (info) {
+      info.el.title = info.event.title;
+    }
+  });
+  calendar.render();
+
+  function render(category) {
     selectedCategory = category;
-    const filtered = eventList.filter(item => category === 'All' || (item.category || '').toLowerCase() === category.toLowerCase());
+    const filtered = allEvents.filter(item => category === 'All' || String(item.category || '').toLowerCase() === category.toLowerCase());
     calendar.removeAllEvents();
-    const dated = filtered.map(item => {
-      const dates = calendarDates(item);
-      return dates ? { ...dates, title: item.title, extendedProps: { original: item } } : null;
+    const calendarEvents = filtered.map(item => {
+      const dates = eventDates(item);
+      if (!dates) return null;
+      const palette = categoryColors[item.category] || categoryColors.Other;
+      return { ...dates, title: item.title || 'Community event', backgroundColor: palette.bg, borderColor: palette.bg, textColor: palette.text, extendedProps: { original: item } };
     }).filter(Boolean);
-    calendar.addEventSource(dated);
+    calendar.addEventSource(calendarEvents);
+
     grid.replaceChildren();
-    if (filtered.length) filtered.forEach(item => grid.appendChild(renderCard(item)));
+    const sorted = [...filtered].sort((a, b) => startSortValue(a) - startSortValue(b));
+    if (sorted.length) sorted.forEach(item => grid.appendChild(makeCard(item)));
     else {
       const empty = document.createElement('p');
-      empty.textContent = `No events in ${category}.`;
+      empty.className = 'ncs-empty';
+      empty.textContent = 'No events are currently listed in this category.';
       grid.appendChild(empty);
     }
-    document.querySelectorAll('.filter-btn').forEach(button => {
+    document.querySelectorAll('.ncs-filter').forEach(button => {
       const active = button.dataset.category === category;
-      button.classList.toggle('active', active);
       button.setAttribute('aria-pressed', String(active));
+      button.classList.toggle('fill', active);
     });
     details.hidden = true;
+    if (showingExamples) status.textContent = 'Demonstration events are shown because the event service is unavailable. Dates and locations have not been confirmed by NCSNCF.';
+    else if (allEvents.length === 0) status.textContent = 'No events have been published by the event service yet.';
+    else status.textContent = `${filtered.length} event${filtered.length === 1 ? '' : 's'} listed${category === 'All' ? '' : ' for ' + category}.`;
   }
 
-  document.querySelectorAll('.filter-btn').forEach(button => button.addEventListener('click', () => filterEvents(button.dataset.category)));
+  document.querySelectorAll('.ncs-filter').forEach(button => {
+    button.addEventListener('click', () => render(button.dataset.category));
+  });
 
+  // Keep the existing frontend/backend connection. Update the production URL if your team changes hosts.
   const BACKEND_URL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
     ? 'http://localhost:8587'
     : 'https://ccae-be.onrender.com';
 
   async function fetchEvents() {
-    status.textContent = 'Loading events...';
     try {
       const response = await fetch(`${BACKEND_URL}/api/events`, { headers: { Accept: 'application/json' } });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
-      if (!Array.isArray(data)) throw new Error('Expected an array');
-      if (data.length) {
-        const defaultImgs = [
-          '{{ site.baseurl }}/images/gallery/poway-padres-gold-medal.jpg',
-          '{{ site.baseurl }}/images/gallery/group-photo.jpg',
-          '{{ site.baseurl }}/images/gallery/bowling-party-1.jpg',
-          '{{ site.baseurl }}/images/gallery/pizza-party.jpg',
-          '{{ site.baseurl }}/images/gallery/celebrating-20-years.jpg',
-          '{{ site.baseurl }}/images/gallery/community-fundrasing-event.jpg'
-        ];
-        eventList = data.map((item, i) => ({ ...item, image: item.image || defaultImgs[i % defaultImgs.length], imageAlt: item.imageAlt || item.title }));
-        status.textContent = '';
-      } else {
-        eventList = [];
-        status.textContent = 'No events currently listed by the backend.';
-      }
+      if (!Array.isArray(data)) throw new Error('Expected an array of events');
+      allEvents = data;
+      showingExamples = false;
     } catch (error) {
       console.warn('Event API unavailable:', error);
-      eventList = FALLBACK_EVENTS;
-      status.textContent = 'Showing example events from the site catalog. Please confirm dates and locations with NCSNCF.';
+      allEvents = FALLBACK_EVENTS;
+      showingExamples = true;
     }
-    filterEvents(selectedCategory);
+    render(selectedCategory);
   }
   fetchEvents();
 });
