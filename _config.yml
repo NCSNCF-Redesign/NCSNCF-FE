@@ -10,7 +10,10 @@ owner_name: Tristan Chiu, Barbara Zhao, Pranay Kamath, Raymond Liu
 github_username: tristan-chiu0
 github_repo: "NCSNCF-FE"
 
-# GitHub Pages configuration
+# ==========================================
+# GitHub Pages Configuration
+# ==========================================
+
 baseurl: "/NCSNCF-FE"
 future: true
 incremental: true
@@ -29,9 +32,6 @@ plugins:
 # Default Layout
 # ==========================================
 
-# Every page uses the default layout unless
-# another layout is explicitly specified.
-
 defaults:
   - scope:
       path: ""
@@ -39,11 +39,8 @@ defaults:
       layout: default
 
 # ==========================================
-# OCS Sass Configuration
+# Sass Configuration
 # ==========================================
-
-# Sass files are stored in _sass/
-# assets/css/main.scss imports the partials.
 
 sass:
   sass_dir: _sass
@@ -52,9 +49,6 @@ sass:
 # ==========================================
 # Centralized Navigation Menu
 # ==========================================
-
-# Main navigation for the NCSNCF hub.
-# The shared header should read site.navigation.
 
 navigation:
   - title: Home
@@ -85,10 +79,6 @@ minima:
 
     - platform: facebook
       user_url: "https://www.facebook.com/North-County-Special-Needs-Community-Foundation-113636564660105/"
-
-  # Default Minima navigation.
-  # Keep these entries until a custom header
-  # is configured to use site.navigation.
 
   nav_pages:
     - navigation/about.md
