@@ -141,7 +141,7 @@ header.post-header, .post-title, .page-heading {
   </div>
 
   <!-- Right Side: The Image Showcase (Image path applied directly in HTML) -->
-  <div class="showcase-side" style="background-image: url('https://raw.githubusercontent.com/NCSNCF-Redesign/NCSNCF-FE/main/images/NCSNCF.jpg');">
+  <div class="showcase-side" style="background-image: url('https://raw.githubusercontent.com/NCSNCF-Redesign/main/images/NCSNCF.jpg');">
   </div>
 </section>
 
