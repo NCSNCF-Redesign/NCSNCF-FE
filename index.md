@@ -1,6 +1,6 @@
 ---
 layout: post
-title: North County Special Needs Community Foundation
+title: ""
 hide: true
 show_reading_time: false
 ---
