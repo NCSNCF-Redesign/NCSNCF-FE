@@ -1,0 +1,4 @@
+/* Hide the layout's auto-generated header block, preserving the masthead navigation */
+  .page-header, .page__header, .entry-header, .page-title { 
+    display: none !important; 
+  }

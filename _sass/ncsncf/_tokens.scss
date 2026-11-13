@@ -1,0 +1,76 @@
+// North County Special Needs Community Foundation (NCSNCF) Brand Tokens
+// Aligned with OCS design system and LabRats UI architecture
+
+$ncsncf-palettes: (
+  light: (
+    bg: #FFFFFF,
+    text: #173B64,            // Deep Navy
+    muted: #536B82,
+    accent: #247E83,          // Coastal Teal
+    surface: #F4F8FA,
+    tint: #EBF3F7,            // Soft Sky Tint
+    border: #D3DFE8,
+    control-border: #7B8F9F,
+    signal: #F3A83B,          // Warm Golden Sand
+    on-signal: #173B64,
+    band: #173B64,            // Deep Navy Footer Band
+    on-band: #F0F5FA,
+    on-band-muted: #B4C6D8,
+    success: #1E7A46,
+    danger: #B42318
+  ),
+  dark: (
+    bg: #0C1622,
+    text: #E8EEF5,
+    muted: #A0B2C4,
+    accent: #58B4B9,
+    surface: #132132,
+    tint: #182B40,
+    border: #22374E,
+    control-border: #5A728E,
+    signal: #F5B652,
+    on-signal: #0C1622,
+    band: #080F18,
+    on-band: #E8EEF5,
+    on-band-muted: #A0B2C4,
+    success: #6FD39A,
+    danger: #FF8A80
+  )
+);
+
+$ncsncf-font-display: "Bricolage Grotesque", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+$ncsncf-font-body: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+$ncsncf-wrap: 74rem;
+$ncsncf-measure: 44rem;
+$ncsncf-gutter: 1.5rem;
+$ncsncf-radius-control: 6px;
+$ncsncf-radius-surface: 12px;
+
+@mixin ncsncf-theme($name) {
+  $palette: map-get($ncsncf-palettes, $name);
+
+  --pref-bg-color: #{map-get($palette, bg)};
+  --pref-text-color: #{map-get($palette, text)};
+  --pref-accent-color: #{map-get($palette, accent)};
+  --pref-success-color: #{map-get($palette, success)};
+  --pref-font-family: #{$ncsncf-font-body};
+  --pref-font-size: 1.0625rem;
+  --text-muted: #{map-get($palette, muted)};
+  --panel: #{map-get($palette, bg)};
+  --panel-mid: #{map-get($palette, surface)};
+  --ui-bg: #{map-get($palette, surface)};
+  --ui-border: #{map-get($palette, border)};
+  --red: #{map-get($palette, danger)};
+  --green: #{map-get($palette, success)};
+
+  --ncsncf-control-border: #{map-get($palette, control-border)};
+  --ncsncf-tint: #{map-get($palette, tint)};
+  --ncsncf-signal: #{map-get($palette, signal)};
+  --ncsncf-on-signal: #{map-get($palette, on-signal)};
+  --ncsncf-band: #{map-get($palette, band)};
+  --ncsncf-on-band: #{map-get($palette, on-band)};
+  --ncsncf-on-band-muted: #{map-get($palette, on-band-muted)};
+
+  color-scheme: $name;
+}

@@ -1,0 +1,72 @@
+// Footer Styling
+.ncsncf {
+  .ncsncf__footer {
+    padding-block: 4rem 2rem;
+    background: var(--ncsncf-band);
+    color: var(--ncsncf-on-band);
+
+    h2, h3 {
+      color: var(--ncsncf-on-band);
+      font-size: 1.15rem;
+      margin-bottom: 0.85rem;
+    }
+
+    p, li, address {
+      color: var(--ncsncf-on-band-muted);
+      font-size: 0.95rem;
+    }
+
+    address {
+      font-style: normal;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--ncsncf-on-band);
+
+      &:hover {
+        color: var(--ncsncf-signal);
+      }
+    }
+  }
+
+  .ncsncf__footer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 3rem 2.5rem;
+
+    @media (max-width: 60rem) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    @media (max-width: 38rem) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .ncsncf__footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .ncsncf__footer-base {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid color-mix(in srgb, var(--ncsncf-on-band) 18%, transparent);
+
+    p {
+      margin: 0;
+      font-size: 0.875rem;
+    }
+  }
+}

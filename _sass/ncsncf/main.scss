@@ -1,0 +1,28 @@
+// Master stylesheet for NCSNCF built with OCS Grammar and LabRats UI principles
+
+// 1. OCS foundations
+@import "open-coding/theme/legacy/root-color-map";
+@import "open-coding/theme/legacy/user-colors";
+@import "open-coding/mixins/variables";
+@import "open-coding/mixins/forms";
+
+// 2. OCS element grammar
+@import "open-coding/elements/buttons/includes";
+@import "open-coding/elements/buttons/variant-filled";
+@import "open-coding/elements/containers/common";
+@import "open-coding/elements/grids/main";
+@import "open-coding/elements/images/main";
+@import "open-coding/elements/tables/main";
+@import "open-coding/elements/text_input/common";
+@import "open-coding/elements/text_input/styles";
+@import "open-coding/elements/toggles/common";
+@import "open-coding/elements/typography/colors";
+@import "open-coding/elements/capstone/main";
+
+// 3. NCSNCF custom branding layer
+@import "tokens";
+@import "base";
+@import "layout";
+@import "header";
+@import "components";
+@import "footer";

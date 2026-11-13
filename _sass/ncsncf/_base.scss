@@ -1,0 +1,61 @@
+// Foundations
+body.ncsncf {
+  @include ncsncf-theme(light);
+
+  @media (prefers-color-scheme: dark) {
+    @include ncsncf-theme(dark);
+  }
+
+  &[data-theme="light"] {
+    @include ncsncf-theme(light);
+  }
+
+  &[data-theme="dark"] {
+    @include ncsncf-theme(dark);
+  }
+
+  margin: 0;
+  background-color: var(--pref-bg-color);
+  color: var(--pref-text-color);
+  font-family: var(--pref-font-family);
+  font-size: var(--pref-font-size);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $ncsncf-font-display;
+    color: var(--pref-text-color);
+    line-height: 1.2;
+    margin-top: 0;
+  }
+
+  a {
+    color: var(--pref-accent-color);
+    transition: color 0.15s ease;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+  }
+}
+
+.ncsncf__skip {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--ncsncf-signal);
+  color: var(--ncsncf-on-signal);
+  font-weight: 700;
+  z-index: 1000;
+  border-radius: 4px;
+
+  &:focus {
+    top: 1rem;
+  }
+}
