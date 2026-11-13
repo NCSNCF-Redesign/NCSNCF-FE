@@ -15,7 +15,7 @@ github_repo: "NCSNCF-FE"
 # ==========================================
 
 url: ncsncf.opencodingsociety.com
-baseurl: ""
+baseurl: "/NCSNCF-FE"
 future: true
 incremental: true
 
