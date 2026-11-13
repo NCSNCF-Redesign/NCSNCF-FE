@@ -41,28 +41,6 @@ href="{{ site.baseurl }}/survey">Community Survey</a>
 </div>
 </div>
 
-<!-- Special Tribute: Honoring Friendship & Connection -->
-<div class="ocs__card" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-bottom: 4rem; background-color: #604140; padding: 5rem 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
-  <div style="width: 100%; max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 4rem; align-items: center;">
-    <div style="flex: 1 1 450px; max-width: 550px; margin: 0 auto; text-align: center;">
-      <img src="{{ site.baseurl }}/images/tony-rubio-friend.png" alt="Mr. Tony Rubio with his beloved friend" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.25); object-fit: cover;">
-      <p style="font-size: 1.05rem; color: #f7eedf; margin-top: 1rem; font-style: italic;">A bond of enduring friendship, joy, and mutual support.</p>
-    </div>
-    <div style="flex: 2 1 500px;">
-      <h2 style="color: #FFFFFF; margin-top: 0; font-size: 2.5rem; margin-bottom: 1rem;">Honoring True Friendship &amp; Inclusion</h2>
-      <p style="color: #FFFFFF; font-size: 1.25rem; line-height: 1.8; margin-bottom: 1.25rem;">
-        At the core of the North County Special Needs Community Foundation is something profound yet simple: <strong>human connection</strong>. Foundation President Tony Rubio often speaks of the deep, irreplaceable bond with his dear friend pictured here. He never let his disabilities stand in the way of living life to the fullest, sharing laughter, and inspiring everyone around him.
-      </p>
-      <p style="color: #FFFFFF; font-size: 1.25rem; line-height: 1.8; margin-bottom: 1.75rem;">
-        Though he has passed on, his vibrant spirit, perseverance, and genuine warmth continue to shape every program we champion. Our mission is not just about programs or buildings-it is about honoring each person's individuality, celebrating their contributions, and ensuring every member of our special needs family feels valued, respected, and truly loved.
-      </p>
-      <div class="ocs__links">
-        <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.75rem 1.75rem; font-size: 1.1rem; border-radius: 6px;" href="{{ site.baseurl }}/about/#our-story">Read Our Story &rarr;</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Full-width wrapper for the lower sections -->
 <div style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
   <div style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 2rem; box-sizing: border-box;">
