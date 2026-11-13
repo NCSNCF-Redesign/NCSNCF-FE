@@ -90,6 +90,7 @@ minima:
 # ==========================================
 
 exclude:
+  - vendor
   - _vendor
   - Gemfile
   - Gemfile.lock
