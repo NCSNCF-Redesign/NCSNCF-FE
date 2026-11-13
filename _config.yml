@@ -14,7 +14,8 @@ github_repo: "NCSNCF-FE"
 # GitHub Pages Configuration
 # ==========================================
 
-baseurl: "/NCSNCF-FE"
+url: ncsncf.opencodingsociety.com
+baseurl: ""
 future: true
 incremental: true
 
