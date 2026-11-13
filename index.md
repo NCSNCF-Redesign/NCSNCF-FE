@@ -29,81 +29,55 @@ show_reading_time: false
     
     <div class="ocs__links" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
       <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;" href="{{ site.baseurl }}/about/">Our Story &amp; Mission</a>
-      <a class="ocs__btn" style="color: #FFFFFF; background-color: transparent; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;" href="{{ site.baseurl }}/gallery/">View Photo Gallery</a>
-      <a class="ocs__btn" style="color: #604140; background-color: #fdf3e7; border: 2px solid #fdf3e7; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;" href="https://www.ncspecialneedsfoundation.com/donate" target="_blank" rel="noopener noreferrer">Donate</a>
+      <a class="ocs__btn" style="color: #FFFFFF; background-color: transparent; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;" href="{{ site.baseurl }}/calendar/">View Event Calendar</a>
+      <a class="ocs__btn" style="color: #604140; background-color: #fdf3e7; border: 2px solid #fdf3e7; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;" href="{{ site.baseurl }}/survey">Community Survey</a>
     </div>
     
   </div>
 </div>
 
 <!-- Special Tribute: Honoring Friendship & Connection -->
-<div class="ocs_card" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-bottom: 4rem; background-color: #604140; padding: 5rem 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
-<div style="width: 100%; max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 4rem; align-items: center;">
-<div style="flex: 1 1 450px; max-width: 550px; margin: 0 auto; text-align: center;">
-<img src="{{ site.baseurl }}/images/tony-rubio-friend.png" alt="Mr. Tony Rubio with his
-beloved friend" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px
-rgba(0,0,0,0.25); object-fit: cover;">
-</div>
-<div style="flex: 2 1 500px;">
-<h2 style="color: #FFFFFF; margin-top: 0; font-size: 2.5rem; margin-bottom:
-1rem;">Bringing People Together</h2>
-<p style="color: #FFFFFF; font-size: 1.25rem; line-height: 1.8; margin-bottom: 1.25rem;">
-At the core of the North County Special Needs Community Foundation is something
-profound yet simple: <strong>human connection</strong>. Foundation President Tony Rubio
-often speaks of the deep, irreplaceable bond with his dear friend pictured here. He never let his
-disabilities stand in the way of living life to the fullest, sharing laughter, and inspiring everyone
-around him.
-</p>
-<p style="color: #FFFFFF; font-size: 1.25rem; line-height: 1.8; margin-bottom: 1.75rem;">
-Though he has passed on, his vibrant spirit, perseverance, and genuine warmth continue
-to shape every program we champion. Our mission is not just about programs or buildings-it is
-about honoring each person's individuality, celebrating their contributions, and ensuring every
-member of our special needs family feels valued, respected, and truly loved.
-</p>
-<div class="ocs_links">
-<a class="ocs_btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid
-#FFFFFF; text-decoration: none; font-weight: bold; padding: 0.75rem 1.75rem; font-size: 1.1rem; border-radius:
-6px;" href="{{ site.baseurl }}/about/">Read Full Story &rarr;</a>
-</div>
-</div>
-</div>
+<div class="ocs__card" style="margin-bottom: 3rem; background-color: #604140; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+  <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+    <div style="flex: 1 1 280px; max-width: 380px; margin: 0 auto; text-align: center;">
+      <img src="{{ site.baseurl }}/images/tony-rubio-friend.png" alt="Mr. Tony Rubio with his beloved friend" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.25); object-fit: cover;">
+      <p style="font-size: 0.85rem; color: #f7eedf; margin-top: 0.6rem; font-style: italic;">A bond of enduring friendship, joy, and mutual support.</p>
+    </div>
+    <div style="flex: 2 1 340px;">
+      <h2 style="color: #FFFFFF; margin-top: 0; font-size: 1.85rem; margin-bottom: 0.75rem;">Honoring True Friendship &amp; Inclusion</h2>
+      <p style="color: #FFFFFF; font-size: 1.1rem; line-height: 1.7; margin-bottom: 1rem;">
+        At the core of the North County Special Needs Community Foundation is something profound yet simple: <strong>human connection</strong>. Foundation President Tony Rubio often speaks of the deep, irreplaceable bond with his dear friend pictured here. He never let his disabilities stand in the way of living life to the fullest, sharing laughter, and inspiring everyone around him.
+      </p>
+      <p style="color: #FFFFFF; font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.25rem;">
+        Though he has passed on, his vibrant spirit, perseverance, and genuine warmth continue to shape every program we champion. Our mission is not just about programs or buildings—it is about honoring each person's individuality, celebrating their contributions, and ensuring every member of our special needs family feels valued, respected, and truly loved.
+      </p>
+      <div class="ocs__links">
+        <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.5rem 1.25rem; border-radius: 6px;" href="{{ site.baseurl }}/about/#our-story">Read Our Story &rarr;</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Full-width wrapper for the lower sections -->
 <div style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
   <div style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 2rem; box-sizing: border-box;">
 
-    <!-- 3 Pillars Section -->
-    <h2 style="color: #FFFFFF; font-size: 2.25rem; margin-bottom: 2rem;">What We Do</h2>
-    <div class="ocs_grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-bottom: 4.5rem;">
-      
-      <!-- Pillar 1 -->
-      <div class="ocs_grid-cell ocs_grid-cell--accent" style="padding: 2.5rem; border-radius: 12px; display: flex; flex-direction: column; background-color: #604140; box-shadow: 0 6px 15px rgba(0,0,0,0.2);">
-        <h3 style="margin-top: 0; color: #FFFFFF; font-size: 1.75rem;">Community &amp; Social</h3>
-        <p style="flex-grow: 1; font-size: 1.2rem; line-height: 1.7; color: #FFFFFF; margin-bottom: 2rem;">
-          Creating opportunities to bring families together and build lasting friendships through sports with the Poway Padres, community parades, picnics, and annual celebrations.
-        </p>
-        <img src="https://placehold.co/600x400/fdf3e7/604140?text=Community+Social" alt="Placeholder showing a community social gathering" style="width: 100%; height: auto; border-radius: 8px; object-fit: cover; aspect-ratio: 3/2; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
-      </div>
-      
-      <!-- Pillar 2 -->
-      <div class="ocs_grid-cell" style="padding: 2.5rem; border-radius: 12px; display: flex; flex-direction: column; background-color: #5b4241; box-shadow: 0 6px 15px rgba(0,0,0,0.2);">
-        <h3 style="margin-top: 0; color: #FFFFFF; font-size: 1.75rem;">Housing Initiatives</h3>
-        <p style="flex-grow: 1; font-size: 1.2rem; line-height: 1.7; color: #FFFFFF; margin-bottom: 2rem;">
-          Spearheading independent living models, including our milestone 53-unit community and the upcoming 60-unit Monte Vista affordable housing development in Poway.
-        </p>
-        <img src="https://placehold.co/600x400/fdf3e7/604140?text=Housing+Initiatives" alt="Placeholder showing an independent living housing model" style="width: 100%; height: auto; border-radius: 8px; object-fit: cover; aspect-ratio: 3/2; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
-      </div>
-      
-      <!-- Pillar 3 -->
-      <div class="ocs_grid-cell ocs_grid-cell--accent" style="padding: 2.5rem; border-radius: 12px; display: flex; flex-direction: column; background-color: #604140; box-shadow: 0 6px 15px rgba(0,0,0,0.2);">
-        <h3 style="margin-top: 0; color: #FFFFFF; font-size: 1.75rem;">Education &amp; Training</h3>
-        <p style="flex-grow: 1; font-size: 1.2rem; line-height: 1.7; color: #FFFFFF; margin-bottom: 2rem;">
-          Collaborating with educators and civic leaders to create post-secondary practical learning, vocational training, and supportive pathways toward independence.
-        </p>
-        <img src="https://placehold.co/600x400/fdf3e7/604140?text=Education+Training" alt="Placeholder showing vocational training and education" style="width: 100%; height: auto; border-radius: 8px; object-fit: cover; aspect-ratio: 3/2; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
-      </div>
-    </div>
+<!-- 3 Pillars Section -->
+<h2 style="color: #FFFFFF; font-size: 1.75rem; margin-bottom: 1rem;">What We Do</h2>
+<div class="ocs__grid ocs__grid--standard cols-3" style="margin-bottom: 3rem;">
+  <div class="ocs__grid-cell ocs__grid-cell--accent" style="padding: 1.5rem; border-radius: 10px;">
+    <h3 style="margin-top: 0; color: #FFFFFF;">Community &amp; Social</h3>
+    <p>Creating opportunities to bring families together and build lasting friendships through sports with the Poway Padres, community parades, picnics, and annual celebrations.</p>
+  </div>
+  <div class="ocs__grid-cell" style="padding: 1.5rem; border-radius: 10px;">
+    <h3 style="margin-top: 0; color: #FFFFFF;">Housing Initiatives</h3>
+    <p>Spearheading independent living models, including our milestone 53-unit community and the upcoming 60-unit Monte Vista affordable housing development in Poway.</p>
+  </div>
+  <div class="ocs__grid-cell ocs__grid-cell--accent" style="padding: 1.5rem; border-radius: 10px;">
+    <h3 style="margin-top: 0; color: #FFFFFF;">Education &amp; Training</h3>
+    <p>Collaborating with educators and civic leaders to create post-secondary practical learning, vocational training, and supportive pathways toward independence.</p>
+  </div>
+</div>
 
     <!-- Featured Milestone -->
     <h2 style="color: #FFFFFF; font-size: 2.25rem; margin-bottom: 1.5rem;">Community Milestones</h2>
@@ -129,18 +103,13 @@ member of our special needs family feels valued, respected, and truly loved.
       <div class="ocs_grid-cell ocs_grid-cell--header" style="font-size: 1.2rem; color: #FFFFFF;">Loading Events...</div>
     </div>
 
-    <!-- Explore Photo Gallery Callout -->
-    <div class="ocs_card" style="text-align: center; padding: 4.5rem 2rem; border-radius: 12px; margin-bottom: 2rem; background-color: #604140; box-shadow: 0 6px 20px rgba(0,0,0,0.2);">
-      <h2 style="color: #FFFFFF; margin-top: 0; font-size: 2.5rem;">Moments of Joy &amp; Community</h2>
-      <p style="color: #FFFFFF; max-width: 750px; margin: 0 auto 2.5rem; font-size: 1.3rem; line-height: 1.8;">
-        From softball tournament victories and bowling parties to community fundraisers, see our athletes, families, and volunteers in action.
-      </p>
-      <a class="ocs_btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.9rem 2.25rem; font-size: 1.2rem; border-radius: 8px;" href="{{ site.baseurl }}/gallery/">Explore Our Gallery &rarr;</a>
-    </div>
-
-    <hr style="margin: 3.5rem 0; border: none; border-top: 1px solid rgba(255,255,255,0.2);">
-    
-  </div>
+<!-- Photo Gallery Callout -->
+<div class="ocs__card" style="text-align: center; padding: 2.5rem 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
+  <h2 style="color: #FFFFFF; margin-top: 0;">Moments of Joy &amp; Community</h2>
+  <p style="color: #FFFFFF; max-width: 650px; margin: 0 auto 1.5rem; font-size: 1.05rem; line-height: 1.6;">
+    From softball tournament victories and bowling parties to community fundraisers, see our athletes, families, and volunteers in action.
+  </p>
+  <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.6rem 1.5rem; border-radius: 8px;" href="{{ site.baseurl }}/gallery/">Explore Our Gallery &rarr;</a>
 </div>
 
 <hr style="margin: 2rem 0; border: none; border-top: 1px solid rgba(255,255,255,0.2);">
@@ -168,7 +137,7 @@ const FALLBACK_EVENTS = [
   },
   {
     title: "Annual 2-Night Family Caregiver Retreat",
-    category: "Community",
+    category: "Social",
     date: "November 14-16, 2026",
     location: "Julian, CA",
     capacity: 20
