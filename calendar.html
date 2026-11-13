@@ -5,259 +5,213 @@ permalink: /calendar/
 show_reading_time: false
 ---
 
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" rel="stylesheet">
 <style>
-  .calendar-filters {
-    margin-bottom: 25px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .filter-btn {
-    padding: 10px 18px;
-    border-radius: 8px;
-    border: 2px solid #FFFFFF;
-    background-color: transparent;
-    color: #FFFFFF;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: var(--pref-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif);
-  }
-  .filter-btn:hover, .filter-btn.active {
-    background-color: #FFFFFF;
-    color: #604140;
-  }
-  .event-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-    padding: 10px 0 30px;
-  }
-  .event-card {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    background-color: #604140;
-    color: #FFFFFF;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  .event-card-img-wrap {
-    width: 100%;
-    height: 190px;
-    overflow: hidden;
-    background-color: #4f3534;
-  }
-  .event-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-  .event-card:hover .event-card-img {
-    transform: scale(1.04);
-  }
-  .event-card-body {
-    padding: 18px 20px 20px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-  .event-card h3 {
-    margin-top: 0;
-    margin-bottom: 8px;
-    color: #FFFFFF;
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
-  .event-card .event-meta {
-    color: #f7eedf;
-    font-size: 0.95rem;
-    margin-bottom: 10px;
-    line-height: 1.4;
-  }
-  .event-card .event-desc {
-    color: #FFFFFF;
-    font-size: 0.95rem;
-    line-height: 1.55;
-    margin: 0;
-  }
+  .calendar-container { max-width: 1100px; margin: 30px auto; padding: 20px; }
+  .calendar-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
+  .filter-btn { padding: 10px 18px; border-radius: 8px; border: 2px solid #604140; background: white; color: #604140; font-weight: 600; cursor: pointer; transition: all .2s ease; }
+  .filter-btn:hover, .filter-btn.active { background: #604140; color: white; }
+  #calendar { background: white; padding: 15px; border: 1px solid #ddd; border-radius: 10px; }
+  .fc-event { cursor: pointer; }
+  .event-details { margin-top: 25px; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background: #f8fafc; }
+  .event-details[hidden] { display: none; }
+  .event-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; padding: 10px 0 30px; }
+  .event-card { border: 1px solid rgba(255,255,255,.2); border-radius: 12px; background: #604140; color: white; box-shadow: 0 4px 12px rgba(0,0,0,.18); overflow: hidden; display: flex; flex-direction: column; }
+  .event-card-img-wrap { height: 190px; overflow: hidden; background: #4f3534; }
+  .event-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+  .event-card:hover .event-card-img { transform: scale(1.04); }
+  .event-card-body { padding: 18px 20px 20px; flex: 1; }
+  .event-card h3 { margin: 0 0 8px; color: white; font-size: 1.25rem; }
+  .event-meta { color: #f7eedf; font-size: .95rem; line-height: 1.5; }
+  .event-desc { color: white; font-size: .95rem; line-height: 1.55; }
+  @media (max-width: 600px) { .calendar-container { padding: 8px; } .fc .fc-toolbar { flex-wrap: wrap; gap: 10px; } }
 </style>
 
-<section id="event-calendar" style="margin-top: 1rem;">
-  <!-- Filter Buttons -->
-  <div class="calendar-filters">
-    <button class="filter-btn active" data-category="All">All Events</button>
-    <button class="filter-btn" data-category="Athletics">Athletics</button>
-    <button class="filter-btn" data-category="Housing">Housing</button>
-    <button class="filter-btn" data-category="Social">Social</button>
-    <button class="filter-btn" data-category="Education">Education</button>
+<section class="calendar-container" id="event-calendar">
+  <h1>NCSNCF Event Calendar</h1>
+  <p>Explore community events and activities by month.</p>
+  <div class="calendar-filters" aria-label="Filter events by category">
+    <button type="button" class="filter-btn active" data-category="All" aria-pressed="true">All Events</button>
+    <button type="button" class="filter-btn" data-category="Athletics" aria-pressed="false">Athletics</button>
+    <button type="button" class="filter-btn" data-category="Housing" aria-pressed="false">Housing</button>
+    <button type="button" class="filter-btn" data-category="Social" aria-pressed="false">Social</button>
+    <button type="button" class="filter-btn" data-category="Education" aria-pressed="false">Education</button>
   </div>
-
-  <!-- Event Grid -->
-  <div class="event-grid" id="event-grid">
-    <!-- JavaScript will inject cards here -->
+  <div id="calendar"></div>
+  <div id="event-details" class="event-details" hidden>
+    <h2 id="detail-title"></h2>
+    <p><strong>Date:</strong> <span id="detail-date"></span></p>
+    <p><strong>Category:</strong> <span id="detail-category"></span></p>
+    <p><strong>Location:</strong> <span id="detail-location"></span></p>
+    <p id="detail-description"></p>
   </div>
+  <p id="calendar-status" role="status"></p>
+  <h2>Community Events</h2>
+  <div id="event-grid" class="event-grid"></div>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
 <script>
-  // 1. DATA ABSTRACTION: Foundation Events List integrated with authentic Gallery photos
+document.addEventListener('DOMContentLoaded', function () {
+  // Existing event catalog retained from the team's version. Verify details before publishing.
   const FALLBACK_EVENTS = [
-    {
-      title: "Poway Padres Softball Weekly Practice",
-      category: "Athletics",
-      date: "Every Saturday, 10:00 AM",
-      location: "Poway Community Park",
-      image: "{{ site.baseurl }}/images/gallery/poway-padres-gold-medal.jpg",
-      imageAlt: "Poway Padres Softball Team Celebration",
-      description: "Weekly softball practice, batting drills, and team camaraderie for Special Olympics athletes, coaches, and families.",
-      capacity: 35
-    },
-    {
-      title: "Monte Vista Housing Project Community Briefing",
-      category: "Housing",
-      date: "October 18, 2026",
-      location: "Poway City Hall / Virtual",
-      image: "{{ site.baseurl }}/images/gallery/celebrating-20-years.jpg",
-      imageAlt: "Foundation Milestones and Housing Celebration",
-      description: "Status update on the 60-unit affordable independent living community opening in Fall 2025 in Poway.",
-      capacity: 100
-    },
-    {
-      title: "Annual 2-Night Family Caregiver Retreat",
-      category: "Social",
-      date: "November 14-16, 2026",
-      location: "Julian, CA",
-      image: "{{ site.baseurl }}/images/gallery/group-photo.jpg",
-      imageAlt: "Caregiver and Foundation Community Group Gathering",
-      description: "Foundation-sponsored weekend getaway providing rest, peer connection, and renewal for dedicated family caregivers.",
-      capacity: 20
-    },
-    {
-      title: "Post-Secondary Vocational Skills Workshop",
-      category: "Education",
-      date: "December 5, 2026",
-      location: "North County Regional Learning Center",
-      image: "{{ site.baseurl }}/images/gallery/community-fundrasing-event.jpg",
-      imageAlt: "Vocational education and community learning workshop",
-      description: "Interactive session exploring workplace readiness, job coaching opportunities, and interview confidence for young adults.",
-      capacity: 25
-    },
-    {
-      title: "NCSNCF Community Holiday Social & Bowling",
-      category: "Social",
-      date: "December 19, 2026",
-      location: "Old Poway Park & Bowling Center",
-      image: "{{ site.baseurl }}/images/gallery/bowling-party-1.jpg",
-      imageAlt: "Team Bowling Party and Holiday Social",
-      description: "Annual holiday celebration with bowling, food, awards, and community fellowship for all athletes and families.",
-      capacity: 150
-    },
-    {
-      title: "Navigating SDRC & Supported Living Options",
-      category: "Education",
-      date: "January 16, 2027",
-      location: "Poway Library Community Hall",
-      image: "{{ site.baseurl }}/images/gallery/pizza-party.jpg",
-      imageAlt: "Community Gathering and Informational Meeting",
-      description: "Informational workshop covering San Diego Regional Center service plans, SLS agencies, and transition planning.",
-      capacity: 40
-    }
+    { title: 'Poway Padres Softball Weekly Practice', category: 'Athletics', date: 'Every Saturday, 10:00 AM', location: 'Poway Community Park', image: '{{ site.baseurl }}/images/gallery/poway-padres-gold-medal.jpg', imageAlt: 'Poway Padres Softball Team Celebration', description: 'Weekly softball practice, batting drills, and team camaraderie for Special Olympics athletes, coaches, and families.', capacity: 35 },
+    { title: 'Monte Vista Housing Project Community Briefing', category: 'Housing', date: 'October 18, 2026', location: 'Poway City Hall / Virtual', image: '{{ site.baseurl }}/images/gallery/celebrating-20-years.jpg', imageAlt: 'Foundation Milestones and Housing Celebration', description: 'Status update on the 60-unit affordable independent living community opening in Fall 2025 in Poway.', capacity: 100 },
+    { title: 'Annual 2-Night Family Caregiver Retreat', category: 'Social', date: 'November 14-16, 2026', location: 'Julian, CA', image: '{{ site.baseurl }}/images/gallery/group-photo.jpg', imageAlt: 'Caregiver and Foundation Community Group Gathering', description: 'Foundation-sponsored weekend getaway providing rest, peer connection, and renewal for dedicated family caregivers.', capacity: 20 },
+    { title: 'Post-Secondary Vocational Skills Workshop', category: 'Education', date: 'December 5, 2026', location: 'North County Regional Learning Center', image: '{{ site.baseurl }}/images/gallery/community-fundrasing-event.jpg', imageAlt: 'Vocational education and community learning workshop', description: 'Interactive session exploring workplace readiness, job coaching opportunities, and interview confidence for young adults.', capacity: 25 },
+    { title: 'NCSNCF Community Holiday Social & Bowling', category: 'Social', date: 'December 19, 2026', location: 'Old Poway Park & Bowling Center', image: '{{ site.baseurl }}/images/gallery/bowling-party-1.jpg', imageAlt: 'Team Bowling Party and Holiday Social', description: 'Annual holiday celebration with bowling, food, awards, and community fellowship for all athletes and families.', capacity: 150 },
+    { title: 'Navigating SDRC & Supported Living Options', category: 'Education', date: 'January 16, 2027', location: 'Poway Library Community Hall', image: '{{ site.baseurl }}/images/gallery/pizza-party.jpg', imageAlt: 'Community Gathering and Informational Meeting', description: 'Informational workshop covering San Diego Regional Center service plans, SLS agencies, and transition planning.', capacity: 40 }
   ];
 
   let eventList = [];
+  let selectedCategory = 'All';
+  const grid = document.getElementById('event-grid');
+  const details = document.getElementById('event-details');
+  const status = document.getElementById('calendar-status');
+  const calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+    initialView: 'dayGridMonth',
+    height: 'auto',
+    headerToolbar: { left: 'prev,next today', center: 'title', right: 'dayGridMonth,dayGridWeek' },
+    buttonText: { today: 'Today', month: 'Month', week: 'Week' },
+    eventClick: function(info) {
+      const item = info.event.extendedProps.original;
+      if (item) showDetails(item);
+    }
+  });
+  calendar.render();
 
-  const BACKEND_URL = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-    ? "http://localhost:8587"
-    : "https://ccae-be.onrender.com";
+  function showDetails(item) {
+    document.getElementById('detail-title').textContent = item.title || '';
+    document.getElementById('detail-date').textContent = item.date || item.start || 'Date TBD';
+    document.getElementById('detail-category').textContent = item.category || 'Other';
+    document.getElementById('detail-location').textContent = item.location || 'Not provided';
+    document.getElementById('detail-description').textContent = item.description || 'No description available.';
+    details.hidden = false;
+    details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Only parse unambiguous dates. Recurring text remains visible in cards, not assigned an invented date.
+  function calendarDates(item) {
+    if (item.start && /^\d{4}-\d{2}-\d{2}/.test(item.start)) {
+      return { start: item.start, end: item.end || undefined, allDay: item.allDay !== false };
+    }
+    const raw = (item.date || '').trim();
+    if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return { start: raw, allDay: true };
+    const range = raw.match(/^([A-Za-z]+)\s+(\d{1,2})\s*[-–]\s*(\d{1,2}),\s*(\d{4})$/);
+    if (range) {
+      const month = new Date(`${range[1]} 1, ${range[4]}`).getMonth();
+      const year = Number(range[4]);
+      const startDay = Number(range[2]);
+      const endDay = Number(range[3]);
+      if (endDay >= startDay && endDay <= 31) {
+        const iso = day => `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const exclusiveEnd = new Date(year, month, endDay + 1);
+        const end = `${exclusiveEnd.getFullYear()}-${String(exclusiveEnd.getMonth()+1).padStart(2,'0')}-${String(exclusiveEnd.getDate()).padStart(2,'0')}`;
+        return { start: iso(startDay), end, allDay: true };
+      }
+    }
+    if (/^[A-Za-z]+\s+\d{1,2},\s*\d{4}$/.test(raw)) {
+      const d = new Date(`${raw} 12:00:00`);
+      if (!Number.isNaN(d.getTime())) {
+        return { start: `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`, allDay: true };
+      }
+    }
+    return null;
+  }
+
+  function renderCard(item) {
+    const card = document.createElement('article');
+    card.className = 'event-card';
+    if (item.image) {
+      const wrap = document.createElement('div');
+      wrap.className = 'event-card-img-wrap';
+      const img = document.createElement('img');
+      img.className = 'event-card-img';
+      img.src = item.image;
+      img.alt = item.imageAlt || item.title || 'Community event';
+      img.loading = 'lazy';
+      wrap.appendChild(img);
+      card.appendChild(wrap);
+    }
+    const body = document.createElement('div');
+    body.className = 'event-card-body';
+    const title = document.createElement('h3');
+    title.textContent = item.title || 'Untitled event';
+    const meta = document.createElement('p');
+    meta.className = 'event-meta';
+    meta.textContent = `${item.category || 'Other'} | ${item.date || item.start || 'Date TBD'}${item.location ? ' | ' + item.location : ''}`;
+    const desc = document.createElement('p');
+    desc.className = 'event-desc';
+    desc.textContent = item.description || 'More information coming soon.';
+    body.append(title, meta, desc);
+    card.appendChild(body);
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `View details for ${item.title || 'event'}`);
+    card.addEventListener('click', () => showDetails(item));
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showDetails(item); } });
+    return card;
+  }
+
+  function filterEvents(category) {
+    selectedCategory = category;
+    const filtered = eventList.filter(item => category === 'All' || (item.category || '').toLowerCase() === category.toLowerCase());
+    calendar.removeAllEvents();
+    const dated = filtered.map(item => {
+      const dates = calendarDates(item);
+      return dates ? { ...dates, title: item.title, extendedProps: { original: item } } : null;
+    }).filter(Boolean);
+    calendar.addEventSource(dated);
+    grid.replaceChildren();
+    if (filtered.length) filtered.forEach(item => grid.appendChild(renderCard(item)));
+    else {
+      const empty = document.createElement('p');
+      empty.textContent = `No events in ${category}.`;
+      grid.appendChild(empty);
+    }
+    document.querySelectorAll('.filter-btn').forEach(button => {
+      const active = button.dataset.category === category;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    details.hidden = true;
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(button => button.addEventListener('click', () => filterEvents(button.dataset.category)));
+
+  const BACKEND_URL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    ? 'http://localhost:8587'
+    : 'https://ccae-be.onrender.com';
 
   async function fetchEvents() {
+    status.textContent = 'Loading events...';
     try {
-      const response = await fetch(`${BACKEND_URL}/api/events`, {
-        method: 'GET',
-        headers: { 'Accept': 'application/json' }
-      });
-      
-      if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+      const response = await fetch(`${BACKEND_URL}/api/events`, { headers: { Accept: 'application/json' } });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
-      
-      if (Array.isArray(data) && data.length > 0) {
-        // Map backend events and assign gallery images based on category/index
+      if (!Array.isArray(data)) throw new Error('Expected an array');
+      if (data.length) {
         const defaultImgs = [
-          "{{ site.baseurl }}/images/gallery/poway-padres-gold-medal.jpg",
-          "{{ site.baseurl }}/images/gallery/group-photo.jpg",
-          "{{ site.baseurl }}/images/gallery/bowling-party-1.jpg",
-          "{{ site.baseurl }}/images/gallery/pizza-party.jpg",
-          "{{ site.baseurl }}/images/gallery/celebrating-20-years.jpg",
-          "{{ site.baseurl }}/images/gallery/community-fundrasing-event.jpg"
+          '{{ site.baseurl }}/images/gallery/poway-padres-gold-medal.jpg',
+          '{{ site.baseurl }}/images/gallery/group-photo.jpg',
+          '{{ site.baseurl }}/images/gallery/bowling-party-1.jpg',
+          '{{ site.baseurl }}/images/gallery/pizza-party.jpg',
+          '{{ site.baseurl }}/images/gallery/celebrating-20-years.jpg',
+          '{{ site.baseurl }}/images/gallery/community-fundrasing-event.jpg'
         ];
-        eventList = data.map((d, idx) => ({
-          ...d,
-          image: d.image || defaultImgs[idx % defaultImgs.length],
-          imageAlt: d.title || "Foundation event photo"
-        }));
+        eventList = data.map((item, i) => ({ ...item, image: item.image || defaultImgs[i % defaultImgs.length], imageAlt: item.imageAlt || item.title }));
+        status.textContent = '';
       } else {
-        eventList = FALLBACK_EVENTS;
+        eventList = [];
+        status.textContent = 'No events currently listed by the backend.';
       }
     } catch (error) {
-      console.warn("Backend unavailable, using Foundation event catalog:", error);
+      console.warn('Event API unavailable:', error);
       eventList = FALLBACK_EVENTS;
+      status.textContent = 'Showing example events from the site catalog. Please confirm dates and locations with NCSNCF.';
     }
-    
-    filterEvents("All");
+    filterEvents(selectedCategory);
   }
-
-  // 2. PROCEDURAL ABSTRACTION & ALGORITHM: Filter and render
-  function filterEvents(selectedCategory) {
-    const grid = document.getElementById("event-grid");
-    if (!grid) return;
-    grid.innerHTML = "";
-
-    const filtered = eventList.filter(item => {
-      if (selectedCategory === "All") return true;
-      return item.category && item.category.toLowerCase() === selectedCategory.toLowerCase();
-    });
-
-    if (filtered.length === 0) {
-      grid.innerHTML = `<div class="event-card" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No scheduled events in "${selectedCategory}". Check back soon!</div>`;
-      return;
-    }
-
-    filtered.forEach(evt => {
-      const card = document.createElement("div");
-      card.className = "event-card";
-      
-      const imgHtml = evt.image 
-        ? `<div class="event-card-img-wrap"><img src="${evt.image}" alt="${evt.imageAlt || evt.title}" class="event-card-img" loading="lazy"></div>`
-        : '';
-        
-      card.innerHTML = `
-        ${imgHtml}
-        <div class="event-card-body">
-          <h3>${evt.title}</h3>
-          <p class="event-meta">
-            <strong>Category:</strong> ${evt.category || 'General'} | <strong>Date:</strong> ${evt.date || 'TBD'}
-            ${evt.location ? '<br><strong>Location:</strong> ' + evt.location : ''}
-          </p>
-          <p class="event-desc">${evt.description || 'Join our community for friendship, learning, and celebration.'}</p>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-  }
-
-  // 3. CAPTURING INPUT: Category button toggling
-  const buttons = document.querySelectorAll('.filter-btn');
-  buttons.forEach(button => {
-    button.addEventListener('click', function() {
-      buttons.forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      const category = this.getAttribute('data-category');
-      filterEvents(category);
-    });
-  });
-
-  document.addEventListener("DOMContentLoaded", fetchEvents);
+  fetchEvents();
+});
 </script>
