@@ -3,7 +3,7 @@
   "use strict";
 
   const categories = [
-    ["🎨 Theme & Colors", "Choose light, dark, system, or your own colors.", []],
+    ["🎨 Theme & Colors", "Choose the original site appearance, light, dark, or your own colors.", []],
     [
       "Vision",
       "Adjust colors, text size, and visibility.",
@@ -124,6 +124,53 @@
   const themeStorageKey = "ncsncfThemeHubV1";
   const storageKey = "ncsncfAccessibilityHubV1";
 
+  // Restore preferences on EVERY page, including pages without the Settings dialog.
+  // The hub below remains responsible for editing and saving those preferences.
+  function restoreSitewidePreferences() {
+    const root = document.documentElement;
+    let theme = { ...themeDefaults };
+    let saved = {};
+    try {
+      const rawTheme = JSON.parse(localStorage.getItem(themeStorageKey) || "{}");
+      if (rawTheme && typeof rawTheme === "object" && !Array.isArray(rawTheme)) {
+        for (const key of Object.keys(themeDefaults)) {
+          if (typeof rawTheme[key] === "string") theme[key] = rawTheme[key];
+        }
+      }
+      const rawSaved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+      if (rawSaved && typeof rawSaved === "object" && !Array.isArray(rawSaved)) saved = rawSaved;
+    } catch (error) {
+      console.warn("Accessibility Hub: could not read saved preferences.", error);
+    }
+
+    const flags = {};
+    for (const [id, enabled] of Object.entries(saved)) {
+      if (enabled !== true) continue;
+      for (const setting of aliases[id] || [id]) flags[setting] = true;
+    }
+    for (const [, , settings] of categories) {
+      for (const [id] of settings) {
+        const attribute = "data-a11y-" + id.replace(/[A-Z]/g, letter => "-" + letter.toLowerCase());
+        if (flags[id]) root.setAttribute(attribute, "true");
+        else root.removeAttribute(attribute);
+      }
+    }
+
+    // System Default deliberately leaves the original OCS theme untouched.
+    if (theme.themeMode === "system") delete root.dataset.ncsncfTheme;
+    else root.dataset.ncsncfTheme = theme.themeMode === "dark" ? "dark" : "light";
+    root.dataset.ncsncfPalette = theme.palette;
+    const colors = theme.palette === "custom" ? theme : palettes[theme.palette];
+    for (const name of ["background", "surface", "text", "accent", "links"]) {
+      if (colors && /^#[0-9a-f]{6}$/i.test(colors[name] || "")) {
+        root.style.setProperty("--ncsncf-" + name, colors[name]);
+      } else {
+        root.style.removeProperty("--ncsncf-" + name);
+      }
+    }
+    root.classList.toggle("ncsncf-theme-active", theme.palette !== "original" || theme.themeMode !== "system");
+  }
+
   function initializeAccessibilityHub() {
     const dialog = document.getElementById("accessibilityDialog");
 
@@ -196,12 +243,11 @@
     }
     let savedTheme = readTheme();
     let themeState = { ...savedTheme };
-    const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
     function applyTheme() {
       const root = document.documentElement;
       const mode = themeState.themeMode;
-      const dark = mode === "dark" || (mode === "system" && systemDark.matches);
-      root.dataset.ncsncfTheme = dark ? "dark" : "light";
+      if (mode === "system") delete root.dataset.ncsncfTheme;
+      else root.dataset.ncsncfTheme = mode;
       root.dataset.ncsncfPalette = themeState.palette;
       const colors = themeState.palette === "custom" ? themeState : palettes[themeState.palette];
       for (const name of ["background", "surface", "text", "accent", "links"]) {
@@ -209,9 +255,8 @@
         else root.style.removeProperty("--ncsncf-" + name);
       }
       // Explicitly disable the older dark-background toggle when theme mode is managed here.
-      root.classList.toggle("ncsncf-theme-active", themeState.palette !== "original" || dark);
+      root.classList.toggle("ncsncf-theme-active", themeState.palette !== "original" || mode !== "system");
     }
-    systemDark.addEventListener?.("change", () => { if (themeState.themeMode === "system") applyTheme(); });
     let saved = readSavedPreferences();
     let state = { ...saved };
     let activeCategory = 0;
@@ -329,7 +374,7 @@
         select.addEventListener("change", () => { themeState[key] = select.value; applyTheme(); render(); });
         field.append(caption, select); panel.append(field);
       };
-      addSelect("Appearance", "themeMode", [["system","Follow device"],["light","Light"],["dark","Dark"]]);
+      addSelect("Appearance", "themeMode", [["system","System Default (original site)"],["light","Light"],["dark","Dark"]]);
       addSelect("Color palette (choose Custom colors for individual pickers)", "palette", [["original","Original NCSNCF"],["ocean","Ocean blue"],["forest","Forest green"],["sunset","Warm sunset"],["lavender","Lavender"],["custom","Custom colors"]]);
       if (themeState.palette === "custom") {
         for (const [key, label] of [["background","Page background"],["surface","Cards and panels"],["text","Text color"],["accent","Accent / buttons"],["links","Links"]]) {
@@ -474,9 +519,10 @@
   if (document.readyState === "loading") {
     document.addEventListener(
       "DOMContentLoaded",
-      initializeAccessibilityHub
+      () => { restoreSitewidePreferences(); initializeAccessibilityHub(); }
     );
   } else {
+    restoreSitewidePreferences();
     initializeAccessibilityHub();
   }
 })();

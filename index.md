@@ -5,9 +5,6 @@ hide: true
 show_reading_time: false
 ---
 
-<!-- Accessibility Hub styles (homepage only) -->
-<link rel="stylesheet" href="{{ '/assets/css/ncsncf-accessibility-hub.css?v=3' | relative_url }}">
-
 <!-- Hero Section with Header Image and Slogan -->
 <div style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw;
 margin-right: -50vw; margin-top: -2rem; background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0,
@@ -240,6 +237,3 @@ function renderEvents(list) {
 document.addEventListener("DOMContentLoaded", loadRecentEvents);
 </script>
 
-<!-- Accessibility Settings Hub (OCS components) -->
-{% include ncsncf/accessibility.html %}
-<script src="{{ '/assets/js/ncsncf-accessibility.js?v=3' | relative_url }}" defer></script>
