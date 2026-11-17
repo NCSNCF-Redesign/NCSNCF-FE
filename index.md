@@ -5,6 +5,9 @@ hide: true
 show_reading_time: false
 ---
 
+<!-- Accessibility Hub styles (homepage only) -->
+<link rel="stylesheet" href="{{ '/assets/css/ncsncf-accessibility-hub.css?v=3' | relative_url }}">
+
 <!-- Hero Section with Header Image and Slogan -->
 <div style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw;
 margin-right: -50vw; margin-top: -2rem; background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0,
@@ -37,6 +40,7 @@ border-radius: 8px;" href="{{ site.baseurl }}/calendar/">View Event Calendar</a>
 <a class="ocs__btn" style="color: #604140; background-color: #fdf3e7; border: 2px solid
 #fdf3e7; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;"
 href="{{ site.baseurl }}/survey">Community Survey</a>
+<a class="ocs__btn" type="button" role="button" href="#accessibilityDialog" data-open-accessibility aria-haspopup="dialog" aria-controls="accessibilityDialog" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.65rem 1.5rem; border-radius: 8px;">⚙ Accessibility Settings</a>
 </div>
 </div>
 </div>
@@ -235,3 +239,7 @@ function renderEvents(list) {
 
 document.addEventListener("DOMContentLoaded", loadRecentEvents);
 </script>
+
+<!-- Accessibility Settings Hub (OCS components) -->
+{% include ncsncf/accessibility.html %}
+<script src="{{ '/assets/js/ncsncf-accessibility.js?v=3' | relative_url }}" defer></script>

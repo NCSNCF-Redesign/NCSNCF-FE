@@ -1,0 +1,29 @@
+<!-- NCSNCF Accessibility Settings Hub; included from index.md -->
+<dialog id="accessibilityDialog" class="a11y-hub" aria-labelledby="a11yTitle" aria-describedby="a11yIntro">
+  <div class="a11y-shell ocs__container">
+    <header class="a11y-head ocs__card">
+      <div>
+        <h2 id="a11yTitle">Accessibility Settings</h2>
+        <p id="a11yIntro" class="ocs__description">Personalize your experience. Changes preview immediately.</p>
+      </div>
+      <button type="button" id="closeAccessibility" class="ocs__btn outline pill a11y-close" aria-label="Close accessibility settings">Close ×</button>
+    </header>
+
+    <div class="a11y-body">
+      <nav id="a11yCategories" class="a11y-sidebar" aria-label="Accessibility settings categories"></nav>
+      <main class="a11y-main ocs__card" id="a11yMain" aria-labelledby="a11ySectionTitle">
+        <h3 id="a11ySectionTitle" class="ocs__section-title">Vision</h3>
+        <p id="a11ySectionDescription" class="ocs__description"></p>
+        <div id="a11ySettings" class="a11y-grid ocs__grid ocs__grid--card"></div>
+      </main>
+    </div>
+
+    <footer class="a11y-foot ocs__card">
+      <div class="a11y-actions ocs__links">
+        <button type="button" id="saveAccessibility" class="ocs__btn accent fill pill a11y-primary">Save Preferences</button>
+        <button type="button" id="resetAccessibility" class="ocs__btn outline pill a11y-secondary">Restore Defaults</button>
+      </div>
+      <span id="a11yCount" aria-live="polite"></span>
+    </footer>
+  </div>
+</dialog>

@@ -1,3 +1,4 @@
+
 <footer class="ncsncf__footer">
   <div class="ncsncf__wrap">
     <div class="ncsncf__footer-grid">
@@ -29,18 +30,53 @@
           Ramona, CA 92065<br><br>
           <strong>President:</strong> Tony Rubio<br>
           <strong>Phone:</strong> (619) 665-1335<br>
-          <strong>Email:</strong> <a href="mailto:info@ncspecialneedsfoundation.com">info@ncspecialneedsfoundation.com</a>
+          <strong>Email:</strong>
+          <a href="mailto:info@ncspecialneedsfoundation.com">
+            info@ncspecialneedsfoundation.com
+          </a>
         </address>
-        <p><a href="{{ '/donate/' | relative_url }}" class="ocs__btn ocs__btn--accent">Donate Today &rarr;</a></p>
+
+        <p>
+          <a href="{{ '/donate/' | relative_url }}"
+             class="ocs__btn accent fill pill">
+            Donate Today &rarr;
+          </a>
+        </p>
       </div>
     </div>
 
     <div class="ncsncf__footer-base">
-      <p>&copy; {{ site.time | date: '%Y' }} North County Special Needs Community Foundation. Built with Open Coding Society (OCS) grammar.</p>
       <p>
-        <a href="https://www.instagram.com/ncspecialneedsfoundation/" target="_blank" rel="noopener noreferrer">Instagram</a> &bull;
-        <a href="https://www.facebook.com/North-County-Special-Needs-Community-Foundation-113636564660105/" target="_blank" rel="noopener noreferrer">Facebook</a>
+        &copy; {{ site.time | date: '%Y' }}
+        North County Special Needs Community Foundation.
+        Built with Open Coding Society (OCS) grammar.
       </p>
+
+      <p>
+        <a href="https://www.instagram.com/ncspecialneedsfoundation/"
+           target="_blank"
+           rel="noopener noreferrer">
+          Instagram
+        </a>
+        &bull;
+        <a href="https://www.facebook.com/North-County-Special-Needs-Community-Foundation-113636564660105/"
+           target="_blank"
+           rel="noopener noreferrer">
+          Facebook
+        </a>
+      </p>
+
+      <!-- Accessibility Preferences -->
+      <div class="ncsncf__footer-accessibility">
+        <button
+          type="button"
+          class="ocs__btn accent outline pill"
+          data-open-accessibility
+          aria-haspopup="dialog"
+          aria-controls="accessibilityDialog">
+          ⚙ Accessibility Settings
+        </button>
+      </div>
     </div>
   </div>
 </footer>

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ '/assets/css/ncsncf-accessibility-hub.css?v=3' | relative_url }}">
     <header class="site-header">
         <div class="wrapper">
             {%- assign default_paths = site.pages | map: "path" -%}
@@ -36,6 +37,7 @@
                     {%- endif -%}
                     {%- endif -%}
                     {%- endfor -%}
+                    <a class="page-link" href="{{ "/" | relative_url }}#accessibilityDialog" data-open-accessibility aria-haspopup="dialog" aria-controls="accessibilityDialog">⚙ Settings</a>
                     <a id="loginArea" class="page-link" href="{{ site.baseurl }}/login">Login</a>
                 </div>
 
