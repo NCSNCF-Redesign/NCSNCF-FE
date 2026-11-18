@@ -165,14 +165,16 @@ show_reading_time: false
 </section>
 
 <script type="module">
-  import { login, pythonURI, javaURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
+  import { login, pythonURI, javaURI, springEnabled, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
 
   // Read the URL for a redirect parameter and set fallback destination
   const urlParams = new URLSearchParams(window.location.search);
   const redirectTarget = urlParams.get('redirect') || '{{site.baseurl}}/profile';
 
   window.loginBoth = function () {
-    javaLogin();
+    if (springEnabled) {
+      javaLogin();
+    }
     pythonLogin();
   };
 
@@ -192,6 +194,8 @@ show_reading_time: false
   };
 
   window.javaLogin = function () {
+    if (!springEnabled) return;
+
     const loginURL = `${javaURI}/authenticate`;
     const databaseURL = `${javaURI}/api/person/get`;
     const signupURL = `${javaURI}/api/person/create`;
