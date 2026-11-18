@@ -18,6 +18,7 @@ url: https://ncsncf.opencodingsociety.com
 baseurl: ""
 future: true
 incremental: true
+spring: false
 
 # ==========================================
 # Jekyll Build Settings
