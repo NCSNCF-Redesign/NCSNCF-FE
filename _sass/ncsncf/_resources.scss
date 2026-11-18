@@ -1,0 +1,260 @@
+// NCSNCF Community Resources Styling
+// Pure Sass / OCS Grammar: Clean 3-column layout matching original format
+
+.ncs-resources {
+  --res-paper: #ffffff;
+  --res-bg: #fffdf9;
+  --res-ink: #2b2626;
+  --res-muted: #5e5454;
+  --res-border: #e3deda;
+  --res-accent: #74545b;
+  --res-accent-soft: #f7eedf;
+  --res-link: #1d4ed8;
+  --res-link-hover: #1e40af;
+  --res-highlight: #604140;
+
+  max-width: 1280px;
+  margin: 1.5rem auto 4.5rem;
+  padding: 0 1.25rem;
+  color: var(--res-ink);
+
+  * {
+    box-sizing: border-box;
+  }
+
+  // Header & Title
+  &__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--res-accent-soft);
+  }
+
+  &__title {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 800;
+    color: var(--res-highlight);
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem;
+    font-family: inherit;
+  }
+
+  &__subtitle {
+    font-size: 1.15rem;
+    color: var(--res-muted);
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  // Admin Controls & Actions
+  &__admin-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem 1.4rem;
+    border-radius: 10px;
+    background-color: var(--res-accent-soft);
+    border: 1px solid var(--res-border);
+  }
+
+  &__admin-info {
+    font-size: 0.95rem;
+    color: var(--res-highlight);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__admin-actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  // Modal / Add Form
+  &__admin-panel {
+    background-color: var(--res-paper);
+    border: 1px solid var(--res-border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+    h3 {
+      font-size: 1.35rem;
+      color: var(--res-highlight);
+      margin: 0 0 1.25rem;
+      font-weight: 700;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem 1.25rem;
+      align-items: end;
+    }
+
+    .ncs-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+
+      label {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--res-ink);
+      }
+
+      input, select, textarea {
+        padding: 0.65rem 0.85rem;
+        border: 1px solid var(--res-border);
+        border-radius: 6px;
+        font-size: 0.95rem;
+        background: #fff;
+        color: var(--res-ink);
+        font-family: inherit;
+
+        &:focus {
+          outline: none;
+          border-color: var(--res-highlight);
+          box-shadow: 0 0 0 2px rgba(96, 65, 64, 0.2);
+        }
+      }
+
+      &--full {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .ncs-form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+  }
+
+  // 3-Column Masonry / Columns Grid
+  &__columns {
+    column-count: 3;
+    column-gap: 2.2rem;
+
+    @media (max-width: 1024px) {
+      column-count: 2;
+      column-gap: 1.8rem;
+    }
+
+    @media (max-width: 680px) {
+      column-count: 1;
+    }
+  }
+
+  // Category Section
+  &__section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 2.2rem;
+    display: inline-block;
+    width: 100%;
+  }
+
+  &__cat-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #2b2424;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__cat-desc {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--res-muted);
+    margin: 0 0 0.6rem;
+  }
+
+  // List of items
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__item {
+    position: relative;
+    padding-left: 1rem;
+    margin-bottom: 0.55rem;
+    font-size: 0.88rem;
+    line-height: 1.45;
+
+    &::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #333;
+      font-weight: bold;
+    }
+
+    // Underlined links formatted exactly like the image
+    a {
+      color: var(--res-link);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 500;
+      word-break: break-word;
+
+      &:hover {
+        color: var(--res-link-hover);
+        text-decoration-thickness: 2px;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--res-link);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+    }
+
+    .ncs-res-details {
+      display: block;
+      color: var(--res-muted);
+      font-size: 0.82rem;
+      margin-top: 0.15rem;
+    }
+
+    .ncs-res-phone {
+      display: inline-block;
+      color: var(--res-ink);
+      font-weight: 600;
+      margin-top: 0.15rem;
+    }
+  }
+
+  // Delete button for admins
+  &__delete-btn {
+    display: inline-block;
+    margin-left: 0.4rem;
+    background: none;
+    border: none;
+    color: #dc2626;
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 0 0.25rem;
+    line-height: 1;
+    opacity: 0.65;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

@@ -64,6 +64,9 @@ navigation:
   - title: Gallery
     url: /gallery/
 
+  - title: Resources
+    url: /resources/
+
   - title: Login
     url: /login
 
@@ -85,6 +88,7 @@ minima:
     - navigation/about.md
     - calendar.html
     - gallery.html
+    - resources.html
 
 # ==========================================
 # Excluded Files
