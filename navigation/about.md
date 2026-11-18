@@ -167,13 +167,85 @@ show_reading_time: false
     </div>
   </section>
 
-  <!-- Get Involved Callout -->
-  <section class="ncs-callout" aria-labelledby="get-involved" style="width: 100% !important; background-color: #5b4241 !important; color: #ffffff !important; padding: 6rem 10% !important; text-align: center !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;">
-    <h2 id="get-involved" style="display: block !important; width: 100% !important; text-align: center !important; font-size: 2.75rem !important; margin: 0 auto 1.5rem auto !important; color: #ffffff !important;">Join Us in Building a Stronger Community</h2>
-    <p style="margin-bottom: 2.5rem !important; line-height: 1.65 !important; font-size: 1.35rem !important; max-width: 900px !important; margin-left: auto !important; margin-right: auto !important; color: #ffffff !important; text-align: center !important;">
-      Stronger, kinder communities start with human connection. Whether you are a parent seeking resources, a volunteer looking to coach or help at events, or a community supporter, there is a warm place for you here.
-    </p>
-    <p style="margin-bottom: 0.75rem !important; font-size: 1.25rem !important; color: #ffffff !important; text-align: center !important; width: 100% !important;"><strong>Email Foundation Leadership:</strong> <a href="mailto:info@ncspecialneedsfoundation.com" style="color: #ffffff !important; text-decoration: underline !important;">info@ncspecialneedsfoundation.com</a></p>
-    <p style="margin: 0 !important; font-size: 1.25rem !important; text-align: center !important; width: 100% !important;"><a href="https://www.ncspecialneedsfoundation.com/" target="_blank" rel="noopener noreferrer" style="color: #ffffff !important; font-weight: bold !important; text-decoration: underline !important;">Visit the official NCSNCF website &rarr;</a></p>
-  </section>
-</div>
+
+<style>
+  .ncsncf-footer {
+    background-color: #5f413f !important;
+    color: #ffffff !important;
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    margin-top: 60px !important;
+    margin-bottom: 0 !important;
+    padding: 40px 24px !important;
+    box-sizing: border-box !important;
+    font-family: inherit !important;
+  }
+
+  .ncsncf-footer-inner {
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 24px !important;
+  }
+
+  .ncsncf-footer-org h3 {
+    margin: 0 0 8px 0 !important;
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+  }
+
+  .ncsncf-footer-org p,
+  .ncsncf-footer-contact p {
+    margin: 0 0 6px 0 !important;
+    font-size: 1.15rem !important;
+    line-height: 1.5 !important;
+    color: #ffffff !important;
+  }
+
+  .ncsncf-footer-contact {
+    text-align: right !important;
+  }
+
+  .ncsncf-footer-contact a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important;
+    transition: border-color 0.2s ease !important;
+  }
+
+  .ncsncf-footer-contact a:hover {
+    border-bottom-color: #ffffff !important;
+  }
+
+  @media (max-width: 650px) {
+    .ncsncf-footer-inner {
+      flex-direction: column !important;
+    }
+
+    .ncsncf-footer-contact {
+      text-align: left !important;
+    }
+  }
+</style>
+
+<footer class="ncsncf-footer">
+  <div class="ncsncf-footer-inner">
+    <div class="ncsncf-footer-org">
+      <h3>North County Special Needs Community Foundation</h3>
+      <p>501(c)(3) Nonprofit &bull; EIN # 45-3974276</p>
+    </div>
+    <div class="ncsncf-footer-contact">
+      <p><strong>President:</strong> Tony Rubino</p>
+      <p><a href="mailto:info@specialneedsfoundation.com">info@specialneedsfoundation.com</a></p>
+      <p><a href="tel:6196651335">619-665-1335</a></p>
+    </div>
+  </div>
+</footer>

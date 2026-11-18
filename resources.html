@@ -11,7 +11,7 @@ show_reading_time: false
   <header class="ncs-resources__header">
     <h1 class="ncs-resources__title">Community Resources</h1>
     <p class="ncs-resources__subtitle">
-      A comprehensive guide to advocacy, support networks, independent housing, safety, and community services for individuals with developmental disabilities and their families in North County San Diego and surrounding regions.
+      Advocacy, support networks, independent housing, safety, and community services links for individuals with developmental disabilities and their families in North County San Diego and surrounding regions!
     </p>
   </header>
 
@@ -71,6 +71,88 @@ show_reading_time: false
     <div style="padding: 2rem 0; font-style: italic; color: #666;">Loading community resources...</div>
   </main>
 </div>
+
+<style>
+  .ncsncf-footer {
+    background-color: #5f413f !important;
+    color: #ffffff !important;
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    margin-top: 60px !important;
+    margin-bottom: 0 !important;
+    padding: 40px 24px !important;
+    box-sizing: border-box !important;
+    font-family: inherit !important;
+  }
+
+  .ncsncf-footer-inner {
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 24px !important;
+  }
+
+  .ncsncf-footer-org h3 {
+    margin: 0 0 8px 0 !important;
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+  }
+
+  .ncsncf-footer-org p,
+  .ncsncf-footer-contact p {
+    margin: 0 0 6px 0 !important;
+    font-size: 1.15rem !important;
+    line-height: 1.5 !important;
+    color: #ffffff !important;
+  }
+
+  .ncsncf-footer-contact {
+    text-align: right !important;
+  }
+
+  .ncsncf-footer-contact a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important;
+    transition: border-color 0.2s ease !important;
+  }
+
+  .ncsncf-footer-contact a:hover {
+    border-bottom-color: #ffffff !important;
+  }
+
+  @media (max-width: 650px) {
+    .ncsncf-footer-inner {
+      flex-direction: column !important;
+    }
+
+    .ncsncf-footer-contact {
+      text-align: left !important;
+    }
+  }
+</style>
+
+<footer class="ncsncf-footer">
+  <div class="ncsncf-footer-inner">
+    <div class="ncsncf-footer-org">
+      <h3>North County Special Needs Community Foundation</h3>
+      <p>501(c)(3) Nonprofit &bull; EIN # 45-3974276</p>
+    </div>
+    <div class="ncsncf-footer-contact">
+      <p><strong>President:</strong> Tony Rubino</p>
+      <p><a href="mailto:info@specialneedsfoundation.com">info@specialneedsfoundation.com</a></p>
+      <p><a href="tel:6196651335">619-665-1335</a></p>
+    </div>
+  </div>
+</footer>
 
 <script type="module">
 import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
