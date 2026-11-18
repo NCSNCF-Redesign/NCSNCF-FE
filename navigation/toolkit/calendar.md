@@ -29,6 +29,7 @@ active_tab: calendar
         </div>
     </div>
 </div>
+
 <!-- FullCalendar JS -->
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
 <script type="module">
@@ -471,3 +472,4 @@ active_tab: calendar
         });
     }
 </script>
+
