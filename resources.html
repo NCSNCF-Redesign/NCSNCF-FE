@@ -1,0 +1,463 @@
+---
+layout: post
+title: Community Resources
+permalink: /resources/
+comments: false
+show_reading_time: false
+---
+
+<div class="ncs-resources">
+  <!-- Header matching format -->
+  <header class="ncs-resources__header">
+    <h1 class="ncs-resources__title">Community Resources</h1>
+    <p class="ncs-resources__subtitle">
+      A comprehensive guide to advocacy, support networks, independent housing, safety, and community services for individuals with developmental disabilities and their families in North County San Diego and surrounding regions.
+    </p>
+  </header>
+
+  <!-- Admin Bar (visible only when logged in as Admin) -->
+  <div id="admin-resources-bar" class="ncs-resources__admin-bar" style="display: none;">
+    <div class="ncs-resources__admin-info">
+      <span aria-hidden="true">🛡️</span>
+      <strong>Admin Controls Active:</strong> You can add new resource links or delete existing entries.
+    </div>
+    <div class="ncs-resources__admin-actions">
+      <button type="button" id="toggle-add-resource-btn" class="ocs__btn accent fill small">
+        + Add Resource
+      </button>
+    </div>
+  </div>
+
+  <!-- Admin Add Resource Panel -->
+  <div id="admin-add-resource-panel" class="ncs-resources__admin-panel" style="display: none;">
+    <h3>Add a Community Resource</h3>
+    <form id="add-resource-form">
+      <div class="ncs-form-group">
+        <label for="res-category">Category *</label>
+        <input type="text" id="res-category" list="category-suggestions" placeholder="e.g. Advocacy Services, Housing" required autocomplete="off">
+        <datalist id="category-suggestions"></datalist>
+      </div>
+
+      <div class="ncs-form-group">
+        <label for="res-title">Resource Title / Organization *</label>
+        <input type="text" id="res-title" placeholder="e.g. Disability Rights California" required>
+      </div>
+
+      <div class="ncs-form-group">
+        <label for="res-url">Website URL (Clickable Link)</label>
+        <input type="url" id="res-url" placeholder="https://example.org">
+      </div>
+
+      <div class="ncs-form-group">
+        <label for="res-phone">Phone / Hotline (Optional)</label>
+        <input type="text" id="res-phone" placeholder="e.g. (619) 555-0123">
+      </div>
+
+      <div class="ncs-form-group ncs-form-group--full">
+        <label for="res-description">Short Description or Notes (Optional)</label>
+        <input type="text" id="res-description" placeholder="Brief note or services provided">
+      </div>
+
+      <div class="ncs-form-actions">
+        <button type="button" id="cancel-add-resource-btn" class="ocs__btn small">Cancel</button>
+        <button type="submit" class="ocs__btn accent fill small">Save Resource</button>
+      </div>
+    </form>
+    <div id="admin-status-msg" style="margin-top: 0.75rem; font-size: 0.9rem; font-weight: 600;"></div>
+  </div>
+
+  <!-- Main 3-Column Resource Content -->
+  <main id="resources-columns" class="ncs-resources__columns" aria-label="Community Resources Directory">
+    <div style="padding: 2rem 0; font-style: italic; color: #666;">Loading community resources...</div>
+  </main>
+</div>
+
+<script type="module">
+import { pythonURI, fetchOptions } from '{{ site.baseurl }}/assets/js/api/config.js';
+
+let allResources = [];
+let isAdminUser = false;
+
+// Fallback initial data in case backend server is unreachable
+const FALLBACK_RESOURCES = [
+  {
+    category: "Advocacy Services",
+    items: [
+      { title: "Access to Independence: State Council on Developmental Disabilities", url: "https://scdd.ca.gov/" },
+      { title: "Disability Rights California - Clients' Rights Advocacy", url: "https://www.disabilityrightsca.org/" }
+    ]
+  },
+  {
+    category: "Aging & Life Planning",
+    items: [
+      { title: "Life Planning - Home of Guiding Hands", url: "https://www.guidinghands.org/" }
+    ]
+  },
+  {
+    category: "Autism",
+    items: [
+      { title: "Autism Society of San Diego", url: "https://autismsocietysandiego.org/" },
+      { title: "Autism Support of Imperial", url: "https://www.facebook.com/AutismSupportOfImperialCounty/" },
+      { title: "Best Step Forward of Imperial", url: "https://beststepforward.org/" }
+    ]
+  },
+  {
+    category: "Assistive Technology",
+    items: [
+      { title: "United Cerebral Palsy (UCP)", url: "https://ucp.org/" }
+    ]
+  },
+  {
+    category: "Benefits",
+    items: [
+      { title: "ACCESS Flyer", url: "https://www.sandiegocounty.gov/hhsa/programs/ssp/access_customer_service_center/" },
+      { title: "Benefit Finder", url: "https://www.benefits.gov/benefit-finder" },
+      { title: "California Children's Services", url: "https://www.dhcs.ca.gov/services/ccs" },
+      { title: "Healthy Families America", url: "https://www.healthyfamiliesamerica.org/" },
+      { title: "In-Home Support Services (IHSS)", url: "https://www.cdss.ca.gov/in-home-supportive-services" },
+      { title: "Medi-Cal Programs", url: "https://www.dhcs.ca.gov/services/medi-cal" }
+    ]
+  },
+  {
+    category: "CalFresh",
+    description: "A Supplemental Nutrition Assistance Program that provides financial assistance for purchasing food to low-income California residents.",
+    items: [
+      { title: "CalFresh Information", url: "https://www.cdss.ca.gov/calfresh" }
+    ]
+  },
+  {
+    category: "Cerebral Palsy",
+    items: [
+      { title: "www.cerebralpalsyguidance.com", url: "https://www.cerebralpalsyguidance.com/" },
+      { title: "Cerebral Palsy Hub - Educational & Family Support Resources", url: "https://www.cerebralpalsyhub.org/" }
+    ]
+  },
+  {
+    category: "Childcare & Parenting",
+    items: [
+      { title: "Children's Care Connection (C3)", url: "https://www.c3sandiego.org/" },
+      { title: "YMCA Child Care Resources", url: "https://www.ymcasd.org/community-support/child-care-resource-service" }
+    ]
+  },
+  {
+    category: "Down Syndrome",
+    items: [
+      { title: "Down Syndrome Association of SD", url: "https://www.dsasdonline.org/", phone: "(619) 594-7389" },
+      { title: "Down Syndrome Action", url: "mailto:dsaction@dsaction.com", phone: "(619) 694-4615", email: "dsaction@dsaction.com" },
+      { title: "Down Syndrome Center at Rady Children's Hospital", url: "https://www.rchsd.org/programs-services/down-syndrome-center/" }
+    ]
+  },
+  {
+    category: "Emergency Preparedness",
+    items: [
+      { title: "Power Shutoffs - Resource Guide", url: "https://www.cpuc.ca.gov/psps/" },
+      { title: "Personal Emergency Plan", url: "https://www.ready.gov/plan" },
+      { title: "Hotline for Power Shutoffs", url: "https://www.sdge.com/wildfire-safety/public-safety-power-shutoffs" },
+      { title: "Response.CA.GOV", url: "https://response.ca.gov/" },
+      { title: "Backup Generator Fact Sheet", url: "https://www.energy.ca.gov/" },
+      { title: "Emergency Power Planning", url: "https://www.ready.gov/power-outages" },
+      { title: "Preparing For a Power Outage", url: "https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/power-outage.html" },
+      { title: "Public Safety Power Shutoff", url: "https://www.sdge.com/psps" }
+    ]
+  },
+  {
+    category: "Employment",
+    items: [
+      { title: "CA Department of Rehabilitation", url: "https://www.dor.ca.gov/" },
+      { title: "Employment First", url: "https://www.dds.ca.gov/initiatives/employment-first/" }
+    ]
+  },
+  {
+    category: "Housing",
+    items: [
+      { title: "Southern CA Housing Collaborative", url: "https://socalhc.org/", description: "Assists in locating affordable housing for persons with developmental disabilities." },
+      { title: "Section 8 HUD Housing", url: "https://www.hud.gov/topics/housing_choice_voucher_program_section_8" }
+    ]
+  },
+  {
+    category: "Protecting Access to Services",
+    description: "Resources for California's Immigrant Communities",
+    items: [
+      { title: "Resources for California's Immigrant Communities", url: "https://www.cdss.ca.gov/immigration-services" },
+      { title: "Immigrant Legal Resource Center (ILRC)", url: "https://www.ilrc.org/" },
+      { title: "California Self Help Guide", url: "https://selfhelp.courts.ca.gov/" },
+      { title: "United We Dream", url: "https://unitedwedream.org/" },
+      { title: "USC Law Students Hotline (Assistance w/Motion to Change Hearing Format)", url: "tel:888-462-5211", phone: "888-462-5211" },
+      { title: "ICE VOICE (Victims of Immigration Crime Engagement) Hotline", url: "tel:1-855-488-6423", phone: "1-855-48-VOICE (1-855-488-6423)", description: "Ask about a detainee, locating someone, or reporting the separation of a parent and child." },
+      { title: "ICE Detention Reporting & Information Line (DRIL)", url: "tel:1-888-351-4024", phone: "1-888-351-4024", description: "General enforcement, detention conditions, abuse, trafficked individuals, or minors." },
+      { title: "Freedom for Immigrants National Detention Hotline", url: "tel:9233", phone: "DIAL 9233# (Mon-Fri, 8 am-8 pm)", description: "Connects immigrants to family, resources, and free abuse documentation support." },
+      { title: "ICE Online Detainee Locator System (ODLS)", url: "https://locator.ice.gov/odls/", description: "Find detainees in ICE custody or in customs and border protection's custody for more than 48 hours." },
+      { title: "Immigration Services Funding Grantee Referral List", url: "https://www.cdss.ca.gov/inforesources/immigration-services/immigration-services-contractors", description: "Free immigration legal services in 5 categories." },
+      { title: "Youth Legal Services Funding Primary Grantee Contact List", url: "https://www.cdss.ca.gov/inforesources/immigration-services", description: "For unaccompanied undocumented minors and immigrant youth." },
+      { title: "CA Department of Social Services Removal Defense Program Primary Grantee Contact List", url: "https://www.cdss.ca.gov/inforesources/immigration-services" },
+      { title: "Knowing Your Rights - English / Spanish", url: "https://www.aclu.org/know-your-rights/immigrants-rights" },
+      { title: "Protect Yourself from Immigration Scams - English / Spanish", url: "https://www.consumer.ftc.gov/articles/how-avoid-scams-immigrants" }
+    ]
+  },
+  {
+    category: "Regional Center Providers",
+    items: [
+      { title: "Provider Directory Regional Center Communications Support Toolkit", url: "https://www.dds.ca.gov/initiatives/provider-directory/" }
+    ]
+  },
+  {
+    category: "Safety",
+    items: [
+      { title: "DDS Safety Net - How to help clients & families stay safe and healthy", url: "https://ddssafetynet.org/" },
+      { title: "Take Me Home Registry Program", url: "https://www.sdsheriff.net/community/take-me-home", description: "A registry for individuals at risk of wandering, becoming missing or found by law enforcement who are unable to identify themselves because of their special needs." },
+      { title: "A Guide to Medical Alert Systems - MedicalAlert.org", url: "https://www.medicalalert.org/", description: "How to help the seniors in your community stay independent and safe." }
+    ]
+  },
+  {
+    category: "Supported Decision Making and Limited Conservatorship",
+    items: [
+      { title: "Decision Making Tool: When do I want support?", url: "https://supporteddecisionmaking.org/" },
+      { title: "Why Supported Decision Making?", url: "https://www.dds.ca.gov/initiatives/supported-decision-making/" },
+      { title: "DDS FAQs", url: "https://www.dds.ca.gov/transparency/faqs/" },
+      { title: "What is Conservatorship?", url: "https://selfhelp.courts.ca.gov/conservatorship" },
+      { title: "SD Probate Court: Conservatorship and Alternatives", url: "https://www.sdcourt.ca.gov/sdcourt/probate2/conservatorships" }
+    ]
+  },
+  {
+    category: "Senior Safety",
+    items: [
+      { title: "Senior Fall Prevention Checklist", url: "https://www.cdc.gov/steadi/pdf/steadi-brochure-checkforsafety-508.pdf" }
+    ]
+  },
+  {
+    category: "Transportation",
+    items: [
+      { title: "Imperial Valley Transit Access (IVT)", url: "https://www.ivtransit.com/" },
+      { title: "Metropolitan Transit System (MTS)", url: "https://www.sdmts.com/" }
+    ]
+  }
+];
+
+// Check current user admin role
+async function checkAdminStatus() {
+  try {
+    const res = await fetch(`${pythonURI}/api/id`, fetchOptions);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && (data.is_admin || (data.role && data.role.toLowerCase() === 'admin'))) {
+        isAdminUser = true;
+        document.getElementById('admin-resources-bar').style.display = 'flex';
+      }
+    }
+  } catch (err) {
+    console.warn("Could not check admin status:", err);
+  }
+}
+
+// Fetch resources from backend API
+async function loadResources() {
+  try {
+    const res = await fetch(`${pythonURI}/api/resources`, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) {
+        allResources = data;
+      } else {
+        allResources = FALLBACK_RESOURCES;
+      }
+    } else {
+      allResources = FALLBACK_RESOURCES;
+    }
+  } catch (err) {
+    console.warn("Using fallback resources due to network/server:", err);
+    allResources = FALLBACK_RESOURCES;
+  }
+  renderResources();
+  updateCategoryDatalist();
+}
+
+// Render 3-column resource layout matching the image format
+function renderResources() {
+  const container = document.getElementById('resources-columns');
+  if (!container) return;
+  container.innerHTML = '';
+
+  allResources.forEach(cat => {
+    const section = document.createElement('section');
+    section.className = 'ncs-resources__section';
+
+    let catHTML = `
+      <div class="ncs-resources__cat-title">
+        <span>${escapeHTML(cat.category)}</span>
+        ${isAdminUser ? `<button type="button" class="ncs-resources__delete-btn" title="Delete entire category" data-del-cat="${escapeHTML(cat.category)}">✕</button>` : ''}
+      </div>
+    `;
+
+    if (cat.description) {
+      catHTML += `<p class="ncs-resources__cat-desc">${escapeHTML(cat.description)}</p>`;
+    }
+
+    catHTML += `<ul class="ncs-resources__list">`;
+    (cat.items || []).forEach(item => {
+      const href = item.url ? item.url : '#';
+      const isExternal = href.startsWith('http');
+      const targetAttr = isExternal ? 'target="_blank" rel="noopener noreferrer"' : '';
+
+      catHTML += `
+        <li class="ncs-resources__item">
+          ${item.url 
+            ? `<a href="${escapeHTML(href)}" ${targetAttr}>${escapeHTML(item.title)}</a>`
+            : `<strong>${escapeHTML(item.title)}</strong>`
+          }
+          ${item.phone ? `<span class="ncs-res-phone">${escapeHTML(item.phone)}</span>` : ''}
+          ${item.email && !item.url ? `<a href="mailto:${escapeHTML(item.email)}">${escapeHTML(item.email)}</a>` : ''}
+          ${item.description ? `<span class="ncs-res-details">${escapeHTML(item.description)}</span>` : ''}
+          ${isAdminUser ? `<button type="button" class="ncs-resources__delete-btn" title="Delete item" data-del-item="${escapeHTML(item.title)}" data-cat="${escapeHTML(cat.category)}">✕</button>` : ''}
+        </li>
+      `;
+    });
+    catHTML += `</ul>`;
+
+    section.innerHTML = catHTML;
+    container.appendChild(section);
+  });
+
+  // Attach delete handlers if admin
+  if (isAdminUser) {
+    container.querySelectorAll('[data-del-item]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-cat');
+        const title = btn.getAttribute('data-del-item');
+        if (confirm(`Remove "${title}" from ${cat}?`)) {
+          deleteResource(cat, title);
+        }
+      });
+    });
+
+    container.querySelectorAll('[data-del-cat]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-del-cat');
+        if (confirm(`Remove the entire "${cat}" category and all its resources?`)) {
+          deleteResource(cat, null);
+        }
+      });
+    });
+  }
+}
+
+// Update datalist for category autocomplete
+function updateCategoryDatalist() {
+  const datalist = document.getElementById('category-suggestions');
+  if (!datalist) return;
+  datalist.innerHTML = '';
+  const cats = [...new Set(allResources.map(r => r.category))];
+  cats.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c;
+    datalist.appendChild(opt);
+  });
+}
+
+// Add a new resource (Admin API call)
+async function handleAddResource(e) {
+  e.preventDefault();
+  const category = document.getElementById('res-category').value.trim();
+  const title = document.getElementById('res-title').value.trim();
+  const url = document.getElementById('res-url').value.trim();
+  const phone = document.getElementById('res-phone').value.trim();
+  const description = document.getElementById('res-description').value.trim();
+  const msgEl = document.getElementById('admin-status-msg');
+
+  if (!category || !title) return;
+
+  msgEl.style.color = '#604140';
+  msgEl.textContent = 'Saving resource...';
+
+  try {
+    const response = await fetch(`${pythonURI}/api/resources`, {
+      ...fetchOptions,
+      method: 'POST',
+      body: JSON.stringify({ category, title, url, phone, description })
+    });
+
+    if (response.ok) {
+      const resData = await response.json();
+      allResources = resData.resources || allResources;
+      renderResources();
+      updateCategoryDatalist();
+      document.getElementById('add-resource-form').reset();
+      msgEl.style.color = '#15803d';
+      msgEl.textContent = 'Resource added successfully!';
+      setTimeout(() => {
+        document.getElementById('admin-add-resource-panel').style.display = 'none';
+        msgEl.textContent = '';
+      }, 1500);
+    } else {
+      const err = await response.json();
+      msgEl.style.color = '#b91c1c';
+      msgEl.textContent = `Error: ${err.message || 'Failed to add resource'}`;
+    }
+  } catch (err) {
+    msgEl.style.color = '#b91c1c';
+    msgEl.textContent = `Network error: ${err.message}`;
+  }
+}
+
+// Delete a resource or category (Admin API call)
+async function deleteResource(category, title) {
+  try {
+    const response = await fetch(`${pythonURI}/api/resources`, {
+      ...fetchOptions,
+      method: 'DELETE',
+      body: JSON.stringify({ category, title })
+    });
+
+    if (response.ok) {
+      const resData = await response.json();
+      allResources = resData.resources || allResources;
+      renderResources();
+      updateCategoryDatalist();
+    } else {
+      const err = await response.json();
+      alert(`Error deleting: ${err.message || 'Action denied'}`);
+    }
+  } catch (err) {
+    alert(`Network error deleting resource: ${err.message}`);
+  }
+}
+
+function escapeHTML(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await checkAdminStatus();
+  await loadResources();
+
+  // Admin Toggle UI
+  const toggleBtn = document.getElementById('toggle-add-resource-btn');
+  const panel = document.getElementById('admin-add-resource-panel');
+  const cancelBtn = document.getElementById('cancel-add-resource-btn');
+  const form = document.getElementById('add-resource-form');
+
+  if (toggleBtn && panel) {
+    toggleBtn.addEventListener('click', () => {
+      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    });
+  }
+
+  if (cancelBtn && panel) {
+    cancelBtn.addEventListener('click', () => {
+      panel.style.display = 'none';
+    });
+  }
+
+  if (form) {
+    form.addEventListener('submit', handleAddResource);
+  }
+});
+</script>
