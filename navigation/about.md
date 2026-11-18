@@ -38,11 +38,10 @@ show_reading_time: false
       <!-- Image Left -->
       <div style="flex: 0 0 40%; text-align: center;">
         <img src="{{ site.baseurl }}/images/tony-rubio-friend.png" alt="Mr. Tony Rubio with his beloved friend" style="width: 100%; border-radius: 12px; box-shadow: none !important; object-fit: cover;">
-        <p style="font-size: 1.05rem; color: #f7eedf; margin-top: 1rem; font-style: italic;">A bond of enduring friendship, joy, and mutual support.</p>
       </div>
       <!-- Text Right -->
       <div style="flex: 0 0 55%;">
-        <h2 style="color: #FFFFFF; margin-top: 0; font-size: 2.5rem; margin-bottom: 1rem;">Honoring True Friendship &amp; Inclusion</h2>
+        <h2 style="color: #FFFFFF; margin-top: 0; font-size: 2.5rem; margin-bottom: 1rem;">Bringing People Together</h2>
         <p style="color: #FFFFFF; font-size: 1.25rem; line-height: 1.8; margin-bottom: 1.25rem;">
           At the core of the North County Special Needs Community Foundation is something profound yet simple: <strong>human connection</strong>. Foundation President Tony Rubio often speaks of the deep, irreplaceable bond with his dear friend pictured here. He never let his disabilities stand in the way of living life to the fullest, sharing laughter, and inspiring everyone around him.
         </p>
