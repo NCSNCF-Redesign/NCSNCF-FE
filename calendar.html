@@ -6,34 +6,331 @@ show_reading_time: false
 ---
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css">
-
+<style>
+  /* Overall container */
+  .ncs-calendar {
+    width: min(92vw, 1200px) !important;
+    max-width: 1200px !important;
+    margin-left: 50% !important;
+    transform: translateX(-50%) !important;
+    box-sizing: border-box !important;
+    font-size: 1.1rem !important;
+  }
+  #ncs-calendar-title {
+    font-size: 2.3rem !important;
+    margin-bottom: 1rem !important;
+  }
+  .ncs-heading {
+    font-size: 2rem !important;
+    margin-top: 2.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+  .ncs-note {
+    font-size: 1.1rem !important;
+    margin: 0.85rem 0 !important;
+  }
+  /* Compact "How to use this calendar" box directly below the title */
+  .ncs-howto-box {
+    background-color: #604140 !important;
+    background: #604140 !important;
+    color: #ffffff !important;
+    padding: 1.1rem 1.5rem !important;
+    border-radius: 8px !important;
+    margin-bottom: 1.5rem !important;
+    border: none !important;
+    border-left: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+  }
+  .ncs-howto-box strong,
+  .ncs-howto-box p {
+    color: #ffffff !important;
+    margin: 0.25rem 0 !important;
+  }
+  /* Two-column layout: Filters on the left, Calendar on the right */
+  .ncs-main-layout {
+    display: grid !important;
+    grid-template-columns: 270px minmax(0, 1fr) !important;
+    gap: 1.5rem !important;
+    align-items: start !important;
+    width: 100% !important;
+  }
+  /* Left sidebar box */
+  .ncs-sidebar {
+    background-color: #604140 !important;
+    background: #604140 !important;
+    color: #ffffff !important;
+    padding: 1.5rem !important;
+    border-radius: 8px !important;
+    border: none !important;
+    border-left: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+  }
+  .ncs-sidebar-header {
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 0.75rem !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+  }
+  .ncs-sidebar strong {
+    display: block !important;
+    color: #ffffff !important;
+    font-size: 1.1rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .ncs-filters {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.6rem !important;
+  }
+  /* White buttons with #5b4241 text (filters, View Details, Close Details) */
+  .ncs-calendar .ocs_btn,
+  .ncs-calendar .ocs_btn.fill,
+  .ncs-calendar .ncs-filter,
+  .ncs-calendar .ncs-close {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: auto !important;
+    min-height: 2.5rem !important;
+    padding: 0.5rem 1.15rem !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    vertical-align: middle !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #5b4241 !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+  }
+  .ncs-calendar .ocs_btn:hover,
+  .ncs-calendar .ncs-filter:hover,
+  .ncs-calendar .ncs-close:hover {
+    background-color: #f3ecec !important;
+    color: #5b4241 !important;
+  }
+  .ncs-calendar .ncs-filter[aria-pressed="true"] {
+    box-shadow: inset 0 0 0 2px #5b4241 !important;
+    font-weight: 700 !important;
+  }
+  .ncs-filters .ocs_btn {
+    width: 100% !important;
+  }
+  /* Calendar column on the right - properly centered */
+  .ncs-calendar-col {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  .ncs-panel {
+    width: 100% !important;
+    padding: 1.25rem !important;
+    margin: 0 auto !important;
+    border: none !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+  }
+  #calendar {
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    font-size: 1.05rem !important;
+  }
+  #calendar .fc-header-toolbar {
+    background-color: #604140 !important;
+    background: #604140 !important;
+    color: #ffffff !important;
+    padding: 0.75rem 1rem !important;
+    margin: 0 0 1rem 0 !important;
+    border-radius: 6px !important;
+  }
+  #calendar .fc-toolbar-title {
+    font-size: 1.75rem !important;
+    color: #ffffff !important;
+    border-bottom: none !important;
+    margin: 0 !important;
+  }
+  #calendar .fc-button {
+    font-size: 0.95rem !important;
+    padding: 0.5rem 0.9rem !important;
+  }
+  #calendar .fc-col-header-cell-cushion {
+    font-size: 1.05rem !important;
+    padding: 0.65rem 0.35rem !important;
+  }
+  #calendar .fc-daygrid-day-frame {
+    min-height: 120px !important;
+  }
+  #calendar .fc-daygrid-day-number {
+    font-size: 1.05rem !important;
+    padding: 0.45rem 0.55rem !important;
+  }
+  #calendar .fc-event {
+    font-size: 0.98rem !important;
+    padding: 0.3rem 0.45rem !important;
+    margin-bottom: 4px !important;
+    line-height: 1.3 !important;
+  }
+  #calendar .fc-event-title {
+    font-size: 0.98rem !important;
+    font-weight: 600 !important;
+  }
+  /* Event details panel (no white outline, no pink left line) */
+  .ncs-details {
+    background-color: #604140 !important;
+    background: #604140 !important;
+    color: #ffffff !important;
+    width: 100% !important;
+    padding: 1.75rem !important;
+    margin: 1.75rem 0 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    border-left: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    font-size: 1.15rem !important;
+    line-height: 1.6 !important;
+    box-sizing: border-box !important;
+  }
+  .ncs-details h2,
+  .ncs-details p,
+  .ncs-details strong,
+  .ncs-details span {
+    color: #ffffff !important;
+  }
+  .ncs-details h2 {
+    font-size: 1.75rem !important;
+    margin-bottom: 0.85rem !important;
+    border-bottom: none !important;
+  }
+  /* Bottom Community Events grid: 2 per line, #604140 boxes, no white outlines */
+  #event-grid.ocs_grid.ncs-events {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 1.25rem !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  #event-grid .ncs-event-card {
+    background-color: #604140 !important;
+    background: #604140 !important;
+    color: #ffffff !important;
+    padding: 1.75rem !important;
+    border-radius: 8px !important;
+    border: none !important;
+    border-left: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+  }
+  .ncs-event-card .ncs-category {
+    display: inline-block !important;
+    align-self: flex-start !important;
+    background-color: rgba(255, 255, 255, 0.18) !important;
+    color: #ffffff !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    padding: 0.25rem 0.75rem !important;
+    border-radius: 999px !important;
+    margin-bottom: 0.6rem !important;
+  }
+  .ncs-event-card h3 {
+    color: #ffffff !important;
+    font-size: 1.45rem !important;
+    line-height: 1.3 !important;
+    margin: 0.25rem 0 0.6rem 0 !important;
+    border-bottom: none !important;
+  }
+  .ncs-event-card .ncs-meta {
+    color: #f2e8e8 !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    margin: 0 0 0.6rem 0 !important;
+  }
+  .ncs-event-card .ncs-desc {
+    color: #f5eded !important;
+    font-size: 1.08rem !important;
+    line-height: 1.55 !important;
+    margin: 0 0 1.25rem 0 !important;
+    flex-grow: 1 !important;
+  }
+  .ncs-event-card .ocs_btn {
+    align-self: flex-start !important;
+  }
+  /* Tablet & Mobile responsiveness */
+  @media (max-width: 900px) {
+    .ncs-main-layout {
+      grid-template-columns: 1fr !important;
+    }
+    .ncs-filters {
+      flex-direction: row !important;
+      flex-wrap: wrap !important;
+    }
+    .ncs-filters .ocs_btn {
+      width: auto !important;
+    }
+  }
+  @media (max-width: 768px) {
+    .ncs-calendar {
+      width: 100% !important;
+      margin-left: 0 !important;
+      transform: none !important;
+    }
+    #event-grid.ocs_grid.ncs-events {
+      grid-template-columns: 1fr !important;
+    }
+    #calendar .fc-toolbar {
+      flex-direction: column !important;
+      gap: 0.75rem !important;
+    }
+    #calendar .fc-daygrid-day-frame {
+      min-height: 90px !important;
+    }
+  }
+</style>
 
 <section class="ncs-calendar" aria-labelledby="ncs-calendar-title">
   <h1 id="ncs-calendar-title">NCSNCF Community Event Calendar</h1>
-  <p class="ncs-intro">Explore community activities, programs, and events. Choose a category, browse the calendar, or read the event list below.</p>
 
-  <div class="ocs__grid ocs__grid--standard cols-2" style="margin-bottom: 1.2rem;">
-    <div class="ocs__grid-cell ocs__grid-cell--header">Find Community Events</div>
-    <div class="ocs__grid-cell">
+  <div class="ocs_grid-cell ocs_grid-cell--accent ncs-howto-box">
+    <strong>How to use this calendar</strong>
+    <p>Switch between Month, Week, and List views. Select an event to read its details. Event listings are shown below the calendar too.</p>
+  </div>
+
+  <div class="ncs-main-layout">
+    <aside class="ocs_grid-cell ncs-sidebar">
+      <div class="ncs-sidebar-header">Find Community Events</div>
       <strong>Browse by category</strong>
       <div class="ncs-filters" role="group" aria-label="Filter events by category">
-        <button type="button" class="ocs__btn fill small ncs-filter" data-category="All" aria-pressed="true">All Events</button>
-        <button type="button" class="ocs__btn small ncs-filter" data-category="Athletics" aria-pressed="false">Athletics</button>
-        <button type="button" class="ocs__btn small ncs-filter" data-category="Housing" aria-pressed="false">Housing</button>
-        <button type="button" class="ocs__btn small ncs-filter" data-category="Social" aria-pressed="false">Social</button>
-        <button type="button" class="ocs__btn small ncs-filter" data-category="Education" aria-pressed="false">Education</button>
+        <button type="button" class="ocs_btn fill small ncs-filter" data-category="All" aria-pressed="true">All Events</button>
+        <button type="button" class="ocs_btn small ncs-filter" data-category="Athletics" aria-pressed="false">Athletics</button>
+        <button type="button" class="ocs_btn small ncs-filter" data-category="Housing" aria-pressed="false">Housing</button>
+        <button type="button" class="ocs_btn small ncs-filter" data-category="Social" aria-pressed="false">Social</button>
+        <button type="button" class="ocs_btn small ncs-filter" data-category="Education" aria-pressed="false">Education</button>
       </div>
-    </div>
-    <div class="ocs__grid-cell ocs__grid-cell--accent">
-      <strong>How to use this calendar</strong>
-      <p>Switch between Month, Week, and List views. Select an event to read its details. Event listings are shown below the calendar too.</p>
-    </div>
-  </div>
+    </aside>
 
-  <div class="ncs-panel">
-    <div id="calendar" aria-label="Community events calendar"></div>
+    <div class="ncs-calendar-col">
+      <div class="ncs-panel">
+        <div id="calendar" aria-label="Community events calendar"></div>
+      </div>
+      <p id="calendar-status" class="ncs-note" role="status" aria-live="polite">Loading community events...</p>
+    </div>
   </div>
-  <p id="calendar-status" class="ncs-note" role="status" aria-live="polite">Loading community events...</p>
 
   <section id="event-details" class="ncs-details" aria-labelledby="detail-title" hidden>
     <h2 id="detail-title" tabindex="-1"></h2>
@@ -41,12 +338,11 @@ show_reading_time: false
     <p><strong>Category:</strong> <span id="detail-category"></span></p>
     <p><strong>Location:</strong> <span id="detail-location"></span></p>
     <p id="detail-description"></p>
-    <button type="button" id="close-details" class="ocs__btn small ncs-close">Close Details</button>
+    <button type="button" id="close-details" class="ocs_btn small ncs-close">Close Details</button>
   </section>
 
   <h2 class="ncs-heading">Community Events</h2>
-  <p class="ncs-note">Browse event information in date order. Undated or recurring events are listed separately.</p>
-  <div id="event-grid" class="ocs__grid ocs__grid--standard cols-2 ncs-events" aria-live="polite"></div>
+  <div id="event-grid" class="ocs_grid ocs_grid--standard cols-2 ncs-events" aria-live="polite"></div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
@@ -71,15 +367,21 @@ document.addEventListener('DOMContentLoaded', function () {
     Education: { bg: '#dcebf8', text: '#245b83' },
     Other: { bg: '#eae6e3', text: '#4d4845' }
   };
+
   const grid = document.getElementById('event-grid');
   const status = document.getElementById('calendar-status');
   const details = document.getElementById('event-details');
+
   let allEvents = [];
   let selectedCategory = 'All';
   let showingExamples = false;
 
   function isoLocal(date) {
-    return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
+    return [
+      date.getFullYear(),
+      String(date.getMonth() + 1).padStart(2, '0'),
+      String(date.getDate()).padStart(2, '0')
+    ].join('-');
   }
 
   function eventDates(item) {
@@ -88,6 +390,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     const raw = String(item.date || '').trim();
     if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return { start: raw, allDay: true };
+
     const range = raw.match(/^([A-Za-z]+)\s+(\d{1,2})\s*[-–]\s*(\d{1,2}),\s*(\d{4})$/);
     if (range) {
       const month = new Date(`${range[1]} 1, ${range[4]}`).getMonth();
@@ -95,14 +398,20 @@ document.addEventListener('DOMContentLoaded', function () {
       const first = Number(range[2]);
       const last = Number(range[3]);
       if (!Number.isNaN(month) && first >= 1 && last >= first && last <= new Date(year, month + 1, 0).getDate()) {
-        return { start: isoLocal(new Date(year, month, first)), end: isoLocal(new Date(year, month, last + 1)), allDay: true };
+        return {
+          start: isoLocal(new Date(year, month, first)),
+          end: isoLocal(new Date(year, month, last + 1)),
+          allDay: true
+        };
       }
     }
+
     const single = raw.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
     if (single) {
       const d = new Date(`${raw} 12:00:00`);
       if (!Number.isNaN(d.getTime())) return { start: isoLocal(d), allDay: true };
     }
+
     return null; // Never invent a date for recurring/undated entries.
   }
 
@@ -121,28 +430,37 @@ document.addEventListener('DOMContentLoaded', function () {
     details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     document.getElementById('detail-title').focus({ preventScroll: true });
   }
-  document.getElementById('close-details').addEventListener('click', () => { details.hidden = true; });
+
+  document.getElementById('close-details').addEventListener('click', () => {
+    details.hidden = true;
+  });
 
   function makeCard(item) {
     const card = document.createElement('article');
-    card.className = 'ocs__grid-cell ncs-event-card';
+    card.className = 'ocs_grid-cell ncs-event-card';
+
     const category = document.createElement('span');
     category.className = 'ncs-category';
     category.textContent = item.category || 'Other';
+
     const title = document.createElement('h3');
     title.textContent = item.title || 'Community event';
+
     const meta = document.createElement('p');
     meta.className = 'ncs-meta';
-    meta.textContent = `${item.date || item.start || 'Date TBD'} · ${item.location || 'Location TBD'}`;
+    meta.textContent = `${item.date || item.start || 'Date TBD'} • ${item.location || 'Location TBD'}`;
+
     const description = document.createElement('p');
     description.className = 'ncs-desc';
     description.textContent = item.description || 'More information coming soon.';
+
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = 'ocs__btn fill small';
+    button.className = 'ocs_btn fill small';
     button.textContent = 'View Details';
     button.setAttribute('aria-label', `View details for ${item.title || 'event'}`);
     button.addEventListener('click', () => showDetails(item));
+
     card.append(category, title, meta, description, button);
     return card;
   }
@@ -153,7 +471,11 @@ document.addEventListener('DOMContentLoaded', function () {
     dayMaxEventRows: 3,
     displayEventTime: true,
     eventDisplay: 'block',
-    headerToolbar: { left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,listMonth' },
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,listMonth'
+    },
     buttonText: { today: 'Today', month: 'Month', week: 'Week', list: 'List' },
     eventClick: function (info) {
       info.jsEvent.preventDefault();
@@ -167,34 +489,52 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function render(category) {
     selectedCategory = category;
-    const filtered = allEvents.filter(item => category === 'All' || String(item.category || '').toLowerCase() === category.toLowerCase());
+    const filtered = allEvents.filter(item =>
+      category === 'All' || String(item.category || '').toLowerCase() === category.toLowerCase()
+    );
+
     calendar.removeAllEvents();
     const calendarEvents = filtered.map(item => {
       const dates = eventDates(item);
       if (!dates) return null;
       const palette = categoryColors[item.category] || categoryColors.Other;
-      return { ...dates, title: item.title || 'Community event', backgroundColor: palette.bg, borderColor: palette.bg, textColor: palette.text, extendedProps: { original: item } };
+      return {
+        ...dates,
+        title: item.title || 'Community event',
+        backgroundColor: palette.bg,
+        borderColor: palette.bg,
+        textColor: palette.text,
+        extendedProps: { original: item }
+      };
     }).filter(Boolean);
     calendar.addEventSource(calendarEvents);
 
     grid.replaceChildren();
     const sorted = [...filtered].sort((a, b) => startSortValue(a) - startSortValue(b));
-    if (sorted.length) sorted.forEach(item => grid.appendChild(makeCard(item)));
-    else {
+    if (sorted.length) {
+      sorted.forEach(item => grid.appendChild(makeCard(item)));
+    } else {
       const empty = document.createElement('p');
       empty.className = 'ncs-empty';
       empty.textContent = 'No events are currently listed in this category.';
       grid.appendChild(empty);
     }
+
     document.querySelectorAll('.ncs-filter').forEach(button => {
       const active = button.dataset.category === category;
       button.setAttribute('aria-pressed', String(active));
       button.classList.toggle('fill', active);
     });
+
     details.hidden = true;
-    if (showingExamples) status.textContent = 'Demonstration events are shown because the event service is unavailable. Dates and locations have not been confirmed by NCSNCF.';
-    else if (allEvents.length === 0) status.textContent = 'No events have been published by the event service yet.';
-    else status.textContent = `${filtered.length} event${filtered.length === 1 ? '' : 's'} listed${category === 'All' ? '' : ' for ' + category}.`;
+
+    if (showingExamples) {
+      status.textContent = 'Demonstration events are shown because the event service is unavailable. Dates and locations have not been confirmed by NCSNCF.';
+    } else if (allEvents.length === 0) {
+      status.textContent = 'No events have been published by the event service yet.';
+    } else {
+      status.textContent = `${filtered.length} event${filtered.length === 1 ? '' : 's'} listed${category === 'All' ? '' : ' for ' + category}.`;
+    }
   }
 
   document.querySelectorAll('.ncs-filter').forEach(button => {
@@ -221,6 +561,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     render(selectedCategory);
   }
+
   fetchEvents();
 });
 </script>
