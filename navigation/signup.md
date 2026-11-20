@@ -19,9 +19,6 @@ show_reading_time: false
           <input type="text" id="uid" placeholder="Username" required autocomplete="username">
         </div>
         <div class="ncs-auth__group form-group">
-          <input type="text" id="sid" placeholder="SID" required>
-        </div>
-        <div class="ncs-auth__group form-group">
           <input type="email" id="email" placeholder="Email" required autocomplete="email">
         </div>
         <div class="ncs-auth__group form-group">
@@ -59,13 +56,11 @@ show_reading_time: false
 
     const nameInput = document.getElementById("name");
     const uidInput = document.getElementById("uid");
-    const sidInput = document.getElementById("sid");
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
 
     const name = nameInput ? nameInput.value.trim() : "";
     const uid = uidInput ? uidInput.value.trim() : "";
-    const sid = sidInput ? sidInput.value.trim() : "";
     const email = emailInput ? emailInput.value.trim() : "";
     const password = passwordInput ? passwordInput.value : "";
 
@@ -78,7 +73,6 @@ show_reading_time: false
     const signupData = {
       name,
       uid,
-      sid,
       email,
       password,
       kasmServerNeeded: false,
