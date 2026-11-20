@@ -40015,3 +40015,17 @@ button.ocs__hub-card {
 .ncs-auth__toggle a:hover {
   color: #ffffff !important;
 }
+
+.site-header a,
+.site-header a:visited,
+.site-header .site-nav .page-link {
+  color: #ffffff !important;
+}
+.site-header a:hover,
+.site-header .site-nav .page-link:hover {
+  color: #ffffff !important;
+}
+.site-header svg {
+  fill: #ffffff;
+  stroke: #ffffff;
+}

@@ -41,3 +41,22 @@
 @import "ncsncf/calendar";
 @import "ncsncf/resources";
 @import "ncsncf/auth";
+
+.site-header {
+  a,
+  a:visited,
+  .site-nav .page-link {
+    color: #ffffff !important;
+  }
+
+  a:hover,
+  .site-nav .page-link:hover {
+    color: #ffffff !important; // subtle white on hover 
+  }
+
+  // Ensures the Settings gear icon also turns white if it's an SVG
+  svg {
+    fill: #ffffff;
+    stroke: #ffffff;
+  }
+}
