@@ -1,0 +1,164 @@
+// NCSNCF Split Screen Authentication (Login & Signup)
+// Adheres strictly to OCS Grammar and SASS structure
+
+.ncs-auth {
+  $auth-bg-form: #6a5656;
+  $auth-bg-showcase: #6e5555;
+  $auth-input-bg: #653f3e;
+  $auth-ink-bright: #ffffff;
+  $auth-ink-muted: #e8ded4;
+  $auth-btn-bg: #ffffff;
+  $auth-btn-ink: #5b4241;
+  $auth-btn-hover: #e6e6e6;
+
+  display: flex;
+  min-height: calc(100vh - 56px);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  &__form-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $auth-bg-form;
+    padding: 2rem 1.5rem;
+  }
+
+  &__showcase-side {
+    flex: 1;
+    background-color: $auth-bg-showcase;
+    overflow: hidden;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__wrapper {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    color: $auth-ink-bright;
+
+    h1 {
+      display: block !important;
+      margin-bottom: 1.5rem;
+      color: $auth-ink-bright !important;
+      text-shadow: 0 0 15px $auth-bg-showcase;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 0 solid #e0e0e0 !important;
+      outline: none !important;
+      box-shadow: none !important;
+      border-radius: 8px;
+      font-family: inherit;
+      box-sizing: border-box;
+      font-size: 0.95rem;
+      color: $auth-ink-bright !important;
+      background-color: $auth-input-bg !important;
+      transition: box-shadow 0.2s ease;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4) !important;
+      }
+
+      &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 30px $auth-input-bg inset !important;
+        -webkit-text-fill-color: $auth-ink-bright !important;
+      }
+    }
+  }
+
+  &__submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: $auth-btn-bg !important;
+    color: $auth-btn-ink !important;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+
+    &:hover {
+      background-color: $auth-btn-hover !important;
+      transform: translateY(-1px);
+    }
+
+    &:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  &__message {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    min-height: 1.25rem;
+    word-break: break-word;
+
+    &--error {
+      color: #ffb4ab !important;
+    }
+
+    &--success {
+      color: #bbf2c8 !important;
+    }
+
+    &--info {
+      color: #f7eedf !important;
+    }
+  }
+
+  &__toggle {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.92rem;
+    color: $auth-ink-bright !important;
+
+    a {
+      color: #fde047 !important;
+      font-weight: 700;
+      text-decoration: underline;
+
+      &:hover {
+        color: #ffffff !important;
+      }
+    }
+  }
+}
