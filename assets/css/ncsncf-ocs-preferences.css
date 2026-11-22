@@ -25,3 +25,55 @@ html.ncsncf-ocs-preferences-active[data-ocs-button-style=pill] body :is(button,.
 .ocs-head-video {position:fixed;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
 .ocs-head-cursor {position:fixed;left:-10px;top:-10px;width:20px;height:20px;border:3px solid #ec4899;background:rgba(255,255,255,.3);border-radius:50%;pointer-events:none;z-index:2147483646;box-shadow:0 0 0 3px #111;transform:translate(-9999px,-9999px)}
 @media(max-width:600px){.a11y-hub .a11y-grid.ocs-prefs-grid{grid-template-columns:1fr!important}}
+
+/* Accessible dropdown menus */
+select {
+  color: #172b4d !important;
+  background-color: #ffffff !important;
+  border: 1px solid #9bb5db !important;
+  color-scheme: light;
+}
+
+select option,
+select optgroup {
+  color: #172b4d !important;
+  background-color: #ffffff !important;
+}
+
+select:focus {
+  outline: 3px solid #2563eb !important;
+  outline-offset: 2px;
+  border-color: #2563eb !important;
+}
+
+select:disabled {
+  color: #64748b !important;
+  background-color: #e2e8f0 !important;
+}
+
+
+/* Accessible dropdown menus */
+select {
+  color: #172b4d !important;
+  background-color: #ffffff !important;
+  border: 1px solid #9bb5db !important;
+  color-scheme: light;
+}
+
+select option,
+select optgroup {
+  color: #172b4d !important;
+  background-color: #ffffff !important;
+}
+
+select:focus {
+  outline: 3px solid #2563eb !important;
+  outline-offset: 2px;
+  border-color: #2563eb !important;
+}
+
+select:disabled {
+  color: #64748b !important;
+  background-color: #e2e8f0 !important;
+}
+
