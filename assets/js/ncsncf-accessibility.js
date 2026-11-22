@@ -3,104 +3,9 @@
   "use strict";
 
   const categories = [
-    ["🎨 Theme & Colors", "Choose the original site appearance, light, dark, or your own colors.", []],
-    [
-      "Vision",
-      "Adjust colors, text size, and visibility.",
-      [
-        ["largeText", "Larger text", "Increase the base text size."],
-        ["extraLargeText", "Extra-large text", "Increase the base text size further."],
-        ["smallText", "Smaller text", "Use a more compact base text size."],
-        ["highContrast", "High contrast", "Use stronger black-and-white contrast."],
-        ["darkMode", "Dark background", "Use a darker page background."],
-        ["grayscale", "Grayscale", "Remove color from the page."],
-        ["saturate", "Stronger colors", "Increase color saturation."],
-        ["invert", "Invert colors", "Invert page colors."],
-        ["zoom110", "Page zoom 110%", "Enlarge the page layout."],
-        ["zoom125", "Page zoom 125%", "Enlarge the page layout further."]
-      ]
-    ],
-    [
-      "Reading",
-      "Make written content easier to follow.",
-      [
-        ["underlineLinks", "Underline links", "Show link underlines."],
-        ["boldLinks", "Bold links", "Emphasize linked text."],
-        ["highlightLinks", "Outline links", "Add an outline around links."],
-        ["readableFont", "Simple sans-serif font", "Use Verdana and Arial."],
-        ["serifFont", "Serif font", "Use Georgia."],
-        ["monoFont", "Monospace font", "Use fixed-width lettering."],
-        ["lineSpacing", "Extra line spacing", "Increase line height."],
-        ["letterSpacing", "Extra letter spacing", "Spread letters apart."],
-        ["wordSpacing", "Extra word spacing", "Spread words apart."],
-        ["leftAlign", "Left-align text", "Align headings and paragraphs left."],
-        ["limitWidth", "Narrower reading lines", "Limit paragraph line length."]
-      ]
-    ],
-    [
-      "Focus & Attention",
-      "Reduce visual distractions.",
-      [
-        ["hideImages", "Hide images", "Hide page images while retaining layout."],
-        ["hideDecorations", "Remove shadows", "Remove decorative shadows."],
-        ["hideBackgroundImages", "Remove background images", "Simplify visual backgrounds."],
-        ["highlightHeadings", "Mark headings", "Add a colored line to headings."],
-        ["highlightParagraphs", "Mark paragraphs", "Add a subtle reading guide."]
-      ]
-    ],
-    [
-      "Navigation",
-      "Make interactive elements easier to find.",
-      [
-        ["largeCursor", "Crosshair cursor", "Use a distinctive pointer over the page."],
-        ["strongFocus", "Strong keyboard focus", "Emphasize focused controls."],
-        ["highlightButtons", "Outline buttons", "Make buttons stand out."],
-        ["showSkipLink", "Keyboard navigation hint", "Show a navigation tip at page top."]
-      ]
-    ],
-    [
-      "Cognitive Support",
-      "Simplify the page presentation.",
-      [
-        ["reducedTransparency", "Reduce transparency", "Remove header and navigation blur."],
-        ["simpleLayout", "Simpler page backgrounds", "Remove background imagery."],
-        ["readingGuide", "Paragraph guides", "Add visual guides beside paragraphs."],
-        ["clearHeadings", "Heading markers", "Visually identify headings."]
-      ]
-    ],
-    [
-      "Forms & Inputs",
-      "Make form controls easier to use.",
-      [
-        ["largeControls", "Larger controls", "Increase the minimum height of controls."],
-        ["inputBorders", "Strong input borders", "Make input fields more visible."],
-        ["formSpacing", "Extra form spacing", "Increase spacing around form fields."],
-        ["formFocus", "Visible form focus", "Emphasize keyboard focus."]
-      ]
-    ],
-    [
-      "Motion & Media",
-      "Reduce unwanted motion and effects.",
-      [
-        ["reduceMotion", "Reduce motion", "Minimize animations and transitions."],
-        ["hideAnimations", "Hide embedded media", "Hide videos and embedded frames."],
-        ["noBackgrounds", "No background imagery", "Remove decorative background images."],
-        ["noShadows", "No visual shadows", "Remove box and text shadows."]
-      ]
-    ],
-    [
-      "Personal Preferences",
-      "Fine-tune your preferred view.",
-      [
-        ["comfortableReading", "Comfortable reading", "Increase line spacing and limit line width."],
-        ["minimalView", "Minimal view", "Remove shadows and background images."],
-        ["emphasizeActions", "Emphasize actions", "Highlight links and buttons."],
-        ["keyboardFriendly", "Keyboard-friendly focus", "Use stronger focus indicators."]
-      ]
-    ],
-    ["OCS Appearance", "Full OCS presets, custom themes, font, and contrast preview.", []],
-    ["OCS Language & Voice", "Translation and read-aloud settings.", []],
-    ["OCS Head Tracking", "Optional camera-based head pointer and nod accessibility.", []]
+    ["Appearance & Themes", "Customize themes, colors, fonts, and visual appearance.", []],
+    ["Language & Voice", "Translation and text-to-speech settings.", []],
+    ["Head Tracking", "Optional camera-based head pointer accessibility.", []]
   ];
 
   const aliases = {
@@ -489,8 +394,8 @@
 
       grid.replaceChildren();
 
-      if (activeCategory === 0) grid.appendChild(createThemePanel());
-      if (activeCategory >= 8 && window.NCSNCFOCS) window.NCSNCFOCS.mount(grid, activeCategory - 8);
+
+      if (activeCategory >= 0 && activeCategory < 3 && window.NCSNCFOCS) window.NCSNCFOCS.mount(grid, activeCategory);
 
       for (const [id, label, help] of items) {
         grid.appendChild(createSettingCard(id, label, help));
