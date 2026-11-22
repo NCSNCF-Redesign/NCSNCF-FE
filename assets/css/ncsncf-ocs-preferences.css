@@ -1,0 +1,27 @@
+/* Additional OCS-compatible preference controls; existing NCSNCF CSS remains. */
+.a11y-hub .a11y-grid.ocs-prefs-grid {display:grid!important;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))!important;gap:1rem!important}
+.a11y-hub .ocs-prefs-field {display:flex;flex-direction:column;align-items:stretch;gap:.65rem;background:white;color:#172b4d;border:1px solid #cedbec;border-radius:.8rem;padding:1rem;min-width:0}
+.a11y-hub .ocs-prefs-field strong,.a11y-hub .ocs-prefs-field small {color:#172b4d!important}
+.a11y-hub .ocs-prefs-field select,.a11y-hub .ocs-prefs-field input {font:inherit;max-width:100%;min-height:38px}
+.a11y-hub .ocs-prefs-field input[type=color]{width:100%;height:55px;cursor:pointer}
+.a11y-hub .ocs-prefs-field input[type=range]{accent-color:#2563eb}
+.a11y-hub .ocs-prefs-field input[type=checkbox]{width:22px;height:22px;min-height:22px}
+.a11y-hub .ocs-prefs-contrast,.a11y-hub .ocs-prefs-preview,.a11y-hub .ocs-prefs-note {grid-column:1/-1;color:#172b4d!important}
+.a11y-hub .ocs-prefs-contrast {padding:.7rem 1rem;border-radius:.6rem;background:#e8f5e9;font-weight:700}
+.a11y-hub .ocs-prefs-contrast[data-ok=false] {background:#fff0cd}
+.a11y-hub .ocs-prefs-preview {padding:1.2rem;border:1px solid #cad8ef;border-radius:.7rem;background:var(--ocs-pref-bg,#fff)!important;color:var(--ocs-pref-text,#222)!important;font-family:var(--ocs-pref-font,system-ui)!important;font-size:var(--ocs-pref-size,16px)!important}
+.a11y-hub .ocs-prefs-tools {grid-column:1/-1;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.a11y-hub .ocs-prefs-name {max-width:300px;min-height:42px;padding:.4rem .6rem;color:#172b4d;background:white;border:1px solid #8ea6c5;border-radius:.4rem}
+.a11y-hub .ocs-prefs-action {display:inline-block!important;padding:.65rem .9rem!important;border:1px solid #1759ea!important;border-radius:.5rem!important;background:#1759ea!important;color:white!important;cursor:pointer}
+.a11y-hub .ocs-prefs-note {margin:.4rem 0}
+html.ncsncf-ocs-preferences-active body:not(.a11y-hub) {background:var(--ocs-pref-bg)!important;color:var(--ocs-pref-text)!important;font-family:var(--ocs-pref-font)!important;font-size:var(--ocs-pref-size)!important}
+html.ncsncf-ocs-preferences-active body :is(.page-content,.site-header,.site-footer) {background-color:var(--ocs-pref-bg)!important;color:var(--ocs-pref-text)!important}
+html.ncsncf-ocs-preferences-active body :is(main,article,section,.wrapper):not(.a11y-hub *) {color:var(--ocs-pref-text)}
+html.ncsncf-ocs-preferences-active body :is(h1,h2,h3,h4,p,li):not(.a11y-hub *) {color:var(--ocs-pref-text)}
+html.ncsncf-ocs-preferences-active body a:not(.a11y-hub *) {color:var(--ocs-pref-accent)!important}
+html.ncsncf-ocs-preferences-active ::selection {background:var(--ocs-pref-selectionColor)!important;color:white}
+html.ncsncf-ocs-preferences-active[data-ocs-button-style=square] body :is(button,.ocs__btn,input[type=submit]):not(.a11y-hub *) {border-radius:0!important}
+html.ncsncf-ocs-preferences-active[data-ocs-button-style=pill] body :is(button,.ocs__btn,input[type=submit]):not(.a11y-hub *) {border-radius:9999px!important}
+.ocs-head-video {position:fixed;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+.ocs-head-cursor {position:fixed;left:-10px;top:-10px;width:20px;height:20px;border:3px solid #ec4899;background:rgba(255,255,255,.3);border-radius:50%;pointer-events:none;z-index:2147483646;box-shadow:0 0 0 3px #111;transform:translate(-9999px,-9999px)}
+@media(max-width:600px){.a11y-hub .a11y-grid.ocs-prefs-grid{grid-template-columns:1fr!important}}

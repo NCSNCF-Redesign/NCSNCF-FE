@@ -97,7 +97,10 @@
         ["emphasizeActions", "Emphasize actions", "Highlight links and buttons."],
         ["keyboardFriendly", "Keyboard-friendly focus", "Use stronger focus indicators."]
       ]
-    ]
+    ],
+    ["OCS Appearance", "Full OCS presets, custom themes, font, and contrast preview.", []],
+    ["OCS Language & Voice", "Translation and read-aloud settings.", []],
+    ["OCS Head Tracking", "Optional camera-based head pointer and nod accessibility.", []]
   ];
 
   const aliases = {
@@ -123,6 +126,84 @@
   };
   const themeStorageKey = "ncsncfThemeHubV1";
   const storageKey = "ncsncfAccessibilityHubV1";
+
+  // Set window.NCSNCF_API_BASE_URL to the deployed Flask origin before this script.
+  // Without it, settings continue to work locally but cannot sync across devices.
+  const apiBase = typeof window.NCSNCF_API_BASE_URL === "string"
+    ? window.NCSNCF_API_BASE_URL.replace(/\/$/, "")
+    : (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+      ? "http://localhost:8460" : "https://ncsncf-api.opencodingsociety.com";
+  const preferenceUrl = apiBase ? apiBase + "/api/user/preferences" : null;
+  let preferencesEdited = false;
+  document.addEventListener("ncsncf-ocs-dirty", () => { preferencesEdited = true; });
+  let accountSyncAvailable = false;
+  const syncEvent = "ncsncf-preferences-loaded";
+
+  function saveLocal(theme, accessibility) {
+    try {
+      localStorage.setItem(themeStorageKey, JSON.stringify(theme));
+      localStorage.setItem(storageKey, JSON.stringify(accessibility));
+      return true;
+    } catch (error) {
+      console.warn("Accessibility Hub: local save failed", error);
+      return false;
+    }
+  }
+
+  async function loadAccountPreferences() {
+    if (!preferenceUrl) return;
+    try {
+      const response = await fetch(preferenceUrl, { credentials: "include", cache: "no-store" });
+      if (!response.ok) return; // Signed out, unavailable, or backend not yet migrated.
+      accountSyncAvailable = true;
+      const data = await response.json();
+      const prefs = data && data.preferences;
+      if (!prefs || typeof prefs !== "object" || Array.isArray(prefs)) return;
+      // Do not overwrite changes made while the account request was in flight.
+      if (preferencesEdited) return;
+      const theme = prefs.theme;
+      const accessibility = prefs.accessibility;
+      if (!theme || typeof theme !== "object" || Array.isArray(theme) ||
+          !accessibility || typeof accessibility !== "object" || Array.isArray(accessibility)) return;
+      const safeTheme = { ...themeDefaults };
+      for (const key of Object.keys(themeDefaults)) {
+        if (typeof theme[key] === "string") safeTheme[key] = theme[key];
+      }
+      if (!["system", "light", "dark"].includes(safeTheme.themeMode)) safeTheme.themeMode = "system";
+      if (![...Object.keys(palettes), "custom"].includes(safeTheme.palette)) safeTheme.palette = "original";
+      const safeAccessibility = {};
+      for (const [, , settings] of categories) {
+        for (const [id] of settings) safeAccessibility[id] = accessibility[id] === true;
+      }
+      saveLocal(safeTheme, safeAccessibility);
+      if (prefs.ocs && typeof prefs.ocs === "object" && !Array.isArray(prefs.ocs)) {
+        window.NCSNCFOCS?.loadFromAccount(prefs.ocs);
+      }
+      restoreSitewidePreferences();
+      document.dispatchEvent(new CustomEvent(syncEvent));
+    } catch (error) {
+      console.warn("Accessibility Hub: account preferences unavailable; using this device", error);
+    }
+  }
+
+  async function saveAccountPreferences(theme, accessibility) {
+    if (!preferenceUrl) return false;
+    try {
+      const response = await fetch(preferenceUrl, {
+        method: "PUT",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ preferences: { theme, accessibility, ocs: window.NCSNCFOCS?.getSaved() || {} } })
+      });
+      if (!response.ok) throw new Error("HTTP " + response.status);
+      accountSyncAvailable = true;
+      return true;
+    } catch (error) {
+      console.warn("Accessibility Hub: account sync failed; preferences saved on this device", error);
+      return false;
+    }
+  }
+
 
   // Restore preferences on EVERY page, including pages without the Settings dialog.
   // The hub below remains responsible for editing and saving those preferences.
@@ -263,7 +344,7 @@
     let shouldRestoreOnClose = true;
 
     count.textContent =
-      `${allSettings.length} preferences • saved on this device`;
+      `${allSettings.length} preferences • ${accountSyncAvailable ? "account connected" : "this device"}`;
 
     function applyPreferences() {
       const flags = {};
@@ -290,6 +371,7 @@
       }
 
       applyTheme();
+      window.NCSNCFOCS?.apply();
 
       // Remove old three-setting implementation attributes.
       ["highContrast", "underlineLinks", "reduceMotion"].forEach(id => {
@@ -354,6 +436,7 @@
 
       input.addEventListener("change", () => {
         state[id] = input.checked;
+        preferencesEdited = true;
         applyPreferences();
       });
 
@@ -371,7 +454,7 @@
         const select = document.createElement("select"); select.setAttribute("aria-label", label);
         for (const [value, text] of options) { const opt = document.createElement("option"); opt.value = value; opt.textContent = text; select.append(opt); }
         select.value = themeState[key];
-        select.addEventListener("change", () => { themeState[key] = select.value; applyTheme(); render(); });
+        select.addEventListener("change", () => { themeState[key] = select.value; preferencesEdited = true; applyTheme(); render(); });
         field.append(caption, select); panel.append(field);
       };
       addSelect("Appearance", "themeMode", [["system","System Default (original site)"],["light","Light"],["dark","Dark"]]);
@@ -382,7 +465,7 @@
           const caption = document.createElement("strong"); caption.textContent = label;
           const input = document.createElement("input"); input.type = "color"; input.value = themeState[key]; input.setAttribute("aria-label", label);
           const hex = document.createElement("span"); hex.textContent = themeState[key];
-          input.addEventListener("input", () => { themeState[key] = input.value; hex.textContent = input.value; applyTheme(); });
+          input.addEventListener("input", () => { themeState[key] = input.value; preferencesEdited = true; hex.textContent = input.value; applyTheme(); });
           field.append(caption, input, hex); panel.append(field);
         }
       }
@@ -407,19 +490,21 @@
       grid.replaceChildren();
 
       if (activeCategory === 0) grid.appendChild(createThemePanel());
+      if (activeCategory >= 8 && window.NCSNCFOCS) window.NCSNCFOCS.mount(grid, activeCategory - 8);
 
       for (const [id, label, help] of items) {
         grid.appendChild(createSettingCard(id, label, help));
       }
 
       count.textContent =
-        `${allSettings.length} preferences • saved on this device`;
+        `${allSettings.length} preferences • ${accountSyncAvailable ? "account connected" : "this device"}`;
     }
 
     function openDialog() {
       state = { ...saved };
       themeState = { ...savedTheme };
       shouldRestoreOnClose = true;
+      window.NCSNCFOCS?.beginPreview();
 
       applyPreferences();
       activeCategory = 0; // Always reveal color customization when Settings opens.
@@ -439,6 +524,7 @@
         state = { ...saved };
         themeState = { ...savedTheme };
         applyPreferences();
+        window.NCSNCFOCS?.cancelPreview();
       }
       if (typeof dialog.close === "function" && dialog.open) {
         dialog.close();
@@ -452,27 +538,25 @@
       }
     }
 
-    function savePreferences() {
-      saved = { ...state };
-      savedTheme = { ...themeState };
-
-      try {
-        localStorage.setItem(storageKey, JSON.stringify(saved));
-        localStorage.setItem(themeStorageKey, JSON.stringify(savedTheme));
-      } catch (error) {
-        console.warn(
-          "Accessibility Hub: preferences could not be saved.",
-          error
-        );
-      }
-
+    async function savePreferences() {
+      const nextSaved = { ...state };
+      const nextTheme = { ...themeState };
+      saved = nextSaved;
+      savedTheme = nextTheme;
+      window.NCSNCFOCS?.commit();
+      preferencesEdited = true;
+      const localSaved = saveLocal(nextTheme, nextSaved);
       shouldRestoreOnClose = false;
       closeDialog();
+      const synced = await saveAccountPreferences(nextTheme, nextSaved);
+      count.textContent = `${allSettings.length} preferences • ${synced ? "saved to account" : localSaved ? "saved on this device" : "save failed"}`;
     }
 
     function restoreDefaults() {
       state = { ...defaults };
       themeState = { ...themeDefaults };
+      window.NCSNCFOCS?.resetPreview();
+      preferencesEdited = true;
 
       applyPreferences();
       render();
@@ -501,6 +585,7 @@
         state = { ...saved };
         themeState = { ...savedTheme };
         applyPreferences();
+        window.NCSNCFOCS?.cancelPreview();
       }
 
       shouldRestoreOnClose = true;
@@ -512,6 +597,18 @@
       }
     });
 
+    document.addEventListener(syncEvent, () => {
+      saved = readSavedPreferences();
+      savedTheme = readTheme();
+      if (!dialog.open) {
+        window.NCSNCFOCS?.apply();
+        state = { ...saved };
+        themeState = { ...savedTheme };
+        applyPreferences();
+        render();
+      }
+    });
+
     applyPreferences();
     render();
   }
@@ -519,10 +616,11 @@
   if (document.readyState === "loading") {
     document.addEventListener(
       "DOMContentLoaded",
-      () => { restoreSitewidePreferences(); initializeAccessibilityHub(); }
+      () => { restoreSitewidePreferences(); initializeAccessibilityHub(); loadAccountPreferences(); }
     );
   } else {
     restoreSitewidePreferences();
     initializeAccessibilityHub();
+    loadAccountPreferences();
   }
 })();
