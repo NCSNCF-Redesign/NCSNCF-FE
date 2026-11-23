@@ -1,0 +1,1190 @@
+---
+layout: post
+title: Event Calendar
+permalink: /calendar/
+show_reading_time: false
+---
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css">
+
+<style>
+  /* Overall container — breaks out of narrow Jekyll post column */
+  .ncs-calendar {
+    --ncs-surface: #604140;
+    --ncs-surface-mid: #6e5555;
+    --ncs-surface-hover: #7c6161;
+    --ncs-surface-dark: #4b3231;
+    --ncs-border-soft: rgba(255, 255, 255, 0.22);
+    --ncs-text-light: #ffffff;
+    --ncs-text-muted: #f5eded;
+    --ncs-btn-bg: #ffffff;
+    --ncs-btn-hover: #f3ecec;
+    --ncs-btn-text: #5b4241;
+    --ncs-active-bg: #f4e6ce;
+    --ncs-active-text: #3d2827;
+    --ncs-focus-light: #f4e6ce;
+
+    width: min(92vw, 1200px) !important;
+    max-width: 1200px !important;
+    margin-left: 50% !important;
+    transform: translateX(-50%) !important;
+    box-sizing: border-box !important;
+    font-size: 1.1rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .ncs-calendar *,
+  .ncs-calendar *::before,
+  .ncs-calendar *::after,
+  #event-details-dialog,
+  #event-details-dialog * {
+    box-sizing: border-box !important;
+  }
+
+  /* High-visibility keyboard focus states */
+  .ncs-calendar :focus-visible,
+  #event-details-dialog :focus-visible {
+    outline: 3px solid var(--ncs-focus-light) !important;
+    outline-offset: 3px !important;
+  }
+
+  #ncs-calendar-title {
+    font-size: 2.3rem !important;
+    margin: 0 0 1rem 0 !important;
+  }
+
+  .ncs-heading {
+    font-size: 2rem !important;
+    margin: 2.5rem 0 1rem 0 !important;
+  }
+
+  .ncs-note {
+    font-size: 1.05rem !important;
+    margin: 0.85rem 0 !important;
+  }
+
+  /* Compact "How to use this calendar" box */
+  .ncs-calendar .ncs-howto-box {
+    background-color: #604140 !important;
+    background: #604140 !important;
+    color: #ffffff !important;
+    padding: 1.1rem 1.5rem !important;
+    border-radius: 8px !important;
+    margin-bottom: 1.5rem !important;
+    border: none !important;
+    border-left: none !important;
+    box-shadow: none !important;
+  }
+
+  .ncs-calendar .ncs-howto-box strong,
+  .ncs-calendar .ncs-howto-box p {
+    color: #ffffff !important;
+    margin: 0.25rem 0 !important;
+  }
+
+  /* Two-column layout: Filters on the left, Calendar on the right */
+  .ncs-calendar .ncs-main-layout {
+    display: grid !important;
+    grid-template-columns: 270px minmax(0, 1fr) !important;
+    gap: 1.5rem !important;
+    align-items: start !important;
+    width: 100% !important;
+  }
+
+  /* Left sidebar box */
+  .ncs-calendar .ncs-sidebar {
+    background-color: #604140 !important;
+    background: #604140 !important;
+    color: #ffffff !important;
+    padding: 1.5rem !important;
+    border-radius: 8px !important;
+    border: none !important;
+    border-left: none !important;
+    box-shadow: none !important;
+  }
+
+  .ncs-calendar .ncs-sidebar-header {
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin: 0 0 0.6rem 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: none !important;
+  }
+
+  .ncs-calendar .ncs-sidebar-label {
+    display: block !important;
+    color: #ffffff !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.85rem !important;
+  }
+
+  .ncs-calendar .ncs-filters {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.65rem !important;
+  }
+
+  /* Accessible 44px+ touch-target buttons */
+  .ncs-calendar .ncs-btn,
+  #event-details-dialog .ncs-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.45rem !important;
+    min-height: 2.75rem !important;
+    height: auto !important;
+    padding: 0.55rem 1.15rem !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    line-height: 1.25 !important;
+    text-decoration: none !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #5b4241 !important;
+    border: 2px solid transparent !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    transition: background-color 0.15s ease !important;
+  }
+
+  .ncs-calendar .ncs-btn:hover,
+  #event-details-dialog .ncs-btn:hover {
+    background-color: #f3ecec !important;
+    background: #f3ecec !important;
+    color: #5b4241 !important;
+  }
+
+  .ncs-calendar .ncs-filters .ncs-btn {
+    width: 100% !important;
+    justify-content: flex-start !important;
+  }
+
+  /* Unmistakable active filter state */
+  .ncs-calendar .ncs-filter[aria-pressed="true"] {
+    background-color: #f4e6ce !important;
+    background: #f4e6ce !important;
+    color: #3d2827 !important;
+    border: 2px solid #ffffff !important;
+    font-weight: 700 !important;
+  }
+
+  .ncs-calendar .ncs-filter[aria-pressed="true"]::before {
+    content: "✓";
+    font-weight: 800;
+  }
+
+  .ncs-calendar .ncs-btn-secondary,
+  #event-details-dialog .ncs-btn-secondary {
+    background-color: transparent !important;
+    background: transparent !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .ncs-calendar .ncs-btn-secondary:hover,
+  #event-details-dialog .ncs-btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+  }
+
+  /* Calendar column on the right */
+  .ncs-calendar .ncs-calendar-col {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .ncs-calendar .ncs-panel {
+    width: 100% !important;
+    padding: 1.25rem !important;
+    margin: 0 auto !important;
+    background-color: #604140 !important;
+    background: #604140 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  #calendar {
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    background-color: transparent !important;
+    background: transparent !important;
+    color: #ffffff !important;
+    font-size: 1.05rem !important;
+    --fc-border-color: rgba(255, 255, 255, 0.22);
+    --fc-page-bg-color: #6e5555;
+    --fc-neutral-bg-color: #604140;
+    --fc-list-event-hover-bg-color: #7c6161;
+    --fc-today-bg-color: #7d6262;
+  }
+
+  /* Toolbar & spaced-out buttons */
+  #calendar .fc-header-toolbar {
+    background-color: #604140 !important;
+    background: #604140 !important;
+    color: #ffffff !important;
+    padding: 0.25rem 0 1rem 0 !important;
+    margin: 0 !important;
+    border-radius: 6px !important;
+    flex-wrap: wrap !important;
+    gap: 0.75rem !important;
+  }
+
+  #calendar .fc-toolbar-chunk {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.55rem !important;
+  }
+
+  #calendar .fc-toolbar-title {
+    font-size: 1.7rem !important;
+    color: #ffffff !important;
+    border-bottom: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #calendar .fc-button-primary,
+  #calendar .fc-button {
+    min-height: 2.65rem !important;
+    font-size: 0.96rem !important;
+    font-weight: 600 !important;
+    padding: 0.45rem 0.95rem !important;
+    margin: 0 !important;
+    border-radius: 6px !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #5b4241 !important;
+    border: 2px solid transparent !important;
+    box-shadow: none !important;
+  }
+
+  #calendar .fc-button-primary:hover,
+  #calendar .fc-button:hover {
+    background-color: #f3ecec !important;
+    background: #f3ecec !important;
+    color: #5b4241 !important;
+  }
+
+  #calendar .fc-button-primary:not(:disabled).fc-button-active,
+  #calendar .fc-button-active {
+    background-color: #f4e6ce !important;
+    background: #f4e6ce !important;
+    color: #3d2827 !important;
+    border: 2px solid #ffffff !important;
+    font-weight: 700 !important;
+  }
+
+  #calendar .fc-button:disabled {
+    opacity: 0.65 !important;
+  }
+
+  /* Month Grid Styling (#6e5555 boxes + white text) */
+  #calendar .fc-scrollgrid,
+  #calendar .fc-scrollgrid table {
+    border-color: rgba(255, 255, 255, 0.22) !important;
+  }
+
+  #calendar .fc-col-header-cell {
+    background-color: #604140 !important;
+    background: #604140 !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+  }
+
+  #calendar .fc-col-header-cell-cushion {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    padding: 0.65rem 0.35rem !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
+
+  #calendar .fc-daygrid-day {
+    background-color: #6e5555 !important;
+    background: #6e5555 !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+  }
+
+  #calendar .fc-daygrid-day.fc-day-other {
+    background-color: #5c4444 !important;
+    background: #5c4444 !important;
+  }
+
+  #calendar .fc-daygrid-day.fc-day-other .fc-daygrid-day-number {
+    color: rgba(255, 255, 255, 0.55) !important;
+  }
+
+  #calendar .fc-daygrid-day.fc-day-today {
+    background-color: #7d6262 !important;
+    background: #7d6262 !important;
+  }
+
+  #calendar .fc-daygrid-day-frame {
+    min-height: 120px !important;
+  }
+
+  #calendar .fc-daygrid-day-number {
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    padding: 0.45rem 0.55rem !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
+
+  /* Event pills in Month view — stack time cleanly above title */
+  #calendar .fc-event {
+    font-size: 0.92rem !important;
+    padding: 0.35rem 0.45rem !important;
+    margin-bottom: 4px !important;
+    line-height: 1.3 !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+  }
+
+  #calendar .fc-event-main-frame {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.15rem !important;
+  }
+
+  #calendar .fc-event-time {
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+    margin-right: 0 !important;
+  }
+
+  #calendar .fc-event-title {
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
+    white-space: normal !important;
+  }
+
+  #calendar .fc-daygrid-more-link {
+    color: #f4e6ce !important;
+    font-weight: 700 !important;
+  }
+
+  /* List View Styling (#604140 date header, #6e5555 event/time rows) */
+  #calendar .fc-list {
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+  }
+
+  #calendar .fc-list-table {
+    background-color: #6e5555 !important;
+    color: #ffffff !important;
+  }
+
+  #calendar .fc-list-day th,
+  #calendar .fc-list-day-cushion {
+    background-color: #604140 !important;
+    background: #604140 !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+    padding: 0.65rem 1rem !important;
+  }
+
+  #calendar .fc-list-day-text,
+  #calendar .fc-list-day-side-text {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+  }
+
+  #calendar .fc-list-event td {
+    background-color: #6e5555 !important;
+    background: #6e5555 !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+    padding: 0.75rem 1rem !important;
+    cursor: pointer !important;
+  }
+
+  #calendar .fc-list-event:hover td {
+    background-color: #7c6161 !important;
+    background: #7c6161 !important;
+    color: #ffffff !important;
+  }
+
+  #calendar .fc-list-event-title,
+  #calendar .fc-list-event-title a,
+  #calendar .fc-list-event-time {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+  }
+
+  #calendar .fc-list-empty {
+    background-color: #6e5555 !important;
+    color: #ffffff !important;
+  }
+
+  /* Native Modal Dialog for Event Details */
+  #event-details-dialog {
+    background-color: #604140 !important;
+    background: #604140 !important;
+    color: #ffffff !important;
+    width: min(92vw, 640px) !important;
+    max-height: 88vh !important;
+    overflow-y: auto !important;
+    padding: 1.75rem !important;
+    border: 2px solid #f4e6ce !important;
+    border-radius: 10px !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4) !important;
+    font-size: 1.1rem !important;
+    line-height: 1.6 !important;
+  }
+
+  #event-details-dialog::backdrop {
+    background-color: rgba(30, 18, 18, 0.72) !important;
+  }
+
+  #event-details-dialog .ncs-dialog-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  #detail-title {
+    font-size: 1.65rem !important;
+    line-height: 1.3 !important;
+    color: #ffffff !important;
+    margin: 0.45rem 0 0 0 !important;
+    padding: 0 !important;
+    border-bottom: none !important;
+  }
+
+  #event-details-dialog .ncs-dialog-meta {
+    margin: 0 0 1.25rem 0 !important;
+    padding: 1rem 1.25rem !important;
+    background-color: #4b3231 !important;
+    background: #4b3231 !important;
+    border-radius: 8px !important;
+  }
+
+  #event-details-dialog .ncs-dialog-meta p,
+  #event-details-dialog .ncs-dialog-meta strong,
+  #event-details-dialog .ncs-dialog-meta span {
+    margin: 0.4rem 0 !important;
+    color: #ffffff !important;
+  }
+
+  #detail-description {
+    color: #f5eded !important;
+    margin: 0 0 1.5rem 0 !important;
+  }
+
+  #event-details-dialog .ncs-dialog-actions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.75rem !important;
+    align-items: center !important;
+  }
+
+  /* Unified Category Pill (matches FullCalendar colors) */
+  .ncs-category-pill {
+    display: inline-block !important;
+    align-self: flex-start !important;
+    font-size: 0.92rem !important;
+    font-weight: 700 !important;
+    padding: 0.25rem 0.75rem !important;
+    border-radius: 999px !important;
+    margin-bottom: 0.5rem !important;
+    letter-spacing: 0.01em !important;
+  }
+
+  /* Bottom Community Events grid: 2 per line, #604140 boxes */
+  #event-grid.ncs-events {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 1.25rem !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  #event-grid article.ncs-event-card {
+    background-color: #604140 !important;
+    background: #604140 !important;
+    color: #ffffff !important;
+    padding: 1.75rem !important;
+    border-radius: 8px !important;
+    border: none !important;
+    border-left: none !important;
+    box-shadow: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  #event-grid article.ncs-event-card h3 {
+    color: #ffffff !important;
+    font-size: 1.45rem !important;
+    line-height: 1.3 !important;
+    margin: 0.25rem 0 0.75rem 0 !important;
+    padding: 0 !important;
+    border-bottom: none !important;
+  }
+
+  #event-grid .ncs-card-meta {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 0 0.9rem 0 !important;
+    color: #f2e8e8 !important;
+    font-size: 1.02rem !important;
+  }
+
+  #event-grid .ncs-card-meta li {
+    margin: 0 0 0.35rem 0 !important;
+    padding: 0 !important;
+    color: #f2e8e8 !important;
+    list-style: none !important;
+  }
+
+  #event-grid .ncs-card-meta strong {
+    color: #ffffff !important;
+  }
+
+  #event-grid article.ncs-event-card .ncs-desc {
+    color: #f5eded !important;
+    font-size: 1.06rem !important;
+    line-height: 1.55 !important;
+    margin: 0 0 1.25rem 0 !important;
+    flex-grow: 1 !important;
+  }
+
+  #event-grid article.ncs-event-card .ncs-btn {
+    align-self: flex-start !important;
+  }
+
+  #event-grid .ncs-empty {
+    grid-column: 1 / -1 !important;
+    padding: 1.25rem !important;
+    background-color: #604140 !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+  }
+
+  /* Tablet & Mobile responsiveness */
+  @media (max-width: 900px) {
+    .ncs-calendar .ncs-main-layout {
+      grid-template-columns: 1fr !important;
+    }
+
+    .ncs-calendar .ncs-filters {
+      flex-direction: row !important;
+      flex-wrap: wrap !important;
+    }
+
+    .ncs-calendar .ncs-filters .ncs-btn {
+      width: auto !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .ncs-calendar {
+      width: 100% !important;
+      margin-left: 0 !important;
+      transform: none !important;
+    }
+
+    #event-grid.ncs-events {
+      grid-template-columns: 1fr !important;
+    }
+
+    #calendar .fc-header-toolbar {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      text-align: center !important;
+    }
+
+    #calendar .fc-toolbar-chunk {
+      justify-content: center !important;
+      flex-wrap: wrap !important;
+    }
+
+    #calendar .fc-daygrid-day-frame {
+      min-height: 90px !important;
+    }
+  }
+
+  /* Respect user motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .ncs-calendar *,
+    #event-details-dialog * {
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+
+<section class="ncs-calendar" aria-labelledby="ncs-calendar-title">
+  <h1 id="ncs-calendar-title">NCSNCF Community Event Calendar</h1>
+
+  <div class="ncs-howto-box">
+    <strong>How to use this calendar</strong>
+    <p>Filter events by category, or switch between Month and List views. Select any event to open its full details, accessibility info, and calendar download. All upcoming events are also listed as cards below.</p>
+  </div>
+
+  <div class="ncs-main-layout">
+    <aside class="ncs-sidebar" aria-labelledby="ncs-filter-heading">
+      <h2 id="ncs-filter-heading" class="ncs-sidebar-header">Find Community Events</h2>
+      <span class="ncs-sidebar-label">Browse by category</span>
+      <div class="ncs-filters" role="group" aria-label="Filter events by category">
+        <button type="button" class="ncs-btn ncs-filter" data-category="All" aria-pressed="true">All Events</button>
+        <button type="button" class="ncs-btn ncs-filter" data-category="Athletics" aria-pressed="false">Athletics</button>
+        <button type="button" class="ncs-btn ncs-filter" data-category="Housing" aria-pressed="false">Housing</button>
+        <button type="button" class="ncs-btn ncs-filter" data-category="Social" aria-pressed="false">Social</button>
+        <button type="button" class="ncs-btn ncs-filter" data-category="Education" aria-pressed="false">Education</button>
+      </div>
+    </aside>
+
+    <div class="ncs-calendar-col">
+      <div class="ncs-panel">
+        <div id="calendar" aria-label="Community events calendar"></div>
+      </div>
+      <p id="calendar-status" class="ncs-note" role="status" aria-live="polite">Loading community events...</p>
+    </div>
+  </div>
+
+  <h2 class="ncs-heading">Community Events</h2>
+  <div id="event-grid" class="ncs-events" aria-live="polite"></div>
+</section>
+
+<dialog id="event-details-dialog" aria-labelledby="detail-title">
+  <div class="ncs-dialog-header">
+    <div>
+      <span id="detail-category" class="ncs-category-pill"></span>
+      <h2 id="detail-title" tabindex="-1"></h2>
+    </div>
+    <button type="button" id="close-details-top" class="ncs-btn ncs-btn-secondary" aria-label="Close event details">Close</button>
+  </div>
+
+  <div class="ncs-dialog-meta">
+    <p><strong>When:</strong> <span id="detail-date"></span></p>
+    <p><strong>Where:</strong> <span id="detail-location"></span></p>
+    <p id="detail-format-row" hidden><strong>Format:</strong> <span id="detail-format"></span></p>
+    <p id="detail-accessibility-row" hidden><strong>Accessibility &amp; Sensory Info:</strong> <span id="detail-accessibility"></span></p>
+    <p id="detail-cost-row" hidden><strong>Cost / RSVP:</strong> <span id="detail-cost"></span></p>
+  </div>
+
+  <p id="detail-description"></p>
+
+  <div class="ncs-dialog-actions">
+    <button type="button" id="download-ics" class="ncs-btn" hidden>Add to Calendar (.ics)</button>
+    <a id="detail-rsvp-link" class="ncs-btn" href="#" target="_blank" rel="noopener noreferrer" hidden>Register / More Info</a>
+    <button type="button" id="close-details-bottom" class="ncs-btn ncs-btn-secondary">Close Details</button>
+  </div>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  'use strict';
+
+  // Demonstration entries shown if the backend API is unreachable.
+  const FALLBACK_EVENTS = [
+    {
+      title: 'Poway Padres Softball Weekly Practice',
+      category: 'Athletics',
+      date: 'Every Saturday, 10:00 AM',
+      daysOfWeek: [6],
+      startTime: '10:00:00',
+      endTime: '12:00:00',
+      location: 'Poway Community Park',
+      format: 'In-person',
+      accessibility: 'Wheelchair-accessible dugouts and paved walkways; shaded seating available.',
+      cost: 'Free — No RSVP required',
+      description: 'Weekly softball practice, batting drills, and team camaraderie for athletes, coaches, and families.'
+    },
+    {
+      title: 'Monte Vista Housing Project Community Briefing',
+      category: 'Housing',
+      date: 'October 18, 2026',
+      location: 'Poway City Hall / Virtual',
+      format: 'Hybrid (In-person & Zoom)',
+      accessibility: 'Step-free entrance, live closed captions on Zoom, and large-print handouts.',
+      cost: 'Free',
+      description: 'Community briefing about housing opportunities and project updates.'
+    },
+    {
+      title: 'Annual 2-Night Family Caregiver Retreat',
+      category: 'Social',
+      date: 'November 14-16, 2026',
+      location: 'Julian, CA',
+      format: 'In-person',
+      accessibility: 'Quiet sensory room on site; dietary accommodations provided upon registration.',
+      cost: 'RSVP required',
+      description: 'A weekend focused on rest, connection, and support for family caregivers.'
+    },
+    {
+      title: 'Post-Secondary Vocational Skills Workshop',
+      category: 'Education',
+      date: 'December 5, 2026',
+      location: 'North County Regional Learning Center',
+      format: 'In-person',
+      accessibility: 'Wheelchair accessible; sensory-friendly breaks scheduled every 45 minutes.',
+      cost: 'Free — Registration recommended',
+      description: 'A workshop about workplace readiness, job coaching, and interview skills.'
+    },
+    {
+      title: 'NCSNCF Community Holiday Social & Bowling',
+      category: 'Social',
+      date: 'December 19, 2026',
+      location: 'Old Poway Park & Bowling Center',
+      format: 'In-person',
+      accessibility: 'Bowling ramps, bumpers, and quiet lounge area available.',
+      cost: 'Free for members',
+      description: 'Community holiday celebration with bowling and social activities.'
+    },
+    {
+      title: 'Navigating SDRC & Supported Living Options',
+      category: 'Education',
+      date: 'January 16, 2027',
+      location: 'Poway Library Community Hall',
+      format: 'In-person',
+      accessibility: 'Wheelchair accessible; ASL interpretation available with 7 days notice.',
+      cost: 'Free — Open to all families',
+      description: 'Information about San Diego Regional Center services and supported living options.'
+    }
+  ];
+
+  const categoryColors = {
+    Athletics: { bg: '#dceee5', text: '#1b513b' },
+    Housing:   { bg: '#f4e6ce', text: '#6b4512' },
+    Social:    { bg: '#e8e0f5', text: '#4e3675' },
+    Education: { bg: '#dcebf8', text: '#1d4c6e' },
+    Other:     { bg: '#eae6e3', text: '#423e3b' }
+  };
+
+  const grid = document.getElementById('event-grid');
+  const statusEl = document.getElementById('calendar-status');
+  const dialog = document.getElementById('event-details-dialog');
+  const downloadIcsBtn = document.getElementById('download-ics');
+
+  let allEvents = [];
+  let selectedCategory = 'All';
+  let showingExamples = false;
+  let lastFocusedElement = null;
+  let activeDialogEvent = null;
+
+  function getPalette(category) {
+    return categoryColors[category] || categoryColors.Other;
+  }
+
+  function isoLocal(date) {
+    return [
+      date.getFullYear(),
+      String(date.getMonth() + 1).padStart(2, '0'),
+      String(date.getDate()).padStart(2, '0')
+    ].join('-');
+  }
+
+  function eventDates(item) {
+    // 1. Recurring events (e.g., weekly practice)
+    if (Array.isArray(item.daysOfWeek) && item.daysOfWeek.length > 0) {
+      return {
+        daysOfWeek: item.daysOfWeek,
+        startTime: item.startTime || undefined,
+        endTime: item.endTime || undefined,
+        allDay: !item.startTime
+      };
+    }
+
+    // 2. Structured ISO start/end from backend
+    if (typeof item.start === 'string' && /^\d{4}-\d{2}-\d{2}/.test(item.start)) {
+      return {
+        start: item.start,
+        end: item.end || undefined,
+        allDay: item.allDay !== false
+      };
+    }
+
+    const raw = String(item.displayDate || item.date || '').trim();
+    if (!raw) return null;
+
+    // 3. Direct ISO string
+    if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+      return { start: raw, allDay: true };
+    }
+
+    // 4. Same-month range: "November 14-16, 2026"
+    const sameMonth = raw.match(/^([A-Za-z]+)\s+(\d{1,2})\s*[–-]\s*(\d{1,2}),\s*(\d{4})$/);
+    if (sameMonth) {
+      const year = Number(sameMonth[4]);
+      const month = new Date(`${sameMonth[1]} 1, ${year}`).getMonth();
+      const first = Number(sameMonth[2]);
+      const last = Number(sameMonth[3]);
+      if (!Number.isNaN(month) && first >= 1 && last >= first) {
+        return {
+          start: isoLocal(new Date(year, month, first)),
+          end: isoLocal(new Date(year, month, last + 1)),
+          allDay: true
+        };
+      }
+    }
+
+    // 5. Cross-month range: "November 30 - December 2, 2026"
+    const crossMonth = raw.match(/^([A-Za-z]+)\s+(\d{1,2})\s*[–-]\s*([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+    if (crossMonth) {
+      const year = Number(crossMonth[5]);
+      const startDate = new Date(`${crossMonth[1]} ${crossMonth[2]}, ${year} 12:00:00`);
+      const endDate = new Date(`${crossMonth[3]} ${crossMonth[4]}, ${year} 12:00:00`);
+      if (!Number.isNaN(startDate.getTime()) && !Number.isNaN(endDate.getTime())) {
+        endDate.setDate(endDate.getDate() + 1);
+        return {
+          start: isoLocal(startDate),
+          end: isoLocal(endDate),
+          allDay: true
+        };
+      }
+    }
+
+    // 6. Single date: "October 18, 2026"
+    const single = raw.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+    if (single) {
+      const d = new Date(`${raw} 12:00:00`);
+      if (!Number.isNaN(d.getTime())) {
+        return { start: isoLocal(d), allDay: true };
+      }
+    }
+
+    return null;
+  }
+
+  function startSortValue(item) {
+    const dates = eventDates(item);
+    if (!dates) return Infinity;
+    if (dates.daysOfWeek) return 0;
+    return dates.start ? new Date(dates.start).getTime() : Infinity;
+  }
+
+  function escapeIcsText(str) {
+    return String(str || '')
+      .replace(/\\/g, '\\\\')
+      .replace(/;/g, '\\;')
+      .replace(/,/g, '\\,')
+      .replace(/\n/g, '\\n');
+  }
+
+  function downloadIcs(item) {
+    const dates = eventDates(item);
+    if (!dates) return;
+
+    const lines = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//NCSNCF//Community Event Calendar//EN',
+      'BEGIN:VEVENT',
+      `SUMMARY:${escapeIcsText(item.title || 'Community Event')}`,
+      `LOCATION:${escapeIcsText(item.location || '')}`,
+      `DESCRIPTION:${escapeIcsText(item.description || '')}`
+    ];
+
+    if (dates.daysOfWeek && dates.daysOfWeek.length > 0) {
+      const dayMap = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+      const byDay = dates.daysOfWeek.map(d => dayMap[d]).filter(Boolean).join(',');
+      const now = new Date();
+      const targetDay = dates.daysOfWeek[0];
+      const diff = (targetDay - now.getDay() + 7) % 7;
+      const firstDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diff);
+      const ymd = isoLocal(firstDate).replace(/-/g, '');
+
+      if (dates.startTime) {
+        const startT = dates.startTime.replace(/:/g, '').slice(0, 6);
+        const endT = (dates.endTime || dates.startTime).replace(/:/g, '').slice(0, 6);
+        lines.push(`DTSTART:${ymd}T${startT}`);
+        lines.push(`DTEND:${ymd}T${endT}`);
+      } else {
+        lines.push(`DTSTART;VALUE=DATE:${ymd}`);
+      }
+      lines.push(`RRULE:FREQ=WEEKLY;BYDAY=${byDay}`);
+    } else if (dates.start) {
+      const startClean = dates.start.slice(0, 10).replace(/-/g, '');
+      lines.push(`DTSTART;VALUE=DATE:${startClean}`);
+      if (dates.end) {
+        const endClean = dates.end.slice(0, 10).replace(/-/g, '');
+        lines.push(`DTEND;VALUE=DATE:${endClean}`);
+      }
+    }
+
+    lines.push('END:VEVENT', 'END:VCALENDAR');
+
+    const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${(item.title || 'event').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.ics`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function setOptionalRow(rowId, valueId, value) {
+    const row = document.getElementById(rowId);
+    const span = document.getElementById(valueId);
+    if (value && String(value).trim()) {
+      span.textContent = value;
+      row.hidden = false;
+    } else {
+      span.textContent = '';
+      row.hidden = true;
+    }
+  }
+
+  function showDetails(item) {
+    lastFocusedElement = document.activeElement;
+    activeDialogEvent = item;
+
+    const categoryName = item.category || 'Other';
+    const palette = getPalette(categoryName);
+
+    const catEl = document.getElementById('detail-category');
+    catEl.textContent = categoryName;
+    catEl.style.backgroundColor = palette.bg;
+    catEl.style.color = palette.text;
+
+    document.getElementById('detail-title').textContent = item.title || 'Community Event';
+    document.getElementById('detail-date').textContent = item.displayDate || item.date || item.start || 'Date to be announced';
+    document.getElementById('detail-location').textContent = item.location || 'Location to be announced';
+    document.getElementById('detail-description').textContent = item.description || 'More details coming soon.';
+
+    setOptionalRow('detail-format-row', 'detail-format', item.format);
+    setOptionalRow('detail-accessibility-row', 'detail-accessibility', item.accessibility);
+    setOptionalRow('detail-cost-row', 'detail-cost', item.cost);
+
+    const rsvpLink = document.getElementById('detail-rsvp-link');
+    if (item.rsvpUrl) {
+      rsvpLink.href = item.rsvpUrl;
+      rsvpLink.hidden = false;
+    } else {
+      rsvpLink.hidden = true;
+    }
+
+    downloadIcsBtn.hidden = !eventDates(item);
+
+    if (typeof dialog.showModal === 'function') {
+      dialog.showModal();
+    } else {
+      dialog.setAttribute('open', '');
+    }
+    document.getElementById('detail-title').focus();
+  }
+
+  function closeDetails() {
+    if (dialog.open) {
+      dialog.close();
+    }
+  }
+
+  dialog.addEventListener('close', function () {
+    activeDialogEvent = null;
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+      lastFocusedElement.focus();
+    }
+  });
+
+  dialog.addEventListener('click', function (event) {
+    if (event.target === dialog) {
+      closeDetails();
+    }
+  });
+
+  document.getElementById('close-details-top').addEventListener('click', closeDetails);
+  document.getElementById('close-details-bottom').addEventListener('click', closeDetails);
+
+  downloadIcsBtn.addEventListener('click', function () {
+    if (activeDialogEvent) downloadIcs(activeDialogEvent);
+  });
+
+  function makeCard(item) {
+    const card = document.createElement('article');
+    card.className = 'ncs-event-card';
+
+    const categoryName = item.category || 'Other';
+    const palette = getPalette(categoryName);
+
+    const category = document.createElement('span');
+    category.className = 'ncs-category-pill';
+    category.textContent = categoryName;
+    category.style.backgroundColor = palette.bg;
+    category.style.color = palette.text;
+
+    const title = document.createElement('h3');
+    title.textContent = item.title || 'Community Event';
+
+    const metaList = document.createElement('ul');
+    metaList.className = 'ncs-card-meta';
+
+    const metaItems = [
+      ['When:', item.displayDate || item.date || item.start || 'Date TBD'],
+      ['Where:', item.location || 'Location TBD']
+    ];
+    if (item.format) metaItems.push(['Format:', item.format]);
+
+    metaItems.forEach(([label, val]) => {
+      const li = document.createElement('li');
+      const strong = document.createElement('strong');
+      strong.textContent = label + ' ';
+      li.append(strong, document.createTextNode(val));
+      metaList.appendChild(li);
+    });
+
+    const description = document.createElement('p');
+    description.className = 'ncs-desc';
+    description.textContent = item.description || 'More information coming soon.';
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'ncs-btn';
+    button.textContent = 'View Details';
+    button.setAttribute('aria-label', `View details for ${item.title || 'event'}`);
+    button.addEventListener('click', () => showDetails(item));
+
+    card.append(category, title, metaList, description, button);
+    return card;
+  }
+
+  const calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+    initialView: window.matchMedia('(max-width: 700px)').matches ? 'listMonth' : 'dayGridMonth',
+    height: 'auto',
+    dayMaxEventRows: 3,
+    displayEventTime: true,
+    eventTimeFormat: {
+      hour: 'numeric',
+      minute: '2-digit',
+      meridiem: 'short'
+    },
+    eventDisplay: 'block',
+    /* Spaces instead of commas separate the buttons so they space out cleanly */
+    headerToolbar: {
+      left: 'prev next today',
+      center: 'title',
+      right: 'dayGridMonth listMonth'
+    },
+    buttonText: {
+      today: 'Today',
+      month: 'Month',
+      list: 'List'
+    },
+    eventClick: function (info) {
+      info.jsEvent.preventDefault();
+      if (info.event.extendedProps.original) {
+        showDetails(info.event.extendedProps.original);
+      }
+    },
+    eventDidMount: function (info) {
+      info.el.title = info.event.title;
+      info.el.setAttribute('tabindex', '0');
+      info.el.setAttribute('role', 'button');
+      info.el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (info.event.extendedProps.original) {
+            showDetails(info.event.extendedProps.original);
+          }
+        }
+      });
+    }
+  });
+
+  calendar.render();
+
+  function render(category) {
+    selectedCategory = category;
+
+    const filtered = allEvents.filter(item =>
+      category === 'All' ||
+      String(item.category || '').toLowerCase() === category.toLowerCase()
+    );
+
+    calendar.removeAllEvents();
+
+    const calendarEvents = filtered.map(item => {
+      const dates = eventDates(item);
+      if (!dates) return null;
+      const palette = getPalette(item.category);
+      return {
+        ...dates,
+        title: item.title || 'Community Event',
+        backgroundColor: palette.bg,
+        /* Using pastel bg for borderColor makes the List view category dot pop on #6e5555 */
+        borderColor: palette.bg,
+        textColor: palette.text,
+        extendedProps: { original: item }
+      };
+    }).filter(Boolean);
+
+    calendar.addEventSource(calendarEvents);
+
+    grid.replaceChildren();
+    const sorted = [...filtered].sort((a, b) => startSortValue(a) - startSortValue(b));
+
+    if (sorted.length) {
+      sorted.forEach(item => grid.appendChild(makeCard(item)));
+    } else {
+      const empty = document.createElement('p');
+      empty.className = 'ncs-empty';
+      empty.textContent = 'No events are currently listed in this category.';
+      grid.appendChild(empty);
+    }
+
+    document.querySelectorAll('.ncs-filter').forEach(button => {
+      const active = button.dataset.category === category;
+      button.setAttribute('aria-pressed', String(active));
+    });
+
+    if (showingExamples) {
+      statusEl.textContent = 'Demonstration events are shown because the event service is unavailable. Dates and locations have not been confirmed by NCSNCF.';
+    } else if (allEvents.length === 0) {
+      statusEl.textContent = 'No events have been published by the event service yet.';
+    } else {
+      statusEl.textContent = `${filtered.length} event${filtered.length === 1 ? '' : 's'} listed${category === 'All' ? '' : ' for ' + category}.`;
+    }
+  }
+
+  document.querySelectorAll('.ncs-filter').forEach(button => {
+    button.addEventListener('click', () => render(button.dataset.category));
+  });
+
+  // TODO: Update the production URL when the NCSNCF backend host is finalized.
+  const BACKEND_URL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    ? 'http://localhost:8587'
+    : 'https://ccae-be.onrender.com';
+
+  async function fetchEvents() {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/events`, {
+        headers: { Accept: 'application/json' }
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      if (!Array.isArray(data)) throw new Error('Expected an array of events');
+      allEvents = data;
+      showingExamples = false;
+    } catch (error) {
+      console.warn('Event API unavailable:', error);
+      allEvents = FALLBACK_EVENTS;
+      showingExamples = true;
+    }
+    render(selectedCategory);
+  }
+
+  fetchEvents();
+});
+</script>
