@@ -53,9 +53,18 @@ show_reading_time: false
     margin: 0 0 1rem 0 !important;
   }
 
+  .ncs-heading-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 1rem !important;
+    margin: 2.5rem 0 1rem 0 !important;
+  }
+
   .ncs-heading {
     font-size: 2rem !important;
-    margin: 2.5rem 0 1rem 0 !important;
+    margin: 0 !important;
   }
 
   .ncs-note {
@@ -122,6 +131,12 @@ show_reading_time: false
     margin-bottom: 0.85rem !important;
   }
 
+  .ncs-calendar .ncs-sidebar-divider {
+    border: 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.22) !important;
+    margin: 1.25rem 0 !important;
+  }
+
   .ncs-calendar .ncs-filters {
     display: flex !important;
     flex-direction: column !important;
@@ -159,13 +174,29 @@ show_reading_time: false
     color: #5b4241 !important;
   }
 
-  .ncs-calendar .ncs-filters .ncs-btn {
+  .ncs-calendar .ncs-filters .ncs-btn,
+  .ncs-calendar .ncs-sidebar .ncs-past-toggle {
     width: 100% !important;
     justify-content: flex-start !important;
   }
 
-  /* Unmistakable active filter state */
-  .ncs-calendar .ncs-filter[aria-pressed="true"] {
+  /* High-contrast button for light page header next to Community Events */
+  .ncs-calendar .ncs-btn-surface {
+    background-color: #604140 !important;
+    background: #604140 !important;
+    color: #ffffff !important;
+    border: 2px solid #604140 !important;
+  }
+
+  .ncs-calendar .ncs-btn-surface:hover {
+    background-color: #4b3231 !important;
+    background: #4b3231 !important;
+    color: #ffffff !important;
+  }
+
+  /* Unmistakable active filter & toggle state */
+  .ncs-calendar .ncs-filter[aria-pressed="true"],
+  .ncs-calendar .ncs-past-toggle[aria-pressed="true"] {
     background-color: #f4e6ce !important;
     background: #f4e6ce !important;
     color: #3d2827 !important;
@@ -173,7 +204,12 @@ show_reading_time: false
     font-weight: 700 !important;
   }
 
-  .ncs-calendar .ncs-filter[aria-pressed="true"]::before {
+  .ncs-calendar .ncs-btn-surface.ncs-past-toggle[aria-pressed="true"] {
+    border-color: #604140 !important;
+  }
+
+  .ncs-calendar .ncs-filter[aria-pressed="true"]::before,
+  .ncs-calendar .ncs-past-toggle[aria-pressed="true"]::before {
     content: "✓";
     font-weight: 800;
   }
@@ -495,6 +531,14 @@ show_reading_time: false
   }
 
   /* Unified Category Pill (matches FullCalendar colors) */
+  .ncs-pill-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
   .ncs-category-pill {
     display: inline-block !important;
     align-self: flex-start !important;
@@ -502,8 +546,18 @@ show_reading_time: false
     font-weight: 700 !important;
     padding: 0.25rem 0.75rem !important;
     border-radius: 999px !important;
-    margin-bottom: 0.5rem !important;
     letter-spacing: 0.01em !important;
+  }
+
+  .ncs-past-badge {
+    display: inline-block !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    padding: 0.2rem 0.65rem !important;
+    border-radius: 999px !important;
+    background-color: rgba(255, 255, 255, 0.16) !important;
+    color: #f4e6ce !important;
+    border: 1px solid rgba(244, 230, 206, 0.45) !important;
   }
 
   /* Bottom Community Events grid: 2 per line, #604140 boxes */
@@ -529,6 +583,11 @@ show_reading_time: false
     box-shadow: none !important;
     display: flex !important;
     flex-direction: column !important;
+  }
+
+  #event-grid article.ncs-event-card.is-past {
+    background-color: #533837 !important;
+    background: #533837 !important;
   }
 
   #event-grid article.ncs-event-card h3 {
@@ -591,7 +650,8 @@ show_reading_time: false
       flex-wrap: wrap !important;
     }
 
-    .ncs-calendar .ncs-filters .ncs-btn {
+    .ncs-calendar .ncs-filters .ncs-btn,
+    .ncs-calendar .ncs-sidebar .ncs-past-toggle {
       width: auto !important;
     }
   }
@@ -638,7 +698,7 @@ show_reading_time: false
 
   <div class="ncs-howto-box">
     <strong>How to use this calendar</strong>
-    <p>Filter events by category, or switch between Month and List views. Select any event to open its full details, accessibility info, and calendar download. All upcoming events are also listed as cards below.</p>
+    <p>Filter events by category, switch between Month and List views, or toggle past events on and off. Select any event to open its full details, accessibility info, and calendar download.</p>
   </div>
 
   <div class="ncs-main-layout">
@@ -652,6 +712,11 @@ show_reading_time: false
         <button type="button" class="ncs-btn ncs-filter" data-category="Social" aria-pressed="false">Social</button>
         <button type="button" class="ncs-btn ncs-filter" data-category="Education" aria-pressed="false">Education</button>
       </div>
+
+      <hr class="ncs-sidebar-divider">
+
+      <span class="ncs-sidebar-label">Date range</span>
+      <button type="button" class="ncs-btn ncs-past-toggle" aria-pressed="false">Show Past Events</button>
     </aside>
 
     <div class="ncs-calendar-col">
@@ -662,14 +727,20 @@ show_reading_time: false
     </div>
   </div>
 
-  <h2 class="ncs-heading">Community Events</h2>
+  <div class="ncs-heading-row">
+    <h2 class="ncs-heading">Community Events</h2>
+    <button type="button" class="ncs-btn ncs-btn-surface ncs-past-toggle" aria-pressed="false">Show Past Events</button>
+  </div>
   <div id="event-grid" class="ncs-events" aria-live="polite"></div>
 </section>
 
 <dialog id="event-details-dialog" aria-labelledby="detail-title">
   <div class="ncs-dialog-header">
     <div>
-      <span id="detail-category" class="ncs-category-pill"></span>
+      <div class="ncs-pill-row">
+        <span id="detail-category" class="ncs-category-pill"></span>
+        <span id="detail-past-badge" class="ncs-past-badge" hidden>Past Event</span>
+      </div>
       <h2 id="detail-title" tabindex="-1"></h2>
     </div>
     <button type="button" id="close-details-top" class="ncs-btn ncs-btn-secondary" aria-label="Close event details">Close</button>
@@ -715,6 +786,8 @@ show_reading_time: false
 
     let allEvents = [];
     let selectedCategory = 'All';
+    let showPastEvents = false;
+    let lastCalendarViewType = null;
     let lastFocusedElement = null;
     let activeDialogEvent = null;
 
@@ -769,7 +842,6 @@ show_reading_time: false
 
       const hasEndDate = endDateStr && endDateStr !== startDateStr;
 
-      // Multi-day / weeklong event formatting
       if (hasEndDate) {
         const startLabel = formatDate(startDateStr, false);
         const endLabel = formatDate(endDateStr, false);
@@ -778,7 +850,6 @@ show_reading_time: false
         return `${startPart} – ${endPart}`;
       }
 
-      // Single-day event formatting with optional start/end times
       const singleLabel = formatDate(startDateStr, true);
       if (startTime && endTime) {
         return `${singleLabel} • ${startTime} – ${endTime}`;
@@ -842,14 +913,12 @@ show_reading_time: false
       const raw = String(item.date || item.displayDate || '').trim();
       if (!raw) return null;
 
-      // Direct ISO string ("YYYY-MM-DD") + optional end_date, time, and end_time
       if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
         const startTime24 = parseTimeTo24(item.time);
         const endTime24 = parseTimeTo24(item.end_time);
         const rawEnd = String(item.end_date || '').trim();
         const endDateStr = (/^\d{4}-\d{2}-\d{2}$/.test(rawEnd) && rawEnd >= raw) ? rawEnd : null;
 
-        // Timed event
         if (startTime24) {
           const effectiveEndDate = endDateStr || raw;
           let endIso;
@@ -865,7 +934,6 @@ show_reading_time: false
           };
         }
 
-        // All-day single-day or weeklong event (FullCalendar expects exclusive end date)
         return {
           start: raw,
           end: (endDateStr && endDateStr > raw) ? addOneDayIso(endDateStr) : undefined,
@@ -912,6 +980,36 @@ show_reading_time: false
       }
 
       return null;
+    }
+
+    function isPastEvent(item) {
+      const todayIso = isoLocal(new Date());
+
+      // Recurring weekly events stay active
+      if (Array.isArray(item.daysOfWeek) && item.daysOfWeek.length > 0) {
+        return false;
+      }
+
+      // Direct ISO start / end_date check
+      const rawStart = String(item.date || '').trim();
+      const rawEnd = String(item.end_date || '').trim();
+      if (/^\d{4}-\d{2}-\d{2}$/.test(rawStart)) {
+        const lastDayIso = (/^\d{4}-\d{2}-\d{2}$/.test(rawEnd) && rawEnd >= rawStart)
+          ? rawEnd
+          : rawStart;
+        return lastDayIso < todayIso;
+      }
+
+      const dates = eventDates(item);
+      if (!dates || !dates.start) return false;
+
+      if (dates.end) {
+        const endIso = dates.end.slice(0, 10);
+        // All-day FullCalendar end dates are exclusive (day after the final day)
+        return dates.allDay ? endIso <= todayIso : endIso < todayIso;
+      }
+
+      return dates.start.slice(0, 10) < todayIso;
     }
 
     function startSortValue(item) {
@@ -1016,6 +1114,8 @@ show_reading_time: false
       catEl.style.backgroundColor = palette.bg;
       catEl.style.color = palette.text;
 
+      document.getElementById('detail-past-badge').hidden = !isPastEvent(item);
+
       document.getElementById('detail-title').textContent = item.title || 'Community Event';
       document.getElementById('detail-date').textContent = item.displayDate || item.date || item.start || 'Date to be announced';
       document.getElementById('detail-location').textContent = item.location || 'Location to be announced';
@@ -1072,8 +1172,12 @@ show_reading_time: false
     });
 
     function makeCard(item) {
+      const past = isPastEvent(item);
       const card = document.createElement('article');
-      card.className = 'ncs-event-card';
+      card.className = past ? 'ncs-event-card is-past' : 'ncs-event-card';
+
+      const pillRow = document.createElement('div');
+      pillRow.className = 'ncs-pill-row';
 
       const categoryName = item.category || 'Other';
       const palette = getPalette(categoryName);
@@ -1083,6 +1187,14 @@ show_reading_time: false
       category.textContent = categoryName;
       category.style.backgroundColor = palette.bg;
       category.style.color = palette.text;
+      pillRow.appendChild(category);
+
+      if (past) {
+        const pastBadge = document.createElement('span');
+        pastBadge.className = 'ncs-past-badge';
+        pastBadge.textContent = 'Past Event';
+        pillRow.appendChild(pastBadge);
+      }
 
       const title = document.createElement('h3');
       title.textContent = item.title || 'Community Event';
@@ -1115,7 +1227,7 @@ show_reading_time: false
       button.setAttribute('aria-label', `View details for ${item.title || 'event'}`);
       button.addEventListener('click', () => showDetails(item));
 
-      card.append(category, title, metaList, description, button);
+      card.append(pillRow, title, metaList, description, button);
       return card;
     }
 
@@ -1140,6 +1252,12 @@ show_reading_time: false
         month: 'Month',
         list: 'List'
       },
+      datesSet: function (info) {
+        if (lastCalendarViewType !== info.view.type) {
+          lastCalendarViewType = info.view.type;
+          render(selectedCategory);
+        }
+      },
       eventClick: function (info) {
         info.jsEvent.preventDefault();
         if (info.event.extendedProps.original) {
@@ -1162,18 +1280,30 @@ show_reading_time: false
     });
 
     calendar.render();
+    lastCalendarViewType = calendar.view.type;
 
     function render(category) {
       selectedCategory = category;
 
-      const filtered = allEvents.filter(item =>
+      const categoryMatched = allEvents.filter(item =>
         category === 'All' ||
         String(item.category || '').toLowerCase() === category.toLowerCase()
       );
 
+      const hiddenPastCount = categoryMatched.filter(isPastEvent).length;
+      const visibleCardsEvents = showPastEvents
+        ? categoryMatched
+        : categoryMatched.filter(item => !isPastEvent(item));
+
+      // In List view, respect the Show Past Events toggle; keep Month grid browsable
+      const isListView = calendar.view && calendar.view.type === 'listMonth';
+      const calendarSourceEvents = (isListView && !showPastEvents)
+        ? visibleCardsEvents
+        : categoryMatched;
+
       calendar.removeAllEvents();
 
-      const calendarEvents = filtered.map(item => {
+      const calendarEvents = calendarSourceEvents.map(item => {
         const dates = eventDates(item);
         if (!dates) return null;
         const palette = getPalette(item.category);
@@ -1190,14 +1320,23 @@ show_reading_time: false
       calendar.addEventSource(calendarEvents);
 
       grid.replaceChildren();
-      const sorted = [...filtered].sort((a, b) => startSortValue(a) - startSortValue(b));
+      const sorted = [...visibleCardsEvents].sort((a, b) => {
+        const aPast = isPastEvent(a);
+        const bPast = isPastEvent(b);
+        if (aPast !== bPast) return aPast ? 1 : -1;
+        return aPast
+          ? startSortValue(b) - startSortValue(a)
+          : startSortValue(a) - startSortValue(b);
+      });
 
       if (sorted.length) {
         sorted.forEach(item => grid.appendChild(makeCard(item)));
       } else {
         const empty = document.createElement('p');
         empty.className = 'ncs-empty';
-        empty.textContent = 'No events are currently listed in this category.';
+        empty.textContent = (!showPastEvents && hiddenPastCount > 0)
+          ? 'No upcoming events are currently listed in this category. Select "Show Past Events" to view past events.'
+          : 'No events are currently listed in this category.';
         grid.appendChild(empty);
       }
 
@@ -1206,15 +1345,31 @@ show_reading_time: false
         button.setAttribute('aria-pressed', String(active));
       });
 
+      document.querySelectorAll('.ncs-past-toggle').forEach(button => {
+        button.setAttribute('aria-pressed', String(showPastEvents));
+        button.textContent = showPastEvents ? 'Showing Past Events' : 'Show Past Events';
+      });
+
       if (allEvents.length === 0) {
         statusEl.textContent = 'No events have been published by the backend yet.';
       } else {
-        statusEl.textContent = `${filtered.length} event${filtered.length === 1 ? '' : 's'} listed${category === 'All' ? '' : ' for ' + category}.`;
+        const scopeLabel = category === 'All' ? '' : ` for ${category}`;
+        const pastNote = (!showPastEvents && hiddenPastCount > 0)
+          ? ` (${hiddenPastCount} past event${hiddenPastCount === 1 ? '' : 's'} hidden)`
+          : '';
+        statusEl.textContent = `${visibleCardsEvents.length} ${showPastEvents ? 'total' : 'upcoming'} event${visibleCardsEvents.length === 1 ? '' : 's'} listed${scopeLabel}${pastNote}.`;
       }
     }
 
     document.querySelectorAll('.ncs-filter').forEach(button => {
       button.addEventListener('click', () => render(button.dataset.category));
+    });
+
+    document.querySelectorAll('.ncs-past-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        showPastEvents = !showPastEvents;
+        render(selectedCategory);
+      });
     });
 
     async function fetchEvents() {
