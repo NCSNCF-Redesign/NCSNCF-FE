@@ -484,6 +484,7 @@ show_reading_time: false
   #detail-description {
     color: #f5eded !important;
     margin: 0 0 1.5rem 0 !important;
+    white-space: pre-wrap !important;
   }
 
   #event-details-dialog .ncs-dialog-actions {
@@ -692,499 +693,565 @@ show_reading_time: false
 </dialog>
 
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  'use strict';
+<script type="module">
+  import { pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
+  import * as EventCalendarAPI from '{{site.baseurl}}/assets/js/api/event-calendar.js';
 
-  // Demonstration entries shown if the backend API is unreachable.
-  const FALLBACK_EVENTS = [
-    {
-      title: 'Poway Padres Softball Weekly Practice',
-      category: 'Athletics',
-      date: 'Every Saturday, 10:00 AM',
-      daysOfWeek: [6],
-      startTime: '10:00:00',
-      endTime: '12:00:00',
-      location: 'Poway Community Park',
-      format: 'In-person',
-      accessibility: 'Wheelchair-accessible dugouts and paved walkways; shaded seating available.',
-      cost: 'Free — No RSVP required',
-      description: 'Weekly softball practice, batting drills, and team camaraderie for athletes, coaches, and families.'
-    },
-    {
-      title: 'Monte Vista Housing Project Community Briefing',
-      category: 'Housing',
-      date: 'October 18, 2026',
-      location: 'Poway City Hall / Virtual',
-      format: 'Hybrid (In-person & Zoom)',
-      accessibility: 'Step-free entrance, live closed captions on Zoom, and large-print handouts.',
-      cost: 'Free',
-      description: 'Community briefing about housing opportunities and project updates.'
-    },
-    {
-      title: 'Annual 2-Night Family Caregiver Retreat',
-      category: 'Social',
-      date: 'November 14-16, 2026',
-      location: 'Julian, CA',
-      format: 'In-person',
-      accessibility: 'Quiet sensory room on site; dietary accommodations provided upon registration.',
-      cost: 'RSVP required',
-      description: 'A weekend focused on rest, connection, and support for family caregivers.'
-    },
-    {
-      title: 'Post-Secondary Vocational Skills Workshop',
-      category: 'Education',
-      date: 'December 5, 2026',
-      location: 'North County Regional Learning Center',
-      format: 'In-person',
-      accessibility: 'Wheelchair accessible; sensory-friendly breaks scheduled every 45 minutes.',
-      cost: 'Free — Registration recommended',
-      description: 'A workshop about workplace readiness, job coaching, and interview skills.'
-    },
-    {
-      title: 'NCSNCF Community Holiday Social & Bowling',
-      category: 'Social',
-      date: 'December 19, 2026',
-      location: 'Old Poway Park & Bowling Center',
-      format: 'In-person',
-      accessibility: 'Bowling ramps, bumpers, and quiet lounge area available.',
-      cost: 'Free for members',
-      description: 'Community holiday celebration with bowling and social activities.'
-    },
-    {
-      title: 'Navigating SDRC & Supported Living Options',
-      category: 'Education',
-      date: 'January 16, 2027',
-      location: 'Poway Library Community Hall',
-      format: 'In-person',
-      accessibility: 'Wheelchair accessible; ASL interpretation available with 7 days notice.',
-      cost: 'Free — Open to all families',
-      description: 'Information about San Diego Regional Center services and supported living options.'
+  function initCalendarPage() {
+    'use strict';
+
+    const categoryColors = {
+      Athletics: { bg: '#dceee5', text: '#1b513b' },
+      Housing:   { bg: '#f4e6ce', text: '#6b4512' },
+      Social:    { bg: '#e8e0f5', text: '#4e3675' },
+      Education: { bg: '#dcebf8', text: '#1d4c6e' },
+      Other:     { bg: '#eae6e3', text: '#423e3b' }
+    };
+
+    const grid = document.getElementById('event-grid');
+    const statusEl = document.getElementById('calendar-status');
+    const dialog = document.getElementById('event-details-dialog');
+    const downloadIcsBtn = document.getElementById('download-ics');
+
+    let allEvents = [];
+    let selectedCategory = 'All';
+    let lastFocusedElement = null;
+    let activeDialogEvent = null;
+
+    function getPalette(category) {
+      return categoryColors[category] || categoryColors.Other;
     }
-  ];
 
-  const categoryColors = {
-    Athletics: { bg: '#dceee5', text: '#1b513b' },
-    Housing:   { bg: '#f4e6ce', text: '#6b4512' },
-    Social:    { bg: '#e8e0f5', text: '#4e3675' },
-    Education: { bg: '#dcebf8', text: '#1d4c6e' },
-    Other:     { bg: '#eae6e3', text: '#423e3b' }
-  };
+    function isoLocal(date) {
+      return [
+        date.getFullYear(),
+        String(date.getMonth() + 1).padStart(2, '0'),
+        String(date.getDate()).padStart(2, '0')
+      ].join('-');
+    }
 
-  const grid = document.getElementById('event-grid');
-  const statusEl = document.getElementById('calendar-status');
-  const dialog = document.getElementById('event-details-dialog');
-  const downloadIcsBtn = document.getElementById('download-ics');
+    function addOneDayIso(isoDateStr) {
+      const [year, month, day] = isoDateStr.split('-').map(Number);
+      return isoLocal(new Date(year, month - 1, day + 1));
+    }
 
-  let allEvents = [];
-  let selectedCategory = 'All';
-  let showingExamples = false;
-  let lastFocusedElement = null;
-  let activeDialogEvent = null;
+    function parseTimeTo24(timeStr) {
+      if (!timeStr) return null;
+      const trimmed = String(timeStr).trim();
+      const ampmMatch = trimmed.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+      if (ampmMatch) {
+        let hours = parseInt(ampmMatch[1], 10);
+        const minutes = ampmMatch[2];
+        const period = ampmMatch[3].toUpperCase();
+        if (period === 'PM' && hours !== 12) hours += 12;
+        if (period === 'AM' && hours === 12) hours = 0;
+        return `${String(hours).padStart(2, '0')}:${minutes}:00`;
+      }
+      const h24Match = trimmed.match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?$/);
+      if (h24Match) {
+        return `${String(parseInt(h24Match[1], 10)).padStart(2, '0')}:${h24Match[2]}:${h24Match[3] || '00'}`;
+      }
+      return null;
+    }
 
-  function getPalette(category) {
-    return categoryColors[category] || categoryColors.Other;
-  }
+    function formatDisplayDateTime(startDateStr, endDateStr, startTime, endTime) {
+      const formatDate = (iso, includeWeekdayLong) => {
+        const match = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        if (!match) return iso;
+        const localDate = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+        return localDate.toLocaleDateString('en-US', {
+          weekday: includeWeekdayLong ? 'long' : 'short',
+          year: 'numeric',
+          month: includeWeekdayLong ? 'long' : 'short',
+          day: 'numeric'
+        });
+      };
 
-  function isoLocal(date) {
-    return [
-      date.getFullYear(),
-      String(date.getMonth() + 1).padStart(2, '0'),
-      String(date.getDate()).padStart(2, '0')
-    ].join('-');
-  }
+      const hasEndDate = endDateStr && endDateStr !== startDateStr;
 
-  function eventDates(item) {
-    // 1. Recurring events (e.g., weekly practice)
-    if (Array.isArray(item.daysOfWeek) && item.daysOfWeek.length > 0) {
+      // Multi-day / weeklong event formatting
+      if (hasEndDate) {
+        const startLabel = formatDate(startDateStr, false);
+        const endLabel = formatDate(endDateStr, false);
+        const startPart = startTime ? `${startLabel} (${startTime})` : startLabel;
+        const endPart = endTime ? `${endLabel} (${endTime})` : endLabel;
+        return `${startPart} – ${endPart}`;
+      }
+
+      // Single-day event formatting with optional start/end times
+      const singleLabel = formatDate(startDateStr, true);
+      if (startTime && endTime) {
+        return `${singleLabel} • ${startTime} – ${endTime}`;
+      }
+      if (startTime) {
+        return `${singleLabel} at ${startTime}`;
+      }
+      if (endTime) {
+        return `${singleLabel} (Ends at ${endTime})`;
+      }
+      return singleLabel;
+    }
+
+    function normalizeBackendEvent(raw) {
+      const rawDate = String(raw.date || '').trim();
+      const rawEndDate = String(raw.end_date || raw.endDate || '').trim();
+      const rawTime = String(raw.time || '').trim();
+      const rawEndTime = String(raw.end_time || raw.endTime || '').trim();
+      const costValue = String(raw.cost_rsvp || raw.cost || '').trim();
+      const urlMatch = costValue.match(/https?:\/\/[^\s)]+/i);
+
       return {
-        daysOfWeek: item.daysOfWeek,
-        startTime: item.startTime || undefined,
-        endTime: item.endTime || undefined,
-        allDay: !item.startTime
+        ...raw,
+        id: raw.id,
+        title: raw.title || 'Community Event',
+        category: raw.category || 'Other',
+        date: rawDate,
+        end_date: rawEndDate,
+        time: rawTime,
+        end_time: rawEndTime,
+        displayDate: /^\d{4}-\d{2}-\d{2}$/.test(rawDate)
+          ? formatDisplayDateTime(rawDate, rawEndDate, rawTime, rawEndTime)
+          : (raw.displayDate || rawDate || 'Date to be announced'),
+        location: raw.location || 'Location to be announced',
+        format: raw.format || 'In-person',
+        accessibility: raw.accessibility || '',
+        cost: costValue,
+        rsvpUrl: raw.rsvpUrl || raw.rsvp_url || (urlMatch ? urlMatch[0] : ''),
+        description: raw.description || ''
       };
     }
 
-    // 2. Structured ISO start/end from backend
-    if (typeof item.start === 'string' && /^\d{4}-\d{2}-\d{2}/.test(item.start)) {
-      return {
-        start: item.start,
-        end: item.end || undefined,
-        allDay: item.allDay !== false
-      };
-    }
-
-    const raw = String(item.displayDate || item.date || '').trim();
-    if (!raw) return null;
-
-    // 3. Direct ISO string
-    if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
-      return { start: raw, allDay: true };
-    }
-
-    // 4. Same-month range: "November 14-16, 2026"
-    const sameMonth = raw.match(/^([A-Za-z]+)\s+(\d{1,2})\s*[–-]\s*(\d{1,2}),\s*(\d{4})$/);
-    if (sameMonth) {
-      const year = Number(sameMonth[4]);
-      const month = new Date(`${sameMonth[1]} 1, ${year}`).getMonth();
-      const first = Number(sameMonth[2]);
-      const last = Number(sameMonth[3]);
-      if (!Number.isNaN(month) && first >= 1 && last >= first) {
+    function eventDates(item) {
+      if (Array.isArray(item.daysOfWeek) && item.daysOfWeek.length > 0) {
         return {
-          start: isoLocal(new Date(year, month, first)),
-          end: isoLocal(new Date(year, month, last + 1)),
+          daysOfWeek: item.daysOfWeek,
+          startTime: item.startTime || undefined,
+          endTime: item.endTime || undefined,
+          allDay: !item.startTime
+        };
+      }
+
+      if (typeof item.start === 'string' && /^\d{4}-\d{2}-\d{2}/.test(item.start)) {
+        return {
+          start: item.start,
+          end: item.end || undefined,
+          allDay: item.allDay !== false
+        };
+      }
+
+      const raw = String(item.date || item.displayDate || '').trim();
+      if (!raw) return null;
+
+      // Direct ISO string ("YYYY-MM-DD") + optional end_date, time, and end_time
+      if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+        const startTime24 = parseTimeTo24(item.time);
+        const endTime24 = parseTimeTo24(item.end_time);
+        const rawEnd = String(item.end_date || '').trim();
+        const endDateStr = (/^\d{4}-\d{2}-\d{2}$/.test(rawEnd) && rawEnd >= raw) ? rawEnd : null;
+
+        // Timed event
+        if (startTime24) {
+          const effectiveEndDate = endDateStr || raw;
+          let endIso;
+          if (endTime24) {
+            endIso = `${effectiveEndDate}T${endTime24}`;
+          } else if (endDateStr && endDateStr > raw) {
+            endIso = `${endDateStr}T23:59:00`;
+          }
+          return {
+            start: `${raw}T${startTime24}`,
+            end: endIso,
+            allDay: false
+          };
+        }
+
+        // All-day single-day or weeklong event (FullCalendar expects exclusive end date)
+        return {
+          start: raw,
+          end: (endDateStr && endDateStr > raw) ? addOneDayIso(endDateStr) : undefined,
           allDay: true
         };
       }
-    }
 
-    // 5. Cross-month range: "November 30 - December 2, 2026"
-    const crossMonth = raw.match(/^([A-Za-z]+)\s+(\d{1,2})\s*[–-]\s*([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
-    if (crossMonth) {
-      const year = Number(crossMonth[5]);
-      const startDate = new Date(`${crossMonth[1]} ${crossMonth[2]}, ${year} 12:00:00`);
-      const endDate = new Date(`${crossMonth[3]} ${crossMonth[4]}, ${year} 12:00:00`);
-      if (!Number.isNaN(startDate.getTime()) && !Number.isNaN(endDate.getTime())) {
-        endDate.setDate(endDate.getDate() + 1);
-        return {
-          start: isoLocal(startDate),
-          end: isoLocal(endDate),
-          allDay: true
-        };
+      const sameMonth = raw.match(/^([A-Za-z]+)\s+(\d{1,2})\s*[\u2013-]\s*(\d{1,2}),\s*(\d{4})$/);
+      if (sameMonth) {
+        const year = Number(sameMonth[4]);
+        const month = new Date(`${sameMonth[1]} 1, ${year}`).getMonth();
+        const first = Number(sameMonth[2]);
+        const last = Number(sameMonth[3]);
+        if (!Number.isNaN(month) && first >= 1 && last >= first) {
+          return {
+            start: isoLocal(new Date(year, month, first)),
+            end: isoLocal(new Date(year, month, last + 1)),
+            allDay: true
+          };
+        }
       }
-    }
 
-    // 6. Single date: "October 18, 2026"
-    const single = raw.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
-    if (single) {
-      const d = new Date(`${raw} 12:00:00`);
-      if (!Number.isNaN(d.getTime())) {
-        return { start: isoLocal(d), allDay: true };
+      const crossMonth = raw.match(/^([A-Za-z]+)\s+(\d{1,2})\s*[\u2013-]\s*([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+      if (crossMonth) {
+        const year = Number(crossMonth[5]);
+        const startDate = new Date(`${crossMonth[1]} ${crossMonth[2]}, ${year} 12:00:00`);
+        const endDate = new Date(`${crossMonth[3]} ${crossMonth[4]}, ${year} 12:00:00`);
+        if (!Number.isNaN(startDate.getTime()) && !Number.isNaN(endDate.getTime())) {
+          endDate.setDate(endDate.getDate() + 1);
+          return {
+            start: isoLocal(startDate),
+            end: isoLocal(endDate),
+            allDay: true
+          };
+        }
       }
-    }
 
-    return null;
-  }
-
-  function startSortValue(item) {
-    const dates = eventDates(item);
-    if (!dates) return Infinity;
-    if (dates.daysOfWeek) return 0;
-    return dates.start ? new Date(dates.start).getTime() : Infinity;
-  }
-
-  function escapeIcsText(str) {
-    return String(str || '')
-      .replace(/\\/g, '\\\\')
-      .replace(/;/g, '\\;')
-      .replace(/,/g, '\\,')
-      .replace(/\n/g, '\\n');
-  }
-
-  function downloadIcs(item) {
-    const dates = eventDates(item);
-    if (!dates) return;
-
-    const lines = [
-      'BEGIN:VCALENDAR',
-      'VERSION:2.0',
-      'PRODID:-//NCSNCF//Community Event Calendar//EN',
-      'BEGIN:VEVENT',
-      `SUMMARY:${escapeIcsText(item.title || 'Community Event')}`,
-      `LOCATION:${escapeIcsText(item.location || '')}`,
-      `DESCRIPTION:${escapeIcsText(item.description || '')}`
-    ];
-
-    if (dates.daysOfWeek && dates.daysOfWeek.length > 0) {
-      const dayMap = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
-      const byDay = dates.daysOfWeek.map(d => dayMap[d]).filter(Boolean).join(',');
-      const now = new Date();
-      const targetDay = dates.daysOfWeek[0];
-      const diff = (targetDay - now.getDay() + 7) % 7;
-      const firstDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diff);
-      const ymd = isoLocal(firstDate).replace(/-/g, '');
-
-      if (dates.startTime) {
-        const startT = dates.startTime.replace(/:/g, '').slice(0, 6);
-        const endT = (dates.endTime || dates.startTime).replace(/:/g, '').slice(0, 6);
-        lines.push(`DTSTART:${ymd}T${startT}`);
-        lines.push(`DTEND:${ymd}T${endT}`);
-      } else {
-        lines.push(`DTSTART;VALUE=DATE:${ymd}`);
+      const single = raw.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+      if (single) {
+        const d = new Date(`${raw} 12:00:00`);
+        if (!Number.isNaN(d.getTime())) {
+          return { start: isoLocal(d), allDay: true };
+        }
       }
-      lines.push(`RRULE:FREQ=WEEKLY;BYDAY=${byDay}`);
-    } else if (dates.start) {
-      const startClean = dates.start.slice(0, 10).replace(/-/g, '');
-      lines.push(`DTSTART;VALUE=DATE:${startClean}`);
-      if (dates.end) {
-        const endClean = dates.end.slice(0, 10).replace(/-/g, '');
-        lines.push(`DTEND;VALUE=DATE:${endClean}`);
-      }
+
+      return null;
     }
 
-    lines.push('END:VEVENT', 'END:VCALENDAR');
-
-    const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${(item.title || 'event').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.ics`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  }
-
-  function setOptionalRow(rowId, valueId, value) {
-    const row = document.getElementById(rowId);
-    const span = document.getElementById(valueId);
-    if (value && String(value).trim()) {
-      span.textContent = value;
-      row.hidden = false;
-    } else {
-      span.textContent = '';
-      row.hidden = true;
-    }
-  }
-
-  function showDetails(item) {
-    lastFocusedElement = document.activeElement;
-    activeDialogEvent = item;
-
-    const categoryName = item.category || 'Other';
-    const palette = getPalette(categoryName);
-
-    const catEl = document.getElementById('detail-category');
-    catEl.textContent = categoryName;
-    catEl.style.backgroundColor = palette.bg;
-    catEl.style.color = palette.text;
-
-    document.getElementById('detail-title').textContent = item.title || 'Community Event';
-    document.getElementById('detail-date').textContent = item.displayDate || item.date || item.start || 'Date to be announced';
-    document.getElementById('detail-location').textContent = item.location || 'Location to be announced';
-    document.getElementById('detail-description').textContent = item.description || 'More details coming soon.';
-
-    setOptionalRow('detail-format-row', 'detail-format', item.format);
-    setOptionalRow('detail-accessibility-row', 'detail-accessibility', item.accessibility);
-    setOptionalRow('detail-cost-row', 'detail-cost', item.cost);
-
-    const rsvpLink = document.getElementById('detail-rsvp-link');
-    if (item.rsvpUrl) {
-      rsvpLink.href = item.rsvpUrl;
-      rsvpLink.hidden = false;
-    } else {
-      rsvpLink.hidden = true;
+    function startSortValue(item) {
+      const dates = eventDates(item);
+      if (!dates) return Infinity;
+      if (dates.daysOfWeek) return 0;
+      return dates.start ? new Date(dates.start).getTime() : Infinity;
     }
 
-    downloadIcsBtn.hidden = !eventDates(item);
-
-    if (typeof dialog.showModal === 'function') {
-      dialog.showModal();
-    } else {
-      dialog.setAttribute('open', '');
+    function escapeIcsText(str) {
+      return String(str || '')
+        .replace(/\\/g, '\\\\')
+        .replace(/;/g, '\\;')
+        .replace(/,/g, '\\,')
+        .replace(/\n/g, '\\n');
     }
-    document.getElementById('detail-title').focus();
-  }
 
-  function closeDetails() {
-    if (dialog.open) {
-      dialog.close();
-    }
-  }
+    function downloadIcs(item) {
+      const dates = eventDates(item);
+      if (!dates) return;
 
-  dialog.addEventListener('close', function () {
-    activeDialogEvent = null;
-    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
-      lastFocusedElement.focus();
-    }
-  });
+      const lines = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//NCSNCF//Community Event Calendar//EN',
+        'BEGIN:VEVENT',
+        `SUMMARY:${escapeIcsText(item.title || 'Community Event')}`,
+        `LOCATION:${escapeIcsText(item.location || '')}`,
+        `DESCRIPTION:${escapeIcsText(item.description || '')}`
+      ];
 
-  dialog.addEventListener('click', function (event) {
-    if (event.target === dialog) {
-      closeDetails();
-    }
-  });
+      if (dates.daysOfWeek && dates.daysOfWeek.length > 0) {
+        const dayMap = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+        const byDay = dates.daysOfWeek.map(d => dayMap[d]).filter(Boolean).join(',');
+        const now = new Date();
+        const targetDay = dates.daysOfWeek[0];
+        const diff = (targetDay - now.getDay() + 7) % 7;
+        const firstDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diff);
+        const ymd = isoLocal(firstDate).replace(/-/g, '');
 
-  document.getElementById('close-details-top').addEventListener('click', closeDetails);
-  document.getElementById('close-details-bottom').addEventListener('click', closeDetails);
-
-  downloadIcsBtn.addEventListener('click', function () {
-    if (activeDialogEvent) downloadIcs(activeDialogEvent);
-  });
-
-  function makeCard(item) {
-    const card = document.createElement('article');
-    card.className = 'ncs-event-card';
-
-    const categoryName = item.category || 'Other';
-    const palette = getPalette(categoryName);
-
-    const category = document.createElement('span');
-    category.className = 'ncs-category-pill';
-    category.textContent = categoryName;
-    category.style.backgroundColor = palette.bg;
-    category.style.color = palette.text;
-
-    const title = document.createElement('h3');
-    title.textContent = item.title || 'Community Event';
-
-    const metaList = document.createElement('ul');
-    metaList.className = 'ncs-card-meta';
-
-    const metaItems = [
-      ['When:', item.displayDate || item.date || item.start || 'Date TBD'],
-      ['Where:', item.location || 'Location TBD']
-    ];
-    if (item.format) metaItems.push(['Format:', item.format]);
-
-    metaItems.forEach(([label, val]) => {
-      const li = document.createElement('li');
-      const strong = document.createElement('strong');
-      strong.textContent = label + ' ';
-      li.append(strong, document.createTextNode(val));
-      metaList.appendChild(li);
-    });
-
-    const description = document.createElement('p');
-    description.className = 'ncs-desc';
-    description.textContent = item.description || 'More information coming soon.';
-
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'ncs-btn';
-    button.textContent = 'View Details';
-    button.setAttribute('aria-label', `View details for ${item.title || 'event'}`);
-    button.addEventListener('click', () => showDetails(item));
-
-    card.append(category, title, metaList, description, button);
-    return card;
-  }
-
-  const calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
-    initialView: window.matchMedia('(max-width: 700px)').matches ? 'listMonth' : 'dayGridMonth',
-    height: 'auto',
-    dayMaxEventRows: 3,
-    displayEventTime: true,
-    eventTimeFormat: {
-      hour: 'numeric',
-      minute: '2-digit',
-      meridiem: 'short'
-    },
-    eventDisplay: 'block',
-    /* Spaces instead of commas separate the buttons so they space out cleanly */
-    headerToolbar: {
-      left: 'prev next today',
-      center: 'title',
-      right: 'dayGridMonth listMonth'
-    },
-    buttonText: {
-      today: 'Today',
-      month: 'Month',
-      list: 'List'
-    },
-    eventClick: function (info) {
-      info.jsEvent.preventDefault();
-      if (info.event.extendedProps.original) {
-        showDetails(info.event.extendedProps.original);
-      }
-    },
-    eventDidMount: function (info) {
-      info.el.title = info.event.title;
-      info.el.setAttribute('tabindex', '0');
-      info.el.setAttribute('role', 'button');
-      info.el.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          if (info.event.extendedProps.original) {
-            showDetails(info.event.extendedProps.original);
+        if (dates.startTime) {
+          const startT = dates.startTime.replace(/:/g, '').slice(0, 6);
+          const endT = (dates.endTime || dates.startTime).replace(/:/g, '').slice(0, 6);
+          lines.push(`DTSTART:${ymd}T${startT}`);
+          lines.push(`DTEND:${ymd}T${endT}`);
+        } else {
+          lines.push(`DTSTART;VALUE=DATE:${ymd}`);
+        }
+        lines.push(`RRULE:FREQ=WEEKLY;BYDAY=${byDay}`);
+      } else if (dates.start) {
+        if (dates.start.includes('T')) {
+          const [datePart, timePart] = dates.start.split('T');
+          lines.push(`DTSTART:${datePart.replace(/-/g, '')}T${timePart.replace(/:/g, '').slice(0, 6)}`);
+          if (dates.end && dates.end.includes('T')) {
+            const [endDatePart, endTimePart] = dates.end.split('T');
+            lines.push(`DTEND:${endDatePart.replace(/-/g, '')}T${endTimePart.replace(/:/g, '').slice(0, 6)}`);
+          }
+        } else {
+          const startClean = dates.start.slice(0, 10).replace(/-/g, '');
+          lines.push(`DTSTART;VALUE=DATE:${startClean}`);
+          if (dates.end) {
+            const endClean = dates.end.slice(0, 10).replace(/-/g, '');
+            lines.push(`DTEND;VALUE=DATE:${endClean}`);
           }
         }
-      });
+      }
+
+      lines.push('END:VEVENT', 'END:VCALENDAR');
+
+      const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${(item.title || 'event').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.ics`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
     }
-  });
 
-  calendar.render();
+    function setOptionalRow(rowId, valueId, value) {
+      const row = document.getElementById(rowId);
+      const span = document.getElementById(valueId);
+      if (value && String(value).trim()) {
+        span.textContent = value;
+        row.hidden = false;
+      } else {
+        span.textContent = '';
+        row.hidden = true;
+      }
+    }
 
-  function render(category) {
-    selectedCategory = category;
+    function showDetails(item) {
+      lastFocusedElement = document.activeElement;
+      activeDialogEvent = item;
 
-    const filtered = allEvents.filter(item =>
-      category === 'All' ||
-      String(item.category || '').toLowerCase() === category.toLowerCase()
-    );
+      const categoryName = item.category || 'Other';
+      const palette = getPalette(categoryName);
 
-    calendar.removeAllEvents();
+      const catEl = document.getElementById('detail-category');
+      catEl.textContent = categoryName;
+      catEl.style.backgroundColor = palette.bg;
+      catEl.style.color = palette.text;
 
-    const calendarEvents = filtered.map(item => {
-      const dates = eventDates(item);
-      if (!dates) return null;
-      const palette = getPalette(item.category);
-      return {
-        ...dates,
-        title: item.title || 'Community Event',
-        backgroundColor: palette.bg,
-        /* Using pastel bg for borderColor makes the List view category dot pop on #6e5555 */
-        borderColor: palette.bg,
-        textColor: palette.text,
-        extendedProps: { original: item }
-      };
-    }).filter(Boolean);
+      document.getElementById('detail-title').textContent = item.title || 'Community Event';
+      document.getElementById('detail-date').textContent = item.displayDate || item.date || item.start || 'Date to be announced';
+      document.getElementById('detail-location').textContent = item.location || 'Location to be announced';
+      document.getElementById('detail-description').textContent = item.description || 'More details coming soon.';
 
-    calendar.addEventSource(calendarEvents);
+      setOptionalRow('detail-format-row', 'detail-format', item.format);
+      setOptionalRow('detail-accessibility-row', 'detail-accessibility', item.accessibility);
+      setOptionalRow('detail-cost-row', 'detail-cost', item.cost);
 
-    grid.replaceChildren();
-    const sorted = [...filtered].sort((a, b) => startSortValue(a) - startSortValue(b));
+      const rsvpLink = document.getElementById('detail-rsvp-link');
+      if (item.rsvpUrl) {
+        rsvpLink.href = item.rsvpUrl;
+        rsvpLink.hidden = false;
+      } else {
+        rsvpLink.hidden = true;
+      }
 
-    if (sorted.length) {
-      sorted.forEach(item => grid.appendChild(makeCard(item)));
-    } else {
-      const empty = document.createElement('p');
-      empty.className = 'ncs-empty';
-      empty.textContent = 'No events are currently listed in this category.';
-      grid.appendChild(empty);
+      downloadIcsBtn.hidden = !eventDates(item);
+
+      if (typeof dialog.showModal === 'function') {
+        dialog.showModal();
+      } else {
+        dialog.setAttribute('open', '');
+      }
+      document.getElementById('detail-title').focus();
+    }
+
+    function closeDetails() {
+      if (dialog.open) {
+        dialog.close();
+      } else {
+        dialog.removeAttribute('open');
+      }
+    }
+
+    dialog.addEventListener('close', function () {
+      activeDialogEvent = null;
+      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus();
+      }
+    });
+
+    dialog.addEventListener('click', function (event) {
+      if (event.target === dialog) {
+        closeDetails();
+      }
+    });
+
+    document.getElementById('close-details-top').addEventListener('click', closeDetails);
+    document.getElementById('close-details-bottom').addEventListener('click', closeDetails);
+
+    downloadIcsBtn.addEventListener('click', function () {
+      if (activeDialogEvent) downloadIcs(activeDialogEvent);
+    });
+
+    function makeCard(item) {
+      const card = document.createElement('article');
+      card.className = 'ncs-event-card';
+
+      const categoryName = item.category || 'Other';
+      const palette = getPalette(categoryName);
+
+      const category = document.createElement('span');
+      category.className = 'ncs-category-pill';
+      category.textContent = categoryName;
+      category.style.backgroundColor = palette.bg;
+      category.style.color = palette.text;
+
+      const title = document.createElement('h3');
+      title.textContent = item.title || 'Community Event';
+
+      const metaList = document.createElement('ul');
+      metaList.className = 'ncs-card-meta';
+
+      const metaItems = [
+        ['When:', item.displayDate || item.date || item.start || 'Date TBD'],
+        ['Where:', item.location || 'Location TBD']
+      ];
+      if (item.format) metaItems.push(['Format:', item.format]);
+
+      metaItems.forEach(([label, val]) => {
+        const li = document.createElement('li');
+        const strong = document.createElement('strong');
+        strong.textContent = label + ' ';
+        li.append(strong, document.createTextNode(val));
+        metaList.appendChild(li);
+      });
+
+      const description = document.createElement('p');
+      description.className = 'ncs-desc';
+      description.textContent = item.description || 'More information coming soon.';
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'ncs-btn';
+      button.textContent = 'View Details';
+      button.setAttribute('aria-label', `View details for ${item.title || 'event'}`);
+      button.addEventListener('click', () => showDetails(item));
+
+      card.append(category, title, metaList, description, button);
+      return card;
+    }
+
+    const calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+      initialView: window.matchMedia('(max-width: 700px)').matches ? 'listMonth' : 'dayGridMonth',
+      height: 'auto',
+      dayMaxEventRows: 3,
+      displayEventTime: true,
+      eventTimeFormat: {
+        hour: 'numeric',
+        minute: '2-digit',
+        meridiem: 'short'
+      },
+      eventDisplay: 'block',
+      headerToolbar: {
+        left: 'prev next today',
+        center: 'title',
+        right: 'dayGridMonth listMonth'
+      },
+      buttonText: {
+        today: 'Today',
+        month: 'Month',
+        list: 'List'
+      },
+      eventClick: function (info) {
+        info.jsEvent.preventDefault();
+        if (info.event.extendedProps.original) {
+          showDetails(info.event.extendedProps.original);
+        }
+      },
+      eventDidMount: function (info) {
+        info.el.title = info.event.title;
+        info.el.setAttribute('tabindex', '0');
+        info.el.setAttribute('role', 'button');
+        info.el.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if (info.event.extendedProps.original) {
+              showDetails(info.event.extendedProps.original);
+            }
+          }
+        });
+      }
+    });
+
+    calendar.render();
+
+    function render(category) {
+      selectedCategory = category;
+
+      const filtered = allEvents.filter(item =>
+        category === 'All' ||
+        String(item.category || '').toLowerCase() === category.toLowerCase()
+      );
+
+      calendar.removeAllEvents();
+
+      const calendarEvents = filtered.map(item => {
+        const dates = eventDates(item);
+        if (!dates) return null;
+        const palette = getPalette(item.category);
+        return {
+          ...dates,
+          title: item.title || 'Community Event',
+          backgroundColor: palette.bg,
+          borderColor: palette.bg,
+          textColor: palette.text,
+          extendedProps: { original: item }
+        };
+      }).filter(Boolean);
+
+      calendar.addEventSource(calendarEvents);
+
+      grid.replaceChildren();
+      const sorted = [...filtered].sort((a, b) => startSortValue(a) - startSortValue(b));
+
+      if (sorted.length) {
+        sorted.forEach(item => grid.appendChild(makeCard(item)));
+      } else {
+        const empty = document.createElement('p');
+        empty.className = 'ncs-empty';
+        empty.textContent = 'No events are currently listed in this category.';
+        grid.appendChild(empty);
+      }
+
+      document.querySelectorAll('.ncs-filter').forEach(button => {
+        const active = button.dataset.category === category;
+        button.setAttribute('aria-pressed', String(active));
+      });
+
+      if (allEvents.length === 0) {
+        statusEl.textContent = 'No events have been published by the backend yet.';
+      } else {
+        statusEl.textContent = `${filtered.length} event${filtered.length === 1 ? '' : 's'} listed${category === 'All' ? '' : ' for ' + category}.`;
+      }
     }
 
     document.querySelectorAll('.ncs-filter').forEach(button => {
-      const active = button.dataset.category === category;
-      button.setAttribute('aria-pressed', String(active));
+      button.addEventListener('click', () => render(button.dataset.category));
     });
 
-    if (showingExamples) {
-      statusEl.textContent = 'Demonstration events are shown because the event service is unavailable. Dates and locations have not been confirmed by NCSNCF.';
-    } else if (allEvents.length === 0) {
-      statusEl.textContent = 'No events have been published by the event service yet.';
-    } else {
-      statusEl.textContent = `${filtered.length} event${filtered.length === 1 ? '' : 's'} listed${category === 'All' ? '' : ' for ' + category}.`;
+    async function fetchEvents() {
+      try {
+        const getEventsFn =
+          EventCalendarAPI.getEvents ||
+          EventCalendarAPI.fetchEvents ||
+          (EventCalendarAPI.default && EventCalendarAPI.default.getEvents) ||
+          (typeof EventCalendarAPI.default === 'function' ? EventCalendarAPI.default : null);
+
+        const data = getEventsFn
+          ? await getEventsFn()
+          : await fetch(`${pythonURI}/api/events`, fetchOptions).then(r => {
+              if (!r.ok) throw new Error(`HTTP ${r.status}`);
+              return r.json();
+            });
+
+        const rawList = Array.isArray(data)
+          ? data
+          : (data && Array.isArray(data.events) ? data.events : []);
+
+        allEvents = rawList.map(normalizeBackendEvent);
+        render(selectedCategory);
+      } catch (error) {
+        console.error('Failed to fetch backend events:', error);
+        allEvents = [];
+        render(selectedCategory);
+        statusEl.textContent = `Could not load events from backend (${error.message}). Check browser console / Network tab.`;
+      }
     }
+
+    fetchEvents();
   }
 
-  document.querySelectorAll('.ncs-filter').forEach(button => {
-    button.addEventListener('click', () => render(button.dataset.category));
-  });
-
-  // TODO: Update the production URL when the NCSNCF backend host is finalized.
-  const BACKEND_URL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
-    ? 'http://localhost:8587'
-    : 'https://ccae-be.onrender.com';
-
-  async function fetchEvents() {
-    try {
-      const response = await fetch(`${BACKEND_URL}/api/events`, {
-        headers: { Accept: 'application/json' }
-      });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
-      if (!Array.isArray(data)) throw new Error('Expected an array of events');
-      allEvents = data;
-      showingExamples = false;
-    } catch (error) {
-      console.warn('Event API unavailable:', error);
-      allEvents = FALLBACK_EVENTS;
-      showingExamples = true;
-    }
-    render(selectedCategory);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCalendarPage);
+  } else {
+    initCalendarPage();
   }
-
-  fetchEvents();
-});
 </script>
