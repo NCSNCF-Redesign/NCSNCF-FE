@@ -13,7 +13,7 @@ show_reading_time: false
     <h1 style="display: block !important; font-size: 2.25rem !important; font-weight: bold !important; color: #ffffff !important; text-transform: uppercase !important; letter-spacing: 1px !important; text-align: center !important; width: 100% !important; margin: 0 auto 3rem auto !important; white-space: nowrap !important; text-shadow: none !important; box-shadow: none !important; background: transparent !important;">North County Special Needs Community Foundation</h1>
   </div>
 
-  <!-- Unified, Clear Introduction (Theme Box/Shadow Overrides Added) -->
+  <!-- Unified, Clear Introduction -->
   <header class="ncs-hero" style="padding: 0 10% 4rem 10% !important; display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 3rem !important; box-sizing: border-box !important; flex-wrap: nowrap !important; background: transparent !important; background-color: transparent !important; box-shadow: none !important; border: none !important;">
     <div style="flex: 1 1 55% !important; box-shadow: none !important; background: transparent !important;">
       <h2 style="font-size: 2.5rem !important; margin-top: 0 !important; color: #ffffff !important; text-shadow: none !important;">Bringing People Together.<br>Creating Opportunities.</h2>
@@ -27,7 +27,6 @@ show_reading_time: false
       </div>
     </div>
     <div style="flex: 1 1 45% !important; display: flex !important; justify-content: center !important;">
-      <!-- Shadow removed -->
       <img src="https://placehold.co/600x450/5b4241/ffffff?text=Community+Social" alt="Hero Image Placeholder" style="max-width: 100% !important; height: auto !important; border-radius: 8px !important; box-shadow: none !important;">
     </div>
   </header>
@@ -49,7 +48,6 @@ show_reading_time: false
           Though he has passed on, his vibrant spirit, perseverance, and genuine warmth continue to shape every program we champion. Our mission is not just about programs or buildings-it is about honoring each person's individuality, celebrating their contributions, and ensuring every member of our special needs family feels valued, respected, and truly loved.
         </p>
         <div class="ocs__links">
-          <!-- Button flex alignment and line-height adjusted -->
           <a class="ocs__btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.75rem 1.75rem; font-size: 1.1rem; border-radius: 6px; display: inline-flex !important; align-items: center !important; justify-content: center !important; text-align: center !important; line-height: 1.2 !important; box-sizing: border-box !important;" href="{{ site.baseurl }}/about/#our-story">Read Our Story &rarr;</a>
         </div>
       </div>
@@ -61,7 +59,6 @@ show_reading_time: false
     <h2 id="community-services" style="display: block !important; width: 100% !important; text-align: center !important; font-size: 2.25rem !important; margin: 0 auto 2.5rem auto !important; color: #ffffff !important;">Essential Community Programs &amp; Support</h2>
     
     <div class="ncs-grid" style="display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 2rem !important; width: 100% !important;">
-      <!-- Shadows removed -->
       <article class="ncs-card" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; gap: 1.5rem !important; padding: 2rem !important; background-color: #5b4241 !important; border-radius: 12px !important; box-shadow: none !important;">
         <div style="flex: 1 !important;">
           <h3 style="font-size: 1.5rem !important; color: #ffffff !important; margin-top: 0 !important; margin-bottom: 0.5rem !important;">Poway Padres Softball</h3>
@@ -108,64 +105,72 @@ show_reading_time: false
     </div>
   </section>
 
-  <!-- Our Journey & Milestones (SHADOWS RESTORED FOR IMAGES) -->
+  <!-- Our Journey & Milestones (Dynamic Container) -->
   <section id="our-story" aria-labelledby="our-story-title" style="padding: 0 10% 4rem 10% !important; box-sizing: border-box !important; background-color: transparent !important;">
     <h2 id="our-story-title" style="display: block !important; width: 100% !important; text-align: center !important; font-size: 2.5rem !important; margin: 0 auto 1.5rem auto !important; color: #ffffff !important;">Our Story &amp; Community Milestones</h2>
     <p class="ncs-lead" style="display: block !important; width: 100% !important; font-size: 1.35rem !important; line-height: 1.6 !important; color: #ffffff !important; text-align: center !important; max-width: 900px !important; margin: 0 auto 4rem auto !important;">What started on a softball field in Poway grew into an enduring movement championing independence, housing, and lifelong human connection.</p>
     
-    <div class="ncs-timeline-blocks" style="display: flex !important; flex-direction: column !important; gap: 4rem !important;">
-      <div style="display: flex !important; flex-direction: row !important; align-items: center !important; gap: 4rem !important;">
-        <div style="flex: 1 !important;">
-          <img src="https://placehold.co/600x400/5b4241/ffffff?text=1998+Softball" alt="1998 Milestone" style="width: 100% !important; height: auto !important; border-radius: 12px !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;">
-        </div>
-        <div style="flex: 1 !important;">
-          <h3 style="font-size: 1.85rem !important; color: #ffffff !important; margin-top: 0 !important; margin-bottom: 1rem !important;">1998 The Poway Padres Bring Families Together</h3>
-          <p style="font-size: 1.35rem !important; line-height: 1.7 !important; color: #ffffff !important; margin: 0 !important;">The Poway Padres Special Olympics softball team began, sparking lifelong bonds among athletes, volunteer coaches, and supportive families.</p>
-        </div>
-      </div>
+    <!-- Dynamic Timeline Container -->
+    <div class="ncs-timeline-blocks" id="milestones-container" style="display: flex !important; flex-direction: column !important; gap: 4rem !important;">
+      <div style="color: #ffffff; text-align: center; font-size: 1.2rem;">Loading Milestones...</div>
+    </div>
 
-      <div style="display: flex !important; flex-direction: row-reverse !important; align-items: center !important; gap: 4rem !important;">
-        <div style="flex: 1 !important;">
-          <img src="https://placehold.co/600x400/5b4241/ffffff?text=2011+Foundation" alt="2011 Milestone" style="width: 100% !important; height: auto !important; border-radius: 12px !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;">
-        </div>
-        <div style="flex: 1 !important;">
-          <h3 style="font-size: 1.85rem !important; color: #ffffff !important; margin-top: 0 !important; margin-bottom: 1rem !important;">2011 - Foundation Established by Tony Rubio</h3>
-          <p style="font-size: 1.35rem !important; line-height: 1.7 !important; color: #ffffff !important; margin: 0 !important;">NCSNCF was officially formed to create structured post-secondary educational programs and social opportunities for adults with special needs.</p>
-        </div>
-      </div>
-
-      <div style="display: flex !important; flex-direction: row !important; align-items: center !important; gap: 4rem !important;">
-        <div style="flex: 1 !important;">
-          <img src="https://placehold.co/600x400/5b4241/ffffff?text=2014+Coalitions" alt="2014 Milestone" style="width: 100% !important; height: auto !important; border-radius: 12px !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;">
-        </div>
-        <div style="flex: 1 !important;">
-          <h3 style="font-size: 1.85rem !important; color: #ffffff !important; margin-top: 0 !important; margin-bottom: 1rem !important;">2014 - Expanding Independent Housing Coalitions</h3>
-          <p style="font-size: 1.35rem !important; line-height: 1.7 !important; color: #ffffff !important; margin: 0 !important;">Collaboration among families, civic leaders, and developers established a shared vision for accessible housing tailored for adults with developmental disabilities.</p>
-        </div>
-      </div>
-
-      <div style="display: flex !important; flex-direction: row-reverse !important; align-items: center !important; gap: 4rem !important;">
-        <div style="flex: 1 !important;">
-          <img src="https://placehold.co/600x400/5b4241/ffffff?text=2021+Villa+de+Vida" alt="2021 Milestone" style="width: 100% !important; height: auto !important; border-radius: 12px !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;">
-        </div>
-        <div style="flex: 1 !important;">
-          <h3 style="font-size: 1.85rem !important; color: #ffffff !important; margin-top: 0 !important; margin-bottom: 1rem !important;">2021 Milestone: Villa de Vida Opens</h3>
-          <p style="font-size: 1.35rem !important; line-height: 1.7 !important; color: #ffffff !important; margin: 0 !important;">A groundbreaking 53-unit independent living community in Poway welcomed residents, demonstrating the viability of supportive residential housing.</p>
-        </div>
-      </div>
-
-      <div style="display: flex !important; flex-direction: row !important; align-items: center !important; gap: 4rem !important;">
-        <div style="flex: 1 !important;">
-          <img src="https://placehold.co/600x400/5b4241/ffffff?text=2025+Monte+Vista" alt="2025 Milestone" style="width: 100% !important; height: auto !important; border-radius: 12px !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;">
-        </div>
-        <div style="flex: 1 !important;">
-          <h3 style="font-size: 1.85rem !important; color: #ffffff !important; margin-top: 0 !important; margin-bottom: 1rem !important;">2025 &amp; Beyond Monte Vista Housing (60 Units)</h3>
-          <p style="font-size: 1.35rem !important; line-height: 1.7 !important; color: #ffffff !important; margin: 0 !important;">Approved by the Poway City Council, this new affordable community will dedicate 30 units specifically for Individuals with Developmental Disabilities.</p>
-        </div>
-      </div>
+    <!-- Admin Manage Milestones Toggle Button -->
+    <div style="text-align: center; margin-top: 3rem;">
+      <button type="button" onclick="toggleMilestoneManager()" class="ncs-button" style="background-color: #f4e6ce; color: #3d2827; border: 2px solid #f4e6ce; padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+        ⚙️ Manage Milestones (Admin)
+      </button>
     </div>
   </section>
 
+  <!-- Admin Milestone Management Panel Modal -->
+  <div id="milestone-admin-panel" style="display: none; background: #4b3231; padding: 2.5rem; border-radius: 12px; margin: 0 10% 4rem 10%; border: 2px dashed #f4e6ce; color: #FFFFFF; box-sizing: border-box;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+      <h3 style="margin: 0; color: #f4e6ce; font-size: 1.8rem;">Milestone Admin Manager</h3>
+      <button type="button" onclick="toggleMilestoneManager()" style="background: transparent; color: #FFFFFF; border: 1px solid #FFFFFF; padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer;">Close</button>
+    </div>
+
+    <!-- Add/Edit Form -->
+    <form id="milestone-form" onsubmit="handleMilestoneSubmit(event)" style="background: #3d2827; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1rem;">
+      <input type="hidden" id="milestone-id">
+      <h4 id="form-title" style="margin: 0 0 0.5rem 0; color: #f7eedf; font-size: 1.2rem;">Add New Milestone</h4>
+      
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <div style="flex: 1 1 200px;">
+          <label style="display: block; font-size: 0.9rem; margin-bottom: 0.3rem;">Year / Date tag</label>
+          <input type="text" id="milestone-year" placeholder="e.g., 2025" style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #7c6161; background: #604140; color: #fff;" required>
+        </div>
+        <div style="flex: 3 1 300px;">
+          <label style="display: block; font-size: 0.9rem; margin-bottom: 0.3rem;">Milestone Title</label>
+          <input type="text" id="milestone-title" placeholder="e.g., Monte Vista Housing Project Opens" style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #7c6161; background: #604140; color: #fff;" required>
+        </div>
+      </div>
+
+      <div>
+        <label style="display: block; font-size: 0.9rem; margin-bottom: 0.3rem;">Description</label>
+        <textarea id="milestone-desc" rows="3" placeholder="Describe the milestone event..." style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #7c6161; background: #604140; color: #fff;" required></textarea>
+      </div>
+
+      <div>
+        <label style="display: block; font-size: 0.9rem; margin-bottom: 0.3rem;">Image URL (Optional)</label>
+        <input type="url" id="milestone-image" placeholder="https://placehold.co/600x400/5b4241/ffffff?text=Milestone" style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #7c6161; background: #604140; color: #fff;">
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <button type="submit" style="background: #f4e6ce; color: #3d2827; border: none; padding: 0.6rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer;">Save Milestone</button>
+        <button type="button" onclick="resetMilestoneForm()" style="background: transparent; color: #fff; border: 1px solid #fff; padding: 0.6rem 1rem; border-radius: 6px; cursor: pointer;">Cancel</button>
+        <span id="milestone-status" style="font-size: 0.95rem; font-weight: 600;"></span>
+      </div>
+    </form>
+
+    <!-- Existing Milestones List for Editing/Deleting -->
+    <h4 style="color: #f7eedf; font-size: 1.2rem; margin-bottom: 1rem;">Existing Milestones</h4>
+    <div id="admin-milestones-list" style="display: flex; flex-direction: column; gap: 0.75rem; max-height: 400px; overflow-y: auto;">
+      <!-- Populated via JS -->
+    </div>
+  </div>
+
+</div>
 
 <style>
   .ncsncf-footer {
@@ -248,3 +253,150 @@ show_reading_time: false
     </div>
   </div>
 </footer>
+
+<script type="module">
+import { pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
+
+async function loadMilestones() {
+  const container = document.getElementById('milestones-container');
+  const adminList = document.getElementById('admin-milestones-list');
+  if (!container) return;
+
+  try {
+    const res = await fetch(`${pythonURI}/api/milestones`, fetchOptions);
+    if (!res.ok) throw new Error("Failed to load milestones");
+    const milestones = await res.json();
+
+    container.innerHTML = "";
+    if (adminList) adminList.innerHTML = "";
+
+    if (milestones.length === 0) {
+      container.innerHTML = `<div style="color: #fff; text-align: center;">No milestones found. Use the admin manager below to add some!</div>`;
+      return;
+    }
+
+    milestones.forEach((m, index) => {
+      const isReverse = index % 2 === 1;
+      const flexDir = isReverse ? 'row-reverse' : 'row';
+
+      // If an image URL exists, show the image. Otherwise, show a styled placeholder box with the title.
+      const mediaHTML = m.image_url 
+        ? `<div style="flex: 1 !important;">
+             <img src="${m.image_url}" alt="${m.title}" style="width: 100% !important; height: auto !important; border-radius: 12px !important; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important; object-fit: cover;">
+           </div>` 
+        : `<div style="flex: 1 !important; background-color: #5b4241; border: 2px dashed #7c6161; border-radius: 12px; padding: 3rem 2rem; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; min-height: 200px;">
+             <span style="color: #f7eedf; font-size: 1.5rem; font-weight: bold;">${m.title}</span>
+           </div>`;
+
+      const block = document.createElement('div');
+      block.style.cssText = `display: flex !important; flex-direction: ${flexDir} !important; align-items: center !important; gap: 4rem !important;`;
+      block.innerHTML = `
+        ${mediaHTML}
+        <div style="flex: 1 !important;">
+          <h3 style="font-size: 1.85rem !important; color: #ffffff !important; margin-top: 0 !important; margin-bottom: 1rem !important;">${m.year} — ${m.title}</h3>
+          <p style="font-size: 1.35rem !important; line-height: 1.7 !important; color: #ffffff !important; margin: 0 !important;">${m.description}</p>
+        </div>
+      `;
+      container.appendChild(block);
+
+      if (adminList) {
+        const item = document.createElement('div');
+        item.style.cssText = "display: flex; justify-content: space-between; align-items: center; background: #5b4241; padding: 1rem; border-radius: 8px;";
+        item.innerHTML = `
+          <div>
+            <strong style="color: #f7eedf;">${m.year}:</strong> <span style="color: #fff;">${m.title}</span>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button onclick="editMilestone(${m.id}, '${encodeURIComponent(m.year)}', '${encodeURIComponent(m.title)}', '${encodeURIComponent(m.description)}', '${encodeURIComponent(m.image_url || '')}')" style="background: #604140; color: #fff; border: 1px solid #fff; padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer;">Edit</button>
+            <button onclick="deleteMilestone(${m.id})" style="background: #991b1b; color: #fff; border: none; padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer;">Delete</button>
+          </div>
+        `;
+        adminList.appendChild(item);
+      }
+    });
+  } catch (err) {
+    console.error("Error loading milestones:", err);
+    container.innerHTML = `<div style="color: #fca5a5; text-align: center;">Error loading milestones from server.</div>`;
+  }
+}
+
+window.toggleMilestoneManager = function() {
+  const panel = document.getElementById('milestone-admin-panel');
+  if (!panel) return;
+  panel.style.display = (panel.style.display === 'none' || !panel.style.display) ? 'block' : 'none';
+  if (panel.style.display === 'block') {
+    panel.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+window.resetMilestoneForm = function() {
+  document.getElementById('milestone-form').reset();
+  document.getElementById('milestone-id').value = "";
+  document.getElementById('form-title').textContent = "Add New Milestone";
+  document.getElementById('milestone-status').textContent = "";
+};
+
+window.editMilestone = function(id, year, title, desc, img) {
+  document.getElementById('milestone-id').value = id;
+  document.getElementById('milestone-year').value = decodeURIComponent(year);
+  document.getElementById('milestone-title').value = decodeURIComponent(title);
+  document.getElementById('milestone-desc').value = decodeURIComponent(desc);
+  document.getElementById('milestone-image').value = img !== 'null' && img !== '' ? decodeURIComponent(img) : '';
+  document.getElementById('form-title').textContent = `Edit Milestone #${id}`;
+  document.getElementById('milestone-form').scrollIntoView({ behavior: 'smooth' });
+};
+
+window.handleMilestoneSubmit = async function(event) {
+  event.preventDefault();
+  const id = document.getElementById('milestone-id').value;
+  const statusEl = document.getElementById('milestone-status');
+  statusEl.style.color = "#f4e6ce";
+  statusEl.textContent = "Saving...";
+
+  const payload = {
+    year: document.getElementById('milestone-year').value,
+    title: document.getElementById('milestone-title').value,
+    description: document.getElementById('milestone-desc').value,
+    image_url: document.getElementById('milestone-image').value
+  };
+
+  const url = id ? `${pythonURI}/api/milestones/${id}` : `${pythonURI}/api/milestones`;
+  const method = id ? 'PUT' : 'POST';
+
+  try {
+    const res = await fetch(url, {
+      ...fetchOptions,
+      method: method,
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error("Failed to save milestone");
+
+    statusEl.style.color = "#86efac";
+    statusEl.textContent = "Saved successfully!";
+    resetMilestoneForm();
+    loadMilestones();
+    setTimeout(() => { statusEl.textContent = ""; }, 3000);
+  } catch (err) {
+    console.error(err);
+    statusEl.style.color = "#fca5a5";
+    statusEl.textContent = "Error saving milestone.";
+  }
+};
+
+window.deleteMilestone = async function(id) {
+  if (!confirm("Are you sure you want to delete this milestone?")) return;
+  try {
+    const res = await fetch(`${pythonURI}/api/milestones/${id}`, {
+      ...fetchOptions,
+      method: 'DELETE'
+    });
+    if (!res.ok) throw new Error("Failed to delete");
+    loadMilestones();
+  } catch (err) {
+    console.error(err);
+    alert("Error deleting milestone.");
+  }
+};
+
+document.addEventListener("DOMContentLoaded", loadMilestones);
+</script>

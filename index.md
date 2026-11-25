@@ -8,9 +8,6 @@ show_reading_time: false
 <!-- Hero Section with Header Image and Slogan -->
 <div style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-top: -2rem; background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('{{ site.baseurl }}/images/NCSNCF%20header.jpg') no-repeat center 15%; background-size: cover; padding: 7rem 2rem; text-align: center; margin-bottom: 3rem;">
   <div style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1rem; box-sizing: border-box;">
-    <h1 style="color: #FFFFFF; margin-bottom: 0.75rem; font-size: clamp(1.8rem, 4vw, 3.2rem); font-weight: 800; letter-spacing: -0.02em; text-align: center;">
-      Bringing People Together
-    </h1>
     <div style="display: flex; justify-content: center; width: 100%;">
       <h2 class="hero-org-name" style="color: #f7eedf; margin-bottom: 1.25rem; font-size: clamp(1.2rem, 2.5vw, 1.75rem); font-weight: 500; text-align: center;">
         North County Special Needs Community Foundation
@@ -92,15 +89,12 @@ show_reading_time: false
       <a href="{{ site.baseurl }}/calendar/" style="color: #FFFFFF; text-decoration: underline; font-weight: bold; font-size: 1.15rem;">View Full Calendar &rarr;</a>
     </div>
 
-    <!-- Adjusted to 2 columns for a 2x2 grid -->
     <div class="ocs_grid" id="recent-events-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 4.5rem;">
       <div class="ocs_grid-cell ocs_grid-cell--header" style="font-size: 1.2rem; color: #FFFFFF;">Loading Events...</div>
     </div>
 
-    <!-- Side-by-Side Callouts (Survey & Gallery) -->
+    <!-- Side-by-Side Callouts -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2.5rem; margin-bottom: 2rem;">
-
-      <!-- Community Survey Callout -->
       <div class="ocs_card" style="text-align: center; padding: 4rem 2rem; border-radius: 12px; background-color: #5b4241; box-shadow: 0 6px 20px rgba(0,0,0,0.2); display: flex; flex-direction: column; justify-content: center;">
         <h2 style="color: #FFFFFF; margin-top: 0; font-size: 2.25rem;">Community Feedback &amp; Survey</h2>
         <p style="color: #FFFFFF; margin: 0 auto 2rem; font-size: 1.2rem; line-height: 1.7;">
@@ -111,7 +105,6 @@ show_reading_time: false
         </div>
       </div>
 
-      <!-- Explore Photo Gallery Callout -->
       <div class="ocs_card" style="text-align: center; padding: 4rem 2rem; border-radius: 12px; background-color: #604140; box-shadow: 0 6px 20px rgba(0,0,0,0.2); display: flex; flex-direction: column; justify-content: center;">
         <h2 style="color: #FFFFFF; margin-top: 0; font-size: 2.25rem;">Moments of Joy &amp; Community</h2>
         <p style="color: #FFFFFF; margin: 0 auto 2rem; font-size: 1.2rem; line-height: 1.7;">
@@ -121,6 +114,39 @@ show_reading_time: false
           <a class="ocs_btn pillar-btn" style="color: #604140; background-color: #FFFFFF; border: 2px solid #FFFFFF; text-decoration: none; font-weight: bold; padding: 0.8rem 2rem; font-size: 1.15rem; border-radius: 8px;" href="{{ site.baseurl }}/gallery/">Explore Our Gallery &rarr;</a>
         </div>
       </div>
+    </div>
+
+    <!-- Admin Content Editor Panel -->
+    <div id="admin-content-editor" style="display: none; background: #4b3231; padding: 2rem; border-radius: 12px; margin-bottom: 3.5rem; border: 2px dashed #f4e6ce; color: #FFFFFF;">
+      <h3 style="margin-top: 0; color: #f4e6ce; font-size: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+        <span>Admin Home Page Content Editor</span>
+        <button type="button" onclick="toggleAdminEditor()" style="background: transparent; color: #FFFFFF; border: 1px solid #FFFFFF; padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">Close</button>
+      </h3>
+      <p style="font-size: 0.95rem; color: #f5eded; margin-bottom: 1.5rem;">Edit the organization subtitle and hero description below. Changes save instantly to your backend.</p>
+      
+      <form id="homeEditorForm" onsubmit="saveHomeContent(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+        <!-- Hidden input for backward compatibility with JS if needed -->
+        <input type="hidden" id="edit-hero-title" value="">
+        <div>
+          <label style="display: block; font-weight: 600; margin-bottom: 0.3rem; font-size: 0.95rem;">Organization Subtitle</label>
+          <input type="text" id="edit-org-subtitle" style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #7c6161; background: #604140; color: #fff; font-size: 1rem;" required>
+        </div>
+        <div>
+          <label style="display: block; font-weight: 600; margin-bottom: 0.3rem; font-size: 0.95rem;">Hero Description Paragraph</label>
+          <textarea id="edit-hero-desc" rows="3" style="width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #7c6161; background: #604140; color: #fff; font-size: 1rem;" required></textarea>
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: center; margin-top: 0.5rem;">
+          <button type="submit" class="ocs_btn" style="background: #f4e6ce; color: #3d2827; border: none; padding: 0.6rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer;">Save Changes</button>
+          <span id="editor-status" style="font-size: 0.95rem; font-weight: 600;"></span>
+        </div>
+      </form>
+    </div>
+
+    <!-- Floating Admin Edit Toggle Button -->
+    <div style="text-align: right; margin-bottom: 2rem;">
+      <button type="button" id="admin-toggle-btn" onclick="toggleAdminEditor()" class="ocs_btn" style="background-color: #f4e6ce; color: #3d2827; border: 2px solid #f4e6ce; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; font-size: 0.95rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer;">
+        ⚙️ Edit Page Content (Admin)
+      </button>
     </div>
 
     <hr style="margin: 3.5rem 0; border: none; border-top: 1px solid rgba(255,255,255,0.2);">
@@ -216,96 +242,5 @@ a.ocs_btn:hover {
   </div>
 </footer>
 
-<script>
-// Point to backend API with fallback
-const BACKEND_URL = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-  ? "http://localhost:8587"
-  : "https://ccae-be.onrender.com";
-
-const FALLBACK_EVENTS = [
-  {
-    title: "Poway Padres Softball Weekly Practice",
-    category: "Athletics",
-    date: "Every Saturday, 10:00 AM",
-    location: "Poway Community Park",
-    capacity: 35
-  },
-  {
-    title: "Monte Vista Housing Project Community Briefing",
-    category: "Housing",
-    date: "October 18, 2026",
-    location: "Poway City Hall / Virtual",
-    capacity: 100
-  },
-  {
-    title: "Annual 2-Night Family Caregiver Retreat",
-    category: "Community",
-    date: "November 14-16, 2026",
-    location: "Julian, CA",
-    capacity: 20
-  },
-  {
-    title: "NCSNCF Holiday Community Social",
-    category: "Social",
-    date: "December 19, 2026",
-    location: "Old Poway Park",
-    capacity: 150
-  }
-];
-
-async function loadRecentEvents() {
-  const gridContainer = document.getElementById("recent-events-grid");
-  if (!gridContainer) return;
-
-  try {
-    const response = await fetch(`${BACKEND_URL}/api/events`, {
-      method: 'GET',
-      headers: { 'Accept': 'application/json' }
-    });
-    if (!response.ok) throw new Error(`HTTP Error status: ${response.status}`);
-    const events = await response.json();
-    if (Array.isArray(events) && events.length > 0) {
-      renderEvents(events.slice(0, 4));
-    } else {
-      renderEvents(FALLBACK_EVENTS);
-    }
-  } catch (error) {
-    console.warn("Using fallback events:", error);
-    renderEvents(FALLBACK_EVENTS);
-  }
-}
-
-function renderEvents(list) {
-  const gridContainer = document.getElementById("recent-events-grid");
-  if (!gridContainer) return;
-  gridContainer.innerHTML = "";
-
-  list.forEach((evt, index) => {
-    const cell = document.createElement("div");
-    // Add distinct card styling to the event cells
-    cell.className = "ocs_grid-cell";
-    cell.style.padding = "2rem";
-    cell.style.borderRadius = "12px";
-    cell.style.backgroundColor = index % 2 === 0 ? "#604140" : "#5b4241";
-    cell.style.boxShadow = "0 6px 15px rgba(0,0,0,0.2)";
-    cell.style.display = "flex";
-    cell.style.flexDirection = "column";
-
-    cell.innerHTML = `
-      <img src="https://placehold.co/600x300/fdf3e7/604140?text=Event" alt="Event Placeholder" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
-      <strong style="font-size: 1.4rem; color: #FFFFFF; display: block; margin-bottom: 0.75rem;">${evt.title || 'Community Gathering'}</strong>
-      <div style="flex-grow: 1;">
-        <p style="margin: 0 0 0.5rem; color: #f7eedf; font-size: 1.05rem;">
-          <strong>Category:</strong> ${evt.category || 'Foundation'} | <strong>Date:</strong> ${evt.date || 'TBD'}
-        </p>
-        <p style="margin: 0; color: #FFFFFF; font-size: 1rem;">
-          ${evt.location ? 'Location: ' + evt.location : (evt.price ? 'Price: $' + evt.price : 'Open community event')}
-        </p>
-      </div>
-    `;
-    gridContainer.appendChild(cell);
-  });
-}
-
-document.addEventListener("DOMContentLoaded", loadRecentEvents);
-</script>
+<!-- Load Dedicated Home Page Module Script -->
+<script type="module" src="{{ site.baseurl }}/assets/js/api/home.js"></script>
