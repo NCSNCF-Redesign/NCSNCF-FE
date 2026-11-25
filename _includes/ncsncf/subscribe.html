@@ -1,0 +1,38 @@
+<section class="ncsncf-subscribe">
+    <h2>Stay Connected</h2>
+
+    <p>
+        Subscribe to receive upcoming event announcements,
+        registration opportunities, and community reminders.
+    </p>
+
+    <form class="ncsncf-subscribe-form">
+        <label>
+            Email Address
+            <input
+                name="email"
+                type="email"
+                placeholder="Enter your email address"
+                autocomplete="email"
+                required
+            >
+        </label>
+
+        <button type="submit"
+                class="ocs__btn accent fill pill">
+            Subscribe Now
+        </button>
+
+        <p class="subscription-status"
+           role="status"
+           aria-live="polite"></p>
+    </form>
+
+    <small>
+        No account required. Unsubscribe at any time.
+    </small>
+</section>
+
+<script type="module"
+        src="{{ '/assets/js/api/subscriptions.js' | relative_url }}">
+</script>
