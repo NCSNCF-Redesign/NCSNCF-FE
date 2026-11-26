@@ -7,692 +7,6 @@ show_reading_time: false
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css">
 
-<style>
-  /* Overall container — breaks out of narrow Jekyll post column */
-  .ncs-calendar {
-    --ncs-surface: #604140;
-    --ncs-surface-mid: #6e5555;
-    --ncs-surface-hover: #7c6161;
-    --ncs-surface-dark: #4b3231;
-    --ncs-border-soft: rgba(255, 255, 255, 0.22);
-    --ncs-text-light: #ffffff;
-    --ncs-text-muted: #f5eded;
-    --ncs-btn-bg: #ffffff;
-    --ncs-btn-hover: #f3ecec;
-    --ncs-btn-text: #5b4241;
-    --ncs-active-bg: #f4e6ce;
-    --ncs-active-text: #3d2827;
-    --ncs-focus-light: #f4e6ce;
-
-    width: calc(100vw - 48px) !important;
-    max-width: none !important;
-    margin-left: 50% !important;
-    transform: translateX(-50%) !important;
-    box-sizing: border-box !important;
-    font-size: 1.1rem !important;
-    line-height: 1.5 !important;
-  }
-
-  .ncs-calendar *,
-  .ncs-calendar *::before,
-  .ncs-calendar *::after,
-  #event-details-dialog,
-  #event-details-dialog * {
-    box-sizing: border-box !important;
-  }
-
-  /* High-visibility keyboard focus states */
-  .ncs-calendar :focus-visible,
-  #event-details-dialog :focus-visible {
-    outline: 3px solid var(--ncs-focus-light) !important;
-    outline-offset: 3px !important;
-  }
-
-  #ncs-calendar-title {
-    font-size: 2.3rem !important;
-    margin: 0 0 1rem 0 !important;
-  }
-
-  .ncs-heading-row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 1rem !important;
-    margin: 2.5rem 0 1rem 0 !important;
-  }
-
-  .ncs-heading {
-    font-size: 2rem !important;
-    margin: 0 !important;
-  }
-
-  .ncs-note {
-    font-size: 1.05rem !important;
-    margin: 0.85rem 0 !important;
-  }
-
-  /* Compact "How to use this calendar" box */
-  .ncs-calendar .ncs-howto-box {
-    background-color: #604140 !important;
-    background: #604140 !important;
-    color: #ffffff !important;
-    padding: 1.1rem 1.5rem !important;
-    border-radius: 8px !important;
-    margin-bottom: 1.5rem !important;
-    border: none !important;
-    border-left: none !important;
-    box-shadow: none !important;
-  }
-
-  .ncs-calendar .ncs-howto-box strong,
-  .ncs-calendar .ncs-howto-box p {
-    color: #ffffff !important;
-    margin: 0.25rem 0 !important;
-  }
-
-  /* Two-column layout: Filters on the left, Calendar on the right */
-  .ncs-calendar .ncs-main-layout {
-    display: grid !important;
-    grid-template-columns: 270px minmax(0, 1fr) !important;
-    gap: 1.5rem !important;
-    align-items: start !important;
-    width: 100% !important;
-  }
-
-  /* Left sidebar box */
-  .ncs-calendar .ncs-sidebar {
-    background-color: #604140 !important;
-    background: #604140 !important;
-    color: #ffffff !important;
-    padding: 1.5rem !important;
-    border-radius: 8px !important;
-    border: none !important;
-    border-left: none !important;
-    box-shadow: none !important;
-  }
-
-  .ncs-calendar .ncs-sidebar-header {
-    font-size: 1.4rem !important;
-    font-weight: 700 !important;
-    color: #ffffff !important;
-    margin: 0 0 0.6rem 0 !important;
-    padding: 0 !important;
-    background: transparent !important;
-    border: none !important;
-    border-bottom: none !important;
-  }
-
-  .ncs-calendar .ncs-sidebar-label {
-    display: block !important;
-    color: #ffffff !important;
-    font-size: 1.05rem !important;
-    font-weight: 600 !important;
-    margin-bottom: 0.85rem !important;
-  }
-
-  .ncs-calendar .ncs-sidebar-divider {
-    border: 0 !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.22) !important;
-    margin: 1.25rem 0 !important;
-  }
-
-  .ncs-calendar .ncs-filters {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.65rem !important;
-  }
-
-  /* Accessible 44px+ touch-target buttons */
-  .ncs-calendar .ncs-btn,
-  #event-details-dialog .ncs-btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 0.45rem !important;
-    min-height: 2.75rem !important;
-    height: auto !important;
-    padding: 0.55rem 1.15rem !important;
-    font-size: 1.05rem !important;
-    font-weight: 600 !important;
-    line-height: 1.25 !important;
-    text-decoration: none !important;
-    background-color: #ffffff !important;
-    background: #ffffff !important;
-    color: #5b4241 !important;
-    border: 2px solid transparent !important;
-    border-radius: 6px !important;
-    box-shadow: none !important;
-    cursor: pointer !important;
-    transition: background-color 0.15s ease !important;
-  }
-
-  .ncs-calendar .ncs-btn:hover,
-  #event-details-dialog .ncs-btn:hover {
-    background-color: #f3ecec !important;
-    background: #f3ecec !important;
-    color: #5b4241 !important;
-  }
-
-  .ncs-calendar .ncs-filters .ncs-btn,
-  .ncs-calendar .ncs-sidebar .ncs-past-toggle {
-    width: 100% !important;
-    justify-content: flex-start !important;
-  }
-
-  /* High-contrast button for light page header next to Community Events */
-  .ncs-calendar .ncs-btn-surface {
-    background-color: #604140 !important;
-    background: #604140 !important;
-    color: #ffffff !important;
-    border: 2px solid #604140 !important;
-  }
-
-  .ncs-calendar .ncs-btn-surface:hover {
-    background-color: #4b3231 !important;
-    background: #4b3231 !important;
-    color: #ffffff !important;
-  }
-
-  /* Unmistakable active filter & toggle state */
-  .ncs-calendar .ncs-filter[aria-pressed="true"],
-  .ncs-calendar .ncs-past-toggle[aria-pressed="true"] {
-    background-color: #f4e6ce !important;
-    background: #f4e6ce !important;
-    color: #3d2827 !important;
-    border: 2px solid #ffffff !important;
-    font-weight: 700 !important;
-  }
-
-  .ncs-calendar .ncs-btn-surface.ncs-past-toggle[aria-pressed="true"] {
-    border-color: #604140 !important;
-  }
-
-  .ncs-calendar .ncs-filter[aria-pressed="true"]::before,
-  .ncs-calendar .ncs-past-toggle[aria-pressed="true"]::before {
-    content: "✓";
-    font-weight: 800;
-  }
-
-  .ncs-calendar .ncs-btn-secondary,
-  #event-details-dialog .ncs-btn-secondary {
-    background-color: transparent !important;
-    background: transparent !important;
-    color: #ffffff !important;
-    border: 2px solid #ffffff !important;
-  }
-
-  .ncs-calendar .ncs-btn-secondary:hover,
-  #event-details-dialog .ncs-btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    background: rgba(255, 255, 255, 0.15) !important;
-    color: #ffffff !important;
-  }
-
-  /* Calendar column on the right */
-  .ncs-calendar .ncs-calendar-col {
-    min-width: 0 !important;
-    width: 100% !important;
-  }
-
-  .ncs-calendar .ncs-panel {
-    width: 100% !important;
-    padding: 1.25rem !important;
-    margin: 0 auto !important;
-    background-color: #604140 !important;
-    background: #604140 !important;
-    border-radius: 8px !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-
-  #calendar {
-    width: 100% !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    background-color: transparent !important;
-    background: transparent !important;
-    color: #ffffff !important;
-    font-size: 1.05rem !important;
-    --fc-border-color: rgba(255, 255, 255, 0.22);
-    --fc-page-bg-color: #6e5555;
-    --fc-neutral-bg-color: #604140;
-    --fc-list-event-hover-bg-color: #7c6161;
-    --fc-today-bg-color: #7d6262;
-  }
-
-  /* Toolbar & spaced-out buttons */
-  #calendar .fc-header-toolbar {
-    background-color: #604140 !important;
-    background: #604140 !important;
-    color: #ffffff !important;
-    padding: 0.25rem 0 1rem 0 !important;
-    margin: 0 !important;
-    border-radius: 6px !important;
-    flex-wrap: wrap !important;
-    gap: 0.75rem !important;
-  }
-
-  #calendar .fc-toolbar-chunk {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.55rem !important;
-  }
-
-  #calendar .fc-toolbar-title {
-    font-size: 1.7rem !important;
-    color: #ffffff !important;
-    border-bottom: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  #calendar .fc-button-primary,
-  #calendar .fc-button {
-    min-height: 2.65rem !important;
-    font-size: 0.96rem !important;
-    font-weight: 600 !important;
-    padding: 0.45rem 0.95rem !important;
-    margin: 0 !important;
-    border-radius: 6px !important;
-    background-color: #ffffff !important;
-    background: #ffffff !important;
-    color: #5b4241 !important;
-    border: 2px solid transparent !important;
-    box-shadow: none !important;
-  }
-
-  #calendar .fc-button-primary:hover,
-  #calendar .fc-button:hover {
-    background-color: #f3ecec !important;
-    background: #f3ecec !important;
-    color: #5b4241 !important;
-  }
-
-  #calendar .fc-button-primary:not(:disabled).fc-button-active,
-  #calendar .fc-button-active {
-    background-color: #f4e6ce !important;
-    background: #f4e6ce !important;
-    color: #3d2827 !important;
-    border: 2px solid #ffffff !important;
-    font-weight: 700 !important;
-  }
-
-  #calendar .fc-button:disabled {
-    opacity: 0.65 !important;
-  }
-
-  /* Month Grid Styling (#6e5555 boxes + white text) */
-  #calendar .fc-scrollgrid,
-  #calendar .fc-scrollgrid table {
-    border-color: rgba(255, 255, 255, 0.22) !important;
-  }
-
-  #calendar .fc-col-header-cell {
-    background-color: #604140 !important;
-    background: #604140 !important;
-    border-color: rgba(255, 255, 255, 0.22) !important;
-  }
-
-  #calendar .fc-col-header-cell-cushion {
-    font-size: 1.05rem !important;
-    font-weight: 700 !important;
-    padding: 0.65rem 0.35rem !important;
-    color: #ffffff !important;
-    text-decoration: none !important;
-  }
-
-  #calendar .fc-daygrid-day {
-    background-color: #6e5555 !important;
-    background: #6e5555 !important;
-    border-color: rgba(255, 255, 255, 0.22) !important;
-  }
-
-  #calendar .fc-daygrid-day.fc-day-other {
-    background-color: #5c4444 !important;
-    background: #5c4444 !important;
-  }
-
-  #calendar .fc-daygrid-day.fc-day-other .fc-daygrid-day-number {
-    color: rgba(255, 255, 255, 0.55) !important;
-  }
-
-  #calendar .fc-daygrid-day.fc-day-today {
-    background-color: #7d6262 !important;
-    background: #7d6262 !important;
-  }
-
-  #calendar .fc-daygrid-day-frame {
-    min-height: 120px !important;
-  }
-
-  #calendar .fc-daygrid-day-number {
-    font-size: 1.05rem !important;
-    font-weight: 600 !important;
-    padding: 0.45rem 0.55rem !important;
-    color: #ffffff !important;
-    text-decoration: none !important;
-  }
-
-  /* Event pills in Month view — stack time cleanly above title */
-  #calendar .fc-event {
-    font-size: 0.92rem !important;
-    padding: 0.35rem 0.45rem !important;
-    margin-bottom: 4px !important;
-    line-height: 1.3 !important;
-    border-radius: 5px !important;
-    cursor: pointer !important;
-  }
-
-  #calendar .fc-event-main-frame {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 0.15rem !important;
-  }
-
-  #calendar .fc-event-time {
-    font-size: 0.82rem !important;
-    font-weight: 700 !important;
-    white-space: nowrap !important;
-    margin-right: 0 !important;
-  }
-
-  #calendar .fc-event-title {
-    font-size: 0.92rem !important;
-    font-weight: 600 !important;
-    white-space: normal !important;
-  }
-
-  #calendar .fc-daygrid-more-link {
-    color: #f4e6ce !important;
-    font-weight: 700 !important;
-  }
-
-  /* List View Styling (#604140 date header, #6e5555 event/time rows) */
-  #calendar .fc-list {
-    border: 1px solid rgba(255, 255, 255, 0.22) !important;
-    border-radius: 6px !important;
-    overflow: hidden !important;
-  }
-
-  #calendar .fc-list-table {
-    background-color: #6e5555 !important;
-    color: #ffffff !important;
-  }
-
-  #calendar .fc-list-day th,
-  #calendar .fc-list-day-cushion {
-    background-color: #604140 !important;
-    background: #604140 !important;
-    color: #ffffff !important;
-    border-color: rgba(255, 255, 255, 0.22) !important;
-    padding: 0.65rem 1rem !important;
-  }
-
-  #calendar .fc-list-day-text,
-  #calendar .fc-list-day-side-text {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    text-decoration: none !important;
-  }
-
-  #calendar .fc-list-event td {
-    background-color: #6e5555 !important;
-    background: #6e5555 !important;
-    color: #ffffff !important;
-    border-color: rgba(255, 255, 255, 0.22) !important;
-    padding: 0.75rem 1rem !important;
-    cursor: pointer !important;
-  }
-
-  #calendar .fc-list-event:hover td {
-    background-color: #7c6161 !important;
-    background: #7c6161 !important;
-    color: #ffffff !important;
-  }
-
-  #calendar .fc-list-event-title,
-  #calendar .fc-list-event-title a,
-  #calendar .fc-list-event-time {
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    text-decoration: none !important;
-  }
-
-  #calendar .fc-list-empty {
-    background-color: #6e5555 !important;
-    color: #ffffff !important;
-  }
-
-  /* Native Modal Dialog for Event Details */
-  #event-details-dialog {
-    background-color: #604140 !important;
-    background: #604140 !important;
-    color: #ffffff !important;
-    width: min(92vw, 640px) !important;
-    max-height: 88vh !important;
-    overflow-y: auto !important;
-    padding: 1.75rem !important;
-    border: 2px solid #f4e6ce !important;
-    border-radius: 10px !important;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4) !important;
-    font-size: 1.1rem !important;
-    line-height: 1.6 !important;
-  }
-
-  #event-details-dialog::backdrop {
-    background-color: rgba(30, 18, 18, 0.72) !important;
-  }
-
-  #event-details-dialog .ncs-dialog-header {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: flex-start !important;
-    gap: 1rem !important;
-    margin-bottom: 1rem !important;
-  }
-
-  #detail-title {
-    font-size: 1.65rem !important;
-    line-height: 1.3 !important;
-    color: #ffffff !important;
-    margin: 0.45rem 0 0 0 !important;
-    padding: 0 !important;
-    border-bottom: none !important;
-  }
-
-  #event-details-dialog .ncs-dialog-meta {
-    margin: 0 0 1.25rem 0 !important;
-    padding: 1rem 1.25rem !important;
-    background-color: #4b3231 !important;
-    background: #4b3231 !important;
-    border-radius: 8px !important;
-  }
-
-  #event-details-dialog .ncs-dialog-meta p,
-  #event-details-dialog .ncs-dialog-meta strong,
-  #event-details-dialog .ncs-dialog-meta span {
-    margin: 0.4rem 0 !important;
-    color: #ffffff !important;
-  }
-
-  #detail-description {
-    color: #f5eded !important;
-    margin: 0 0 1.5rem 0 !important;
-    white-space: pre-wrap !important;
-  }
-
-  #event-details-dialog .ncs-dialog-actions {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 0.75rem !important;
-    align-items: center !important;
-  }
-
-  /* Unified Category Pill (matches FullCalendar colors) */
-  .ncs-pill-row {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
-  }
-
-  .ncs-category-pill {
-    display: inline-block !important;
-    align-self: flex-start !important;
-    font-size: 0.92rem !important;
-    font-weight: 700 !important;
-    padding: 0.25rem 0.75rem !important;
-    border-radius: 999px !important;
-    letter-spacing: 0.01em !important;
-  }
-
-  .ncs-past-badge {
-    display: inline-block !important;
-    font-size: 0.85rem !important;
-    font-weight: 700 !important;
-    padding: 0.2rem 0.65rem !important;
-    border-radius: 999px !important;
-    background-color: rgba(255, 255, 255, 0.16) !important;
-    color: #f4e6ce !important;
-    border: 1px solid rgba(244, 230, 206, 0.45) !important;
-  }
-
-  /* Bottom Community Events grid: 2 per line, #604140 boxes */
-  #event-grid.ncs-events {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 1.5rem !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-top: 1.25rem !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-
-  #event-grid article.ncs-event-card {
-    background-color: #604140 !important;
-    background: #604140 !important;
-    color: #ffffff !important;
-    padding: 1.75rem !important;
-    border-radius: 8px !important;
-    border: none !important;
-    border-left: none !important;
-    box-shadow: none !important;
-    display: flex !important;
-    flex-direction: column !important;
-  }
-
-  #event-grid article.ncs-event-card.is-past {
-    background-color: #533837 !important;
-    background: #533837 !important;
-  }
-
-  #event-grid article.ncs-event-card h3 {
-    color: #ffffff !important;
-    font-size: 1.45rem !important;
-    line-height: 1.3 !important;
-    margin: 0.25rem 0 0.75rem 0 !important;
-    padding: 0 !important;
-    border-bottom: none !important;
-  }
-
-  #event-grid .ncs-card-meta {
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 0 0.9rem 0 !important;
-    color: #f2e8e8 !important;
-    font-size: 1.02rem !important;
-  }
-
-  #event-grid .ncs-card-meta li {
-    margin: 0 0 0.35rem 0 !important;
-    padding: 0 !important;
-    color: #f2e8e8 !important;
-    list-style: none !important;
-  }
-
-  #event-grid .ncs-card-meta strong {
-    color: #ffffff !important;
-  }
-
-  #event-grid article.ncs-event-card .ncs-desc {
-    color: #f5eded !important;
-    font-size: 1.06rem !important;
-    line-height: 1.55 !important;
-    margin: 0 0 1.25rem 0 !important;
-    flex-grow: 1 !important;
-  }
-
-  #event-grid article.ncs-event-card .ncs-btn {
-    align-self: flex-start !important;
-  }
-
-  #event-grid .ncs-empty {
-    grid-column: 1 / -1 !important;
-    padding: 1.25rem !important;
-    background-color: #604140 !important;
-    color: #ffffff !important;
-    border-radius: 8px !important;
-    font-weight: 600 !important;
-  }
-
-  /* Tablet & Mobile responsiveness */
-  @media (max-width: 900px) {
-    .ncs-calendar .ncs-main-layout {
-      grid-template-columns: 1fr !important;
-    }
-
-    .ncs-calendar .ncs-filters {
-      flex-direction: row !important;
-      flex-wrap: wrap !important;
-    }
-
-    .ncs-calendar .ncs-filters .ncs-btn,
-    .ncs-calendar .ncs-sidebar .ncs-past-toggle {
-      width: auto !important;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .ncs-calendar {
-      width: 100% !important;
-      margin-left: 0 !important;
-      transform: none !important;
-    }
-
-    #event-grid.ncs-events {
-      grid-template-columns: 1fr !important;
-    }
-
-    #calendar .fc-header-toolbar {
-      flex-direction: column !important;
-      align-items: stretch !important;
-      text-align: center !important;
-    }
-
-    #calendar .fc-toolbar-chunk {
-      justify-content: center !important;
-      flex-wrap: wrap !important;
-    }
-
-    #calendar .fc-daygrid-day-frame {
-      min-height: 90px !important;
-    }
-  }
-
-  /* Respect user motion preferences */
-  @media (prefers-reduced-motion: reduce) {
-    .ncs-calendar *,
-    #event-details-dialog * {
-      transition: none !important;
-      scroll-behavior: auto !important;
-    }
-  }
-</style>
-
 <section class="ncs-calendar" aria-labelledby="ncs-calendar-title">
   <h1 id="ncs-calendar-title">NCSNCF Community Event Calendar</h1>
 
@@ -706,17 +20,17 @@ show_reading_time: false
       <h2 id="ncs-filter-heading" class="ncs-sidebar-header">Find Community Events</h2>
       <span class="ncs-sidebar-label">Browse by category</span>
       <div class="ncs-filters" role="group" aria-label="Filter events by category">
-        <button type="button" class="ncs-btn ncs-filter" data-category="All" aria-pressed="true">All Events</button>
-        <button type="button" class="ncs-btn ncs-filter" data-category="Athletics" aria-pressed="false">Athletics</button>
-        <button type="button" class="ncs-btn ncs-filter" data-category="Housing" aria-pressed="false">Housing</button>
-        <button type="button" class="ncs-btn ncs-filter" data-category="Social" aria-pressed="false">Social</button>
-        <button type="button" class="ncs-btn ncs-filter" data-category="Education" aria-pressed="false">Education</button>
+        <button type="button" class="ocs__btn ncs-btn ncs-filter" data-category="All" aria-pressed="true">All Events</button>
+        <button type="button" class="ocs__btn ncs-btn ncs-filter" data-category="Athletics" aria-pressed="false">Athletics</button>
+        <button type="button" class="ocs__btn ncs-btn ncs-filter" data-category="Housing" aria-pressed="false">Housing</button>
+        <button type="button" class="ocs__btn ncs-btn ncs-filter" data-category="Social" aria-pressed="false">Social</button>
+        <button type="button" class="ocs__btn ncs-btn ncs-filter" data-category="Education" aria-pressed="false">Education</button>
       </div>
 
       <hr class="ncs-sidebar-divider">
 
       <span class="ncs-sidebar-label">Date range</span>
-      <button type="button" class="ncs-btn ncs-past-toggle" aria-pressed="false">Show Past Events</button>
+      <button type="button" class="ocs__btn ncs-btn ncs-past-toggle" aria-pressed="false">Show Past Events</button>
     </aside>
 
     <div class="ncs-calendar-col">
@@ -727,11 +41,12 @@ show_reading_time: false
     </div>
   </div>
 
-  <div class="ncs-heading-row">
+  <div class="ncs-heading-row" id="community-events-heading-row">
     <h2 class="ncs-heading">Community Events</h2>
-    <button type="button" class="ncs-btn ncs-btn-surface ncs-past-toggle" aria-pressed="false">Show Past Events</button>
+    <button type="button" class="ocs__btn ncs-btn ncs-btn-surface ncs-past-toggle" aria-pressed="false">Show Past Events</button>
   </div>
-  <div id="event-grid" class="ncs-events" aria-live="polite"></div>
+  <div id="event-grid" class="ocs__grid ncs-events" aria-live="polite"></div>
+  <nav id="event-pagination" class="ncs-pagination" aria-label="Community events pages" hidden></nav>
 </section>
 
 <dialog id="event-details-dialog" aria-labelledby="detail-title">
@@ -743,7 +58,7 @@ show_reading_time: false
       </div>
       <h2 id="detail-title" tabindex="-1"></h2>
     </div>
-    <button type="button" id="close-details-top" class="ncs-btn ncs-btn-secondary" aria-label="Close event details">Close</button>
+    <button type="button" id="close-details-top" class="ocs__btn ncs-btn ncs-btn-secondary" aria-label="Close event details">Close</button>
   </div>
 
   <div class="ncs-dialog-meta">
@@ -757,9 +72,9 @@ show_reading_time: false
   <p id="detail-description"></p>
 
   <div class="ncs-dialog-actions">
-    <button type="button" id="download-ics" class="ncs-btn" hidden>Add to Calendar (.ics)</button>
-    <a id="detail-rsvp-link" class="ncs-btn" href="#" target="_blank" rel="noopener noreferrer" hidden>Register / More Info</a>
-    <button type="button" id="close-details-bottom" class="ncs-btn ncs-btn-secondary">Close Details</button>
+    <button type="button" id="download-ics" class="ocs__btn ncs-btn" hidden>Add to Calendar (.ics)</button>
+    <a id="detail-rsvp-link" class="ocs__btn ncs-btn" href="#" target="_blank" rel="noopener noreferrer" hidden>Register / More Info</a>
+    <button type="button" id="close-details-bottom" class="ocs__btn ncs-btn ncs-btn-secondary">Close Details</button>
   </div>
 </dialog>
 
@@ -771,6 +86,8 @@ show_reading_time: false
   function initCalendarPage() {
     'use strict';
 
+    const EVENTS_PER_PAGE = 6;
+
     const categoryColors = {
       Athletics: { bg: '#dceee5', text: '#1b513b' },
       Housing:   { bg: '#f4e6ce', text: '#6b4512' },
@@ -780,6 +97,8 @@ show_reading_time: false
     };
 
     const grid = document.getElementById('event-grid');
+    const paginationEl = document.getElementById('event-pagination');
+    const headingRowEl = document.getElementById('community-events-heading-row');
     const statusEl = document.getElementById('calendar-status');
     const dialog = document.getElementById('event-details-dialog');
     const downloadIcsBtn = document.getElementById('download-ics');
@@ -787,6 +106,7 @@ show_reading_time: false
     let allEvents = [];
     let selectedCategory = 'All';
     let showPastEvents = false;
+    let currentPage = 1;
     let lastCalendarViewType = null;
     let lastFocusedElement = null;
     let activeDialogEvent = null;
@@ -1222,13 +542,111 @@ show_reading_time: false
 
       const button = document.createElement('button');
       button.type = 'button';
-      button.className = 'ncs-btn';
+      button.className = 'ocs__btn ncs-btn';
       button.textContent = 'View Details';
       button.setAttribute('aria-label', `View details for ${item.title || 'event'}`);
       button.addEventListener('click', () => showDetails(item));
 
       card.append(pillRow, title, metaList, description, button);
       return card;
+    }
+
+    function getPaginationSequence(totalPages, activePage) {
+      if (totalPages <= 7) {
+        return Array.from({ length: totalPages }, (_, idx) => idx + 1);
+      }
+
+      const pages = [1];
+      const left = Math.max(2, activePage - 1);
+      const right = Math.min(totalPages - 1, activePage + 1);
+
+      if (left > 2) pages.push('...');
+      for (let p = left; p <= right; p++) {
+        pages.push(p);
+      }
+      if (right < totalPages - 1) pages.push('...');
+      pages.push(totalPages);
+
+      return pages;
+    }
+
+    function goToPage(page, shouldScroll) {
+      currentPage = page;
+      render(selectedCategory, false);
+      if (shouldScroll && headingRowEl) {
+        headingRowEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function renderPagination(totalEventsCount) {
+      paginationEl.replaceChildren();
+
+      const totalPages = Math.ceil(totalEventsCount / EVENTS_PER_PAGE);
+      if (totalPages <= 1) {
+        paginationEl.hidden = true;
+        return;
+      }
+
+      paginationEl.hidden = false;
+
+      const controls = document.createElement('div');
+      controls.className = 'ncs-pagination-controls';
+
+      const prevBtn = document.createElement('button');
+      prevBtn.type = 'button';
+      prevBtn.className = 'ocs__btn ncs-btn ncs-page-btn';
+      prevBtn.textContent = '‹ Previous';
+      prevBtn.setAttribute('aria-label', 'Previous page');
+      prevBtn.disabled = currentPage <= 1;
+      prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) goToPage(currentPage - 1, true);
+      });
+      controls.appendChild(prevBtn);
+
+      const sequence = getPaginationSequence(totalPages, currentPage);
+      sequence.forEach(entry => {
+        if (entry === '...') {
+          const ellipsis = document.createElement('span');
+          ellipsis.className = 'ncs-pagination-ellipsis';
+          ellipsis.textContent = '…';
+          ellipsis.setAttribute('aria-hidden', 'true');
+          controls.appendChild(ellipsis);
+          return;
+        }
+
+        const pageBtn = document.createElement('button');
+        pageBtn.type = 'button';
+        pageBtn.className = 'ocs__btn ncs-btn ncs-page-btn';
+        pageBtn.textContent = String(entry);
+        pageBtn.setAttribute('aria-label', `Page ${entry}`);
+
+        if (entry === currentPage) {
+          pageBtn.setAttribute('aria-current', 'page');
+        } else {
+          pageBtn.addEventListener('click', () => goToPage(entry, true));
+        }
+
+        controls.appendChild(pageBtn);
+      });
+
+      const nextBtn = document.createElement('button');
+      nextBtn.type = 'button';
+      nextBtn.className = 'ocs__btn ncs-btn ncs-page-btn';
+      nextBtn.textContent = 'Next ›';
+      nextBtn.setAttribute('aria-label', 'Next page');
+      nextBtn.disabled = currentPage >= totalPages;
+      nextBtn.addEventListener('click', () => {
+        if (currentPage < totalPages) goToPage(currentPage + 1, true);
+      });
+      controls.appendChild(nextBtn);
+
+      const startIdx = (currentPage - 1) * EVENTS_PER_PAGE + 1;
+      const endIdx = Math.min(currentPage * EVENTS_PER_PAGE, totalEventsCount);
+      const info = document.createElement('p');
+      info.className = 'ncs-pagination-info';
+      info.textContent = `Showing ${startIdx}–${endIdx} of ${totalEventsCount} events (Page ${currentPage} of ${totalPages})`;
+
+      paginationEl.append(controls, info);
     }
 
     const calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
@@ -1255,7 +673,7 @@ show_reading_time: false
       datesSet: function (info) {
         if (lastCalendarViewType !== info.view.type) {
           lastCalendarViewType = info.view.type;
-          render(selectedCategory);
+          render(selectedCategory, false);
         }
       },
       eventClick: function (info) {
@@ -1282,7 +700,10 @@ show_reading_time: false
     calendar.render();
     lastCalendarViewType = calendar.view.type;
 
-    function render(category) {
+    function render(category, resetPage = true) {
+      if (resetPage || selectedCategory !== category) {
+        currentPage = 1;
+      }
       selectedCategory = category;
 
       const categoryMatched = allEvents.filter(item =>
@@ -1329,8 +750,16 @@ show_reading_time: false
           : startSortValue(a) - startSortValue(b);
       });
 
+      const totalPages = Math.max(1, Math.ceil(sorted.length / EVENTS_PER_PAGE));
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+      }
+
       if (sorted.length) {
-        sorted.forEach(item => grid.appendChild(makeCard(item)));
+        const startIdx = (currentPage - 1) * EVENTS_PER_PAGE;
+        const pageSlice = sorted.slice(startIdx, startIdx + EVENTS_PER_PAGE);
+        pageSlice.forEach(item => grid.appendChild(makeCard(item)));
+        renderPagination(sorted.length);
       } else {
         const empty = document.createElement('p');
         empty.className = 'ncs-empty';
@@ -1338,6 +767,7 @@ show_reading_time: false
           ? 'No upcoming events are currently listed in this category. Select "Show Past Events" to view past events.'
           : 'No events are currently listed in this category.';
         grid.appendChild(empty);
+        paginationEl.hidden = true;
       }
 
       document.querySelectorAll('.ncs-filter').forEach(button => {
@@ -1362,13 +792,13 @@ show_reading_time: false
     }
 
     document.querySelectorAll('.ncs-filter').forEach(button => {
-      button.addEventListener('click', () => render(button.dataset.category));
+      button.addEventListener('click', () => render(button.dataset.category, true));
     });
 
     document.querySelectorAll('.ncs-past-toggle').forEach(button => {
       button.addEventListener('click', () => {
         showPastEvents = !showPastEvents;
-        render(selectedCategory);
+        render(selectedCategory, true);
       });
     });
 
@@ -1392,11 +822,11 @@ show_reading_time: false
           : (data && Array.isArray(data.events) ? data.events : []);
 
         allEvents = rawList.map(normalizeBackendEvent);
-        render(selectedCategory);
+        render(selectedCategory, true);
       } catch (error) {
         console.error('Failed to fetch backend events:', error);
         allEvents = [];
-        render(selectedCategory);
+        render(selectedCategory, true);
         statusEl.textContent = `Could not load events from backend (${error.message}). Check browser console / Network tab.`;
       }
     }
