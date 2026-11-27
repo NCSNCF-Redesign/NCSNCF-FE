@@ -152,13 +152,20 @@ function renderEvents(list) {
     cell.className = "ocs_grid-cell";
     cell.style.padding = "2rem";
     cell.style.borderRadius = "12px";
-    cell.style.backgroundColor = index % 2 === 0 ? "$604140" : "#5b4241";
+    cell.style.backgroundColor = index % 2 === 0 ? "#604140" : "#5b4241";
     cell.style.boxShadow = "0 6px 15px rgba(0,0,0,0.2)";
     cell.style.display = "flex";
     cell.style.flexDirection = "column";
 
+    const fallbackImg = `https://placehold.co/600x300/fdf3e7/604140?text=${encodeURIComponent(evt.category || 'Event')}`;
+    const thumbSrc = evt.image_url || fallbackImg;
+    const thumbAlt = evt.image_alt || evt.title || "Event thumbnail";
+
     cell.innerHTML = `
-      <img src="https://placehold.co/600x300/fdf3e7/604140?text=Event" alt="Event Placeholder" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+      <img src="${thumbSrc}"
+           alt="${thumbAlt}"
+           onerror="this.onerror=null;this.src='${fallbackImg}';"
+           style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
       <strong style="font-size: 1.4rem; color: #FFFFFF; display: block; margin-bottom: 0.75rem;">${evt.title || 'Community Gathering'}</strong>
       <div style="flex-grow: 1;">
         <p style="margin: 0 0 0.5rem; color: #f7eedf; font-size: 1.05rem;">
